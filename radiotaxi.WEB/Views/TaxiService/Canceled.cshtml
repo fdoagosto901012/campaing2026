@@ -1,0 +1,227 @@
+﻿@model radiotaxi.Model.TaxiServicesPagination
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0 font-size-18">Servicios</h4>
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Inicio</a></li>
+                            <li class="breadcrumb-item active">Servicios cancelados</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+
+        <div class="row">
+            <div class="col-12">
+                <!-- Left sidebar -->
+                <div class="email-leftbar card">
+                    <button type="button" class="btn btn-danger w-100 waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#composemodal">
+                        Filtros
+                    </button>
+                    <div class="mail-list mt-4">
+                        <a href="/TaxiService/Index/"><i class="mdi mdi-expand-all me-2"></i> Todos <span class="ms-1 float-end">(@(ViewBag.resume["total"]))</span></a>
+                        <a href="/TaxiService/Pending/"><i class="bx bx-calendar-minus me-2"></i> Pendientes <span class="ms-1 float-end">(@(ViewBag.resume["Pending"]))</span></a>
+                        <a href="/TaxiService/assigned/"><i class="bx bx-calendar-check me-2"></i> Asignados <span class="ms-1 float-end">(@(ViewBag.resume["Asigment"]))</span></a>
+                        <a href="/TaxiService/Canceled/" class="active"><i class="bx bx-calendar-x me-2"></i> Cancelados <span class="ms-1 float-end">(@(ViewBag.resume["Canceled"]))</span></a>
+                        <a href="/TaxiService/History/"><i class=" bx bx-history me-2"></i> Historico <span class="ms-1 float-end">(@(ViewBag.resume["total"]))</span></a>
+                    </div>
+
+
+
+                    <h6 class="mt-4">Chat</h6>
+
+                    <div class="mt-2">
+                        <a href="javascript: void(0);" class="d-flex align-items-start">
+                            <img class="flex-shrink-0 me-3 rounded-circle" src="~/Content/images/users/avatar-2.jpg" alt="Generic placeholder image" height="36">
+                            <div class="flex-grow-1 chat-user-box">
+                                <p class="user-title m-0">Scott Median</p>
+                                <p class="text-muted">Hello</p>
+                            </div>
+                        </a>
+
+                        <a href="javascript: void(0);" class="d-flex align-items-start">
+                            <img class="flex-shrink-0 me-3 rounded-circle" src="~/Content/images/users/avatar-3.jpg" alt="Generic placeholder image" height="36">
+                            <div class="flex-grow-1 chat-user-box">
+                                <p class="user-title m-0">Julian Rosa</p>
+                                <p class="text-muted">What about our next..</p>
+                            </div>
+                        </a>
+
+                        <a href="javascript: void(0);" class="d-flex align-items-start">
+                            <img class="flex-shrink-0 me-3 rounded-circle" src="~/Content/images/users/avatar-4.jpg" alt="Generic placeholder image" height="36">
+                            <div class="flex-grow-1 chat-user-box">
+                                <p class="user-title m-0">David Medina</p>
+                                <p class="text-muted">Yeah everything is fine</p>
+                            </div>
+                        </a>
+
+                        <a href="javascript: void(0);" class="d-flex align-items-start">
+                            <img class="flex-shrink-0 me-3 rounded-circle" src="~/Content/images/users/avatar-6.jpg" alt="Generic placeholder image" height="36">
+                            <div class="flex-grow-1 chat-user-box">
+                                <p class="user-title m-0">Jay Baker</p>
+                                <p class="text-muted">Wow that's great</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- End Left sidebar -->
+                <!-- Right Sidebar -->
+                <div class="email-rightbar mb-3">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Servicios cancelados</h4>
+                            <p class="card-title-desc">Este lsitado contiene todos los servicios cancelados.</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-rep-plugin">
+                                <div class="table-responsive mb-0" data-pattern="priority-columns">
+                                    <table id="tech-companies-1" class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="3">Status</th>
+                                                <th data-priority="1">Teléfono</th>
+                                                <th data-priority="1">Hr. Solicitado</th>
+                                                <th data-priority="3">Hr. Servicio</th>
+                                                <th data-priority="3">Origin</th>
+                                                <th data-priority="3">Observación</th>
+                                                <th data-priority="3">n.º RT</th>
+                                                <th data-priority="3"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.Data)
+                                            {
+                                                <tr>
+                                                    <th>
+                                                        @switch (item.statusServiceId)
+                                                        {
+                                                            case 1:
+                                                                <span class="badge bg-success">Asignado</span>
+                                                                break;
+                                                            case 2:
+                                                                <span class="badge bg-warning">Pendiente</span>
+                                                                break;
+                                                            case 3:
+                                                                <span class="badge bg-danger">Cancelado</span>
+                                                                break;
+                                                            case 4:
+                                                                <span class="badge bg-info">Finalizado</span>
+                                                                break;
+                                                            case 5:
+                                                                <span class="badge bg-dark">Abordado</span>
+                                                                break;
+                                                            default:
+                                                                break;
+                                                        }
+
+                                                    </th>
+                                                    <th><span class="co-name"><i class="bx bx-phone"></i> @(item.phoneId)</span></th>
+
+                                                    <td><i class="bx bx-calendar"> @(item.dateRequested.ToString("dd/MM/yyyy HH:mm"))</i></td>
+                                                    <td><i class="bx bx-calendar"> @(item.datePickUp.ToString("dd/MM/yyyy HH:mm"))</i></td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary position-relative p-0 avatar-sm rounded-circle"
+                                                                data-bs-toggle="popover"
+                                                                data-bs-trigger="focus"
+                                                                title="Dirección"
+                                                                data-bs-content="@(item.origin)">
+                                                            <i class="mdi mdi-google-maps"></i>
+                                                        </button>
+                                                        @(" " + item.origin.Substring(0, Math.Min(item.origin.Length, 20)))...
+
+                                                    </td>
+                                                    <td><i class="bx bxs-note"> @(item.note)</i></td>
+                                                    <td><i class="bx bxs-car"> @(item.id)</i></td>
+
+                                                    <td>
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="bx bx-dots-horizontal-rounded"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                                <li><a class="dropdown-item" href="#"><i class=" bx bx-show-alt"></i> Ver más</a></li>
+                                                                <li><a class="dropdown-item" href="#"><i class="bx bx-trash"></i> Cancelar</a></li>
+                                                                <li><a class="dropdown-item" href="#"><i class="bx bxs-save"></i> Guardar</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                            <div class="row justify-content-center mt-3">
+                                <div class="col-md-12">
+                                    <nav aria-label="Page navigation example">
+                                        @if (Model.EndPage > 1)
+                                        {
+                                            <ul class="pagination justify-content-center">
+
+                                                @if (Model.CurrentPage > 1)
+                                                {
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="~/TaxiService/Index/">Primero</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="~/TaxiService/Index/?page=@(Model.CurrentPage - 1)">Anterior</a>
+                                                    </li>
+                                                }
+                                                else if (Model.CurrentPage == 1)
+                                                {
+                                                    <li class="page-item ">
+                                                        <a class="page-link" href="~/TaxiService/Index/">Primero</a>
+                                                    </li>
+                                                }
+
+                                                <!--Paginación activa-->
+                                                @for (var p = Model.StartPage; p <= Model.EndPage; p++)
+                                                {
+                                                    <li class="page-item @(p == Model.CurrentPage ? "active" : "")">
+                                                        <a class="page-link" href="~/TaxiService/Index/?page=@p">@p</a>
+                                                    </li>
+                                                }
+
+                                                @if (Model.CurrentPage < Model.TotalPages)
+                                                {
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="~/TaxiService/Index/?page=@(Model.CurrentPage + 1)">Siguiente</a>
+                                                    </li>
+                                                    <li class="page-item next">
+                                                        <a class="page-link" href="~/TaxiService/Index/?page=@(Model.TotalPages)">Último</a>
+                                                    </li>
+                                                }
+                                                else if (Model.CurrentPage == Model.TotalPages)
+                                                {
+                                                    <li class="page-item next">
+                                                        <a class="page-link" href="~/TaxiService/Index/?page=@(Model.TotalPages)">Último</a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        }
+                                    </nav>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- end Col-9 -->
+            </div>
+        </div><!-- End row -->
+
+    </div>
+</div>

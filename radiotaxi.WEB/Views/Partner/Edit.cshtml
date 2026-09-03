@@ -1,0 +1,630 @@
+﻿@model radiotaxi.Model.Partner
+@{
+    ViewBag.Title = "Editar operador";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    try
+    {
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0"><i class="bx bx-edit"></i> Editar socio</h4>
+                </div>
+                <div class="card-body">
+                    <div id="progrss-wizard" class="twitter-bs-wizard">
+                        <ul class="twitter-bs-wizard-nav nav nav-pills nav-justified">
+                            <li class="nav-item">
+                                <a href="#informacionGeneral" class="nav-link" data-toggle="tab">
+                                    <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Información general">
+                                        <i class="bx bx-list-ul"></i>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#informacionContacto" class="nav-link" data-toggle="tab">
+                                    <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Información de contacto">
+                                        <i class="bx bxs-contact"></i>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#datosSindicales" class="nav-link" data-toggle="tab">
+                                    <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Datos sindicales">
+                                        <i class="bx bx-book-bookmark"></i>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#informacionMedica" class="nav-link" data-toggle="tab">
+                                    <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Informacion médica">
+                                        <i class="bx bx-plus-medical"></i>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#redesSociales" class="nav-link" data-toggle="tab">
+                                    <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Redes sociales">
+                                        <i class="bx bx-group"></i>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#direccion" class="nav-link" data-toggle="tab">
+                                    <div class="step-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Dirección">
+                                        <i class="bx bx-map-pin"></i>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- wizard-nav    -->
+                        <div id="bar" class="progress mt-4">
+                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"></div>
+                        </div>
+                        <form id="form6" class="formjs" v-on:submit="onSubmit" method="POST" enctype="multipart/form-data">
+                            <div class="tab-content twitter-bs-wizard-tab-content">
+                                <div class="tab-pane active" id="informacionGeneral">
+                                    <div class="text-center mb-4">
+                                        <h5>Información general del socio</h5>
+                                        <p class="card-title-desc">Favor de llenar toda la información solicitada</p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <input type="hidden" id="userId" name="userId" value="@(Model.userId)" />
+                                                <label for="partnerReference">Eco</label>
+
+                                                <input v-validate="'required'" type="text" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('partnerReference')}" id="partnerReference" name="partnerReference" placeholder="Ingrese el No. de gafet" value="@(Model.partnerReference != null ? Model.partnerReference : "")" @(Permissions.allow("Admin") ? " " : " readonly ")>
+                                                <small id="emailHelp" class="form-text text-muted"></small>
+                                                <span class="text-danger" v-show="this.errors.has('partnerReference')">{{ this.errors.first('partnerReference') }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="firstName">Nombre</label>
+
+                                                <input v-validate="'required'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('firstName')}" id="firstName" name="firstName" placeholder="Ingrese el nombre del operador" value="@(Model.firstName != null ? Model.firstName : "")" @(Permissions.allow("Admin,Tarjeton") ? " " : " readonly ")>
+                                                <small id="emailHelp" class="form-text text-muted"></small>
+                                                <span class="text-danger" v-show="this.errors.has('firstName')">{{ this.errors.first('firstName') }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="lastNameF">Apellido Paterno</label>
+
+                                                <input v-validate="'required'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('lastNameF')}" id="lastNameF" name="lastNameF" placeholder="Ingrese el apellido paterno" value="@(Model.lastNameF != null ? Model.lastNameF : "")" @(Permissions.allow("Admin,Tarjeton") ? " " : " readonly ")>
+                                                <small id="emailHelp" class="form-text text-muted"></small>
+                                                <span class="text-danger" v-show="this.errors.has('lastNameF')">{{ this.errors.first('lastNameF') }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="lastNameM">Apellido Materno</label>
+                                                <input v-validate="'required'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('lastNameM')}" id="lastNameM" name="lastNameM" placeholder="Ingrese el apellido materno" value="@(Model.lastNameM != null ? Model.lastNameM : "")" @(Permissions.allow("Admin,Tarjeton") ? " " : " readonly ")>
+                                                <small id="emailHelp" class="form-text text-muted"></small>
+                                                <span class="text-danger" v-show="this.errors.has('lastNameM')">{{ this.errors.first('lastNameM') }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="birthDate">Fecha de nacimiento</label>
+                                                <input v-validate="'required'" type="date" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('birthDate')}" id="birthDate" name="birthDate" value="@(Model.birthDate != null ? Model.birthDate.ToString("yyyy-MM-dd") : "")">
+                                                <small id="emailHelp" class="form-text text-muted"></small>
+                                                <span class="text-danger" v-show="this.errors.has('birthDate')">{{ this.errors.first('birthDate') }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="birthPlace">Lugar de nacimiento</label>
+                                                <input v-validate="'required'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('birthPlace')}" id="birthPlace" name="birthPlace" placeholder="Ingrese el lugar de nacimiento" value="@(Model.birthPlace != null ? Model.birthPlace : "" )" @(Permissions.allow("Admin") ? " " : " readonly ")>
+                                                <small id="emailHelp" class="form-text text-muted"></small>
+                                                <span class="text-danger" v-show="this.errors.has('birthPlace')">{{ this.errors.first('birthPlace') }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="relationShipStatusId">Estado civil</label>
+                                                <select id="relationShipStatusId" name="relationShipStatusId" class="form-select" v-validate="'required'" @(Permissions.allow("Admin") ? " " : " readonly ")>
+                                                    <option selected value="">Seleccione el estado civil</option>
+
+                                                    @foreach (var relationship in ViewBag.relationships)
+                                                    {
+                                                        <option @(Model.relationShipStatusId == relationship.id ? " Selected " : "" ) value="@(relationship.id != null ? relationship.id : "")">@(relationship.name != null ? relationship.name : "")</option>
+                                                    }
+                                                </select>
+                                                <span class="text-danger" v-show="this.errors.has('relationShipStatusId')">{{ this.errors.first('relationShipStatusId') }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="sex">Sexo</label>
+                                                <select id="sex" name="sex" class="form-select" v-validate="'required'">
+                                                    <option selected value="">Seleccione el sexo</option>
+                                                    <option @(Model.sex == 1 ? " Selected " : "") value="1">Masculino</option>
+                                                    <option @(Model.sex == 2 ? " Selected " : "") value="2">Femenino</option>
+                                                </select>
+                                                <span class="text-danger" v-show="this.errors.has('sex')">{{ this.errors.first('sex') }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label for="rfc">RFC</label>
+                                                <input v-validate="'required|alpha_num|min:12|max:13'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('urfc')}" id="urfc" name="urfc" placeholder="Ingrese el RFC" value="@(Model.urfc != null ? Model.urfc : "")">
+                                                <small id="emailHelp" class="form-text text-muted"></small>
+                                                <span class="text-danger" v-show="this.errors.has('urfc')">{{ this.errors.first('urfc') }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label for="ine">INE</label>
+                                                <input v-validate="'required|alpha_num|min:18|max:18'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('ine')}" id="ine" name="ine" placeholder="Ingrese el INE" value="@(Model.ine != null ? Model.ine : "")">
+                                                <small id="emailHelp" class="form-text text-muted"></small>
+                                                <span class="text-danger" v-show="this.errors.has('ine')">{{ this.errors.first('ine') }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label for="curp">CURP</label>
+                                                <input v-validate="'required|alpha_num|min:18|max:18'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('curp')}" id="curp" name="curp" placeholder="Ingrese el CURP" value="@(Model.curp != null ? Model.curp : "")">
+                                                <small id="emailHelp" class="form-text text-muted"></small>
+                                                <span class="text-danger" v-show="this.errors.has('curp')">{{ this.errors.first('curp') }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- FORM 1 -->
+                                    <ul class="pager wizard twitter-bs-wizard-pager-link">
+                                        <li class="next">
+                                            <a v-on:click="next('foto')" class="btn btn-primary">
+                                                Siguiente <i class="bx bx-chevron-right ms-1"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="tab-pane" id="foto">
+                                    <div class="text-center mb-4">
+                                        <h5>Foto del socio</h5>
+                                        <p class="card-title-desc">Favor de tomar la fotografía del socio</p>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <div class="row mb-3">
+                                                    <div class="col-md-12">
+                                                        <video id="video" autoplay style="display: block; background: black; width: 100%; height: 0; padding-bottom: 75%;"></video>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6 text-center">
+                                                        <a class="btn btn-primary" id="start-camera">Iniciar Camera</a>
+                                                    </div>
+                                                    <div class="col-6 text-center">
+                                                        <a class="btn btn-primary" id="click-photo">Tomar Foto</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <div class="row mb-3">
+                                                    <div class="col-md-12">
+                                                        <div class="img-container">
+                                                            <canvas class="img-fluid" id="canvas" width="714" height="515"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 text-center">
+                                                        <a class="btn btn-primary" id="save-photo">Cortar Foto</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <div class="row mb-3">
+                                                    <div class="col-md-12 text-center">
+                                                        @if (Model.urlImage != null && Model.urlImage != "")
+                                                        {
+
+                                                            <img class="thumbnails" id="cropped" src="@(Model.urlImage)" style="display: block; background: black; width: 66%; height: auto; margin: 0 auto;">
+                                                        }
+                                                        else
+                                                        {
+                                                            <img class="thumbnails" id="cropped" src="https://dummyimage.com/500x600/000/000003" style="display: block; background: black; width: 66%; height: auto; margin: 0 auto;">
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 text-center">
+                                                        <input id="file" type="file" name="file">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- </form> FIN FORM 1 -->
+                                    <ul class="pager wizard twitter-bs-wizard-pager-link">
+                                        <li class="previous">
+                                            <a v-on:click="prev('informacionGeneral')" class="btn btn-primary">
+                                                <i class="bx bx-chevron-left me-1"></i> Anterior
+                                            </a>
+                                        </li>
+                                        <li class="next">
+                                            <a v-on:click="next('informacionContacto')" class="btn btn-primary">
+                                                Siguiente <i class="bx bx-chevron-right ms-1"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- FIN TAB 1 -->
+                                <div class="tab-pane" id="informacionContacto">
+                                    <div>
+                                        <div class="text-center mb-4">
+                                            <h5>Información de contacto</h5>
+                                            <p class="card-title-desc">Favor de llenar toda la información solicitada</p>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <input hidden="hidden" id="userPhones[0].id" name="userPhones[0].id" value="@(Model.userPhones != null && Model.userPhones.Count() > 0 ? Model.userPhones.FirstOrDefault().id.ToString() : "")" />
+                                                    <label for="phone">Teléfono</label>
+                                                    <input v-on:input="setAndFilter($event)" v-validate="{ required: true, regex: /\(\d\d\d\)\s+\d\d\d\s+\d\d\d\d/i }" type="tel" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('userPhones[0].phone')}" id="userPhones[0].phone" name="userPhones[0].phone" placeholder="Ingrese el número de teléfono" value="@(Model.userPhones != null && Model.userPhones.Count() > 0 ? Model.userPhones.FirstOrDefault().phone : "")" />
+                                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                                    <span class="text-danger" v-show="this.errors.has('userPhones[0].phone')">{{ this.errors.first('userPhones[0].phone') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <input hidden="hidden" id="emails[0].id" name="emails[0].id" value="@(Model.emails != null && Model.emails.Count() > 0 ? Model.emails.FirstOrDefault().id.ToString() : "")" />
+                                                    <label for="email">Correo</label>
+                                                    <input v-validate="'required|email'" type="email" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('emails[0].email1')}" id="emails[0].email1" name="emails[0].email1" placeholder="Ingrese el correo" value="@(Model.emails != null && Model.emails.Count() > 0 ? Model.emails.FirstOrDefault().email1 : "")" />
+                                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                                    <span class="text-danger" v-show="this.errors.has('emails[0].email1')">{{ this.errors.first('emails[0].email1') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- FIN FORM 2 -->
+                                        <ul class="pager wizard twitter-bs-wizard-pager-link">
+                                            <li class="previous">
+                                                <a v-on:click="prev('foto')" class="btn btn-primary">
+                                                    <i class="bx bx-chevron-left me-1"></i> Anterior
+                                                </a>
+                                            </li>
+                                            <li class="next">
+                                                <a v-on:click="next('datosSindicales')" class="btn btn-primary">
+                                                    Siguiente <i class="bx bx-chevron-right ms-1"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- FIN TAB 2 -->
+                                <div class="tab-pane" id="datosSindicales">
+                                    <div>
+                                        <div class="text-center mb-4">
+                                            <h5>Datos sindicales</h5>
+                                            <p class="card-title-desc">Favor de llenar toda la información solicitada</p>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <label for="createdDt" class="form-label">Fecha de ingreso</label>
+                                                    <input v-validate="'required'" type="date" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('createdDt')}" id="createdDt" name="createdDt" value="@(Model.createdDt != null ? Model.createdDt.ToString("yyyy-MM-dd") : "")">
+                                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                                    <span class="text-danger" v-show="this.errors.has('createdDt')">{{ this.errors.first('createdDt') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <label for="partnerTypeId">Tipo de asociación</label>
+                                                    <select  disabled id="partnerTypeId" name="partnerTypeId" class="form-select" v-validate="'required'" @(Permissions.allow("Admin") ? " " : " readonly ")>
+                                                        <option selected value="">Seleccione el tipo de asociación</option>
+                                                        @foreach (var partnerType in ViewBag.partnerTypes)
+                                                        {
+                                                            <option @(Model.partnerTypeId == partnerType.id ? " Selected " : "") value="@(partnerType != null ? partnerType.id : "")">@(partnerType.name != null ? partnerType.name : "")</option>
+                                                        }
+                                                    </select>
+                                                    <span class="text-danger" v-show="this.errors.has('partnerTypeId')">{{ this.errors.first('partnerTypeId') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- FIN FORM 3 -->
+                                        <ul class="pager wizard twitter-bs-wizard-pager-link">
+                                            <li class="previous">
+                                                <a v-on:click="prev('informacionContacto')" class="btn btn-primary">
+                                                    <i class="bx bx-chevron-left me-1"></i> Anterior
+                                                </a>
+                                            </li>
+                                            <li class="next">
+                                                <a v-on:click="next('informacionMedica')" class="btn btn-primary">
+                                                    Siguiente <i class="bx bx-chevron-right ms-1"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- FIN TAB 3 -->
+                                <div class="tab-pane" id="informacionMedica">
+                                    <div>
+                                        <div class="text-center mb-4">
+                                            <h5>Información médica</h5>
+                                            <p class="card-title-desc">Favor de llenar toda la información solicitada</p>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="bloodTypeId">Tipo de sangre</label>
+                                                    <select class="form-select" id="TipoSangre" name="TipoSangre" v-validate="'required'">
+                                                        <option selected value="">Selecciona el tipo de sangre</option>
+                                                        <option value="N/A" @(Model.TipoSangre != null && Model.TipoSangre == "N/A" ? " Selected " : "")>N/A</option>
+                                                        <option value="AB+" @(Model.TipoSangre != null && Model.TipoSangre == "AB+" ? " Selected " : "")>AB+</option>
+                                                        <option value="AB-" @(Model.TipoSangre != null && Model.TipoSangre == "AB-" ? " Selected " : "")>AB-</option>
+                                                        <option value="A+" @(Model.TipoSangre != null && Model.TipoSangre == "A+" ? " Selected " : "")>A+</option>
+                                                        <option value="A-" @(Model.TipoSangre != null && Model.TipoSangre == "A-" ? " Selected " : "")>A-</option>
+                                                        <option value="B+" @(Model.TipoSangre != null && Model.TipoSangre == "B+" ? " Selected " : "")>B+</option>
+                                                        <option value="B-" @(Model.TipoSangre != null && Model.TipoSangre == "B-" ? " Selected " : "")>B-</option>
+                                                        <option value="O+" @(Model.TipoSangre != null && Model.TipoSangre == "O+" ? " Selected " : "")>O+</option>
+                                                        <option value="O-" @(Model.TipoSangre != null && Model.TipoSangre == "O-" ? " Selected " : "")>O-</option>
+                                                        <option value="ORH+" @(Model.TipoSangre != null && Model.TipoSangre == "ORH+" ? " Selected " : "")>ORH+</option>
+                                                        <option value="ORH-" @(Model.TipoSangre != null && Model.TipoSangre == "ORH-" ? " Selected " : "")>ORH-</option>
+                                                    </select>
+                                                    <span class="text-danger" v-show="this.errors.has('TipoSangre')">{{ this.errors.first('TipoSangre') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="allergies">Alergias</label>
+                                                    <select class="form-select" id="allergies" name="allergies" v-validate="'required'">
+                                                        <option value="No" @(Model.allergies == "No" ? " selected " : "")>No</option>
+                                                        <option value="Si" @(Model.allergies == "Si" ? " selected " : "")>Si</option>
+                                                    </select>
+                                                    <span class="text-danger" v-show="this.errors.has('allergies')">{{ this.errors.first('allergies') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 d-flex justify-content-around">
+                                                <div class="mb-3">
+                                                    <div class="form-check mt-5">
+                                                        <input class="form-check-input" type="checkbox" id="organDonor" name="organDonor" value="true" @(Model.organDonor == true ? " checked " : "")>
+                                                        <label class="form-check-label" for="formCheck2">
+                                                            Donador
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- FIN FORM 4 -->
+                                        <ul class="pager wizard twitter-bs-wizard-pager-link">
+                                            <li class="previous">
+                                                <a v-on:click="prev('datosSindicales')" class="btn btn-primary">
+                                                    <i class="bx bx-chevron-left me-1"></i> Anterior
+                                                </a>
+                                            </li>
+                                            <li class="next">
+                                                <a v-on:click="next('redesSociales')" class="btn btn-primary">
+                                                    Siguiente <i class="bx bx-chevron-right ms-1"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- FIN TAB 4 -->
+                                <div class="tab-pane" id="redesSociales">
+                                    <div>
+                                        <div class="text-center mb-4">
+                                            <h5>Redes sociales</h5>
+                                            <p class="card-title-desc">Favor de llenar toda la información solicitada</p>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <label for="facebook" class="form-label">Facebook</label>
+                                                    <input type="text" class="form-control" id="facebook" name="facebook" placeholder="" value="@(Model.facebook != null ? Model.facebook : "")">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <label for="instagram" class="form-label">Instagram</label>
+                                                    <input type="text" class="form-control" id="instagram" name="instagram" placeholder="" value="@(Model.instagram != null ? Model.instagram : "")">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <label for="twitter" class="form-label">Twitter</label>
+                                                    <input type="text" class="form-control" id="twitter" name="twitter" placeholder="" value="@(Model.twitter != null ? Model.twitter : "")">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <label for="googleplus" class="form-label">Google+</label>
+                                                    <input type="text" class="form-control" id="googleplus" name="googleplus" placeholder="" value="@(Model.googleplus != null ? Model.googleplus : "")">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- FIN FORM 5 -->
+                                        <ul class="pager wizard twitter-bs-wizard-pager-link">
+                                            <li class="previous">
+                                                <a v-on:click="prev('informacionMedica')" class="btn btn-primary">
+                                                    <i class="bx bx-chevron-left me-1"></i> Anterior
+                                                </a>
+                                            </li>
+                                            <li class="next">
+                                                <a v-on:click="next('direccion')" class="btn btn-primary">
+                                                    Siguiente <i class="bx bx-chevron-right ms-1"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- FIN TAB 5 -->
+                                <div class="tab-pane" id="direccion">
+                                    <div>
+                                        <div class="text-center mb-4">
+                                            <h5>Dirección</h5>
+                                            <p class="card-title-desc">Favor de llenar toda la información solicitada</p>
+                                        </div>
+                                        <!-- <form id="form6" class="formjs" v-on:submit="onSubmit" method="POST" > -->
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <div class="mb-3">
+                                                    <input hidden="hidden" id="userAddresses[0].id" name="userAddresses[0].id" value="@(ViewBag.userAddress != null ? ViewBag.userAddress.id : "")" />
+                                                    <label for="state">Estado</label>
+                                                    <select class="form-select estado text-uppercase" id="userAddresses[0].stateId" name="userAddresses[0].stateId">
+                                                        <option selected value="0">Seleccione el estado</option>
+                                                        @foreach (var item in ViewBag.states)
+                                                        {
+                                                            <option @(ViewBag.stateId == item.id ? " selected " : "") value="@(item.id != null ? item.id : "")">@(item.name != null ? item.name : "")</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="mb-3">
+                                                    <label for="city">Ciudad</label>
+                                                    <select class="form-select ciudad text-uppercase" id="userAddresses[0].cityId" name="userAddresses[0].cityId">
+                                                        <option selected readonly value="">Seleccione la ciudad</option>
+                                                        @foreach (var item in ViewBag.cities)
+                                                        {
+                                                            <option @(ViewBag.cityId == item.id ? " selected " : "") value="@(item.id != null ? item.id : "")">@(item.name != null ? item.name : "")</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="mb-3">
+                                                    <label for="address">Dirección</label>
+                                                    <input v-validate="'required'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('userAddresses[0].address')}" id="userAddresses[0].address" name="userAddresses[0].address" placeholder="" value="@(ViewBag.userAddress != null && ViewBag.userAddress.address != null ? ViewBag.userAddress.address : "")">
+                                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                                    <span class="text-danger" v-show="this.errors.has('userAddresses[0].address')">{{ this.errors.first('userAddresses[0].address') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="mb-3">
+                                                    <label for="address2">Segunda dirección</label>
+                                                    <input type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('userAddresses[0].address2')}" id="userAddresses[0].address2" name="userAddresses[0].address2" placeholder="" value="@(ViewBag.userAddress != null && ViewBag.userAddress.address2 != null ? ViewBag.userAddress.address2 : "")">
+                                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                                    <span class="text-danger" v-show="this.errors.has('userAddresses[0].address2')">{{ this.errors.first('userAddresses[0].address2') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <div class="mb-3">
+                                                    <label for="interiorNumber">Número interior</label>
+                                                    <input v-validate="'required'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('userAddresses[0].interiorNumber')}" id="userAddresses[0].interiorNumber" name="userAddresses[0].interiorNumber" placeholder="" value="@(ViewBag.userAddress != null && ViewBag.userAddress.interiorNumber != null ? ViewBag.userAddress.interiorNumber :"" )">
+                                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                                    <span class="text-danger" v-show="this.errors.has('userAddresses[0].interiorNumber')">{{ this.errors.first('userAddresses[0].interiorNumber') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="mb-3">
+                                                    <label for="colony">Colonia</label>
+                                                    <input v-validate="'required'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('userAddresses[0].colony')}" id="userAddresses[0].colony" name="userAddresses[0].colony" placeholder="" value="@(ViewBag.userAddress != null && ViewBag.userAddress.colony != null ? ViewBag.userAddress.colony : "")">
+                                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                                    <span class="text-danger" v-show="this.errors.has('userAddresses[0].colony')">{{ this.errors.first('userAddresses[0].colony') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="mb-3">
+                                                    <label for="supermanzana">Supermanzana</label>
+                                                    <input v-validate="'required|digits:3'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('userAddresses[0].supermanzana')}" id="userAddresses[0].supermanzana" name="userAddresses[0].supermanzana" placeholder="" value="@(ViewBag.userAddress != null && ViewBag.userAddress.supermanzana != null ? ViewBag.userAddress.supermanzana : "")">
+                                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                                    <span class="text-danger" v-show="this.errors.has('userAddresses[0].supermanzana')">{{ this.errors.first('userAddresses[0].supermanzana') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="mb-3">
+                                                    <label for="manzana">Manzana</label>
+                                                    <input v-validate="'required|digits:3'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('userAddresses[0].manzana')}" id="userAddresses[0].manzana" name="userAddresses[0].manzana" placeholder="" value="@(ViewBag.userAddress != null && ViewBag.userAddress.manzana != null ? ViewBag.userAddress.manzana : "")">
+                                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                                    <span class="text-danger" v-show="this.errors.has('userAddresses[0].manzana')">{{ this.errors.first('userAddresses[0].manzana') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <div class="mb-3">
+                                                    <label for="lote">Lote</label>
+                                                    <input v-validate="'required|digits:3'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('userAddresses[0].lote')}" id="userAddresses[0].lote" name="userAddresses[0].lote" placeholder="" value="@(ViewBag.userAddress != null && ViewBag.userAddress.lote != null ? ViewBag.userAddress.lote : "")">
+                                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                                    <span class="text-danger" v-show="this.errors.has('userAddresses[0].lote')">{{ this.errors.first('userAddresses[0].lote') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="mb-3">
+                                                    <label for="street">Calle</label>
+                                                    <input v-validate="'required'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('userAddresses[0].street')}" id="userAddresses[0].street" name="userAddresses[0].street" placeholder="" value="@(ViewBag.userAddress != null && ViewBag.userAddress.street != null ? ViewBag.userAddress.street : "")">
+                                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                                    <span class="text-danger" v-show="this.errors.has('userAddresses[0].street')">{{ this.errors.first('userAddresses[0].street') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="mb-3">
+                                                    <label for="postalCode">Código postal</label>
+                                                    <input v-validate="'required|digits:5'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('userAddresses[0].postalCode')}" id="userAddresses[0].postalCode" name="userAddresses[0].postalCode" placeholder="" value="@(ViewBag.userAddress != null && ViewBag.userAddress.postalCode != null ? ViewBag.userAddress.postalCode : "")">
+                                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                                    <span class="text-danger" v-show="this.errors.has('userAddresses[0].postalCode')">{{ this.errors.first('userAddresses[0].postalCode') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- </form> FIN FORM 6 -->
+                                        <ul class="pager wizard twitter-bs-wizard-pager-link">
+                                            <li class="previous">
+                                                <a v-on:click="prev('redesSociales')" class="btn btn-primary">
+                                                    <i class="bx bx-chevron-left me-1"></i> Anterior
+                                                </a>
+                                            </li>
+                                            <li class="float-end">
+                                                <input value="Guardar" type="submit" id="SendForm" href="" class="btn btn-primary" />
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- end card body -->
+            </div>
+            <!-- end card -->
+        </div>
+        <!-- end col -->
+    </div>
+    }
+    catch (Exception ex)
+    {
+
+        throw;
+    }
+
+
+}
+
+@section Scripts {
+    <!-- form wizard init
+    <script src="~/Content/js/pages/form-wizard.init.js"></script>
+         -->
+    <script src="~/Content/js/Views/Partner/edit.js"></script>
+}

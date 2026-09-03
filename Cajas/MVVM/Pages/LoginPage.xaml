@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Cajas.MVVM.Pages.LoginPage"
+    xmlns:viewmodel="clr-namespace:Cajas.MVVM.ViewModels.log"
+    xmlns:Converter="clr-namespace:Cajas.Converters"
+    Title="Login"
+    NavigationPage.HasNavigationBar="false"
+    BackgroundColor="White">
+
+    <Grid>
+
+        <!-- ===================================================== -->
+        <!-- CONTENIDO PRINCIPAL DEL LOGIN -->
+        <!-- ===================================================== -->
+
+        <Grid
+            Padding="24"
+            RowDefinitions="0.14*,Auto,*">
+
+            <!-- ================================================= -->
+            <!-- FORMULARIO -->
+            <!-- ================================================= -->
+
+            <VerticalStackLayout
+                Grid.Row="1"
+                WidthRequest="460"
+                MaximumWidthRequest="460"
+                Spacing="0"
+                HorizontalOptions="Center"
+                VerticalOptions="Start">
+
+                <!-- ================================================= -->
+                <!-- LOGO -->
+                <!-- ================================================= -->
+
+                <Image
+                    Source="logologin.png"
+                    Aspect="AspectFit"
+                    HeightRequest="190"
+                    HorizontalOptions="Center" />
+
+
+                <!-- ================================================= -->
+                <!-- TÍTULO -->
+                <!-- ================================================= -->
+
+                <Label
+                    Text="Iniciar sesion en Cajas"
+                    FontSize="20"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    Margin="0,18,0,28"
+                    HorizontalOptions="Center" />
+
+
+                <!-- ================================================= -->
+                <!-- USUARIO -->
+                <!-- ================================================= -->
+
+                <Label
+                    Text="Your Email"
+                    TextColor="Black"
+                    Margin="0,0,0,4" />
+
+                <Entry
+                    Placeholder="E-mail"
+                    Text="{Binding Nickname}"
+                    TextColor="Black"
+                    HeightRequest="52">
+
+                    <Entry.Triggers>
+
+                        <DataTrigger
+                            TargetType="Entry"
+                            Value="True">
+
+                            <Setter
+                                Property="TextColor"
+                                Value="Black" />
+
+                        </DataTrigger>
+
+                    </Entry.Triggers>
+
+                </Entry>
+
+
+                <!-- ================================================= -->
+                <!-- CONTRASEÑA -->
+                <!-- ================================================= -->
+
+                <Label
+                    Text="Password"
+                    TextColor="Black"
+                    Margin="0,14,0,4" />
+
+                <Entry
+                    Placeholder="Contraseña"
+                    IsPassword="True"
+                    Text="{Binding Password}"
+                    TextColor="Black"
+                    HeightRequest="52">
+
+                    <Entry.Triggers>
+
+                        <DataTrigger
+                            TargetType="Entry"
+                            Value="True">
+
+                            <Setter
+                                Property="TextColor"
+                                Value="Black" />
+
+                        </DataTrigger>
+
+                    </Entry.Triggers>
+
+                </Entry>
+
+
+                <!-- ================================================= -->
+                <!-- BOTÓN INICIAR -->
+                <!-- ================================================= -->
+
+                <Button
+                    IsEnabled="{Binding IsBusy, Converter={Converter:InverseBoolConverter}}"
+                    Text="Iniciar"
+                    HeightRequest="50"
+                    BackgroundColor="{StaticResource btnBackgroundcolor}"
+                    TextColor="{StaticResource btntexgcolor}"
+                    Margin="0,16,0,0"
+                    Command="{Binding LoginCommand}" />
+
+
+                <!-- ================================================= -->
+                <!-- ESPACIO FIJO PARA EL INDICADOR -->
+                <!--
+                    Este Grid siempre ocupa espacio.
+                    De esta manera el formulario NO SE MUEVE
+                    cuando IsBusy cambia.
+                -->
+                <!-- ================================================= -->
+
+                <Grid
+                    HeightRequest="70"
+                    Margin="0,8,0,0">
+
+                    <ActivityIndicator
+                        IsRunning="{Binding IsBusy}"
+                        IsVisible="{Binding IsBusy}"
+                        Color="{StaticResource btnBackgroundcolor}"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
+
+                </Grid>
+
+            </VerticalStackLayout>
+
+        </Grid>
+
+
+        <!-- ===================================================== -->
+        <!-- MODAL DE ALERTA - LOGIN -->
+        <!-- ===================================================== -->
+
+        <Grid
+            ZIndex="200"
+            IsVisible="{Binding ShowAlertModal}"
+            BackgroundColor="#66000000">
+
+            <Border
+                WidthRequest="430"
+                Padding="28,24"
+                BackgroundColor="White"
+                Stroke="#E3E6E4"
+                StrokeThickness="1"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+
+                <Border.Shadow>
+
+                    <Shadow
+                        Brush="#70000000"
+                        Offset="0,8"
+                        Radius="18"
+                        Opacity="0.45" />
+
+                </Border.Shadow>
+
+
+                <VerticalStackLayout Spacing="16">
+
+                    <!-- ================================================= -->
+                    <!-- ICONO -->
+                    <!-- ================================================= -->
+
+                    <Border
+                        WidthRequest="66"
+                        HeightRequest="66"
+                        BackgroundColor="{Binding AlertBackgroundColor}"
+                        StrokeThickness="0"
+                        HorizontalOptions="Center">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="33" />
+                        </Border.StrokeShape>
+
+                        <Label
+                            Text="{Binding AlertIcon}"
+                            FontFamily="FASolid"
+                            FontSize="30"
+                            TextColor="{Binding AlertColor}"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center" />
+
+                    </Border>
+
+
+                    <!-- ================================================= -->
+                    <!-- TÍTULO -->
+                    <!-- ================================================= -->
+
+                    <Label
+                        Text="{Binding AlertTitle}"
+                        FontSize="21"
+                        FontAttributes="Bold"
+                        TextColor="{Binding AlertColor}"
+                        HorizontalTextAlignment="Center" />
+
+
+                    <!-- ================================================= -->
+                    <!-- MENSAJE -->
+                    <!-- ================================================= -->
+
+                    <Label
+                        Text="{Binding AlertMessage}"
+                        FontSize="14"
+                        TextColor="#666666"
+                        HorizontalTextAlignment="Center"
+                        LineBreakMode="WordWrap" />
+
+
+                    <!-- ================================================= -->
+                    <!-- BOTÓN -->
+                    <!-- ================================================= -->
+
+                    <Button
+                        Margin="0,8,0,0"
+                        HeightRequest="50"
+                        Text="ACEPTAR"
+                        BackgroundColor="{Binding AlertColor}"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        Command="{Binding CloseAlertCommand}" />
+
+                </VerticalStackLayout>
+
+            </Border>
+
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

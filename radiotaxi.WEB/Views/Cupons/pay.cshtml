@@ -1,0 +1,783 @@
+﻿@model radiotaxi.Model.CouponPayment
+
+@{
+    ViewBag.Title = "Detalle de pago";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var cantidadCupones = 0;
+
+    if (Model.CouponPaymentDetails != null)
+    {
+        cantidadCupones = Model.CouponPaymentDetails.Count;
+    }
+
+    string metodoPago = "";
+
+    switch (Model.PaymentMethod)
+    {
+        case 0:
+            metodoPago = "No especificado";
+            break;
+
+        case 1:
+            metodoPago = "Efectivo";
+            break;
+
+        case 2:
+            metodoPago = "Transferencia";
+            break;
+
+        case 3:
+            metodoPago = "Tarjeta";
+            break;
+
+        default:
+            metodoPago = "Otro";
+            break;
+    }
+}
+
+
+<!-- =====================================================
+     TITULO DE PAGINA
+     ===================================================== -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+
+            <h4 class="mb-sm-0 font-size-18">
+                <i class="bx bx-receipt"></i>
+                Detalle de pago
+            </h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item">
+                        <a href="javascript: void(0);">Inicio</a>
+                    </li>
+
+                    <li class="breadcrumb-item">
+                        <a href="javascript: void(0);">Cupones</a>
+                    </li>
+
+                    <li class="breadcrumb-item active">
+                        Pago #@Model.CouponPaymentId
+                    </li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+<!-- =====================================================
+     ENCABEZADO / ESTADO
+     ===================================================== -->
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <div class="row align-items-center">
+
+                    <div class="col-md-8">
+
+                        <h4 class="card-title mb-1">
+                            Pago de cupones #@Model.CouponPaymentId
+                        </h4>
+
+                        <p class="card-title-desc mb-0">
+                            Detalle de la operación y cupones incluidos en este pago.
+                        </p>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="d-flex justify-content-md-end mt-3 mt-md-0">
+
+                            @if (Model.Cancelled)
+                            {
+                                <span class="badge bg-danger-subtle text-danger fs-6">
+                                    <i class="bx bx-x-circle me-1"></i>
+                                    Cancelado
+                                </span>
+                            }
+                            else if (Model.Active)
+                            {
+                                <span class="badge bg-success-subtle text-success fs-6">
+                                    <i class="bx bx-check-circle me-1"></i>
+                                    Pagado
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary-subtle text-secondary fs-6">
+                                    <i class="bx bx-info-circle me-1"></i>
+                                    Inactivo
+                                </span>
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- =====================================================
+     RESUMEN DEL PAGO
+     ===================================================== -->
+<div class="row">
+
+    <!-- TOTAL PAGADO -->
+    <div class="col-xl-3 col-md-6 d-flex">
+
+        <div class="card w-100">
+
+            <div class="card-body d-flex align-items-center">
+
+                <div class="d-flex align-items-center w-100">
+
+                    <div class="flex-grow-1">
+
+                        <p class="text-muted fw-medium mb-2">
+                            Total pagado
+                        </p>
+
+                        <h4 class="mb-0 text-success">
+                            @Model.TotalAmount.ToString("$#,##0.00") MXN
+                        </h4>
+
+                    </div>
+
+                    <div class="flex-shrink-0">
+
+                        <div class="avatar-sm rounded-circle bg-success-subtle d-flex align-items-center justify-content-center">
+                            <i class="bx bx-dollar-circle font-size-24 text-success"></i>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CANTIDAD CUPONES -->
+    <div class="col-xl-3 col-md-6 d-flex">
+
+        <div class="card w-100">
+
+            <div class="card-body d-flex align-items-center">
+
+                <div class="d-flex align-items-center w-100">
+
+                    <div class="flex-grow-1">
+
+                        <p class="text-muted fw-medium mb-2">
+                            Cupones pagados
+                        </p>
+
+                        <h4 class="mb-0">
+                            @cantidadCupones
+                        </h4>
+
+                    </div>
+
+                    <div class="flex-shrink-0">
+
+                        <div class="avatar-sm rounded-circle bg-primary-subtle d-flex align-items-center justify-content-center">
+                            <i class="bx bxs-coupon font-size-24 text-primary"></i>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- FECHA -->
+    <div class="col-xl-3 col-md-6 d-flex">
+
+        <div class="card w-100">
+
+            <div class="card-body d-flex align-items-center">
+
+                <div class="d-flex align-items-center w-100">
+
+                    <div class="flex-grow-1">
+
+                        <p class="text-muted fw-medium mb-2">
+                            Fecha de pago
+                        </p>
+
+                        <h4 class="mb-0">
+                            @Model.CreatedDate.ToString("dd/MM/yyyy")
+                        </h4>
+
+                    </div>
+
+                    <div class="flex-shrink-0">
+
+                        <div class="avatar-sm rounded-circle bg-info-subtle d-flex align-items-center justify-content-center">
+                            <i class="bx bx-calendar font-size-24 text-info"></i>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- METODO DE PAGO -->
+    <div class="col-xl-3 col-md-6 d-flex">
+
+        <div class="card w-100">
+
+            <div class="card-body d-flex align-items-center">
+
+                <div class="d-flex align-items-center w-100">
+
+                    <div class="flex-grow-1">
+
+                        <p class="text-muted fw-medium mb-2">
+                            Método de pago
+                        </p>
+
+                        <h4 class="mb-0">
+                            @metodoPago
+                        </h4>
+
+                    </div>
+
+                    <div class="flex-shrink-0">
+
+                        <div class="avatar-sm rounded-circle bg-warning-subtle d-flex align-items-center justify-content-center">
+                            <i class="bx bx-wallet font-size-24 text-warning"></i>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     INFORMACION GENERAL
+     ===================================================== -->
+<div class="row">
+
+    <div class="col-lg-12">
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <h4 class="card-title">
+                    <i class="bx bx-info-circle"></i>
+                    Información del pago
+                </h4>
+
+                <p class="card-title-desc">
+                    Información general correspondiente a esta operación.
+                </p>
+
+            </div>
+
+            <div class="card-body p-4">
+
+                <div class="row">
+
+                    <!-- ID -->
+                    <div class="col-md-3 mb-3">
+
+                        <label class="form-label text-muted">
+                            ID del pago
+                        </label>
+
+                        <div>
+                            <span class="fw-semibold">
+                                #@Model.CouponPaymentId
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <!-- REFERENCIA -->
+                    <div class="col-md-3 mb-3">
+
+                        <label class="form-label text-muted">
+                            Referencia
+                        </label>
+
+                        <div class="fw-semibold">
+
+                            @if (string.IsNullOrWhiteSpace(Model.Reference))
+                            {
+                                <span class="text-muted">
+                                    Sin referencia
+                                </span>
+                            }
+                            else
+                            {
+                                @Model.Reference
+                            }
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CREADO POR -->
+                    <div class="col-md-3 mb-3">
+
+                        <label class="form-label text-muted">
+                            Creado por
+                        </label>
+
+                        <div>
+                            <span class="fw-semibold">
+                                @Model.CreatedBy
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <!-- ESTADO -->
+                    <div class="col-md-3 mb-3">
+
+                        <label class="form-label text-muted">
+                            Estado
+                        </label>
+
+                        <div>
+
+                            @if (Model.Cancelled)
+                            {
+                                <span class="badge bg-danger-subtle text-danger">
+                                    <i class="bx bx-x-circle me-1"></i>
+                                    Cancelado
+                                </span>
+                            }
+                            else if (Model.Active)
+                            {
+                                <span class="badge bg-success-subtle text-success">
+                                    <i class="bx bx-check-circle me-1"></i>
+                                    Pagado
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary-subtle text-secondary">
+                                    Inactivo
+                                </span>
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                @if (!string.IsNullOrWhiteSpace(Model.Comments))
+                {
+                    <div class="row mt-2">
+
+                        <div class="col-md-12">
+
+                            <label class="form-label text-muted">
+                                Comentarios
+                            </label>
+
+                            <div class="alert alert-light mb-0">
+
+                                <i class="bx bx-message-detail me-1"></i>
+
+                                @Model.Comments
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     TABLA DE CUPONES
+     ===================================================== -->
+<div class="row">
+
+    <div class="col-lg-12">
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <div class="row align-items-center">
+
+                    <div class="col-md-6">
+
+                        <div class="mb-3 mb-md-0">
+
+                            <h5 class="card-title mb-1">
+                                <i class="bx bxs-coupon"></i>
+                                Cupones pagados
+                            </h5>
+
+                            <p class="card-title-desc mb-0">
+                                Cupones incluidos en este pago.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <div class="d-flex flex-wrap align-items-center justify-content-end gap-2">
+
+                            <span class="badge bg-primary-subtle text-primary fs-6">
+
+                                <i class="bx bxs-coupon me-1"></i>
+
+                                @cantidadCupones
+
+                                @if (cantidadCupones == 1)
+                                {
+                                    @:cupón
+                                }
+                                else
+                                {
+                                    @:cupones
+                                }
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="card-body">
+
+                <div class="table-rep-plugin">
+
+                    <div class="table-responsive mb-0"
+                         data-pattern="priority-columns">
+
+                        <table class="table table-striped table-hover">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th data-priority="1">
+                                        #
+                                    </th>
+
+                                    <th data-priority="1">
+                                        Folio
+                                    </th>
+
+                                    <th data-priority="3">
+                                        Hotel / Cliente
+                                    </th>
+
+                                    <th data-priority="1">
+                                        Tipo de ticket
+                                    </th>
+
+                                    <th data-priority="1">
+                                        Fecha de pago
+                                    </th>
+
+                                    <th data-priority="1">
+                                        Importe
+                                    </th>
+
+                                    <th data-priority="1">
+                                        Estado
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                @if (Model.CouponPaymentDetails != null &&
+                                     Model.CouponPaymentDetails.Count > 0)
+                                {
+                                    var numero = 1;
+
+                                    foreach (var detalle in Model.CouponPaymentDetails)
+                                    {
+                                        var cupon = detalle.Cupon;
+
+                                        <tr>
+
+                                            <!-- NUMERO -->
+                                            <td>
+                                                @numero
+                                            </td>
+
+
+                                            <!-- FOLIO -->
+                                            <td>
+
+                                                @if (cupon != null)
+                                                {
+                                                    <span class="fw-semibold">
+                                                        @cupon.CuponsID
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted">
+                                                        -
+                                                    </span>
+                                                }
+
+                                            </td>
+
+
+                                            <!-- HOTEL -->
+                                            <td>
+
+                                                @if (cupon != null &&
+                                                     cupon.Couponrate != null &&
+                                                     cupon.Couponrate.Hotel != null)
+                                                {
+                                                    <span>
+                                                        @cupon.Couponrate.Hotel.Name
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted">
+                                                        Sin hotel / cliente
+                                                    </span>
+                                                }
+
+                                            </td>
+
+
+                                            <!-- TIPO -->
+                                            <td>
+
+                                                @if (cupon != null &&
+                                                     cupon.Couponrate != null &&
+                                                     cupon.Couponrate.Cupontype != null)
+                                                {
+                                                    <span class="badge bg-info-subtle text-info">
+                                                        @cupon.Couponrate.Cupontype.Name
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted">
+                                                        -
+                                                    </span>
+                                                }
+
+                                            </td>
+
+
+                                            <!-- FECHA -->
+                                            <td>
+
+                                                @if (cupon != null &&
+                                                     cupon.PaymentDate.HasValue)
+                                                {
+                                                    <div>
+                                                        @cupon.PaymentDate.Value.ToString("dd/MM/yyyy")
+                                                    </div>
+
+                                                    <small class="text-muted">
+                                                        @cupon.PaymentDate.Value.ToString("hh:mm tt")
+                                                    </small>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted">
+                                                        -
+                                                    </span>
+                                                }
+
+                                            </td>
+
+
+                                            <!-- IMPORTE -->
+                                            <td>
+
+                                                <span class="badge bg-success-subtle text-success fs-6">
+                                                    @detalle.Amount.ToString("$#,##0.00") MXN
+                                                </span>
+
+                                            </td>
+
+
+                                            <!-- ESTADO -->
+                                            <td>
+
+                                                @if (cupon != null && cupon.Paid)
+                                                {
+                                                    <span class="badge bg-success-subtle text-success">
+                                                        <i class="bx bx-check-circle me-1"></i>
+                                                        Pagado
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-warning-subtle text-warning">
+                                                        <i class="bx bx-time-five me-1"></i>
+                                                        Pendiente
+                                                    </span>
+                                                }
+
+                                            </td>
+
+                                        </tr>
+
+                                        numero++;
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+
+                                        <td colspan="7"
+                                            class="text-center py-5">
+
+                                            <div class="text-muted">
+
+                                                <i class="bx bxs-coupon font-size-24"></i>
+
+                                                <p class="mt-2 mb-0">
+                                                    Este pago no contiene cupones.
+                                                </p>
+
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+
+
+                            @if (Model.CouponPaymentDetails != null && Model.CouponPaymentDetails.Count > 0)
+                            {
+                                <tfoot>
+
+                                    <tr>
+
+                                        <td colspan="7">
+
+                                            <div class="d-flex justify-content-end align-items-center py-2">
+
+                                                <span class="fw-semibold me-3">
+                                                    Total pagado:
+                                                </span>
+
+                                                <span class="badge bg-success-subtle text-success fs-6">
+                                                    @Model.TotalAmount.ToString("$#,##0.00") MXN
+                                                </span>
+
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                </tfoot>
+                            }
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     BOTONES
+     =====================================================
+<div class="row">
+
+    <div class="col-lg-12">
+
+        <div class="d-flex flex-wrap gap-2 mb-4">
+
+            <a href="javascript:history.back()"
+               class="btn btn-light waves-effect">
+
+                <i class="bx bx-arrow-back me-1"></i>
+                Regresar
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+    -->

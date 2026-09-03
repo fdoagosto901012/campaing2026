@@ -1,0 +1,115 @@
+﻿@model IEnumerable<radiotaxi.Model.taxiService>
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon"><i class="icon-th"></i></span>
+                <h5>Servicios Radio Taxi</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                Teléfono Cliente
+                            </th>
+                            <th>
+                                Fecha solicitado
+                            </th>
+                            <th>
+                                Hora del Servicio
+                            </th>
+                            <th>
+                                Origen
+                            </th>
+                            <th>
+                                Observación
+                            </th>
+                            <th>
+                                Número RT
+                            </th>
+                            <th>
+                                Estado
+                            </th>
+                            <th>
+                                Creado Por
+                            </th>
+                            <th>
+                                Editado Por
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.phoneId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.dateRequested)                                    
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.datePickUp)
+                                </td>
+                                <td>
+                                   @Html.DisplayFor(modelItem => item.startPoint)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.note)
+                                </td>
+                                <td>
+                                    @{
+                                    string numeros = "*";
+                                    if (item.rtNumberServices.Count > 0)
+                                    {
+                                        foreach (var rtItem in item.rtNumberServices)
+                                        {
+                                            numeros = rtItem.rtNumber + ", " + numeros;
+                                        }
+                                        numeros = numeros.Replace(", *", "");
+                                        @Html.Raw(numeros);
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw("");
+                                    }
+                                    }                                    
+                                </td>
+                                <td>
+                                    @switch (item.statusServiceId)
+                                    {
+                                        case 1:
+                                            @Html.Raw("Asignado");
+                                                                 break;
+                                        case 2:
+                                        @Html.Raw("Pendiente");
+                                                              break;
+                                        case 3:
+                                        @Html.Raw("Cancelado");
+                                                              break;
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.createdBy)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.editedBy)
+                                </td>
+                                <td>
+                                    <a href="/TaxiService/Edit/@item.id" class="btn btn-mini btn-primary"><i class="icon-edit"></i></a>
+                                    <a href="/TaxiService/Details/@item.id" class="btn btn-mini btn-primary"><i class="icon-cog"></i></a>
+                                    <a href="/TaxiService/Delete/@item.id" class=" btn btn-mini btn-primary"><i class="icon-remove"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--End-Chart-box-->
+    <hr />
+</div>

@@ -1,0 +1,105 @@
+﻿@model radiotaxi.Model.reportDTO
+
+@{
+    ViewBag.Title = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="content-header">
+    <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Editar Reporte</a>  </div>
+    <h1>Editar Reporte</h1>
+</div>
+<div class="container-fluid">
+    <hr>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"> <i class="icon-align-justify"></i> </span>
+                    <h5>Información de reporte</h5>
+                </div>
+                <div class="widget-content nopadding">
+
+                    @using (Html.BeginForm(null, null, FormMethod.Post, new { name = "editReport", id = "editReport", @class = "form-horizontal" }))
+                    {
+
+                        <div class="row-fluid">
+                            <div class="span8">
+                                @Html.AntiForgeryToken()
+                                <hr />
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="controls">
+                                        @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.HiddenFor(model => model.id)
+                                        @Html.HiddenFor(model => model.createdBy)
+                                        @Html.HiddenFor(model => model.dateCreated)
+                                        @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="controls">
+                                        @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.address, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="controls">
+                                        @Html.TextAreaFor(model => model.address, 4, 63, new { @class = "textarea_editor form-control span11", @title = "" })
+                                        @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="controls">
+                                        @Html.TextAreaFor(model => model.description, 4, 63, new { @class = "textarea_editor form-control span11", @title = "" })
+                                        @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <div id="taxiReports">
+                                            <span>Taxi</span>
+                                            @if (Model.taxiReports.Count > 0)
+                                            {
+
+                                            }
+                                            @for (int i = 0; i < Model.taxiReports.Count; i++)
+                                            {
+                                                <div class="rtNumberServicesRow">
+                                                    @Html.LabelFor(model => Model.taxiReports[i].taxiNumber)
+                                                    @Html.TextBoxFor(model => Model.taxiReports[i].taxiNumber, new { @class = "taxiNumber" })
+                                                    @Html.HiddenFor(model => Model.taxiReports[i].reportId, new { @class = "reportId", @Value = Model.id })
+                                                    @Html.HiddenFor(model => Model.taxiReports[i].id, new { @class = "id" })
+                                                    <a href="javascript:void(0);" class="remRowR">Eliminar</a>
+                                                </div>
+                                            }
+                                        </div>
+                                        <p>
+                                            <a href="javascript:void(0);" class="addRowR">Agregar Taxi</a>
+                                        </p>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-actions">
+                                    <input type="submit" value="Editar" class="btn btn-success" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Regresar", "Index")
+</div>

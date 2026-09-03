@@ -1,0 +1,476 @@
+﻿@{
+    ViewBag.Title = "Identity";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- DATOS DE CONTROL JS -->
+<input id="gafet" name="gafet" type="hidden" value="partnerReference" />
+<input id="userId" name="userId" type="hidden" value="userId" />
+<input id="porcentaje" name="porcentaje" type="hidden" value="Porcentaje" />
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">CHOFER DADO DE BAJA</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- end page title -->
+<div class="row">
+    <div class="col-xl-9 col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm order-2 order-sm-1">
+                        <div class="d-flex align-items-start mt-3 mt-sm-0">
+                            <div class="flex-lg-shrink-0">
+                                <div class="avatar-xl me-3">
+                                    @if (Model.urlImage != null)
+                                    {
+                                        <img src="@(Model.urlImage)" alt="" class="avatar-xl rounded-circle me-2 img-thumbnail">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Content/images/users/empty.png" alt="" class="avatar-xl rounded-circle me-2 img-thumbnail">
+                                    }
+                                </div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <div>
+                                    <h4 class="font-size-18 mb-1 fw-bolder">@(ViewBag.baja.CHOFER)</h4>
+                                    <h6 class="font-size-14 mb-1">@(ViewBag.baja.NOMBRE) @(ViewBag.baja.APELLIDOS)</h6>
+                                    <p class="text-muted font-size-13 mb-0"> <span class="fw-bold">Fecha de ingreso:</span> @(Model.FECHAING != null ? Model.FECHAING.ToString("dd/MM/yyyy") : "")</p>
+                                    <p class="text-muted font-size-13 "><span class="fw-bold">Número telefónico:</span> @(Model.TELEFONO != null ? Model.TELEFONO : "")</p>
+
+                                    <div class="d-flex flex-wrap align-items-start gap-2 gap-lg-3 text-muted font-size-13">
+                                        <div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i>FECHA DE BAJA : @(ViewBag.baja.FECHABAJ)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- FIN PERFIL-->
+
+                </div>
+
+                <ul class="nav nav-tabs-custom card-header-tabs border-top mt-4" id="pills-tab" role="tablist">
+
+                    @if (Permissions.allow("Admin, Practi-Cred"))
+                    {
+                        <form method="POST" action="/Operator/Identity/@(Model.partnerReference)" class="hstack gap-3">
+                            <input type="hidden" value="0" />
+                            <li class="nav-item ms-auto my-auto  p-2">
+                                <button type="submit" class="btn btn-success btn-label">
+                                    <i class="bx bx-user label-icon"></i> Regresar identidad
+                                </button>
+                            </li>
+                        </form>
+
+                    }
+
+                </ul>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="general" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Información general</h5>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <div class="pb-3">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div>
+                                            <h5 class="font-size-15"><span>Fecha de nacimiento :</span></h5>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="text-muted">
+                                            @if (ViewBag.baja.FECHANAC != null)
+                                            {
+                                                <p class="my-0"> @((DateTime)ViewBag.baja.FECHANAC)</p>
+                                            }
+                                            else
+                                            {
+                                                <p class="my-0"> NO REGISTRADO</p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div>
+                                            <h5 class="font-size-15"><span>Lugar de nacimiento :</span></h5>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="text-muted">
+                                            @if (ViewBag.baja.LUGARNAC != null)
+                                            {
+                                            <p class="my-0"> @(ViewBag.baja.LUGARNAC)</p>
+                                            }
+                                            else
+                                            {
+                                            <p class="my-0"> NO REGISTRADO</p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div>
+                                            <h5 class="font-size-15"><span>Sexo :</span></h5>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="text-muted">
+                                            @if (ViewBag.baja.SEXO != null)
+                                            {
+                                                if (ViewBag.baja.SEXO == "M")
+                                                {
+                                                    <span>Masculino</span>
+                                                }
+                                                else
+                                                {
+                                                    <span>Femenino</span>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <p class="my-0"> NO REGISTRADO</p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div>
+                                            <h5 class="font-size-15"><span>Ciudad actual :</span></h5>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="text-muted">
+                                            @if (ViewBag.baja.CIUDADACT != null)
+                                            {
+                                                <span>@(ViewBag.baja.CIUDADACT)</span>
+                                            }
+                                            else
+                                            {
+                                                <p class="my-0"> NO REGISTRADO</p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div>
+                                            <h5 class="font-size-15"><span>Domicilio actual :</span></h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="text-muted">
+                                            @if (ViewBag.baja.DOMICACT != null)
+                                            {
+                                                <span>@(ViewBag.baja.DOMICACT)</span>
+                                            }
+                                            else
+                                            {
+                                                <p class="my-0"> NO REGISTRADO</p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card body -->
+                </div>
+                <!-- end card -->
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex">
+                                    <div class="flex-grow-1">
+                                        <h5 class="card-title mb-0">Estado civil</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div>
+                                    <div class="pb-3">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <div>
+                                                    <h5 class="font-size-15"><span>Estado civil :</span></h5>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="text-muted">
+                                                    @if (Model.realtionship != null)
+                                                    {
+                                                        <p class="my-0"> @Model.realtionship</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="my-0"> NO REGISTRADO</p>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <div>
+                                                    <h5 class="font-size-15"><span>Conyuge :</span></h5>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="text-muted">
+                                                    @if (Model.CONYUGE != null)
+                                                    {
+                                                        <p class="my-0"> @Model.CONYUGE</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="my-0"> NO REGISTRADO</p>
+                                                    }
+                                                    CONYUGUE
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card body -->
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex">
+                                    <div class="flex-grow-1">
+                                        <h5 class="card-title mb-0">Estudios/Educación</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div>
+                                    <div class="pb-3">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <div>
+                                                    <h5 class="font-size-15"><span>Escolaridad :</span></h5>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="text-muted">
+                                                    @if (Model.ESCOLARIDAD != null)
+                                                    {
+                                                        <p class="my-0"> @Model.ESCOLARIDAD</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="my-0"> NO REGISTRADO</p>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card body -->
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- end card -->
+            </div>
+            <!-- end tab pane -->
+        </div>
+        <!-- end tab content -->
+    </div>
+    <!-- end col -->
+
+    <div class="col-xl-3 col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Porcentaje</h5>
+                <div class="flex-wrap gap-2 font-size-14">
+                    <div class="col-sm order-2 order-sm-1">
+                        <div class="d-flex align-items-start mt-sm-0">
+                            <div class="col-sm">
+                                <div id="invested-overview" data-colors='["#5156be", "#34c38f"]'
+                                     class="apex-charts"></div>
+                            </div>
+                        </div>
+                    </div> <!-- FIN PORCENTAJE-->
+                </div>
+            </div>
+            <!-- end card body -->
+            <div class="card-footer text-center ">
+                <h6 class="badge badge-soft-danger font-size-14">FALTAS: 88</h6>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Documentación importante</h5>
+
+                <div class="flex-wrap gap-2 font-size-14">
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            @if (Model.ine != null)
+                            {
+                                <p class="my-0"><span class="fw-bold">INE:</span> @Model.ine.ToUpper()</p>
+                            }
+                            else
+                            {
+                                <p class="my-0"><span class="fw-bold">INE:</span> NO REGISTRADO</p>
+                            }
+                        </li>
+                        <li>
+                            @if (Model.urfc != null)
+                            {
+                                <p class="my-0"><span class="fw-bold">RFC:</span> @Model.urfc.ToUpper()</p>
+                            }
+                            else
+                            {
+                                <p class="my-0"><span class="fw-bold">RFC:</span> NO REGISTRADO</p>
+                            }
+                        </li>
+                        <li>
+                            @if (Model.curp != null)
+                            {
+                                <p class="my-0"><span class="fw-bold">CURP:</span> @Model.curp.ToUpper()</p>
+                            }
+                            else
+                            {
+                                <p class="my-0"><span class="fw-bold">CURP:</span> NO REGISTRADO</p>
+                            }
+                        </li>
+                        <li>
+                            @if (Model.LUGARNAC != null)
+                            {
+                                <p class="my-0"><span class="fw-bold">Lugar de nacimiendo:</span> @Model.LUGARNAC.ToUpper()</p>
+                            }
+                            else
+                            {
+                                <p class="my-0"><span class="fw-bold">Lugar de nacimiendo:</span> NO REGISTRADO</p>
+                            }
+                        </li>
+                        <li>
+                            @if (Model.birthDate != null)
+                            {
+                                <p class="my-0"><span class="fw-bold">Fecha de nacimiendo:</span> @(((DateTime)Model.birthDate).ToString("dd/MM/yyyy"))</p>
+                            }
+                            else
+                            {
+                                <p class="my-0"><span class="fw-bold">Fecha de nacimiendo:</span> NO REGISTRADO</p>
+                            }
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Licencia de conducir</h5>
+
+                <div>
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            @if (Model.LICENCIA != null)
+                            {
+                                <p class="my-0"><span class="fw-bold">Licencia:</span> @Model.LICENCIA.ToUpper()</p>
+                            }
+                            else
+                            {
+                                <p class="my-0"><span class="fw-bold">Licencia:</span> NO REGISTRADO</p>
+                            }
+                        </li>
+                        <li>
+                            @if (Model.LICVENCE != null)
+                            {
+                                <p class="my-0"><span class="fw-bold">Expira:</span> @Model.LICVENCE.Value.ToString("yy/MM/dddd")</p>
+                            }
+                            else
+                            {
+                                <p class="my-0"><span class="fw-bold">Expira:</span> NO REGISTRADO</p>
+                            }
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Información médica</h5>
+
+                <div>
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            @if (Model.TIPOSANGRE != null)
+                            {
+                                <p class="my-0"><span class="fw-bold">Tipo de sangre:</span> @Model.TIPOSANGRE</p>
+                            }
+                            else
+                            {
+                                <p class="my-0"><span class="fw-bold">Tipo de sangre:</span> NO REGISTRADO</p>
+                            }
+                        </li>
+                        <li>
+                            @if (Model.organDonor != false)
+                            {
+                                <p class="my-0"><span class="fw-bold">Donador:</span> Si</p>
+                            }
+                            else
+                            {
+                                <p class="my-0"><span class="fw-bold">Donador:</span> No</p>
+                            }
+                            <p class="my-0"><span class="fw-bold">Donador: </span> @Model.organDonor</p>
+                        </li>
+                        <li>
+                            @if (Model.allergies != null)
+                            {
+                                <p class="my-0"><span class="fw-bold">Alergias:</span> @(Model.allergies != null && Model.allergies == "1" ? "Si" : "No")</p>
+                            }
+                            else
+                            {
+                                <p class="my-0"><span class="fw-bold">Alergias:</span> NO REGISTRADO</p>
+                            }
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+
+
+@section Scripts {
+    <script src="~/Content/libs/DataTables/datatables.js"></script>
+    <script src="~/Content/libs/DataTables/datatables.min.js"></script>
+    <script src="~/Content/js/Views/Operator/identity.js"></script>
+}

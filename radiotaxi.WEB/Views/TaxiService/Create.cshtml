@@ -1,0 +1,183 @@
+﻿@model radiotaxi.Model.taxiServiceDTO
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--
+<button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Static backdrop modal
+</button>
+-->
+
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">Servicios</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Inicio</a></li>
+                    <li class="breadcrumb-item active">Servicios</li>
+                    <li class="breadcrumb-item active">Registrar servicio</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FORMULARIO-->
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Registrar servicio</h4>
+                <p class="card-title-desc">Para registrar un nuevo servicio al cliente seleccionado, llene los siguientes campos.</p>
+            </div>
+            <div class="card-body p-4">
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { name = "createService", id = "createService", @class = "form-horizontal" }))
+            {
+                <div class="row-fluid">
+                    <div class="span8">
+                        @Html.AntiForgeryToken()
+                        <div class="control-group observation-custom">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div id="dvResult">
+                            </div>
+                        </div>
+                        <div class="control-group mb-3">
+                            <label class="control-label" for="clienteRTL">Cliente</label>
+                            <div class="controls">
+                                @Html.Editor("clienteRT", new { htmlAttributes = new { @class = "form-control span11", @Value = ViewBag.cliente, @Disabled = "disabled" } })
+                            </div>
+                        </div>
+                        <div class="control-group  mb-3">
+                            @Html.LabelFor(model => model.phoneId, htmlAttributes: new { @class = "control-label" })
+                            <div class="controls">
+                                @Html.EditorFor(model => model.phoneId, new { htmlAttributes = new { @class = "form-control span11", @Value = ViewBag.phone } })
+                                @Html.ValidationMessageFor(model => model.phoneId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="control-group  mb-3">
+                            @Html.LabelFor(model => model.startPoint, htmlAttributes: new { @class = "control-label" })
+                            <div class="controls">
+                                @Html.TextAreaFor(model => model.startPoint, 4, 63, new { @class = "textarea_editor form-control span11" })
+                                @Html.ValidationMessageFor(model => model.startPoint, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="control-group mb-3">
+                            @Html.LabelFor(model => model.baseServiceId, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="controls">
+                                @Html.DropDownListFor(model => model.baseServiceId, (IEnumerable<SelectListItem>)ViewBag.baseRT, htmlAttributes: new { @class = "form-control span11" })
+                                @Html.ValidationMessageFor(model => model.baseServiceId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div hidden class="control-group mb-3">
+                            @Html.LabelFor(model => model.endPoint, htmlAttributes: new { @class = "control-label" })
+                            <div class="controls">
+                                @Html.EditorFor(model => model.endPoint, new { htmlAttributes = new { @class = "form-control span11", @Value = " " } })
+                                @Html.ValidationMessageFor(model => model.endPoint, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="control-group mb-3">
+                            @Html.LabelFor(model => model.note, htmlAttributes: new { @class = "control-label" })
+                            <div class="controls">
+                                @Html.TextAreaFor(model => model.note, 4, 63, new { @class = "textarea_editor form-control span11", @title = "" })
+                                @Html.ValidationMessageFor(model => model.note, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="control-group mb-3">
+                            @Html.LabelFor(model => model.datePickUp, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="controls">
+                                @Html.EditorFor(model => model.datePickUp, new { htmlAttributes = new { @class = "form-control span11", @Value = DateTime.Now.ToString("dd-MM-yyyy HH:mm") } })
+                                @Html.ValidationMessageFor(model => model.datePickUp, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="control-group mb-3">
+                            @Html.LabelFor(model => model.catalogServiceId, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="controls">
+                                @Html.DropDownListFor(model => model.catalogServiceId, (IEnumerable<SelectListItem>)ViewBag.catalog, htmlAttributes: new { @class = "form-control span11" })
+                                @Html.ValidationMessageFor(model => model.catalogServiceId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="control-group mb-3">
+                            @Html.LabelFor(model => model.statusServiceId, htmlAttributes: new { @class = "control-label" })
+                            <div class="controls">
+                                @Html.DropDownListFor(model => model.statusServiceId, (IEnumerable<SelectListItem>)ViewBag.status, htmlAttributes: new { @class = "form-control span11" })
+                                @Html.ValidationMessageFor(model => model.statusServiceId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="control-group mb-3">
+                            <div class="controls">
+                                <div id="rtNumberServices">
+                                    <h3><span>Taxi</span></h3>
+                                </div>
+                                <p>
+                                    <a href="javascript:void(0);" class="addRow btn btn-primary"><i class="icon-plus-sign"></i> Agregar Taxi</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="control-group mb-3">
+                            @Html.LabelFor(model => model.autoRenew, htmlAttributes: new { @class = "control-label " })
+                            <div class="controls">
+                                @Html.CheckBoxFor(model => model.autoRenew)
+                                @Html.ValidationMessageFor(model => model.autoRenew, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <input type="submit" value="Crear" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>
+            }
+                <div style='clear:both'></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Calendario de servicios</h4>
+                <p class="card-title-desc">Para registrar un nuevo servicio al cliente seleccionado, llene los siguientes campos.</p>
+            </div>
+            <div class="card-body p-4">
+                <div id="calendar"></div>
+                <h1>{{ message }}</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Static Backdrop Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Servicio para <strong>{{date}}</strong></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <div class="mb-3">
+                        <label for="example-time-input" class="form-label">Hora</label>
+                        <input  id="time" class="form-control" type="time" value="">
+                    </div>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+                <button @@click="save" type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <script src="~/Content/js/Views/TaxiService/VueCreate.js"></script>
+}

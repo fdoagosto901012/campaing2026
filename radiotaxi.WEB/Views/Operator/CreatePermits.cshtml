@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "Permits";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18"></h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Inicio</a></li>
+                    <li class="breadcrumb-item">Operadores</li>
+                    <li class="breadcrumb-item active">Crear permisos</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div id="content" class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Crear permisos para operadores</h4>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <form action="/Operator/CreatePermits" method="POST" class="col-md-8 row">
+                                <div class="form-group mb-3 col-6">
+                                    <label for="Name">Gafet </label>
+                                    <input v-validate="'required'" type="text" class="form-control " v-on:blur="searchOP($event)" v-bind:class="{ 'border-danger' : this.errors.has('gafet')}" id="gafet" name="gafet" aria-describedby="gafet" placeholder="">
+                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                    @*<span class="text-danger" v-show="this.errors.has('gafet')">{{ //this.errors.first('gafet') }}</span>*@
+                                </div>
+                                <div class="form-group mb-3 col-6">
+                                    <label for="lastNameF">Días</label>
+                                    <input v-validate="'required'" type="number" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('days')}" id="days" name="days" aria-describedby="emailHelp" placeholder="">
+                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                    @*<span class="text-danger" v-show="this.errors.has('days')">{{ //this.errors.first('days') }}</span>*@
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="motivo">Motivo</label>
+                                    <input v-validate="'required'" type="text" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('motivo')}" id="motivo" name="motivo" aria-describedby="emailHelp" placeholder="">
+                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                    @*<span class="text-danger" v-show="this.errors.has('motivo')">{{ //this.errors.first('motivo') }}</span>*@
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="descripcion">Descripción</label>
+                                    <input v-validate="'required'" type="text" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('descripcion')}" id="descripcion" name="descripcion" aria-describedby="emailHelp" placeholder="">
+                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                    @*<span class="text-danger" v-show="this.errors.has('descripcion')">{{ //this.errors.first('descripcion') }}</span>*@
+                                </div>
+
+                                <div class="col-3 align-content-end">
+                                    <button type="submit" class="btn btn-primary">Crear</button>
+                                    <div v-if="loading" class="spinner-border text-success m-1" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+
+                                <input v-if="data != null && data.Operator != null" type="hidden" name="id_user" id="id_user" v-bind:value="data.Operator.userId"/>
+
+                            </form>
+                            <div class="col-md-4" v-if="data != null && data.Operator != null">
+                                <img v-bind:src="data.Operator.urlImage" /><br />
+                                <span>Gafet: {{data.Operator.CHOFER}} </span><br />
+                                <span>Nombre: {{data.Operator.NOMBRE}} </span><br />
+                                <span>Apellidos: {{data.Operator.APELLIDOS}} </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <!-- form wizard init -->
+    <script src="~/Content/js/Views//Operator/CreatePermits.js"></script>
+}

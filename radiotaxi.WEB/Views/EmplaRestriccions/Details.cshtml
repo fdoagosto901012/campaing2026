@@ -1,0 +1,90 @@
+﻿@model radiotaxi.Model.EmplaRestriccion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EmplaRestriccion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_Marca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_Marca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_Modelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_Modelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AutoAno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AutoAno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Motor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Motor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.No_Serie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.No_Serie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Motivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Motivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Avisar_a)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Avisar_a)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaOp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaOp)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_Servicio }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

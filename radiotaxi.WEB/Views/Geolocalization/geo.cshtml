@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Geo";
+}
+<div style="height: 1100px; width: 100%; position: relative; overflow: hidden;" id="map"></div>
+
+<!-- end table responsive -->
+@section Scripts {
+    <!-- API de Google Maps con tu clave -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHMfXpMtrVbgMBpFq8oURjEnJ4QtbNhG0&callback=initMap"></script>
+    <script src="~/Content/js/Views/geolocalization/map.js"></script>
+}

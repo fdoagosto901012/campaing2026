@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cajas.MVVM.Pages.AppShell"
+             xmlns:pages="clr-namespace:Cajas.MVVM.Pages"
+             xmlns:blokcs="clr-namespace:Cajas.MVVM.Pages.blocks"
+             xmlns:convs="clr-namespace:Cajas.MVVM.Pages.convs"
+             xmlns:debs="clr-namespace:Cajas.MVVM.Pages.debs"
+             xmlns:contact="clr-namespace:Cajas.MVVM.Pages.contact"
+             xmlns:scan="clr-namespace:Cajas.MVVM.Pages.scan"
+             xmlns:ViewModels="clr-namespace:Cajas.MVVM.ViewModels"
+             xmlns:cupons="clr-namespace:Cajas.MVVM.Pages.cupones"
+             x:DataType="ViewModels:AppShellViewModel"
+             FlyoutBackgroundColor="{StaticResource base}"
+             BackgroundColor="{StaticResource complement}"
+             Title="Cajas">
+    <!-- paginas del shell-->
+    <Shell.FlyoutHeader>
+        <StackLayout Padding="20">
+            <Label Text="Menú Principal" FontSize="20"/>
+        </StackLayout>
+    </Shell.FlyoutHeader>
+
+    <!-- Aquí el botón personalizado en el Footer -->
+    <Shell.FlyoutFooter>
+        <StackLayout Padding="10">
+            <Button Text="Cerrar sesión" Command="{Binding SignOutCommand}" />
+        </StackLayout>
+    </Shell.FlyoutFooter>
+
+    <FlyoutItem Title="MI PERFIL" Icon="face.svg">
+        <ShellContent ContentTemplate="{ DataTemplate cupons:CuponesView }" Title="Cupones" Icon="home.svg"/>
+        <!--
+        <ShellContent ContentTemplate="{ DataTemplate pages:Home }" Title="HOME" Icon="home.svg"/>
+        <ShellContent ContentTemplate="{ DataTemplate debs:Debs }" Title="CARGOS" Icon="bill.svg"/>
+        <ShellContent ContentTemplate="{ DataTemplate scan:Scan }" Title="ESCANEAR" Icon="qr.svg"/>
+        <ShellContent ContentTemplate="{ DataTemplate convs:Convs }" Title="CONVENIOS" Icon="hand.svg"/>
+        <ShellContent ContentTemplate="{ DataTemplate blokcs:Blocks }" Title="BLOQUEOS" Icon="block.svg"/>-->
+    </FlyoutItem>
+
+    <ShellContent ContentTemplate="{ DataTemplate contact:revist }" Title="NOTICIAS" Icon="foco.svg"/>
+    <ShellContent ContentTemplate="{ DataTemplate contact:revist }" Title="PROMOCIONES" Icon="gif.svg"/>
+
+    <FlyoutItem Title="CONTACTO" Icon="headphones.svg">
+        <ShellContent ContentTemplate="{ DataTemplate contact:chat }" Title="CHAT" Icon="chat.svg"/>
+        <ShellContent ContentTemplate="{ DataTemplate contact:info }" Title="DIRECTORIO" Icon="book.svg"/>
+    </FlyoutItem>
+</Shell>

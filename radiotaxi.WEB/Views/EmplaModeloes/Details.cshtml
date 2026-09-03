@@ -1,0 +1,66 @@
+﻿@model radiotaxi.Model.EmplaModelo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EmplaModelo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_Marca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_Marca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaOp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaOp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaEdit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaEdit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_Usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_Usuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_UsuarioEdit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_UsuarioEdit)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_Modelo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

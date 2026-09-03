@@ -1,0 +1,458 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- ===================================================== -->
+    <!-- COLORES -->
+    <!-- ===================================================== -->
+
+    <Color x:Key="PrimaryGreen">#176B32</Color>
+    <Color x:Key="DarkGreen">#115126</Color>
+    <Color x:Key="LightGreen">#EAF5E9</Color>
+    <Color x:Key="PanelGreen">#F8FCF8</Color>
+
+    <Color x:Key="TextPrimary">#252525</Color>
+    <Color x:Key="TextSecondary">#646464</Color>
+    <Color x:Key="TextMuted">#989898</Color>
+    <Color x:Key="TextLight">#B0B0B0</Color>
+
+    <Color x:Key="BorderColor">#D8DDD9</Color>
+    <Color x:Key="SeparatorColor">#E4E4E4</Color>
+    <Color x:Key="SurfaceColor">#FFFFFF</Color>
+    <Color x:Key="TableHeaderBackground">#FAFAFA</Color>
+    <Color x:Key="ModalOverlayColor">#99000000</Color>
+
+    <Color x:Key="Success">#24803D</Color>
+    <Color x:Key="SuccessBackground">#EAF5E9</Color>
+
+    <Color x:Key="Danger">#E53935</Color>
+    <Color x:Key="DangerBackground">#FDECEC</Color>
+
+    <Color x:Key="Warning">#D99000</Color>
+    <Color x:Key="WarningBackground">#FFF5DE</Color>
+
+    <Color x:Key="Info">#1976D2</Color>
+    <Color x:Key="InfoBackground">#E7F2FC</Color>
+
+    <!-- ===================================================== -->
+    <!-- PÁGINAS -->
+    <!-- ===================================================== -->
+
+    <Style
+        x:Key="ApplicationPageStyle"
+        TargetType="ContentPage">
+
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource SurfaceColor}" />
+
+        <Setter Property="Shell.NavBarIsVisible"
+                Value="False" />
+
+    </Style>
+
+    <!-- ===================================================== -->
+    <!-- LABELS -->
+    <!-- ===================================================== -->
+
+    <Style
+        x:Key="SectionTitle"
+        TargetType="Label">
+
+        <Setter Property="FontSize"
+                Value="16" />
+
+        <Setter Property="FontAttributes"
+                Value="Bold" />
+
+        <Setter Property="TextColor"
+                Value="{StaticResource PrimaryGreen}" />
+
+        <Setter Property="VerticalTextAlignment"
+                Value="Center" />
+
+    </Style>
+
+    <Style
+        x:Key="FieldLabel"
+        TargetType="Label">
+
+        <Setter Property="FontSize"
+                Value="14" />
+
+        <Setter Property="TextColor"
+                Value="{StaticResource TextPrimary}" />
+
+        <Setter Property="VerticalTextAlignment"
+                Value="Center" />
+
+    </Style>
+
+    <Style
+        x:Key="SecondaryText"
+        TargetType="Label">
+
+        <Setter Property="FontSize"
+                Value="13" />
+
+        <Setter Property="TextColor"
+                Value="{StaticResource TextSecondary}" />
+
+        <Setter Property="VerticalTextAlignment"
+                Value="Center" />
+
+    </Style>
+
+    <!-- ===================================================== -->
+    <!-- ENTRIES -->
+    <!-- ===================================================== -->
+
+    <Style
+        x:Key="InputEntry"
+        TargetType="Entry">
+
+        <Setter Property="BackgroundColor"
+                Value="Transparent" />
+
+        <Setter Property="TextColor"
+                Value="{StaticResource TextPrimary}" />
+
+        <Setter Property="PlaceholderColor"
+                Value="{StaticResource TextMuted}" />
+
+        <Setter Property="FontSize"
+                Value="15" />
+
+        <Setter Property="HeightRequest"
+                Value="52" />
+
+        <Setter Property="Margin"
+                Value="12,0" />
+
+    </Style>
+
+    <!-- ===================================================== -->
+    <!-- BOTONES -->
+    <!-- ===================================================== -->
+
+    <Style
+        x:Key="PrimaryButton"
+        TargetType="Button">
+
+        <Setter Property="HeightRequest"
+                Value="56" />
+
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource PrimaryGreen}" />
+
+        <Setter Property="TextColor"
+                Value="White" />
+
+        <Setter Property="FontSize"
+                Value="15" />
+
+        <Setter Property="FontAttributes"
+                Value="Bold" />
+
+        <Setter Property="CornerRadius"
+                Value="8" />
+
+        <Setter Property="Padding"
+                Value="16,0" />
+
+    </Style>
+
+    <Style
+        x:Key="SecondaryButton"
+        TargetType="Button">
+
+        <Setter Property="HeightRequest"
+                Value="56" />
+
+        <Setter Property="BackgroundColor"
+                Value="White" />
+
+        <Setter Property="TextColor"
+                Value="{StaticResource TextPrimary}" />
+
+        <Setter Property="FontSize"
+                Value="15" />
+
+        <Setter Property="FontAttributes"
+                Value="Bold" />
+
+        <Setter Property="CornerRadius"
+                Value="8" />
+
+        <Setter Property="BorderColor"
+                Value="{StaticResource BorderColor}" />
+
+        <Setter Property="BorderWidth"
+                Value="1" />
+
+        <Setter Property="Padding"
+                Value="16,0" />
+
+    </Style>
+
+    <Style
+    x:Key="SquarePrimaryImageButton"
+    TargetType="ImageButton">
+
+        <Setter Property="WidthRequest" Value="52" />
+        <Setter Property="HeightRequest" Value="52" />
+        <Setter Property="Padding" Value="15" />
+        <Setter Property="BackgroundColor"
+            Value="{StaticResource PrimaryGreen}" />
+        <Setter Property="CornerRadius" Value="7" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+
+                <VisualStateGroup Name="CommonStates">
+
+                    <VisualState Name="Normal">
+                        <VisualState.Setters>
+                            <Setter
+                            Property="BackgroundColor"
+                            Value="{StaticResource PrimaryGreen}" />
+                            <Setter
+                            Property="Scale"
+                            Value="1" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState Name="PointerOver">
+                        <VisualState.Setters>
+                            <Setter
+                            Property="BackgroundColor"
+                            Value="{StaticResource DarkGreen}" />
+                            <Setter
+                            Property="Scale"
+                            Value="1.04" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter
+                            Property="BackgroundColor"
+                            Value="{StaticResource DarkGreen}" />
+                            <Setter
+                            Property="Scale"
+                            Value="0.97" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter
+                            Property="Opacity"
+                            Value="0.5" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                </VisualStateGroup>
+
+            </VisualStateGroupList>
+        </Setter>
+
+    </Style>
+
+    <Style
+        x:Key="DangerImageButton"
+        TargetType="ImageButton">
+
+        <Setter Property="WidthRequest"
+                Value="42" />
+
+        <Setter Property="HeightRequest"
+                Value="42" />
+
+        <Setter Property="Padding"
+                Value="10" />
+
+        <Setter Property="BackgroundColor"
+                Value="Transparent" />
+
+        <Setter Property="HorizontalOptions"
+                Value="Center" />
+
+        <Setter Property="VerticalOptions"
+                Value="Center" />
+
+    </Style>
+
+    <!-- ===================================================== -->
+    <!-- BORDERS -->
+    <!-- ===================================================== -->
+
+    <Style
+        x:Key="CardBorder"
+        TargetType="Border">
+
+        <Setter Property="BackgroundColor"
+                Value="White" />
+
+        <Setter Property="Stroke"
+                Value="{StaticResource BorderColor}" />
+
+        <Setter Property="StrokeThickness"
+                Value="1" />
+
+        <Setter Property="Padding"
+                Value="18" />
+
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="8" />
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+    <Style
+        x:Key="InputBorder"
+        TargetType="Border">
+
+        <Setter Property="BackgroundColor"
+                Value="White" />
+
+        <Setter Property="Stroke"
+                Value="{StaticResource BorderColor}" />
+
+        <Setter Property="StrokeThickness"
+                Value="1" />
+
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="7" />
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+    <Style
+        x:Key="ModalCard"
+        TargetType="Border">
+
+        <Setter Property="BackgroundColor"
+                Value="White" />
+
+        <Setter Property="Stroke"
+                Value="{StaticResource BorderColor}" />
+
+        <Setter Property="StrokeThickness"
+                Value="1" />
+
+        <Setter Property="Padding"
+                Value="28,20,28,24" />
+
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="10" />
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="Shadow">
+            <Setter.Value>
+                <Shadow
+                    Brush="#70000000"
+                    Offset="0,8"
+                    Radius="18"
+                    Opacity="0.45" />
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+    <!-- ===================================================== -->
+    <!-- TABLAS -->
+    <!-- ===================================================== -->
+
+    <Style
+        x:Key="TableHeader"
+        TargetType="Label">
+
+        <Setter Property="FontAttributes"
+                Value="Bold" />
+
+        <Setter Property="FontSize"
+                Value="14" />
+
+        <Setter Property="TextColor"
+                Value="#333333" />
+
+        <Setter Property="VerticalTextAlignment"
+                Value="Center" />
+
+    </Style>
+
+    <Style
+        x:Key="TableCell"
+        TargetType="Label">
+
+        <Setter Property="FontSize"
+                Value="14" />
+
+        <Setter Property="TextColor"
+                Value="{StaticResource TextPrimary}" />
+
+        <Setter Property="VerticalTextAlignment"
+                Value="Center" />
+
+    </Style>
+
+    <!-- ===================================================== -->
+    <!-- BADGES -->
+    <!-- ===================================================== -->
+
+    <Style
+        x:Key="SuccessBadge"
+        TargetType="Border">
+
+        <Setter Property="Padding"
+                Value="10,5" />
+
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource SuccessBackground}" />
+
+        <Setter Property="StrokeThickness"
+                Value="0" />
+
+        <Setter Property="HorizontalOptions"
+                Value="Center" />
+
+        <Setter Property="VerticalOptions"
+                Value="Center" />
+
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="5" />
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+    <Style
+        x:Key="SuccessBadgeLabel"
+        TargetType="Label">
+
+        <Setter Property="FontSize"
+                Value="12" />
+
+        <Setter Property="FontAttributes"
+                Value="Bold" />
+
+        <Setter Property="TextColor"
+                Value="{StaticResource Success}" />
+
+        <Setter Property="HorizontalTextAlignment"
+                Value="Center" />
+
+    </Style>
+
+</ResourceDictionary>

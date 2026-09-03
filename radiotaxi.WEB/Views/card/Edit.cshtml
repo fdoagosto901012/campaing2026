@@ -1,0 +1,82 @@
+﻿@model radiotaxi.Model.card
+@{
+    ViewBag.Title = "Tarjeton";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">. 
+            <h4 class="mb-sm-0 font-size-18">Tarjeton del operador @(Model.partnerReference != null ? Model.partnerReference : "") en el taxi No. @(Model.taxi != null ? Model.taxi : "")</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- end page title -->
+<div class="row">
+    <div class="col-xl-9 col-lg-8" style="height:650px;">
+        <iframe id="iframe1"
+                title="Preview del tarjetón"
+                frameborder="0"
+                style="display:block;width:100%;height:100%"
+                src="/card/generatepdf/@Model.id">
+        </iframe>
+        <!-- end card -->
+    </div>
+    <div class="col-xl-3 col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title mb-3 text-lg-center fw-bold">Formulario para generar tarjeton</h5>
+                <div class="flex-wrap gap-2 font-size-14">
+                    <form action="/card/Edit/@Model.id" method="POST" class="form-horizontal">
+                        <div class="row control-group">
+                            <div class="input-group my-3">
+                                <label class="input-group-text" for="turno">Turno</label>
+                                <select id="turn" name="turn" class="form-select">
+                                    <option @(Model.turn == 0 ? " selected " : "")>Elegir turno</option>
+                                    <option @(Model.turn == 1 ? " selected " : "") value="1">Matutino</option>
+                                    <option @(Model.turn == 2 ? " selected " : "") value="2">Vespertino</option>
+                                    <option @(Model.turn == 3 ? " selected " : "") value="3">Ambos</option>
+                                </select>
+                            </div>
+                            <div class="my-3">
+                                <label for="note" class="form-label">Nota</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="note" name="note" aria-describedby="basic-addon3" value="@Model.note">
+                                </div>
+                            </div>
+                            <div class="col d-flex justify-content-around my-3">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="isActive" name="isActive" value="true" @(Model.isActive != null && Model.isActive == true ? " checked " : "")>
+                                    <label class="form-check-label" for="activo">Activo</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="deliver" name="deliver" value="true" @(Model.deliver != null && Model.deliver == true ? " checked " : "")>
+                                    <label class="form-check-label" for="entregado">Entregado</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="low" name="low" value="true" @(Model.low != null && Model.low == true ? " checked " : "")>
+                                    <label class="form-check-label" for="baja">Baja</label>
+                                </div>
+                            </div>
+                            <div class="mt-4 form-actions">
+                                <button type="submit" value="Guardar" class="btn btn-success waves-effect btn-label waves-light">
+                                    <i class="bx bx-save label-icon"></i> Guardar
+                                </button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+</div>
+

@@ -1,0 +1,334 @@
+﻿@model radiotaxi.Model.Emplacamiento
+
+@{
+    ViewBag.Title = "Editar emplacamiento " + (ViewBag.Partner.partnerReference);
+}
+
+
+@if (Model.Protegido == true)
+{
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="alert alert-danger" role="alert">
+                <i class=" bx bx-block"></i> <i class=" bx bx-car"></i> El vehiculo esta  protegido, favor de comunicarse con sistemas.
+            </div>
+        </div><!-- end col -->
+    </div>
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0"><i class="bx bx-car"></i> Emplacamiento</h4>
+            </div>
+            <div class="card-body">
+                <form id="formu" class="formjs" v-on:submit="onSubmit" action="/emplacamiento/edit" method="POST" enctype="multipart/form-data">
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        <div class="form-group row">
+                            <div class="d-flex justify-content-between">
+                                <div class="col-md-3">
+                                    <label for="No_Economico">Eco:</label>
+                                    <input v-validate="'required'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('No_Economico')}" id="No_Economico" name="No_Economico" value="@(ViewBag.Partner.partnerReference != null ? ViewBag.Partner.partnerReference : "")" readonly>
+                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                    <span class="text-danger" v-show="this.errors.has('No_Economico')">{{ this.errors.first('No_Economico') }}</span>
+                                </div>
+
+                                <!--
+                                <div class="col-md-2">
+                                    <label for="Status" class="control-label col-md-6">Estatus</label>
+                                    <select id="Status" name="Status" class="form-control" v-validate="'required'" v-bind:class="{ 'border-danger' : this.errors.has('Status')}">
+                                        <option value="ALTA" selected>Alta</option>
+                                        <option value="BAJA">Baja</option>
+                                    </select>
+                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                    <span class="text-danger" v-show="this.errors.has('Status')">{{ this.errors.first('Status') }}</span>
+                                </div>
+
+                                -->
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label for="Nombre">Nombres</label>
+                                <input v-validate="'required'" type="text" class="form-control text-uppercase" id="Nombre"
+                                       name="Nombre" placeholder="Ingrese el nombre del operador" v-bind:class="{ 'border-danger' : this.errors.has('Status')}"
+                                       value="@(ViewBag.Partner.firstName != null ? ViewBag.Partner.firstName : "")" readonly>
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Nombre')">{{ this.errors.first('Nombre') }}</span>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="Paterno">Apellido Paterno</label>
+                                <input v-validate="'required'" type="text" class="form-control text-uppercase" id="Paterno"
+                                       name="Paterno" placeholder=""
+                                       value="@(ViewBag.Partner.lastNameF != null ? ViewBag.Partner.lastNameF : "")" v-bind:class="{ 'border-danger' : this.errors.has('Paterno')}" readonly>
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Paterno')">{{ this.errors.first('Paterno') }}</span>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="Materno">Apellido Materno</label>
+                                <input v-validate="'required'" type="text" class="form-control text-uppercase" id="Materno"
+                                       name="Materno" placeholder=""
+                                       value="@(ViewBag.Partner.lastNameM != null ? ViewBag.Partner.lastNameM : "")" v-bind:class="{ 'border-danger' : this.errors.has('Materno')}" readonly>
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Materno')">{{ this.errors.first('Materno') }}</span>
+                            </div>
+                        </div>
+
+                        <br />
+
+
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <label for="Id_Op" class="control-label col-md-6" hidden>Movimiento</label>
+                                <select id="Id_Mov" name="Id_Mov" class="form-control" v-validate="'required'" v-bind:class="{ 'border-danger' : this.errors.has('Id_Mov')}" hidden>
+                                    <option value="0" hidden>N/A</option>
+                                    @foreach (radiotaxi.Model.EmplaMovimiento movimiento in ViewBag.movimientos)
+                                    {
+                                        <option @(Model.Id_Mov == movimiento.Id_Mov ? " Selected " : "" ) value="@( movimiento.Id_Mov != null ?  movimiento.Id_Mov : "")" hidden>@( movimiento.Movimiento != null ? movimiento.Movimiento: "")</option>
+                                    }
+                                </select>
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Id_Op')">{{ this.errors.first('Id_Op') }}</span>
+                            </div>
+                        </div>
+
+
+                        <br />
+
+                        <div class="form-group row">
+                            <div class="col-md-5">
+                                <label for="Id_Marca" class="control-label col-md-2">Marca</label>
+                                <select v-on:change="onSeach($event)" id="Id_Marca" name="Id_Marca" class="form-control" v-validate="'required'" v-bind:class="{ 'border-danger' : this.errors.has('Id_Marca')}">
+                                    <option value="0">N/A</option>
+                                    @foreach (radiotaxi.Model.EmplaMarca marca in ViewBag.marcas)
+                                    {
+                                        <option @(Model.Id_Marca == marca.Id_Marca ? " Selected " : "" ) value="@( marca.Id_Marca != null ?  marca.Id_Marca : "")">@( marca.Marca != null ? marca.Marca: "")</option>
+                                    }
+                                </select>
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Id_Marca')">{{ this.errors.first('Id_Marca') }}</span>
+                            </div>
+
+                            <div class="col-md-5">
+                                <label for="Id_Modelo" class="control-label col-md-2">Modelo</label>
+                                <select id="Id_Modelo" name="Id_Modelo" class="form-control" v-validate="'required'" v-bind:class="{ 'border-danger' : this.errors.has('Id_Modelo')}">
+                                    <option value="0">N/A</option>
+
+                                    @foreach (radiotaxi.Model.EmplaModelo modelo in ViewBag.modelos)
+                                    {
+                                        <option @(Model.Id_Modelo == modelo.Id_Modelo ? " Selected " : "" ) value="@(modelo.Id_Modelo != null ?  modelo.Id_Modelo : "")">@( modelo.Modelo != null ? modelo.Modelo : "")</option>
+                                    }
+                                </select>
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Id_Modelo')">{{ this.errors.first('Id_Modelo') }}</span>
+                            </div>
+
+                            <div class="col-md-2">
+                                <label for="AutoAno">Año del auto</label>
+                                <input v-validate="'required|integer|min:4|max:4'" type="number" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('AutoAno')}" id="AutoAno" name="AutoAno" value="@(Model.AutoAno)">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('AutoAno')">{{ this.errors.first('AutoAno') }}</span>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="form-group row">
+                            <div class="col-md-2">
+
+                                <label for="Motor">Motor</label>
+                                <input v-validate="'required'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('Motor')}" id="Motor" name="Motor" value="@(Model.Motor)">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Motor')">{{ this.errors.first('Motor') }}</span>
+                            </div>
+
+                            <div class="col-md-2">
+
+                                <label for="No_Serie">N° de Serie (VIN)</label>
+                                <input v-validate="'required|vin'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('No_Serie')}" id="No_Serie" name="No_Serie" value="@(Model.No_Serie)">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('No_Serie')">{{ this.errors.first('No_Serie') }}</span>
+                            </div>
+
+                            <div class="col-md-2">
+
+                                <label for="Placas">Placas</label>
+                                <input v-validate="'required'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('Placas')}" id="placas" name="Placas" value="@(Model.Placas)">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Placas')">{{ this.errors.first('Placas') }}</span>
+                            </div>
+
+                            <div class="col-md-2">
+
+                                <label for="Capacidad">Capacidad</label>
+                                <input v-validate="'required|integer'" type="number" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('Capacidad')}" id="Capacidad" name="Capacidad" value="@(Model.Capacidad)">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Capacidad')">{{ this.errors.first('Capacidad') }}</span>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-check form-check mb-3">
+                                    <label class="control-label" for="Bloqueado">
+                                        Bloqueado
+                                    </label>
+                                    <div>
+                                        <input @(Model.Bloqueado == true ? " checked " : "") @(Model.Protegido == true ? " disabled " : "") class="" type="checkbox" id="Bloqueado" name="Bloqueado" value="true">
+                                    </div>
+
+                                    @*<small id="emailHelp" class="form-text text-muted"></small>
+                                        <span class="text-danger" v-show="this.errors.has('Bloqueado')">{{ this.errors.first('Bloqueado') }}</span>*@
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+
+                                <div class="form-check form-check mb-3">
+                                    <label class="control-label" for="Protegido">
+                                        Protegido
+                                    </label>
+                                    <div>
+                                        <input @(Model.Protegido == true ? " checked " : "") @(Model.Protegido == true ? " disabled " : "") class="" type="checkbox" id="Protegido" name="Protegido" value="true">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="form-group row">
+                            <div class="col-md-2">
+                                <label for="EconoResp">N° Eco del responsable</label>
+                                <input @(Model.Protegido == true ? " readonly " : "") v-on:change="onUser($event)" v-validate="'required'" type="text" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('EconoResp')}" id="EconoResp" name="EconoResp" value="@(Model.EconoResp)">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('EconoResp')">{{ this.errors.first('EconoResp') }}</span>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="Responsable">Nombre del responsable</label>
+                                <input v-validate="'required'" type="text" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('Responsable')}" id="Responsable" name="Responsable" value="@(Model.Responsable)" readonly>
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Responsable')">{{ this.errors.first('Responsable') }}</span>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="resp_telefono">Teléfono del responsable</label>
+                                <input v-on:input="setAndFilter($event)" v-validate="{ required: true, regex: /\(\d\d\d\)\s+\d\d\d\s+\d\d\d\d/i }" type="tel" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('resp_telefono')}" id="resp_telefono" name="resp_telefono" placeholder="Ingrese el número de teléfono" value="@(Model.resp_telefono)" />
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('resp_telefono')">{{ this.errors.first('resp_telefono') }}</span>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="resp_celular">Celular del responsable</label>
+                                <input v-on:input="setAndFilter($event)" v-validate="{ required: true, regex: /\(\d\d\d\)\s+\d\d\d\s+\d\d\d\d/i }" type="tel" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('resp_celular')}" id="resp_celular" name="resp_celular" placeholder="Ingrese el número de celular" value="@(Model.resp_celular)" />
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('resp_celular')">{{ this.errors.first('resp_celular') }}</span>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <label for="poliza">Poliza</label>
+                                <input v-validate="'required'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('poliza')}" id="poliza" name="poliza" value="@(Model.poliza)">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('poliza')">{{ this.errors.first('poliza') }}</span>
+                            </div>
+
+                            <div class="col-md-3">
+
+                                <label for="tipopoliza">Tipo de poliza</label>
+                                <input v-validate="'required'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('tipopoliza')}" id="tipopoliza" name="tipopoliza" value="@(Model.tipopoliza)">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('tipopoliza')">{{ this.errors.first('tipopoliza') }}</span>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="aseguradora" class="control-label col-md-6">Aseguradora</label>
+                                <select v-validate="'required'" v-bind:class="{ 'border-danger' : this.errors.has('aseguradora')}" id="aseguradora" name="aseguradora" class="form-control">
+                                    <option value="0">N/A</option>
+
+                                    @foreach (radiotaxi.Model.AseguradorasEmpla asegura in ViewBag.aseguradoras)
+                                    {
+                                        <option @(Model.aseguradora == asegura.aseguradora ? " Selected " : "" ) value="@(asegura.aseguradora != null ? asegura.aseguradora : "")">@(asegura.aseguradora!= null ? asegura.aseguradora: "")</option>
+                                    }
+                                </select>
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('aseguradora')">{{ this.errors.first('aseguradora') }}</span>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="vencepoliza" class="form-label col-md-8">Fecha de vencimiento de poliza</label>
+                                <input v-validate="'required'" v-bind:class="{ 'border-danger' : this.errors.has('vencepoliza')}" class="form-control" type="date" id="vencepoliza" name="vencepoliza" value="@(Model.vencepoliza != null ? ((DateTime)Model.vencepoliza).ToString("yyyy-MM-dd") : "")">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('vencepoliza')">{{ this.errors.first('vencepoliza') }}</span>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <label for="Observaciones">Observaciones</label>
+                                <input v-validate="'required'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('Observaciones')}" id="Observaciones" name="Observaciones" value="@(Model.Observaciones)">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Observaciones')">{{ this.errors.first('Observaciones') }}</span>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="form-group row d-flex justify-content-between">
+                            <div class="col-md-2 align-content-start">
+                                <a href="/emplacamiento/detalle/@(ViewBag.Partner.partnerReference)" class="btn btn-danger">
+                                    <i class=""></i> Cancelar
+                                </a>
+                            </div>
+
+                            @if (Model.Protegido != true)
+                            {
+                                <div class="col-md-2 d-flex  justify-content-end">
+                                    <input type="hidden" value="@Model.Id_Op" name="Id_Op" id="Id_Op" />
+                                    <input type="submit" value="Guardar" class="btn btn-success" id="SendForm" />
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+
+@section Scripts {
+    <script src="~/Content/js/Views/Emplacamiento/edit.js"></script>
+
+    <script>
+        const form = document.getElementById('formu');
+        if (form !== null && '@(Model.Protegido == true && !Permissions.allow("Admin"))' === 'True') {
+            const elementos = form.querySelectorAll('input, textarea, select, button');
+            elementos.forEach(el => {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.readOnly = true;
+                } else {
+                    el.disabled = true;
+                }
+            });
+        }   
+
+
+    </script>
+
+}

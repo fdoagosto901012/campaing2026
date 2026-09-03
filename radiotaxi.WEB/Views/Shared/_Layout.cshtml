@@ -1,0 +1,863 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>@(ViewBag.Title) | Practicontrol Web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta content="Practicontrol web by FAC" name="panel administrativo del sindicato de taxistas Andres Quintana Roo" />
+    <meta content="Practicontrol" name="FAC" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/Content/images/favicon.ico">
+
+
+
+    <link href="~/Content/libs/admin-resources/rwd-table/rwd-table.min.css" rel="stylesheet" type="text/css" />
+
+
+    <!-- DATATABLES PDF-->
+    <!--
+    <link href="@Url.Content("~/Content/libs/DataTablesPDF/buttons.dataTables.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/libs/DataTablesPDF/dataTables.dataTables.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/libs/DataTables/datatables.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/libs/DataTables/datatables.min.css")" rel="stylesheet" type="text/css" />
+    -->
+    @*
+
+        <!-- DATATABLES-->
+        <link href="~/Content/css/DataTablesProd.css" rel="stylesheet" type="text/css" />
+    *@
+
+    <!-- preloader css -->
+    <link rel="stylesheet" href="~/Content/css/preloader.min.css" type="text/css" />
+    <!-- Bootstrap Css -->
+    <link href="~/Content/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="~/Content/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="~/Content/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <!-- Cropper.js -->
+    <link href="~/Content/libs/cropperjs/cropper.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="~/Content/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <!-- <body data-layout="horizontal"> -->
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <div class="d-flex">
+                    <!-- LOGO -->
+                    <div class="navbar-brand-box">
+                        <a href="/Operator" class="logo logo-dark">
+                            <span class="logo-sm">
+                                <img src="~/Content/images/logo-sm.svg" alt="" height="24">
+
+                            </span>
+                            <span class="logo-lg">
+                                <img src="~/Content/images/logo-sm.svg" alt="" height="24"> <span class="logo-txt">Practicontrol web</span>
+
+                            </span>
+                        </a>
+
+                        <a href="index.html" class="logo logo-light">
+                            <span class="logo-sm">
+                                <img src="~/Content/images/logo-sm.svg" alt="" height="24">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="~/Content/images/logo-sm.svg" alt="" height="24"> <span class="logo-txt">Practicontrol web</span>
+                            </span>
+                        </a>
+                    </div>
+
+                    <button type="button" class="btn btn-sm px-3 font-size-16 header-item" id="vertical-menu-btn">
+                        <i class="fa fa-fw fa-bars"></i>
+                    </button>
+
+                    <!-- App Search-->
+                    <form id="Search" v-on:submit="Search" class="app-search d-none d-lg-block">
+                        <div class="position-relative">
+                            <input type="text" class="form-control" v-model="reference" placeholder="Buscar... ">
+                            <button class="btn btn-primary" type="submit"><i class="bx bx-search-alt align-middle"></i></button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="d-flex">
+
+                    <div class="dropdown d-inline-block d-lg-none ms-2">
+                        <button type="button" class="btn header-item" id="page-header-search-dropdown"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i data-feather="search" class="icon-lg"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+                             aria-labelledby="page-header-search-dropdown">
+
+                            <form class="p-3">
+                                <div class="form-group m-0">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search ..." aria-label="Search Result">
+
+                                        <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- HORA -->
+                    <div class="dropdown d-none d-sm-inline-block">
+                        <div class="btn header-item d-flex align-items-center gap-3" id="datetime-section">
+                            <i data-feather="calendar" class="icon-lg mr-2"></i>
+                            <span id="current-date" class="text-lg mr-2"></span>
+                            <i data-feather="clock" class="icon-lg mr-2"></i>
+                            <span id="current-time" class="text-lg"></span>
+                        </div>
+                    </div>
+                    <!-- FIN HORA -->
+
+                    <div class="dropdown d-none d-sm-inline-block">
+                        <button type="button" class="btn header-item" id="mode-setting-btn">
+                            <i data-feather="moon" class="icon-lg layout-mode-dark"></i>
+                            <i data-feather="sun" class="icon-lg layout-mode-light"></i>
+                        </button>
+                    </div>
+
+                    <!--
+
+
+                        NOTIFICACIONES
+
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item noti-icon position-relative" id="page-header-notifications-dropdown"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i data-feather="bell" class="icon-lg"></i>
+                            <span class="badge bg-danger rounded-pill">5</span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+                             aria-labelledby="page-header-notifications-dropdown">
+                            <div class="p-3">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h6 class="m-0"> Notifications </h6>
+                                    </div>
+                                    <div class="col-auto">
+                                        <a href="#!" class="small text-reset text-decoration-underline"> Unread (3)</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-simplebar style="max-height: 230px;">
+                                <a href="#!" class="text-reset notification-item">
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0 me-3">
+                                            <img src="~/Content/images/users/avatar-3.jpg" class="rounded-circle avatar-sm" alt="user-pic">
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">James Lemire</h6>
+                                            <div class="font-size-13 text-muted">
+                                                <p class="mb-1">It will seem like simplified English.</p>
+                                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span>1 hour ago</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#!" class="text-reset notification-item">
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0 avatar-sm me-3">
+                                            <span class="avatar-title bg-primary rounded-circle font-size-16">
+                                                <i class="bx bx-cart"></i>
+                                            </span>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">Your order is placed</h6>
+                                            <div class="font-size-13 text-muted">
+                                                <p class="mb-1">If several languages coalesce the grammar</p>
+                                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span>3 min ago</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#!" class="text-reset notification-item">
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0 avatar-sm me-3">
+                                            <span class="avatar-title bg-success rounded-circle font-size-16">
+                                                <i class="bx bx-badge-check"></i>
+                                            </span>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">Your item is shipped</h6>
+                                            <div class="font-size-13 text-muted">
+                                                <p class="mb-1">If several languages coalesce the grammar</p>
+                                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span>3 min ago</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#!" class="text-reset notification-item">
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0 me-3">
+                                            <img src="~/Content/images/users/empty.png" class="rounded-circle avatar-sm" alt="user-pic">
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">Salena Layfield</h6>
+                                            <div class="font-size-13 text-muted">
+                                                <p class="mb-1">As a skeptical Cambridge friend of mine occidental.</p>
+                                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span>1 hour ago</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="p-2 border-top d-grid">
+                                <a class="btn btn-sm btn-link font-size-14 text-center" href="javascript:void(0)">
+                                    <i class="mdi mdi-arrow-right-circle me-1"></i> <span>View More..</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    -->
+
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item bg-light-subtle border-start border-end" id="page-header-user-dropdown"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="rounded-circle header-profile-user" src="~/Content/images/users/empty.png"
+                                 alt="Header Avatar">
+                            <span class="d-none d-xl-inline-block ms-1 fw-medium">Bienvenido @Session["name"].ToString()</span>
+                            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <!-- item
+                            <a class="dropdown-item" href="apps-contacts-profile.html"><i class="mdi mdi mdi-face-man font-size-16 align-middle me-1"></i> Profile</a>
+                            <a class="dropdown-item" href="auth-lock-screen.html"><i class="mdi mdi-lock font-size-16 align-middle me-1"></i> Lock Screen</a>
+                            <div class="dropdown-divider"></div>
+                            -->
+                            <a class="dropdown-item" href="/Login/Logout"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Cerrar sesión</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="vertical-menu no-print">
+            <div data-simplebar class="h-100">
+                <!--- Sidemenu -->@**@
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu list-unstyled" id="side-menu">
+                        <li class="menu-title">Menu</li>
+
+                        <!--<li @if (ViewBag.Title == "Clientes Index") { @Html.Raw(" class='active' ") ; }><a href="/Client/"><i class="bx bx-user"></i> <span>Clientes</span></a> </li>-->
+                        <!--<li @if (ViewBag.Title == "Servicios") { @Html.Raw(" class='active' ") ; }><a href="/TaxiService/Index/"><i class="icon icon-star" data-feather="grid"></i> <span>Servicios</span></a> </li>-->
+                        <!--<li @if (ViewBag.Title == "Reportes") { @Html.Raw(" class='active' ") ; }><a href="/Report/"><i class="bx bxs-report"></i> <span>Reportes</span></a> </li>-->
+                        <li @if (ViewBag.Title == "Card") { @Html.Raw(" class='active' ") ; }>
+
+
+
+                            @if (Permissions.allow("Admin, tarjeton"))
+                            {
+                                <a href="javascript: void(0);" class="has-arrow">
+                                    <i class="bx bx-id-card"></i>
+                                    <span>Tarjetones</span>
+                                </a>
+
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li>
+                                        <a href="/Card/">
+                                            <span>Búqueda tarjeton</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="/card/Create">
+                                            <span>Crear tarjeton</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            }
+
+                        </li>
+
+                        @if (Permissions.allow("Admin, Practi-Emplacamiento, Practi-Plusvalia, Practi-BasicView"))
+                        {
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow">
+                                    <i class="bx bx-group"></i>
+                                    <span>Emplacamiento</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    @if (Permissions.allow("Admin, Practi-Emplacamiento, Practi-BasicView"))
+                                    {
+                                        <li>
+                                            <a href="/Emplacamiento/">
+                                                <span>
+                                                    Búqueda vehículo
+                                                </span>
+                                            </a>
+                                        </li>
+                                    }
+                                    @if (Permissions.allow("Admin, Practi-Plusvalia, Practi-Emplacamiento"))
+                                    {
+                                        <li>
+                                            <a href="/Emplacamiento/filter">
+                                                <span>
+                                                    Reporte
+                                                </span>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+
+                        <!-- SOCIO -->
+
+
+                        @if (Permissions.allow("Admin, tarjeton, Practi-AutoS, Practi-Actas, Clinica, Practi-Finanzas, Practi-Plusvalia, Archivo, Practi-Trabajo, Practi-Viewer, Practi-ViewerSOC, Practi-Cred, Practi-BasicView, Practi-Tte"))
+                        {
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow">
+                                    <i class="bx bx-group"></i>
+                                    <span>Socios</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+
+                                    @if (Permissions.allow("Admin, tarjeton, Practi-AutoS, Practi-Actas, Practi-Cajas, Practi-AdminTurkey, Clinica, Practi-Finanzas, Practi-Plusvalia, Archivo, Practi-Trabajo, Practi-Viewer, Practi-ViewerSOC, Practi-Cred, Practi-BasicView, Practi-Tte"))
+                                    {
+                                        <li>
+                                            <a href="/Partner/">
+                                                <span>Búqueda socio</span>
+                                            </a>
+                                        </li>
+                                    }
+                                    @if (Permissions.allow("Admin, Practi-Cred"))
+                                    {
+                                        <li>
+                                            <a href="/Partner/Create">
+                                                <span>Alta socio</span>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+
+
+                        <!-- OPERADORES -->
+
+                        @if (Permissions.allow("Admin, tarjeton, Archivo, Practi-AutoS,Practi-Actas,Practi-Cajas,Practi-AdminTurkey, Clinica,Practi-Finanzas, Practi-Prevision, Practi-Plusvalia, Practi-Tte, Practi-Trabajo, Practi-Viewer, Practi-ViewerOP, Practi-Cred, Practi-BasicView"))
+                        {
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow">
+                                    <i class="bx bx-car"></i>
+                                    <span>Operadores</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li>
+                                        <a href="/Operator/">
+                                            <span>Búqueda operador</span>
+                                        </a>
+                                    </li>
+                                    @if (Permissions.allow("Admin, Archivo"))
+                                    {
+                                        <li>
+                                            <a href="/Operator/create">
+                                                <span>Alta operador</span>
+                                            </a>
+                                        </li>
+                                    }
+                                    @if (Permissions.allow("Admin,Archivo"))
+                                    {
+                                        <li>
+                                            <a href="javascript: void(0);" class="has-arrow">
+                                                <span>Permisos</span>
+                                            </a>
+
+                                            <ul class="sub-menu" aria-expanded="false">
+                                                <!--
+                                                <li>
+                                                    <a href="/Operator/PermitsList">
+                                                        <span>Lista de Permisos</span>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="/Operator/CreatePermits">
+                                                        <span>Crear Permiso</span>
+                                                    </a>
+                                                </li>-->
+                                                <li>
+                                                    <a href="/Operator/Permits">
+                                                        <span>Permisos e incapacidades</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    }
+
+                                </ul>
+                            </li>
+                        }
+
+                        <!-- USUARIOS -->
+
+                        @if (Permissions.allow("Admin"))
+                        {
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow">
+                                    <i class="bx bx-user"></i>
+                                    <span>Usuarios/Accesos</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li>
+                                        <a href="/Users/">
+                                            <span>Búqueda usuario</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="/Users/create">
+                                            <span>Crear usuario</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+
+
+                        <!-- FINANZAS -->
+
+                        @if (Permissions.allow("Admin,Finanzas,Practi-Finanzas, Practi-FDI"))
+                        {
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow">
+                                    <i class="mdi mdi-finance"></i>
+                                    <span>Finanzas</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li>
+                                        <a href="/finance/fdi">
+                                            <span>Reporte de FDI</span>
+                                        </a>
+                                    </li>
+                                    @if (Permissions.allow("Admin,Finanzas,Practi-Finanzas"))
+                                    {
+                                        <li>
+                                            <a href="/finance/families">
+                                                <span>Reporte general por familias</span>
+                                            </a>
+                                        </li>
+                                    }
+
+                                </ul>
+                            </li>
+                        }
+
+                        <!-- CAJAS -->
+                        @if (Permissions.allow("Admin,Finanzas,Practi-Finanzas"))
+                        {
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow">
+                                    <i class="mdi mdi-cash-register"></i>
+                                    <span>Cajas / Cobro</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li>
+                                        <a href="/ticket/box">
+                                            <span>Cobros</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+
+                        <!-- CUPONES -->
+                        @if (Permissions.allow("Admin,Finanzas,Practi-Finanzas"))
+                        {
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow">
+                                    <i class="bx bxs-coupon"></i>
+                                    <span>Cupones</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li>
+                                        <a href="/cupones/">
+                                            <span>Búqueda de cupones</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/cupones/crear/">
+                                            <span>Crear cupones</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/cupones/impresion/">
+                                            <span>Impresion cupones</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Coupons/PayCoupon/">
+                                            <span>Pagar cupones</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Coupons/CashierCouponPaymentReport/">
+                                            <span>Reporte de pagos cajeras</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Coupons/CouponPaymentReport/">
+                                            <span>Reporte de pagos</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/cupones/Modulo-Impresion/">
+                                            <span>Modulo de impresión de cupones</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Coupons/Invoice/">
+                                            <span>Facturación</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Coupons/PrintInvoice/">
+                                            <span>Reimpresión de factura</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Coupons/Block/">
+                                            <span>Bloqueos</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="javascript: void(0);" class="has-arrow">
+                                            <i class="bx bxs-coupon"></i>
+                                            <span>Cupones tarifas</span>
+                                        </a>
+                                        <ul class="sub-menu" aria-expanded="false">
+                                            <li>
+                                                <a href="/cupones/tarifa">
+                                                    <span>Tarifas</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/cupones/tarifa/crear">
+                                                    <span>Crear Tarifas</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        }
+
+                        <!-- PAVOS -->
+
+                        @if (Permissions.allow("Admin, Practi-AdminTurkey, Practi-Cajas,Practi-Finanzas"))
+                        {
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow">
+                                    <i class="mdi mdi-food-turkey"></i>
+                                    <span>Pavos</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li><a href="/Turkey/CashierTurkeys">Estadisticas Pavos</a></li>
+                                    @if (Permissions.allow("Admin, Practi-AdminTurkey"))
+                                    {
+                                        <li>
+                                            <a href="/Turkey/ExternalCoupon">
+                                                <span>Cúpón Externo</span>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+
+                        @if (Permissions.allow("Admin"))
+                        {
+                            <li>
+                                <a href="/Geolocalization/map">
+                                    <i class="mdi mdi-google-maps"></i>
+                                    <span>Geolocalización</span>
+                                </a>
+
+                            </li>
+                        }
+
+
+
+
+                        @*x
+                            @if (permissions("Admin, Sistemas"))
+                            {
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow">
+                                        <i class="mdi mdi-tools"></i>
+                                        <span>Utilidades</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li>
+                                            <a href="/Operator/Identity">
+                                                <span>Regresar identidad</span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                            }
+                        *@
+
+                    </ul>
+                </div>
+                <!-- Sidebar -->
+            </div>
+        </div>
+        <!-- Left Sidebar End -->
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div id="App" class="main-content">
+            <div class="page-content">
+                <div class="container-fluid">
+                    <div id="content" class="row">
+                        <div class="col-md-12">
+                            @RenderBody()
+                        </div>
+                    </div>
+                    <!-- start page title -->
+                    <!-- end page title -->
+                    <footer class="footer">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <script>document.write(new Date().getFullYear())</script> © Practicontrol web.
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="text-sm-end d-none d-sm-block">
+                                        Design & Develop by <a href="#!" class="text-decoration-underline">Tippingpoint</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+                <!-- end main content-->
+
+            </div>
+        </div>
+        <!-- END layout-wrapper -->
+        <!-- Right Sidebar -->
+        <div class="right-bar">
+            <div data-simplebar class="h-100">
+                <div class="rightbar-title d-flex align-items-center p-3">
+
+                    <h5 class="m-0 me-2">Theme Customizer</h5>
+
+                    <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
+                        <i class="mdi mdi-close noti-icon"></i>
+                    </a>
+                </div>
+
+                <!-- Settings -->
+                <hr class="m-0" />
+
+                <div class="p-4">
+                    <h6 class="mb-3">Layout</h6>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="layout"
+                               id="layout-vertical" value="vertical">
+                        <label class="form-check-label" for="layout-vertical">Vertical</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="layout"
+                               id="layout-horizontal" value="horizontal">
+                        <label class="form-check-label" for="layout-horizontal">Horizontal</label>
+                    </div>
+
+                    <h6 class="mt-4 mb-3 pt-2">Layout Mode</h6>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="layout-mode"
+                               id="layout-mode-light" value="light">
+                        <label class="form-check-label" for="layout-mode-light">Light</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="layout-mode"
+                               id="layout-mode-dark" value="dark">
+                        <label class="form-check-label" for="layout-mode-dark">Dark</label>
+                    </div>
+
+                    <h6 class="mt-4 mb-3 pt-2">Layout Width</h6>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="layout-width"
+                               id="layout-width-fuild" value="fuild" onchange="document.body.setAttribute('data-layout-size', 'fluid')">
+                        <label class="form-check-label" for="layout-width-fuild">Fluid</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="layout-width"
+                               id="layout-width-boxed" value="boxed" onchange="document.body.setAttribute('data-layout-size', 'boxed')">
+                        <label class="form-check-label" for="layout-width-boxed">Boxed</label>
+                    </div>
+
+                    <h6 class="mt-4 mb-3 pt-2">Layout Position</h6>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="layout-position"
+                               id="layout-position-fixed" value="fixed" onchange="document.body.setAttribute('data-layout-scrollable', 'false')">
+                        <label class="form-check-label" for="layout-position-fixed">Fixed</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="layout-position"
+                               id="layout-position-scrollable" value="scrollable" onchange="document.body.setAttribute('data-layout-scrollable', 'true')">
+                        <label class="form-check-label" for="layout-position-scrollable">Scrollable</label>
+                    </div>
+
+                    <h6 class="mt-4 mb-3 pt-2">Topbar Color</h6>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="topbar-color"
+                               id="topbar-color-light" value="light" onchange="document.body.setAttribute('data-topbar', 'light')">
+                        <label class="form-check-label" for="topbar-color-light">Light</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="topbar-color"
+                               id="topbar-color-dark" value="dark" onchange="document.body.setAttribute('data-topbar', 'dark')">
+                        <label class="form-check-label" for="topbar-color-dark">Dark</label>
+                    </div>
+
+                    <h6 class="mt-4 mb-3 pt-2 sidebar-setting">Sidebar Size</h6>
+
+                    <div class="form-check sidebar-setting">
+                        <input class="form-check-input" type="radio" name="sidebar-size"
+                               id="sidebar-size-default" value="default" onchange="document.body.setAttribute('data-sidebar-size', 'lg')">
+                        <label class="form-check-label" for="sidebar-size-default">Default</label>
+                    </div>
+                    <div class="form-check sidebar-setting">
+                        <input class="form-check-input" type="radio" name="sidebar-size"
+                               id="sidebar-size-compact" value="compact" onchange="document.body.setAttribute('data-sidebar-size', 'md')">
+                        <label class="form-check-label" for="sidebar-size-compact">Compact</label>
+                    </div>
+                    <div class="form-check sidebar-setting">
+                        <input class="form-check-input" type="radio" name="sidebar-size"
+                               id="sidebar-size-small" value="small" onchange="document.body.setAttribute('data-sidebar-size', 'sm')">
+                        <label class="form-check-label" for="sidebar-size-small">Small (Icon View)</label>
+                    </div>
+
+                    <h6 class="mt-4 mb-3 pt-2 sidebar-setting">Sidebar Color</h6>
+
+                    <div class="form-check sidebar-setting">
+                        <input class="form-check-input" type="radio" name="sidebar-color"
+                               id="sidebar-color-light" value="light" onchange="document.body.setAttribute('data-sidebar', 'light')">
+                        <label class="form-check-label" for="sidebar-color-light">Light</label>
+                    </div>
+                    <div class="form-check sidebar-setting">
+                        <input class="form-check-input" type="radio" name="sidebar-color"
+                               id="sidebar-color-dark" value="dark" onchange="document.body.setAttribute('data-sidebar', 'dark')">
+                        <label class="form-check-label" for="sidebar-color-dark">Dark</label>
+                    </div>
+                    <div class="form-check sidebar-setting">
+                        <input class="form-check-input" type="radio" name="sidebar-color"
+                               id="sidebar-color-brand" value="brand" onchange="document.body.setAttribute('data-sidebar', 'brand')">
+                        <label class="form-check-label" for="sidebar-color-brand">Brand</label>
+                    </div>
+
+                    <h6 class="mt-4 mb-3 pt-2">Direction</h6>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="layout-direction"
+                               id="layout-direction-ltr" value="ltr">
+                        <label class="form-check-label" for="layout-direction-ltr">LTR</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="layout-direction"
+                               id="layout-direction-rtl" value="rtl">
+                        <label class="form-check-label" for="layout-direction-rtl">RTL</label>
+                    </div>
+                </div>
+            </div> <!-- end slimscroll-menu-->
+        </div>
+        <!-- /Right-bar -->
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script src="~/Content/libs/jquery/jquery.min.js"></script>
+
+    <script src="~/Content/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/libs/metismenu/metisMenu.min.js"></script>
+    <script src="~/Content/libs/simplebar/simplebar.min.js"></script>
+    <script src="~/Content/libs/node-waves/waves.min.js"></script>
+    <script src="~/Content/libs/feather-icons/feather.min.js"></script>
+    <!-- pace js -->
+    <script src="~/Content/libs/pace-js/pace.min.js"></script>
+    <!-- VUE 3 -->
+    <script src="~/Content/libs/Vue/vee-validate.js"></script>
+    <script src="~/Content/libs/Vue/vue.js"></script>
+    <!-- Sweetalert-->
+    <!-- dashboard init -->
+    <script src="~/Content/js/pages/dashboard.init.js"></script>
+
+    <script src="~/Content/libs/sweetalert2/sweetalert2.min.js"></script>
+    <!-- MAIN APP -->
+    <script src="~/Content/js/app.js"></script>
+
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const optionsTime = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
+            const dateString = now.toLocaleDateString('es-ES', optionsDate);
+            const timeString = now.toLocaleTimeString('es-ES', optionsTime);
+            document.getElementById('current-date').innerText = dateString;
+            document.getElementById('current-time').innerText = timeString;
+        }
+        // Inicializa la fecha y hora y actualiza cada segundo
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+    </script>
+
+    <script>
+        @functions{
+            public string TokenHeaderValue()
+            {
+                string cookieToken, formToken;
+                AntiForgery.GetTokens(null, out cookieToken, out formToken);
+                return cookieToken + ":" + formToken;
+            }
+            public bool permissions(string roles){
+                roles = roles.Replace(" ", "");
+                string[] _roles = roles.Split(',');
+                foreach (var role in _roles)
+                {
+                    if (Session["role"].ToString() == role)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+        var csrfToken = '@TokenHeaderValue()';
+    </script>
+
+
+
+
+    <!-- Copperjs-->
+    <script src="~/Content/libs/cropperjs/cropper.js"></script>
+    @RenderSection("Scripts", required: false);
+</body>
+
+</html>

@@ -1,0 +1,178 @@
+﻿@model PagedList.IPagedList<radiotaxi.Model.taxiService>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "IndexAsignados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .appService {
+        background: #47ce45;
+        color: white;
+    }
+    .appService:hover {
+        background: #72da71;
+        color: white;
+    }
+    .clasicService {
+        background: #47515b;
+        color: white;
+    }
+
+    .clasicService:hover {
+        background: #47515b;
+        color: white;
+    }
+</style>
+
+<!--breadcrumbs-->
+<div id="content-header">
+    <div id="breadcrumb"> <a href="/" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom" data-original-title="">Servicios Asignados</a> </div>
+</div>
+<!--End-breadcrumbs-->
+<!--Action boxes-->
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span6 text-left">
+            <h2><i class="icon-thumbs-up"></i> Servicios Asignados</h2>
+        </div>
+        <div id="dvSearchResult">
+
+        </div>
+    </div>
+    <hr />
+    <div class="quick-actions_homepage">
+        <!--<ul class="quick-actions">
+            <li class="bg_lb"> <a href="index.html"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> My Dashboard </a> </li>
+            <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> Charts</a> </li>
+            <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success">101</span> Widgets </a> </li>
+            <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i> Tables</a> </li>
+            <li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i> Full width</a> </li>
+            <li class="bg_lo span3"> <a href="form-common.html"> <i class="icon-th-list"></i> Forms</a> </li>
+            <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i> Buttons</a> </li>
+            <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"></i>Elements</a> </li>
+            <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i> Calendar</a> </li>
+            <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i> Error</a> </li>
+        </ul>-->
+    </div>
+    <!--End-Action boxes-->
+    <!--Chart-box-->
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-th"></i></span>
+                    <h5>Servicios Radio Taxi</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Teléfono Cliente
+                                </th>
+                                <th>
+                                    Nombre Cliente
+                                </th>
+                                <th>
+                                    Fecha solicitado
+                                </th>
+                                <th>
+                                    Hora del Servicio
+                                </th>
+                                <th>
+                                    Origen
+                                </th>
+                                <th>
+                                    Observación
+                                </th>
+                                <th>
+                                    Número RT
+                                </th>
+                                <th>
+                                    Estado
+                                </th>
+                                <th>
+                                    Renovación Automática
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.phoneId)
+                                    </td>
+                                    <td>
+                                        @(item.client1.name + " " + item.client1.lastname1 + " " + item.client1.lastname2)
+                                    </td>
+                                    <td>
+                                        @item.dateRequested.ToString("dd/MM/yyyy HH:mm")
+                                    </td>
+                                    <td>
+                                        @item.datePickUp.ToString("dd/MM/yyyy HH:mm")
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.startPoint)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.note)
+                                    </td>
+                                    <td>
+                                        @{
+                                string numeros = "*";
+                                if (item.rtNumberServices.Count > 0)
+                                {
+                                    foreach (var rtItem in item.rtNumberServices)
+                                    {
+                                        numeros = rtItem.rtNumber + ", " + numeros;
+                                    }
+                                    numeros = numeros.Replace(", *", "");
+                                    @Html.Raw(numeros);
+                                }
+                                else
+                                {
+                                    @Html.Raw("");
+                                }
+                                        }
+                                    </td>
+                                    <td>
+                                        @switch (item.statusServiceId)
+                                        {
+                                            case 1:
+                                                @Html.Raw("Asignado");
+                                                                 break;
+                                            case 2:
+                                            @Html.Raw("Pendiente");
+                                                              break;
+                                            case 3:
+                                            @Html.Raw("Cancelado");
+                                                              break;
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.autoRenew)
+                                    </td>
+                                    <td>
+                                        <a href="/TaxiService/Edit/@item.id" class="btn btn-mini btn-primary"><i class="icon-edit"></i></a>
+                                        <a href="/TaxiService/Details/@item.id" class="btn btn-mini btn-primary"><i class="icon-cog"></i></a>
+                                        <a href="/TaxiService/Delete/@item.id" class=" btn btn-mini btn-primary"><i class="icon-remove"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            @Html.PagedListPager(Model, page => Url.Action("IndexAsignados",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </div>
+        <!--End-Chart-box-->
+        <hr />
+    </div>
+</div>

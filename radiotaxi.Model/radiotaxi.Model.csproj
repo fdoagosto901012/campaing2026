@@ -1,0 +1,1520 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C74A683D-64ED-4951-AD12-BED71F6253CF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>radiotaxi.Model</RootNamespace>
+    <AssemblyName>radiotaxi.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>5</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.4\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.4\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="academicGrade.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="accident.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AccountViewModels.cs" />
+    <Compile Include="Actas_Convenios.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="activismDTO.cs" />
+    <Compile Include="activist.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="address_sectors.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="adjuster.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="alcohol.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="amazonPicture.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="API\cards\CardResponse.cs" />
+    <Compile Include="API\cards\creditcard.cs" />
+    <Compile Include="API\cards\creditCardDTO.cs" />
+    <Compile Include="API\ConvenioResponse.cs" />
+    <Compile Include="API\partner\_PartnerGlobalDTO.cs" />
+    <Compile Include="API\PaymentRegisterDTO.cs" />
+    <Compile Include="API\PermissionsResponse.cs" />
+    <Compile Include="API\SaleDTO.cs" />
+    <Compile Include="API\ScanQRresponse.cs" />
+    <Compile Include="API\_caja_cargos_DTO.cs" />
+    <Compile Include="AseguradorasEmpla.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AsisAplicar.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="asistenciaTemporal.cs">
+      <DependentUpon>VentasDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="assignment.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AudienceModel.cs" />
+    <Compile Include="AuthtDTO.cs" />
+    <Compile Include="autoinsurance.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AUT_RECALCULOCONV.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BANCO.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="baseModel.cs" />
+    <Compile Include="bitacora.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>bitacora.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bitacora.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="bitacora.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>bitacora.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="bitacora1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>bitacora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BitacoraAplicacione.cs">
+      <DependentUpon>bitacora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Boletine.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="box.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="box_user.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="candidate.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Capturist.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="card.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cardsPrinted.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Carge.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="categoriesQuestProblem.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="causeaccident.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CederAutorizacion.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Charge.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargesItem.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="choferes_det.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Chof_datbaja.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Chof_Detalle.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="chof_exp.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="chof_fianza.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Chof_FondoHead.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Chof_Fondo_Fallecidos.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Chof_Head.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Christmasgift.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChristmasgiftPrinted.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CierreDetalle.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="city.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="client.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cliente.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cobro.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CobrosDetalle.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Comando.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="commentsreport.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="company.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="company1.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Compra.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ComprasDetalle.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ComputadoraCambioVersion.cs">
+      <DependentUpon>VentasDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Concepto.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConceptoAgrupador.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConceptosConvenio.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConceptosConveniosRelacion.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConceptosCxP.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConceptosCxP2.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="confinement.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Consecutivo.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Control.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlObligacione.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Convenio.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConvenioFactura.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConveniosDetalle.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="coordinate.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CouponPayment.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CouponPaymentDetail.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Couponrate.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="crane.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="creditcard.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CSP_REPORTEVENTASorig_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CSP_REPORTEVENTAS_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CUENTA.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cupon.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CuponesBloqueo.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CuponesEntagen.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cuponsGroupPrinted.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cupontype.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CxC.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CxP.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CxPChof.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CxpFondoGrupoMayor.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C_permissions.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="delegateintransit.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="delegateoperational.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Departamento.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="department.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="desbloqueo.cs">
+      <DependentUpon>bitacora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="descriptionLoss.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="descriptionOperator.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="descriptionVehicle.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="doctor.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="document.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\CardsResponse.cs" />
+    <Compile Include="DTO\ChargesDTO.cs" />
+    <Compile Include="DTO\Class1.cs" />
+    <Compile Include="DTO\ClientDTO.cs" />
+    <Compile Include="DTO\ClientSearchParametersDTO.cs" />
+    <Compile Include="DTO\CouponCreateDTO.cs" />
+    <Compile Include="DTO\DirectionTarrif.cs" />
+    <Compile Include="DTO\EmplacamientoDTO.cs" />
+    <Compile Include="DTO\Emplacamiento\EmplacamientoCarReport.cs" />
+    <Compile Include="DTO\fcmDTO.cs" />
+    <Compile Include="DTO\GpsList.cs" />
+    <Compile Include="DTO\ListAsignedDTO.cs" />
+    <Compile Include="DTO\ListCanceledDTO.cs" />
+    <Compile Include="DTO\ListFinishedDTO.cs" />
+    <Compile Include="DTO\ListPendingDTO.cs" />
+    <Compile Include="DTO\LoadRateData.cs" />
+    <Compile Include="DTO\MessageDTO.cs" />
+    <Compile Include="DTO\OrderDTO.cs" />
+    <Compile Include="DTO\orderPreferences.cs" />
+    <Compile Include="DTO\Payments\orderConekta.cs" />
+    <Compile Include="DTO\Payments\PackageDTO.cs" />
+    <Compile Include="DTO\Payments\PaymentsClass.cs" />
+    <Compile Include="DTO\reports_DTO.cs" />
+    <Compile Include="DTO\ResultsRervicesCounter.cs" />
+    <Compile Include="DTO\rtUnidNumberServices.cs" />
+    <Compile Include="DTO\ServicesByTurn.cs" />
+    <Compile Include="DTO\TaxiServicesDTO.cs" />
+    <Compile Include="DTO\TaxiServicesPagination.cs" />
+    <Compile Include="DTO\taxiServiceLightDTO.cs" />
+    <Compile Include="DTO\userDTO.cs" />
+    <Compile Include="DTO\ClientPagination.cs" />
+    <Compile Include="DTO\_IntervalDate.cs" />
+    <Compile Include="dtproperty.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt_getpropertiesbyid_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt_getpropertiesbyid_u_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="email.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="emailPriorityType.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="emplaBitacora.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="emplacambioplacas_log.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Emplacamiento.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Emplacamientocopiaresp.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmplaMarca.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmplaModelo.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmplaMovimiento.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmplaProtegido.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmplaRestriccion.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntradasySalida.cs">
+      <DependentUpon>bitacora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="entregapavos_activacion_1.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="entregatarifarios_1.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EXAMCATALOGO.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EXAMCLPAGO.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExamenClDetalle.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExamenesClinica.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExamenesPendiente.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExistenciaFisica.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EXPEDIEN.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Factura.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FacturasDetalle.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Familia.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="family_members.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fcmDTO.cs" />
+    <Compile Include="FDISaldosPorCobrarInv_1.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FDI_NE_chof_turnados.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FDI_NE_entregado.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FDI_NE_soc_turnados.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fdo_cuotas_auto_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fdo_fdi_reporte_chof_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fdo_fdi_reporte_soc_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fdo_getEmplacamientoHistory_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fdo_getEmplacamiento_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fdo_get_operator_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fdo_get_Partner_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="filtrocobro.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="filtrocobroscaja.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fingerInfo.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FISC_DOCUMENTACION.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FormasPago.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fotoid.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="garage.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gp.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="grouping.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hardvote.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HistAsistencia.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HistoricoAsisCancelacion.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="historyreport.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hospital.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IdentityModels.cs" />
+    <Compile Include="incident.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="infoautosop.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InfoParaPagoFianza_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="insurance.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Inventario.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InventarioHistorico.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InventarioOK.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InventarioOrig.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="involved.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IronRolle.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IronUser.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IronUserRoll.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="licincourt.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="listadodelfondopagado.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoginModel.cs" />
+    <Compile Include="managerinmp.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="manageroperational.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="medical_records.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="membership.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MENSAJE.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MensajeGlobal.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MensajesAVariosTemp.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="mensajesguardado.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MENSAJEStechnopago.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MENSAJES_apy.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modulo.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Monitoreo.cs">
+      <DependentUpon>bitacora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="movil_detenciones.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="movil_DeudasXFamilia_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="movil_Mensajes_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="movil_VerificacionTaxi_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Movimiento.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MovimientosDetalle.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="mua_V1.cs">
+      <DependentUpon>VentasDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="network.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Network_capturist.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="objectAcl.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Observacione.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="occupation.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="occupationsUsersList.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OfficeContact.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OPCONVENIOSOML_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Operadores_Baja_Datos.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="operatorgeneral.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OPINVLIQUIDACIONESOML_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OPINVLIQUIEDOEOML_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OPINVOML_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OPrepDiaOML_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="originReport.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="padronRadioTaxi.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Paginator.cs" />
+    <Compile Include="pagocupone.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PanicAlert.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="panicAlertReport.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="parameter.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="parametersDTO.cs" />
+    <Compile Include="PartialBaseService.cs" />
+    <Compile Include="PartialCatalogService.cs" />
+    <Compile Include="PartialClient.cs" />
+    <Compile Include="Partialroleparam.cs" />
+    <Compile Include="PartialRTNumberService.cs" />
+    <Compile Include="PartialStatusService.cs" />
+    <Compile Include="Partials\AppServicePartial.cs" />
+    <Compile Include="Partials\ChatMessage.cs" />
+    <Compile Include="Partials\companyPartial.cs" />
+    <Compile Include="Partials\CouponPayment.cs" />
+    <Compile Include="Partials\departmentPartial.cs" />
+    <Compile Include="Partials\Emplacamiento.cs" />
+    <Compile Include="Partials\parameter.cs" />
+    <Compile Include="Partials\profilePartial.cs" />
+    <Compile Include="Partials\roleDTO.cs" />
+    <Compile Include="Partials\roleparam.cs" />
+    <Compile Include="Partials\rolePartial.cs" />
+    <Compile Include="Partials\userCompanyPartial.cs" />
+    <Compile Include="Partials\userDepartmentPartial.cs" />
+    <Compile Include="Partials\userProfilePartial.cs" />
+    <Compile Include="Partials\userRolePartial.cs" />
+    <Compile Include="PartialTaxiReport.cs" />
+    <Compile Include="PartialTaxiService.cs" />
+    <Compile Include="partial_Unit_taxi.cs" />
+    <Compile Include="partnerType.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="payrollCapturist.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pCarControl2014IronRollesGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pCarControl2014IronUserGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pCarControl2014IronUserRollGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pCarControl2014SisAdmPropietariosGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pCarControl2014SistAdmCtrlServicioDetalleGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pCarControl2014SistAdmCtrlServicioHeadGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pCarControl2014SistAdmCtrlVehiculosGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pCarControl2014SistAdmServiciosCatalogoGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pedido.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PedidosReal.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PerfilDeAcceso.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PerfilDeComando.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="permisos_especiales.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="phoneType.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pictureType.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="policysecure.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PoliticasVenta.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PolizasAseguradora.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="poll.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Position.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="post.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Post1.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pPracticontrolAdExamenesClinicaGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pPracticontrolAdVD_Ex_ClGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="priority.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="profile.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proveedore.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProveedoresAgencia.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProveedoresFDI.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pSindAdmLiqProveedoresGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pSindAdmLiqSistAdmCtrlIncidenciasGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pSindAdmLiqSistAdmCtrlLiqGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pSindAdmLiqSistAdmCtrlOperadoresGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pSindAdmLiqSistAdmCtrlServicioHeadGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pSindAdmLiqSistAdmCtrlVehiculosGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pSindicatoChof_Fondo_FallecidosGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pSindicatoInventarioGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pSindLiqFeb2013InventarioGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pSindLiqFeb2013ProveedoresGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pSINDLIQOMLInventarioGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pSINDLIQOMLProveedoresGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pSindQrBoletinesGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pSindQrChof_DetalleGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pSindQrEXAMCLPAGOSGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pSindQrExamenClDetalleGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pSindQrExamenesClinicaGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pSindQrUsuariosInternetGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pVcom2012SindChof_DetalleGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pVcom2012SindSoc_DatPersonalesGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pVcom2012SindTareasComisGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pVcom2012SindTareasComunGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pVcom2012SindTareasEtapasGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pVcom2012SindTareasHeadGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pVcom2012SindTareasInvoluGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pVcom2012SindTareasTaskGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pVcom2012SindTGrupotipoGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pVcom2012SindTUsuariosGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pVcom2012SindVchoferesGet_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="radiotaxi.Context.cs">
+      <DependentUpon>radiotaxi.Context.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="radiotaxi.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="radiotaxi.Designer.cs">
+      <DependentUpon>radiotaxi.edmx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Radio_Taxi.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="rate.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RDC_esquema_convenios.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RECALCULO.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RegisterResponseDTO.cs" />
+    <Compile Include="relationShipStatu.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="relationShipType.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RENUCIAOP.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="report.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="reportDTO.cs" />
+    <Compile Include="reportService.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportType.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="reportUnit.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="report_Files.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="responsable.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="responsibleincourt.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="responsibleinmp.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="responsibleintransit.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="role.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RoleDTO.cs" />
+    <Compile Include="roleparam.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RTYPE.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RVA_Listar_Usuario_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ScannerEvent.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SDLIQOML_INVENT.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SD_LiqCobros.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SD_LiqPorPagar.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SearchModel.cs" />
+    <Compile Include="SearchModelHistory.cs" />
+    <Compile Include="SearchModelReport.cs" />
+    <Compile Include="SearchModelService.cs" />
+    <Compile Include="SearchWithDates.cs" />
+    <Compile Include="Secretaria.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SecretariasforMensaje.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sectionsTTE.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sector.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sectors_categories.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Servicio.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SindLiq1.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SindLiqTTxOperador.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SisAdmPropietario.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SisAdnProveedore.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sistAdmCtrlIncidencia.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SistAdmCtrlLiq.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SistAdmCtrlOperadore.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SistAdmCtrlOperadores2.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SistAdmCtrlServicioDetalle.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SistAdmCtrlServicioHead.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SistAdmCtrlVehiculo.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SistAdmServiciosCatalogo.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="socfechanac.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Socio.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Soc_DatFiscales.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Soc_DatPersonales.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Soc_Documentacion.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Soc_DomiciliosFisc.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Soc_DomiciliosPart.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Soc_FondoHead.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Soc_Fondo_Fallecidos.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Soc_Head.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_CobrarFaltas_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="state.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="status.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="statusAssignment.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="statusReport.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="status_accidents.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SubFamilia.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TareasComi.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TareasComun.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TareasEtapa.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TareasGrupAsig.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TareasHead.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TareasInvolu.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TareasProyInvolu.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TareasTask.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TarifaCupone.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="taxiServiceDTO.cs" />
+    <Compile Include="Tbcomun.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tbinvolu.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tbitacora.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="telephoneoperator.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="telephone_campaign.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tempFacturarCupone.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TempVentasDetalle.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TGrupotipo.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tienda.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="totalReport.cs" />
+    <Compile Include="totalReportUser.cs" />
+    <Compile Include="tracking.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="transaction.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TUsuario.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="typeaccident.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="update_Select_Liquidaciones_Result.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="user.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="userAddress.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="userBloodType.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="userCompany.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="userDepartment.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="userFamily.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="userGeolocation.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserGrouping.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="userHealthInformation.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="userHistory.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="userlog.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="userOccupation.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserOwner.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="userPhone.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="userPhone_telephoneoperators_campaign.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="userPrintedCard.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="userProfile.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="userRole.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="userType.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Usuario.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsuariosInternet.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Usuarios_Acceso_Especiales.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USUROOL.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USUROOLASIG.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="v2\Agreements\Convenio.cs" />
+    <Compile Include="v2\Amazon\amazonPicture.cs" />
+    <Compile Include="v2\Card\card.cs" />
+    <Compile Include="v2\Card\CardPagination.cs" />
+    <Compile Include="v2\Card\CardSearchParametersDTO.cs" />
+    <Compile Include="v2\Coupons\Coupon.cs" />
+    <Compile Include="v2\Coupons\CouponrateDTO.cs" />
+    <Compile Include="v2\Coupons\CuponDTO.cs" />
+    <Compile Include="v2\Coupons\cuponsGroupPrintedDTO.cs" />
+    <Compile Include="v2\Coupons\CupontypeType.cs" />
+    <Compile Include="v2\Coupons\Hotel.cs" />
+    <Compile Include="v2\Coupons\LoadCuponsDTO.cs" />
+    <Compile Include="v2\Credential\credential.cs" />
+    <Compile Include="v2\Cupones\Couponrate.cs" />
+    <Compile Include="v2\Cupones\Cupon.cs" />
+    <Compile Include="v2\Cupones\cuponsGroupPrinted.cs" />
+    <Compile Include="v2\Cupones\Cupontype.cs" />
+    <Compile Include="v2\Cupones\SerchCuponsDTO.cs" />
+    <Compile Include="v2\Cuts\Cut.cs" />
+    <Compile Include="v2\Cuts\CutResults.cs" />
+    <Compile Include="v2\Cuts\day.cs" />
+    <Compile Include="v2\Cuts\Familia.cs" />
+    <Compile Include="v2\Empla\emplaBitacora.cs" />
+    <Compile Include="v2\finance\fdi_result.cs" />
+    <Compile Include="v2\finance\financesOperator.cs" />
+    <Compile Include="v2\finance\pay.cs" />
+    <Compile Include="v2\finance\p_agreements.cs" />
+    <Compile Include="v2\General\city.cs" />
+    <Compile Include="v2\General\DocumentCounter.cs" />
+    <Compile Include="v2\General\HistAsistencia.cs" />
+    <Compile Include="v2\General\LoginDTO.cs" />
+    <Compile Include="v2\General\partnerType.cs" />
+    <Compile Include="v2\General\relationShipStatu.cs" />
+    <Compile Include="v2\General\state.cs" />
+    <Compile Include="v2\General\user.cs" />
+    <Compile Include="v2\GeoLocations\userGeolocation.cs" />
+    <Compile Include="v2\GeoLocations\userGeolocationDTO.cs" />
+    <Compile Include="v2\MENSAJE.cs" />
+    <Compile Include="v2\OfficeContact.cs" />
+    <Compile Include="v2\Openpay\AddressDto.cs" />
+    <Compile Include="v2\Openpay\BillingAddress.cs" />
+    <Compile Include="v2\Openpay\CardListItemDto.cs" />
+    <Compile Include="v2\Openpay\CardSavedDto.cs" />
+    <Compile Include="v2\Openpay\ChargeCreateDto.cs" />
+    <Compile Include="v2\Openpay\ChargeReq.cs" />
+    <Compile Include="v2\Openpay\ChargeRes.cs" />
+    <Compile Include="v2\Openpay\ChargeResultDto.cs" />
+    <Compile Include="v2\Openpay\CreateChargeDto.cs" />
+    <Compile Include="v2\Openpay\EnsureReq.cs" />
+    <Compile Include="v2\Openpay\EnsureRes.cs" />
+    <Compile Include="v2\Openpay\OpenpayOptions.cs" />
+    <Compile Include="v2\Openpay\OpenPayTransportData.cs" />
+    <Compile Include="v2\Openpay\openpay_cargos_DTO.cs" />
+    <Compile Include="v2\Openpay\PaymentResult.cs" />
+    <Compile Include="v2\Openpay\SaveCardDto.cs" />
+    <Compile Include="v2\Openpay\Ticket_openpay_DTO.cs" />
+    <Compile Include="v2\Operator\Chof_Detalle.cs" />
+    <Compile Include="v2\Operator\C_permissions.cs" />
+    <Compile Include="v2\Operator\C_permissionsDTO.cs" />
+    <Compile Include="v2\Operator\Operadores_Baja_Datos.cs" />
+    <Compile Include="v2\Operator\Operator.cs" />
+    <Compile Include="v2\Operator\OperatorLastReport.cs" />
+    <Compile Include="v2\Operator\OperatorPagination.cs" />
+    <Compile Include="v2\Operator\OperatorSearchParametersDTO.cs" />
+    <Compile Include="v2\Operator\p_debt_operator.cs" />
+    <Compile Include="v2\Partner\Partner.cs" />
+    <Compile Include="v2\Partner\PartnerPagination.cs" />
+    <Compile Include="v2\Partner\PartnerSearchParametersDTO.cs" />
+    <Compile Include="v2\Partner\PartnerT.cs" />
+    <Compile Include="v2\Partner\Soc_DatPersonales.cs" />
+    <Compile Include="v2\permisos\permiso.cs" />
+    <Compile Include="v2\QrResponse.cs" />
+    <Compile Include="v2\ReportValues.cs" />
+    <Compile Include="v2\RTYPE.cs" />
+    <Compile Include="v2\Sales\caja_cargos_DTO.cs" />
+    <Compile Include="v2\Sales\caja_debs_reporte_DTO.cs" />
+    <Compile Include="v2\Sales\caja_proveedor_DTO.cs" />
+    <Compile Include="v2\Sales\caja_reporte_DTO.cs" />
+    <Compile Include="v2\Sales\Consecutivo_DTO.cs" />
+    <Compile Include="v2\Sales\RTYPE.cs" />
+    <Compile Include="v2\Sales\Sale.cs" />
+    <Compile Include="v2\Sales\Sale_Response.cs" />
+    <Compile Include="v2\Sales\Servicio.cs" />
+    <Compile Include="v2\Sales\Ticket_Detail_DTO.cs" />
+    <Compile Include="v2\Sales\Ticket_DTO.cs" />
+    <Compile Include="v2\TicketInfo.cs" />
+    <Compile Include="v2\turkey\Christmasgift.cs" />
+    <Compile Include="v2\turkey\ChristmasgiftPrinted.cs" />
+    <Compile Include="v2\user.cs" />
+    <Compile Include="v2\UserLog\RegisterViewModel.cs" />
+    <Compile Include="v2\UserLog\roles.cs" />
+    <Compile Include="v2\UserLog\userlog.cs" />
+    <Compile Include="v2\UserLog\userlogDTO.cs" />
+    <Compile Include="v2\UserLog\UserLogPagination.cs" />
+    <Compile Include="v2\UserLog\UserLogSearchParametersDTO.cs" />
+    <Compile Include="v2\Users\user.cs" />
+    <Compile Include="v2\Users\UserResponse.cs" />
+    <Compile Include="Vchofere.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VD_Ex_Cl.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Vendedore.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Venta.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VentasDb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VentasDb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VentasDb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VentasDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VentasDb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VentasDb.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="VentasDetalle.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VentaServiciosTemp.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VerificationCodeResponseDTO.cs" />
+    <Compile Include="visit.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="zone.cs">
+      <DependentUpon>radiotaxi.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="bitacora.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>bitacora.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="bitacora.edmx.diagram">
+      <DependentUpon>bitacora.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <EntityDeploy Include="radiotaxi.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>radiotaxi.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="VentasDb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>VentasDb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="radiotaxi.edmx.diagram">
+      <DependentUpon>radiotaxi.edmx</DependentUpon>
+    </None>
+    <None Include="VentasDb.edmx.diagram">
+      <DependentUpon>VentasDb.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bitacora.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>bitacora.edmx</DependentUpon>
+      <LastGenOutput>bitacora.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="bitacora.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>bitacora.edmx</DependentUpon>
+      <LastGenOutput>bitacora1.cs</LastGenOutput>
+    </Content>
+    <Content Include="radiotaxi.Context.tt">
+      <DependentUpon>radiotaxi.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>radiotaxi.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="radiotaxi.tt">
+      <DependentUpon>radiotaxi.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>radiotaxi.cs</LastGenOutput>
+    </Content>
+    <Content Include="VentasDb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>VentasDb.edmx</DependentUpon>
+      <LastGenOutput>VentasDb.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="VentasDb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>VentasDb.edmx</DependentUpon>
+      <LastGenOutput>VentasDb.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

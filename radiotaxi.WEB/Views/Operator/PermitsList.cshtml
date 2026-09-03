@@ -1,0 +1,177 @@
+@model List<radiotaxi.Model.C_permissionsDTO>
+@{
+    ViewBag.Title = "Permits";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18"><i class="bx bx-car"></i> Operadores</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Inicio</a></li>
+                    <li class="breadcrumb-item active">Operadores</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title bx bx-search-alt-2"> Búsqueda</h4>
+                <p class="card-title-desc">La búsqueda se puede realizar con cualquiera de los siguientes campos.</p>
+            </div>
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div>
+                            <form action="/Operator/" method="POST" class="form-horizontal">
+                                <div class="row control-group">
+                                    <div class="col-md-3 mb-3 ">
+                                        <label class="form-label control-label">Económico</label>
+                                        <input type="number" class="form-control span11" name="eco" id="eco" value="" placeholder="Ingrese el número económico" />
+                                    </div>
+
+                                    <div class="col-md-3 mb-3 ">
+                                        <label class="form-label control-label">Gafet</label>
+                                        <input type="text" class="form-control span11" name="gafet" id="phoneNumber" value="" placeholder="Ingrese el número de gafet" />
+                                    </div>
+
+                                    <div class="col-md-3 mb-3 mt-4 pt-1 form-actions">
+                                        <button type="submit" value="Buscar" class="btn btn-success waves-effect btn-label waves-light"> <i class="bx bx-search label-icon "></i>Buscar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class=" table-rep-plugin">
+                        <div class="table-responsive mb-0" data-pattern="priority-columns">
+                            <table id="tech-companies-1" class="table table-striped mb-lg-5 pb-lg-5 style=" min-height: 600px;"">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">Eco/Gafet</th>
+                                        <th data-priority="3">Nombre</th>
+                                        <th data-priority="3">Apellidos</th>
+                                        <th data-priority="3">Status</th>
+                                        <th data-priority="3">Fecha Vencimiento</th>
+                                        <th data-priority="3">Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (radiotaxi.Model.C_permissionsDTO item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <img title="Operador dado de baja" src="~/Content/images/users/empty.png" alt="" class="avatar-md rounded-circle me-2 img-thumbnail">
+                                                <span class="ntext">@item.CHOFER</span>
+                                            </td>
+                                            <td>
+                                                <span class="co-name ntext">@item.firstName</span>
+                                            </td>
+                                            <td>
+                                                <span class="co-name ntext">@item.lastNameF @item.lastNameM</span>
+                                            </td>
+                                            <td>
+                                                <span class="co-name ntext">
+                                                    @if (item.Exist != 1)
+                                                    {
+                                                        <span>PAGADO</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>POR PAGAR</span>
+                                                    }
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="co-name ntext">@item.dateEnd</span>
+                                            </td>
+                                            <td>
+                                                @if (Permissions.allow("Admin,Archivo"))
+                                                {
+                                                    <a href="" class="btn btn-success waves-effect btn-label waves-light">
+                                                        <i class="bx bx-edit-alt label-icon"></i> Editar
+                                                    </a>
+                                                }
+                                                <a href="" class="btn btn-success waves-effect btn-label waves-light">
+                                                    <i class="bx bx-show label-icon"></i> Ver más
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <h5 class="card-title">Permisos Totales <span class="text-muted fw-normal ms-2">mil8mil</span></h5>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
+                            <div>
+                                @if (Permissions.allow("Admin, Archivo"))
+                                {
+                                    <a href="/Operator/Create" class="btn btn-light"><i class="bx bx-plus me-1"></i> Crear Permiso</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class=" table-rep-plugin">
+                    <div class="table-responsive mb-0" data-pattern="priority-columns">
+                        <table id="permisos" class="table table-striped display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th data-priority="gafet">Gafet</th>
+                                    <th data-priority="gafet">Tipo</th>
+                                    <th data-priority="days">Días</th>
+                                    <th data-priority="1">Fecha del permiso</th>
+                                    <th data-priority="user">Usuario</th>
+                                    <th data-priority="userName">Nombre Usuario</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th data-priority="gafet">Gafet</th>
+                                    <th data-priority="days">Días</th>
+                                    <th data-priority="1">Fecha del permiso</th>
+                                    <th data-priority="user">Usuario</th>
+                                    <th data-priority="userName">Nombre Usuario</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end table responsive -->

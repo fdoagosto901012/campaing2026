@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewBag.Title = "Reporte de emplacamiento";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">Emplacamiento</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Inicio</a></li>
+                    <li class="breadcrumb-item active">Reporte de emplacamiento</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title bx bx-search-alt-2"> Búsqueda</h4>
+                <p class="card-title-desc">La búsqueda se puede realizar con cualquiera de los siguientes campos.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mb-3">
+
+    <!-- Fila 1: selects -->
+    <div class="col-12 col-md-2">
+        <label class="form-label">Tipo (por Económico)</label>
+        <select id="fTipoEco" class="form-select">
+            <option value="">Todos</option>
+            <option value="rut">Ruletero (1 - 10,000)</option>
+            <option value="tte">TTE (10,001 - 15,000)</option>
+            <option value="esp">Especiales (80,000 - 80,300)</option>
+        </select>
+    </div>
+
+    <div class="col-12 col-md-2">
+        <label class="form-label">Marca</label>
+        <select id="fMarca" class="form-select">
+            <option value="">Todas</option>
+        </select>
+    </div>
+
+    <div class="col-12 col-md-2">
+        <label class="form-label">Modelo</label>
+        <select id="fModelo" class="form-select" disabled>
+            <option value="">Todos</option>
+        </select>
+    </div>
+
+    <div class="col-12 col-md-2">
+        <label class="form-label">Año del auto</label>
+        <select id="fAno" class="form-select">
+            <option value="">Todos</option>
+        </select>
+    </div>
+
+    <div class="col-12 col-md-2">
+        <label class="form-label">Status</label>
+        <select id="fStatus" class="form-select">
+            <option value="">Todos</option>
+        </select>
+    </div>
+
+    <!-- Fuerza salto a la siguiente línea en md+ -->
+    <div class="w-100 d-none d-md-block"></div>
+
+    <!-- Fila 2: Fechas juntas -->
+    <div class="col-12 col-md-2">
+        <label class="form-label">Fecha desde</label>
+        <input id="fDesde" type="date" class="form-control">
+    </div>
+
+    <div class="col-12 col-md-2">
+        <label class="form-label">Fecha hasta</label>
+        <input id="fHasta" type="date" class="form-control">
+    </div>
+
+    <div class="col-12 col-md-8 d-flex align-items-end justify-content-end">
+        <button id="fReset" class="btn btn-outline-secondary">Limpiar</button>
+    </div>
+
+</div>
+
+
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <table id="general" class="table table-striped w-100">
+                    <thead>
+                        <tr>
+                            <th data-priority="1">Economico</th>
+                            <th data-priority="2">Marca</th>
+                            <th data-priority="3">Modelo</th>
+                            <th data-priority="4">Capacidad</th>
+                            <th data-priority="5">Año del auto</th>
+                            <th data-priority="6">Fecha de operación</th>
+                            <th data-priority="7">Status</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (radiotaxi.Model.EmplacamientoCarReport item in ViewBag.cars)
+                        {
+                            <tr>
+                                <td>
+                                    @((int)item.No_Economico)
+                                </td>
+                                <td>@item.Marca</td>
+                                <td>@item.Modelo</td>
+                                <td>@item.Capacidad</td>
+                                <td>@item.AutoAno</td>
+                                <td data-order="@item.FechaOp.ToString("yyyy-MM-dd HH:mm")">@item.FechaOp.ToString("dd/MM/yyyy")</td>
+                                <td>@item.status</td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+        <!-- end card -->
+    </div> <!-- end col -->
+</div>
+
+
+@section Scripts {
+    <script src="~/Content/libs/DataTables/datatables.js"></script>
+    <script src="~/Content/libs/DataTables/datatables.min.js"></script>
+    <script src="~/Content/js/Views/Emplacamiento/filter.js"></script>
+}

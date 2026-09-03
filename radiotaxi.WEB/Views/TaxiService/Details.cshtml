@@ -1,0 +1,142 @@
+﻿@model radiotaxi.Model.taxiService
+
+@{
+    ViewBag.Title = "Detalles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Servicio Radio Taxi</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.startPoint)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.startPoint)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateRequested)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateRequested)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.createdBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.createdBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.editedBy)
+        </dt>
+
+        <dd>
+            @{
+                if (!String.IsNullOrEmpty(Model.editedBy))
+                {
+                    @Html.DisplayFor(model => model.editedBy)
+                }
+                else
+                {
+                    @Html.Raw("&nbsp;")
+                }
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phoneId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phoneId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.statusService.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.statusService.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.note)
+        </dt>
+
+        <dd>
+            @{
+                if (!String.IsNullOrEmpty(Model.note))
+                {
+                    @Html.DisplayFor(model => model.note)
+                }
+                else
+                {
+                    @Html.Raw("&nbsp;")
+                }
+            }            
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.datePickUp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.datePickUp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.autoRenew)
+        </dt>
+
+        <dd>
+            @{
+                if (Model.autoRenew == true)
+                {
+                    @Html.Raw("Si")
+                }
+                else
+                {
+                    @Html.Raw("No")
+                }
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.baseService.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.baseService.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.catalogService.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.catalogService.name)
+        </dd>
+        @{
+            if (Model.autoRenew == true)
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.days)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.days)
+                </dd>
+            }
+        }
+    </dl>
+</div>
+

@@ -1,0 +1,729 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BitacorasMod.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BitacoraAplicaciones">
+          <Key>
+            <PropertyRef Name="id_op" />
+          </Key>
+          <Property Name="id_op" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Accion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="procedimiento" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Parametros" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FechaSistema" Type="datetime" Nullable="false" />
+          <Property Name="FechaServidor" Type="datetime" Nullable="false" />
+          <Property Name="id_usuario" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="computadora" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="horaMaquina" Type="datetime" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Bitacoras.dbo.desbloqueos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="desbloqueos">
+          <Key>
+            <PropertyRef Name="taxi" />
+            <PropertyRef Name="chofer" />
+            <PropertyRef Name="economico" />
+            <PropertyRef Name="mensaje" />
+            <PropertyRef Name="fecha" />
+            <PropertyRef Name="detener" />
+            <PropertyRef Name="id_secretaria" />
+            <PropertyRef Name="secretaria" />
+            <PropertyRef Name="delsistema" />
+            <PropertyRef Name="temporal" />
+            <PropertyRef Name="folio" />
+            <PropertyRef Name="id_usuario" />
+            <PropertyRef Name="usuario" />
+            <PropertyRef Name="fcsdesbloqueo" />
+            <PropertyRef Name="id_usuariodesbloqueo" />
+            <PropertyRef Name="usuariodesbloqueo" />
+          </Key>
+          <Property Name="taxi" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="chofer" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="economico" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="mensaje" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+          <Property Name="detener" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="id_secretaria" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="secretaria" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="delsistema" Type="bit" Nullable="false" />
+          <Property Name="temporal" Type="bit" Nullable="false" />
+          <Property Name="folio" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="id_usuario" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="usuario" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="fechacompletaserver" Type="datetime" />
+          <Property Name="usuarioultimaedicion" Type="varchar" MaxLength="20" />
+          <Property Name="fcsdesbloqueo" Type="datetime" Nullable="false" />
+          <Property Name="id_usuariodesbloqueo" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="usuariodesbloqueo" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dtproperties">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="property" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="objectid" Type="int" />
+          <Property Name="property" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="value" Type="varchar" MaxLength="255" />
+          <Property Name="uvalue" Type="nvarchar" MaxLength="255" />
+          <Property Name="lvalue" Type="image" />
+          <Property Name="version" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Bitacoras.dbo.EntradasySalidas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="EntradasySalidas">
+          <Key>
+            <PropertyRef Name="fecha" />
+            <PropertyRef Name="hora" />
+            <PropertyRef Name="id_usuario" />
+            <PropertyRef Name="tipo" />
+            <PropertyRef Name="ubicacion" />
+            <PropertyRef Name="fechacompletaserver" />
+          </Key>
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+          <Property Name="hora" Type="datetime" Nullable="false" />
+          <Property Name="id_usuario" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="ubicacion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="fechacompletaserver" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Bitacoras.dbo.Monitoreo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Monitoreo">
+          <Key>
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Hora" />
+            <PropertyRef Name="PC" />
+            <PropertyRef Name="Usuario" />
+            <PropertyRef Name="Conectada" />
+            <PropertyRef Name="fechacompletaserver" />
+          </Key>
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Hora" Type="datetime" Nullable="false" />
+          <Property Name="PC" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Conectada" Type="bit" Nullable="false" />
+          <Property Name="fechacompletaserver" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Function Name="dt_addtosourcecontrol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="vchSourceSafeINI" Type="varchar" Mode="In" />
+          <Parameter Name="vchProjectName" Type="varchar" Mode="In" />
+          <Parameter Name="vchComment" Type="varchar" Mode="In" />
+          <Parameter Name="vchLoginName" Type="varchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="dt_addtosourcecontrol_u" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="vchSourceSafeINI" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchProjectName" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchComment" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchLoginName" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="dt_adduserobject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="dt_adduserobject_vcs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="vchProperty" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="dt_checkinobject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="chObjectType" Type="char" Mode="In" />
+          <Parameter Name="vchObjectName" Type="varchar" Mode="In" />
+          <Parameter Name="vchComment" Type="varchar" Mode="In" />
+          <Parameter Name="vchLoginName" Type="varchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="varchar" Mode="In" />
+          <Parameter Name="iVCSFlags" Type="int" Mode="In" />
+          <Parameter Name="iActionFlag" Type="int" Mode="In" />
+          <Parameter Name="txStream1" Type="text" Mode="In" />
+          <Parameter Name="txStream2" Type="text" Mode="In" />
+          <Parameter Name="txStream3" Type="text" Mode="In" />
+        </Function>
+        <Function Name="dt_checkinobject_u" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="chObjectType" Type="char" Mode="In" />
+          <Parameter Name="vchObjectName" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchComment" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchLoginName" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="nvarchar" Mode="In" />
+          <Parameter Name="iVCSFlags" Type="int" Mode="In" />
+          <Parameter Name="iActionFlag" Type="int" Mode="In" />
+          <Parameter Name="txStream1" Type="text" Mode="In" />
+          <Parameter Name="txStream2" Type="text" Mode="In" />
+          <Parameter Name="txStream3" Type="text" Mode="In" />
+        </Function>
+        <Function Name="dt_checkoutobject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="chObjectType" Type="char" Mode="In" />
+          <Parameter Name="vchObjectName" Type="varchar" Mode="In" />
+          <Parameter Name="vchComment" Type="varchar" Mode="In" />
+          <Parameter Name="vchLoginName" Type="varchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="varchar" Mode="In" />
+          <Parameter Name="iVCSFlags" Type="int" Mode="In" />
+          <Parameter Name="iActionFlag" Type="int" Mode="In" />
+        </Function>
+        <Function Name="dt_checkoutobject_u" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="chObjectType" Type="char" Mode="In" />
+          <Parameter Name="vchObjectName" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchComment" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchLoginName" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="nvarchar" Mode="In" />
+          <Parameter Name="iVCSFlags" Type="int" Mode="In" />
+          <Parameter Name="iActionFlag" Type="int" Mode="In" />
+        </Function>
+        <Function Name="dt_displayoaerror" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="iObject" Type="int" Mode="In" />
+          <Parameter Name="iresult" Type="int" Mode="In" />
+        </Function>
+        <Function Name="dt_displayoaerror_u" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="iObject" Type="int" Mode="In" />
+          <Parameter Name="iresult" Type="int" Mode="In" />
+        </Function>
+        <Function Name="dt_droppropertiesbyid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="property" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="dt_dropuserobjectbyid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="dt_generateansiname" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="dt_getobjwithprop" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="property" Type="varchar" Mode="In" />
+          <Parameter Name="value" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="dt_getobjwithprop_u" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="property" Type="varchar" Mode="In" />
+          <Parameter Name="uvalue" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="dt_getpropertiesbyid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="property" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="dt_getpropertiesbyid_u" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="property" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="dt_getpropertiesbyid_vcs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="property" Type="varchar" Mode="In" />
+          <Parameter Name="value" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="dt_getpropertiesbyid_vcs_u" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="property" Type="varchar" Mode="In" />
+          <Parameter Name="value" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="dt_isundersourcecontrol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="vchLoginName" Type="varchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="varchar" Mode="In" />
+          <Parameter Name="iWhoToo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="dt_isundersourcecontrol_u" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="vchLoginName" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="nvarchar" Mode="In" />
+          <Parameter Name="iWhoToo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="dt_removefromsourcecontrol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="dt_setpropertybyid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="property" Type="varchar" Mode="In" />
+          <Parameter Name="value" Type="varchar" Mode="In" />
+          <Parameter Name="lvalue" Type="image" Mode="In" />
+        </Function>
+        <Function Name="dt_setpropertybyid_u" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="property" Type="varchar" Mode="In" />
+          <Parameter Name="uvalue" Type="nvarchar" Mode="In" />
+          <Parameter Name="lvalue" Type="image" Mode="In" />
+        </Function>
+        <Function Name="dt_validateloginparams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="vchLoginName" Type="varchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="dt_validateloginparams_u" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="vchLoginName" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="dt_vcsenabled" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="dt_verstamp006" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="dt_whocheckedout" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="chObjectType" Type="char" Mode="In" />
+          <Parameter Name="vchObjectName" Type="varchar" Mode="In" />
+          <Parameter Name="vchLoginName" Type="varchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="dt_whocheckedout_u" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="chObjectType" Type="char" Mode="In" />
+          <Parameter Name="vchObjectName" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchLoginName" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="BitacorasModStoreContainer">
+          <EntitySet Name="BitacoraAplicaciones" EntityType="Self.BitacoraAplicaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dtproperties" EntityType="Self.dtproperties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="desbloqueos" EntityType="Self.desbloqueos" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [desbloqueos].[taxi] AS [taxi], 
+    [desbloqueos].[chofer] AS [chofer], 
+    [desbloqueos].[economico] AS [economico], 
+    [desbloqueos].[mensaje] AS [mensaje], 
+    [desbloqueos].[fecha] AS [fecha], 
+    [desbloqueos].[detener] AS [detener], 
+    [desbloqueos].[id_secretaria] AS [id_secretaria], 
+    [desbloqueos].[secretaria] AS [secretaria], 
+    [desbloqueos].[delsistema] AS [delsistema], 
+    [desbloqueos].[temporal] AS [temporal], 
+    [desbloqueos].[folio] AS [folio], 
+    [desbloqueos].[id_usuario] AS [id_usuario], 
+    [desbloqueos].[usuario] AS [usuario], 
+    [desbloqueos].[fechacompletaserver] AS [fechacompletaserver], 
+    [desbloqueos].[usuarioultimaedicion] AS [usuarioultimaedicion], 
+    [desbloqueos].[fcsdesbloqueo] AS [fcsdesbloqueo], 
+    [desbloqueos].[id_usuariodesbloqueo] AS [id_usuariodesbloqueo], 
+    [desbloqueos].[usuariodesbloqueo] AS [usuariodesbloqueo]
+    FROM [dbo].[desbloqueos] AS [desbloqueos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="EntradasySalidas" EntityType="Self.EntradasySalidas" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [EntradasySalidas].[fecha] AS [fecha], 
+    [EntradasySalidas].[hora] AS [hora], 
+    [EntradasySalidas].[id_usuario] AS [id_usuario], 
+    [EntradasySalidas].[tipo] AS [tipo], 
+    [EntradasySalidas].[ubicacion] AS [ubicacion], 
+    [EntradasySalidas].[fechacompletaserver] AS [fechacompletaserver]
+    FROM [dbo].[EntradasySalidas] AS [EntradasySalidas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Monitoreo" EntityType="Self.Monitoreo" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Monitoreo].[Fecha] AS [Fecha], 
+    [Monitoreo].[Hora] AS [Hora], 
+    [Monitoreo].[PC] AS [PC], 
+    [Monitoreo].[Usuario] AS [Usuario], 
+    [Monitoreo].[Conectada] AS [Conectada], 
+    [Monitoreo].[fechacompletaserver] AS [fechacompletaserver]
+    FROM [dbo].[Monitoreo] AS [Monitoreo]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BitacorasMod" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BitacoraAplicacione">
+          <Key>
+            <PropertyRef Name="id_op" />
+          </Key>
+          <Property Name="id_op" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Accion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="procedimiento" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Parametros" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaSistema" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaServidor" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="id_usuario" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="computadora" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="horaMaquina" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="dtproperty">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="property" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="objectid" Type="Int32" />
+          <Property Name="property" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="uvalue" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="lvalue" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="version" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="desbloqueo">
+          <Key>
+            <PropertyRef Name="taxi" />
+            <PropertyRef Name="chofer" />
+            <PropertyRef Name="economico" />
+            <PropertyRef Name="mensaje" />
+            <PropertyRef Name="fecha" />
+            <PropertyRef Name="detener" />
+            <PropertyRef Name="id_secretaria" />
+            <PropertyRef Name="secretaria" />
+            <PropertyRef Name="delsistema" />
+            <PropertyRef Name="temporal" />
+            <PropertyRef Name="folio" />
+            <PropertyRef Name="id_usuario" />
+            <PropertyRef Name="usuario" />
+            <PropertyRef Name="fcsdesbloqueo" />
+            <PropertyRef Name="id_usuariodesbloqueo" />
+            <PropertyRef Name="usuariodesbloqueo" />
+          </Key>
+          <Property Name="taxi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="chofer" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="economico" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mensaje" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="detener" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_secretaria" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="secretaria" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="delsistema" Type="Boolean" Nullable="false" />
+          <Property Name="temporal" Type="Boolean" Nullable="false" />
+          <Property Name="folio" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_usuario" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fechacompletaserver" Type="DateTime" Precision="3" />
+          <Property Name="usuarioultimaedicion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fcsdesbloqueo" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="id_usuariodesbloqueo" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usuariodesbloqueo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EntradasySalida">
+          <Key>
+            <PropertyRef Name="fecha" />
+            <PropertyRef Name="hora" />
+            <PropertyRef Name="id_usuario" />
+            <PropertyRef Name="tipo" />
+            <PropertyRef Name="ubicacion" />
+            <PropertyRef Name="fechacompletaserver" />
+          </Key>
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hora" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="id_usuario" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipo" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ubicacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fechacompletaserver" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Monitoreo">
+          <Key>
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Hora" />
+            <PropertyRef Name="PC" />
+            <PropertyRef Name="Usuario" />
+            <PropertyRef Name="Conectada" />
+            <PropertyRef Name="fechacompletaserver" />
+          </Key>
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Hora" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Usuario" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Conectada" Type="Boolean" Nullable="false" />
+          <Property Name="fechacompletaserver" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="BitacorasEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BitacoraAplicaciones" EntityType="Self.BitacoraAplicacione" />
+          <EntitySet Name="dtproperties" EntityType="Self.dtproperty" />
+          <EntitySet Name="desbloqueos" EntityType="Self.desbloqueo" />
+          <EntitySet Name="EntradasySalidas" EntityType="Self.EntradasySalida" />
+          <EntitySet Name="Monitoreos" EntityType="Self.Monitoreo" />
+          <FunctionImport Name="dt_addtosourcecontrol">
+            <Parameter Name="vchSourceSafeINI" Mode="In" Type="String" />
+            <Parameter Name="vchProjectName" Mode="In" Type="String" />
+            <Parameter Name="vchComment" Mode="In" Type="String" />
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_addtosourcecontrol_u">
+            <Parameter Name="vchSourceSafeINI" Mode="In" Type="String" />
+            <Parameter Name="vchProjectName" Mode="In" Type="String" />
+            <Parameter Name="vchComment" Mode="In" Type="String" />
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_adduserobject" />
+          <FunctionImport Name="dt_adduserobject_vcs">
+            <Parameter Name="vchProperty" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_checkinobject">
+            <Parameter Name="chObjectType" Mode="In" Type="String" />
+            <Parameter Name="vchObjectName" Mode="In" Type="String" />
+            <Parameter Name="vchComment" Mode="In" Type="String" />
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+            <Parameter Name="iVCSFlags" Mode="In" Type="Int32" />
+            <Parameter Name="iActionFlag" Mode="In" Type="Int32" />
+            <Parameter Name="txStream1" Mode="In" Type="String" />
+            <Parameter Name="txStream2" Mode="In" Type="String" />
+            <Parameter Name="txStream3" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_checkinobject_u">
+            <Parameter Name="chObjectType" Mode="In" Type="String" />
+            <Parameter Name="vchObjectName" Mode="In" Type="String" />
+            <Parameter Name="vchComment" Mode="In" Type="String" />
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+            <Parameter Name="iVCSFlags" Mode="In" Type="Int32" />
+            <Parameter Name="iActionFlag" Mode="In" Type="Int32" />
+            <Parameter Name="txStream1" Mode="In" Type="String" />
+            <Parameter Name="txStream2" Mode="In" Type="String" />
+            <Parameter Name="txStream3" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_checkoutobject">
+            <Parameter Name="chObjectType" Mode="In" Type="String" />
+            <Parameter Name="vchObjectName" Mode="In" Type="String" />
+            <Parameter Name="vchComment" Mode="In" Type="String" />
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+            <Parameter Name="iVCSFlags" Mode="In" Type="Int32" />
+            <Parameter Name="iActionFlag" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="dt_checkoutobject_u">
+            <Parameter Name="chObjectType" Mode="In" Type="String" />
+            <Parameter Name="vchObjectName" Mode="In" Type="String" />
+            <Parameter Name="vchComment" Mode="In" Type="String" />
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+            <Parameter Name="iVCSFlags" Mode="In" Type="Int32" />
+            <Parameter Name="iActionFlag" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="dt_displayoaerror">
+            <Parameter Name="iObject" Mode="In" Type="Int32" />
+            <Parameter Name="iresult" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="dt_displayoaerror_u">
+            <Parameter Name="iObject" Mode="In" Type="Int32" />
+            <Parameter Name="iresult" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="dt_droppropertiesbyid">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="property" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_dropuserobjectbyid">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="dt_generateansiname">
+            <Parameter Name="name" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_getobjwithprop" ReturnType="Collection(Int32)">
+            <Parameter Name="property" Mode="In" Type="String" />
+            <Parameter Name="value" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_getobjwithprop_u" ReturnType="Collection(Int32)">
+            <Parameter Name="property" Mode="In" Type="String" />
+            <Parameter Name="uvalue" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_getpropertiesbyid" ReturnType="Collection(BitacorasMod.dt_getpropertiesbyid_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="property" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_getpropertiesbyid_u" ReturnType="Collection(BitacorasMod.dt_getpropertiesbyid_u_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="property" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_getpropertiesbyid_vcs">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="property" Mode="In" Type="String" />
+            <Parameter Name="value" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_getpropertiesbyid_vcs_u">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="property" Mode="In" Type="String" />
+            <Parameter Name="value" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_isundersourcecontrol">
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+            <Parameter Name="iWhoToo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="dt_isundersourcecontrol_u">
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+            <Parameter Name="iWhoToo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="dt_removefromsourcecontrol" />
+          <FunctionImport Name="dt_setpropertybyid">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="property" Mode="In" Type="String" />
+            <Parameter Name="value" Mode="In" Type="String" />
+            <Parameter Name="lvalue" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="dt_setpropertybyid_u">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="property" Mode="In" Type="String" />
+            <Parameter Name="uvalue" Mode="In" Type="String" />
+            <Parameter Name="lvalue" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="dt_validateloginparams">
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_validateloginparams_u">
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_vcsenabled" />
+          <FunctionImport Name="dt_verstamp006" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="dt_whocheckedout">
+            <Parameter Name="chObjectType" Mode="In" Type="String" />
+            <Parameter Name="vchObjectName" Mode="In" Type="String" />
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_whocheckedout_u">
+            <Parameter Name="chObjectType" Mode="In" Type="String" />
+            <Parameter Name="vchObjectName" Mode="In" Type="String" />
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="dt_getpropertiesbyid_Result">
+          <Property Type="String" Name="property" Nullable="false" MaxLength="64" />
+          <Property Type="Int32" Name="version" Nullable="false" />
+          <Property Type="String" Name="value" Nullable="true" MaxLength="255" />
+          <Property Type="Binary" Name="lvalue" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="dt_getpropertiesbyid_u_Result">
+          <Property Type="String" Name="property" Nullable="false" MaxLength="64" />
+          <Property Type="Int32" Name="version" Nullable="false" />
+          <Property Type="String" Name="uvalue" Nullable="true" MaxLength="255" />
+          <Property Type="Binary" Name="lvalue" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BitacorasModStoreContainer" CdmEntityContainer="BitacorasEntities">
+          <EntitySetMapping Name="BitacoraAplicaciones">
+            <EntityTypeMapping TypeName="BitacorasMod.BitacoraAplicacione">
+              <MappingFragment StoreEntitySet="BitacoraAplicaciones">
+                <ScalarProperty Name="id_op" ColumnName="id_op" />
+                <ScalarProperty Name="Accion" ColumnName="Accion" />
+                <ScalarProperty Name="procedimiento" ColumnName="procedimiento" />
+                <ScalarProperty Name="Parametros" ColumnName="Parametros" />
+                <ScalarProperty Name="FechaSistema" ColumnName="FechaSistema" />
+                <ScalarProperty Name="FechaServidor" ColumnName="FechaServidor" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="computadora" ColumnName="computadora" />
+                <ScalarProperty Name="horaMaquina" ColumnName="horaMaquina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dtproperties">
+            <EntityTypeMapping TypeName="BitacorasMod.dtproperty">
+              <MappingFragment StoreEntitySet="dtproperties">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="objectid" ColumnName="objectid" />
+                <ScalarProperty Name="property" ColumnName="property" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="uvalue" ColumnName="uvalue" />
+                <ScalarProperty Name="lvalue" ColumnName="lvalue" />
+                <ScalarProperty Name="version" ColumnName="version" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="desbloqueos">
+            <EntityTypeMapping TypeName="BitacorasMod.desbloqueo">
+              <MappingFragment StoreEntitySet="desbloqueos">
+                <ScalarProperty Name="taxi" ColumnName="taxi" />
+                <ScalarProperty Name="chofer" ColumnName="chofer" />
+                <ScalarProperty Name="economico" ColumnName="economico" />
+                <ScalarProperty Name="mensaje" ColumnName="mensaje" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="detener" ColumnName="detener" />
+                <ScalarProperty Name="id_secretaria" ColumnName="id_secretaria" />
+                <ScalarProperty Name="secretaria" ColumnName="secretaria" />
+                <ScalarProperty Name="delsistema" ColumnName="delsistema" />
+                <ScalarProperty Name="temporal" ColumnName="temporal" />
+                <ScalarProperty Name="folio" ColumnName="folio" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="fechacompletaserver" ColumnName="fechacompletaserver" />
+                <ScalarProperty Name="usuarioultimaedicion" ColumnName="usuarioultimaedicion" />
+                <ScalarProperty Name="fcsdesbloqueo" ColumnName="fcsdesbloqueo" />
+                <ScalarProperty Name="id_usuariodesbloqueo" ColumnName="id_usuariodesbloqueo" />
+                <ScalarProperty Name="usuariodesbloqueo" ColumnName="usuariodesbloqueo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntradasySalidas">
+            <EntityTypeMapping TypeName="BitacorasMod.EntradasySalida">
+              <MappingFragment StoreEntitySet="EntradasySalidas">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="hora" ColumnName="hora" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
+                <ScalarProperty Name="fechacompletaserver" ColumnName="fechacompletaserver" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Monitoreos">
+            <EntityTypeMapping TypeName="BitacorasMod.Monitoreo">
+              <MappingFragment StoreEntitySet="Monitoreo">
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Hora" ColumnName="Hora" />
+                <ScalarProperty Name="PC" ColumnName="PC" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Conectada" ColumnName="Conectada" />
+                <ScalarProperty Name="fechacompletaserver" ColumnName="fechacompletaserver" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="dt_addtosourcecontrol" FunctionName="BitacorasMod.Store.dt_addtosourcecontrol" />
+          <FunctionImportMapping FunctionImportName="dt_addtosourcecontrol_u" FunctionName="BitacorasMod.Store.dt_addtosourcecontrol_u" />
+          <FunctionImportMapping FunctionImportName="dt_adduserobject" FunctionName="BitacorasMod.Store.dt_adduserobject" />
+          <FunctionImportMapping FunctionImportName="dt_adduserobject_vcs" FunctionName="BitacorasMod.Store.dt_adduserobject_vcs" />
+          <FunctionImportMapping FunctionImportName="dt_checkinobject" FunctionName="BitacorasMod.Store.dt_checkinobject" />
+          <FunctionImportMapping FunctionImportName="dt_checkinobject_u" FunctionName="BitacorasMod.Store.dt_checkinobject_u" />
+          <FunctionImportMapping FunctionImportName="dt_checkoutobject" FunctionName="BitacorasMod.Store.dt_checkoutobject" />
+          <FunctionImportMapping FunctionImportName="dt_checkoutobject_u" FunctionName="BitacorasMod.Store.dt_checkoutobject_u" />
+          <FunctionImportMapping FunctionImportName="dt_displayoaerror" FunctionName="BitacorasMod.Store.dt_displayoaerror" />
+          <FunctionImportMapping FunctionImportName="dt_displayoaerror_u" FunctionName="BitacorasMod.Store.dt_displayoaerror_u" />
+          <FunctionImportMapping FunctionImportName="dt_droppropertiesbyid" FunctionName="BitacorasMod.Store.dt_droppropertiesbyid" />
+          <FunctionImportMapping FunctionImportName="dt_dropuserobjectbyid" FunctionName="BitacorasMod.Store.dt_dropuserobjectbyid" />
+          <FunctionImportMapping FunctionImportName="dt_generateansiname" FunctionName="BitacorasMod.Store.dt_generateansiname" />
+          <FunctionImportMapping FunctionImportName="dt_getobjwithprop" FunctionName="BitacorasMod.Store.dt_getobjwithprop" />
+          <FunctionImportMapping FunctionImportName="dt_getobjwithprop_u" FunctionName="BitacorasMod.Store.dt_getobjwithprop_u" />
+          <FunctionImportMapping FunctionImportName="dt_getpropertiesbyid" FunctionName="BitacorasMod.Store.dt_getpropertiesbyid">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BitacorasMod.dt_getpropertiesbyid_Result">
+                <ScalarProperty Name="property" ColumnName="property" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="lvalue" ColumnName="lvalue" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="dt_getpropertiesbyid_u" FunctionName="BitacorasMod.Store.dt_getpropertiesbyid_u">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BitacorasMod.dt_getpropertiesbyid_u_Result">
+                <ScalarProperty Name="property" ColumnName="property" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="uvalue" ColumnName="uvalue" />
+                <ScalarProperty Name="lvalue" ColumnName="lvalue" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="dt_getpropertiesbyid_vcs" FunctionName="BitacorasMod.Store.dt_getpropertiesbyid_vcs" />
+          <FunctionImportMapping FunctionImportName="dt_getpropertiesbyid_vcs_u" FunctionName="BitacorasMod.Store.dt_getpropertiesbyid_vcs_u" />
+          <FunctionImportMapping FunctionImportName="dt_isundersourcecontrol" FunctionName="BitacorasMod.Store.dt_isundersourcecontrol" />
+          <FunctionImportMapping FunctionImportName="dt_isundersourcecontrol_u" FunctionName="BitacorasMod.Store.dt_isundersourcecontrol_u" />
+          <FunctionImportMapping FunctionImportName="dt_removefromsourcecontrol" FunctionName="BitacorasMod.Store.dt_removefromsourcecontrol" />
+          <FunctionImportMapping FunctionImportName="dt_setpropertybyid" FunctionName="BitacorasMod.Store.dt_setpropertybyid" />
+          <FunctionImportMapping FunctionImportName="dt_setpropertybyid_u" FunctionName="BitacorasMod.Store.dt_setpropertybyid_u" />
+          <FunctionImportMapping FunctionImportName="dt_validateloginparams" FunctionName="BitacorasMod.Store.dt_validateloginparams" />
+          <FunctionImportMapping FunctionImportName="dt_validateloginparams_u" FunctionName="BitacorasMod.Store.dt_validateloginparams_u" />
+          <FunctionImportMapping FunctionImportName="dt_vcsenabled" FunctionName="BitacorasMod.Store.dt_vcsenabled" />
+          <FunctionImportMapping FunctionImportName="dt_verstamp006" FunctionName="BitacorasMod.Store.dt_verstamp006" />
+          <FunctionImportMapping FunctionImportName="dt_whocheckedout" FunctionName="BitacorasMod.Store.dt_whocheckedout" />
+          <FunctionImportMapping FunctionImportName="dt_whocheckedout_u" FunctionName="BitacorasMod.Store.dt_whocheckedout_u" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,1180 @@
+﻿@model radiotaxi.Model.Partner
+@{
+    ViewBag.Title = @Model.partnerReference;
+}
+
+<!-- DATOS DE CONTROL JS -->
+<input id="gafet" name="gafet" type="hidden" value="@Model.partnerReference" />
+<input id="userId" name="userId" type="hidden" value="@Model.userId" />
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18 "><i class="bx bx-user"></i> @Model.partnerReference</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- end page title -->
+<div class="row">
+    <div class="col-xl-9 col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm order-2 order-sm-1">
+                        <div class="d-flex align-items-start mt-3 mt-sm-0">
+                            <div class="flex-lg-shrink-0">
+                                <div class="avatar-xl me-3">
+
+                                    @if (Model.urlImage != null)
+                                    {
+                                        <img src="@(Model.urlImage)" alt="" class="avatar-xl rounded-circle me-2 img-thumbnail">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Content/images/users/empty.png" alt="" class="avatar-xl rounded-circle me-2 img-thumbnail">
+                                    }
+                                </div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <div>
+                                    <h4 class="font-size-18 mb-1 fw-bolder">@(Model.partnerReference != null ? Model.partnerReference : "")</h4>
+                                    <h6 class="font-size-14 mb-1">@(Model.firstName != null ? Model.firstName.ToUpper() : "") @(Model.lastNameF != null ? Model.lastNameF.ToUpper() : "") @(Model.lastNameM != null ? Model.lastNameM.ToUpper() : "")</h6>
+                                    <p class="text-muted font-size-13 mb-0"> <span class="fw-bold">Fecha de ingreso:</span> @(Model.fechaingreso != null ? Model.fechaingreso.Value.ToString("dd/MM/yyyy") : "")</p>
+                                    @if (Permissions.allow("Admin, Practi-Trabajo"))
+                                    {
+                                        <p class="text-muted font-size-13 "><span class="fw-bold">Número telefónico:</span> @(Model.Telefono != null ? Model.Telefono : "")</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- FIN PERFIL-->
+                    <!-- INICIO PORCENTAJE-->
+                    <!--
+
+                            <div class="col-sm order-2 order-sm-1">
+                            <div class="d-flex align-items-start mt-3 mt-sm-0">
+                                <div class="col-sm">
+                                    <div id="invested-overview" data-colors='["#5156be", "#34c38f"]'
+                                         class="apex-charts"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        -->
+                    <!-- FIN PORCENTAJE-->
+                </div>
+
+                <ul class="nav nav-tabs-custom card-header-tabs border-top mt-4" id="pills-tab" role="tablist">
+
+                    @if (Permissions.allow("Admin, Practi-Actas, Practi-Trabajo, Practi-Viewer, Practi-ViewerSOC"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link px-3 active" data-bs-toggle="tab" href="#general" role="tab">General</a>
+                        </li>
+                    }
+
+                    @if (Permissions.allow("Admin, Practi-AdminTurkey, Practi-Cajas, Practi-Trabajo, Practi-Viewer, Practi-ViewerSOC"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link px-3" data-bs-toggle="tab" href="#pavos" role="tab">Pavos</a>
+                        </li>
+                    }
+
+                    @if (Permissions.allow("Admin, tarjeton, Practi-Cajas, Practi-Plusvalia, Practi-Trabajo, Practi-Viewer, Practi-ViewerSOC"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link px-3" data-bs-toggle="tab" href="#tarjeton" role="tab">Tarjetón</a>
+                        </li>
+                    }
+                    @if (Permissions.allow("Admin, Practi-Actas, Practi-Finanzas, Practi-AutoS, Practi-Plusvalia, Archivo, Practi-Trabajo, Practi-Viewer, Practi-ViewerSOC"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link px-3" data-bs-toggle="tab" href="#finanzas" role="tab">Finanzas</a>
+                        </li>
+
+
+
+                        <li class="nav-item">
+                            <a class="nav-link px-3" data-bs-toggle="tab" href="#bloqueos" role="tab">Bloqueos</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link px-3" data-bs-toggle="tab" href="#reportes" role="tab">Reportes</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link px-3" data-bs-toggle="tab" href="#convenios" role="tab">Convenios</a>
+                        </li>
+                    }
+
+
+                <li class="nav-item ms-auto my-auto ">
+
+                    @if (Permissions.allow("Admin"))
+                    {
+                        <a href="/Partner/Edit/@Model.partnerReference" class="btn btn-success btn-label mb-3">
+                            <i class="bx bx-edit-alt label-icon"></i> Editar
+                        </a>
+                    }
+
+                    @if (Permissions.allow("Admin"))
+                    {
+
+                        <a href="/credential/view/@Model.partnerReference" class="btn btn-success btn-label mb-3" target="_blank">
+                            <i class="bx bx-printer label-icon"></i> Imprimir credencial
+                        </a>
+                    }
+
+                    @if (Permissions.allow("Practi-Fiscal"))
+                    {
+                        <a href="/Sat/Edit//@Model.partnerReference" class="btn btn-success btn-label mb-3" target="">
+                            <i class="fas fa-file-invoice label-icon"></i> Fiscal / SAT
+                        </a>
+                    }
+
+                    @if (Permissions.allow("Admin, Practi-Actas, Practi-Finanzas, Practi-AutoS, Practi-Plusvalia"))
+                    {
+                        <div class="btn-group mb-3">
+                            <button type="button" class="btn btn-success waves-light waves-effect dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Más <i class="mdi mdi-dots-vertical ms-2"></i>
+                            </button>
+                            <div class="dropdown-menu">
+
+                                @if (Permissions.allow("Admin"))
+                                {
+                                    <a class="dropdown-item" href="../cuotas/sindicales/@Model.partnerReference">Cancelar cuotas sindicales</a>
+                                }
+
+                                @if (Permissions.allow("Admin, Archivo, Practi-Actas, Practi-Finanzas, Practi-AutoS, Practi-Plusvalia"))
+                                {
+
+                                    <a class="dropdown-item" href="../Bloqueos/@Model.partnerReference">Bloquear</a>
+                                }
+                                @if (Permissions.allow("Admin"))
+                                {
+                                    <a class="dropdown-item" href="/Partner/register/@Model.partnerReference">Generar contraseña</a>
+                                }
+                            </div>
+                        </div>
+                    }
+                </li>
+                </ul>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+
+        <div class="tab-content">
+            <div class="tab-pane @(Permissions.allow("Admin, Practi-Actas, Practi-Trabajo, Practi-Viewer, Practi-ViewerSOC") ? "active" : "")" id="general" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0"> <i class="bx bx-info-circle"></i> Información general</h5>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <div class="pb-3">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div>
+                                            <h5 class="font-size-15"><span>Fecha de nacimiento :</span></h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="text-muted">
+                                            @if (Model.birthDate != null)
+                                            {
+                                                <p class="my-0"> @Model.birthDate.ToString("dd/MM/yyyy")</p>
+                                            }
+                                            else
+                                            {
+                                                <p class="my-0"> NO REGISTRADO</p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div>
+                                            <h5 class="font-size-15"><span>Lugar de nacimiento :</span></h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="text-muted">
+                                            @if (Model.birthPlace != null)
+                                            {
+                                                <p class="my-0"> @Model.birthPlace.ToUpper()</p>
+                                            }
+                                            else
+                                            {
+                                                <p class="my-0"> NO REGISTRADO</p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div>
+                                            <h5 class="font-size-15"><span>Sexo :</span></h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="text-muted">
+
+                                            <p class="my-0">@(Model.sex == 0 ? "No registrado" : Model.sex == 1 ? "Masculino" : "Femenino") </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div>
+                                            <h5 class="font-size-15"><span>Ciudad actual :</span></h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="text-muted">
+                                            @if (Model.userAddresses != null && Model.userAddresses.Count() > 0)
+                                            {
+                                                try
+                                                {
+                                                    <p class="my-0">@Model.userAddresses.FirstOrDefault().city.name</p>
+                                                }
+                                                catch (Exception)
+                                                {
+                                                    <span>Error al cargar la direccion</span>
+                                                }
+
+                                            }
+                                            else
+                                            {
+                                                <p class="my-0"> NO REGISTRADO</p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                @if (Permissions.deny("Clinica"))
+                                {
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div>
+                                                <h5 class="font-size-15"><span>Domicilio actual :</span></h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div class="text-muted">
+                                                @if (Model.userAddresses != null && Model.userAddresses.Count() > 0)
+                                                {
+                                                    try
+                                                    {
+                                                        <p>
+                                                            @(Model.userAddresses.FirstOrDefault().address + ", " + Model.userAddresses.FirstOrDefault().address2 + ", " + Model.userAddresses.FirstOrDefault().colony + ", SM " + Model.userAddresses.FirstOrDefault().supermanzana + ", MZ " + Model.userAddresses.FirstOrDefault().manzana + ", LT " + Model.userAddresses.FirstOrDefault().lote + ", Calle " + Model.userAddresses.FirstOrDefault().street + ", CP " + Model.userAddresses.FirstOrDefault().postalCode)
+                                                        </p>
+                                                    }
+                                                    catch (Exception)
+                                                    {
+                                                        <span>Error al cargar la direccion</span>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <p class="my-0"> NO REGISTRADO</p>
+                                                }
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                }
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- end card body -->
+                </div>
+                <!-- end card -->
+
+                <div class="row">
+                    <div class="col-6">
+                        
+                    </div>
+                   
+                </div>
+
+
+                <!-- end card -->
+            </div>
+            <!-- end tab pane -->
+
+            <div class="tab-pane" id="tarjeton" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0"> <i class="bx bx-id-card"></i> Tarjetones</h5>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <div class="mt-1">
+                                        <div class="row container">
+
+                                            @if (Permissions.allow("Admin, Tarjeton"))
+                                            {
+
+                                                <div class="col-6 row">
+                                                    <div class="col-8">
+                                                        <div class="col ">
+                                                            <label for="gafet">Eco taxi</label>
+                                                            <input v-validate="'required'" v-model="gafet" type="text" class="form-control col-auto" v-bind:class="{ 'border-danger' : this.errors.has('gafet')}" id="gafet" name="gafet" aria-describedby="btnGroupAddon" />
+                                                            <small id="emailHelp" class="form-text text-muted"></small>
+                                                            <span class="text-danger" v-show="this.errors.has('gafet')">{{ this.errors.first('gafet') }}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-4 d-flex">
+                                                        <div class="col align-content-end">
+                                                            <btn v-on:click="searchCar" name="buscar" class="btn btn-success btn-label ms-auto my-auto">
+                                                                <i class=" bx bx-search-alt-2 label-icon"></i> Buscar
+                                                            </btn>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-6 row">
+                                                    <div class="col-7">
+                                                        <div class="col ">
+                                                            <label for="turno" class="col-auto">Turno</label>
+                                                            <select v-model="selected" class="form-select form-select" aria-label=".form-select" id="turno">
+                                                                <option selected disabled value="">Selecciona el turno del operador</option>
+                                                                <option value="1">Matutino</option>
+                                                                <option value="2">Vespertino</option>
+                                                                <option selected value="3">Ambos</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div v-if="data != null" class="col-5 d-flex">
+                                                        <div class="col align-content-end">
+                                                            <btn v-on:click="saveCard" name="guardar" class="btn btn-success btn-label">
+                                                                <i class=" bx bx-id-card label-icon"></i> Generar tarjetón
+                                                            </btn>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+
+                                        <div class="mt-3">
+                                            <div class="card" v-if="data != null">
+                                                <div class="card-body">
+                                                    <h5 class="card-title mb-3">Información del taxi</h5>
+                                                    <div class="flex-wrap gap-2 font-size-14">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <ul class="list-unstyled mb-0">
+                                                                    <li>
+                                                                        <p class="my-0"><span class="fw-bold">Status:</span> {{data.Operacion}}</p>
+                                                                    </li>
+                                                                    <li>
+                                                                        <p href="#" class="my-0"><span class="fw-bold">Marca:</span>{{data.Marca}}</p>
+                                                                    </li>
+                                                                    <li>
+                                                                        <p class="my-0"><span class="fw-bold">Modelo:</span> {{data.Modelo}}</p>
+                                                                    </li>
+                                                                    <li>
+                                                                        <p class="my-0"><span class="fw-bold">Año:</span> {{data.AutoAno}}</p>
+                                                                    </li>
+                                                                    <li>
+                                                                        <p class="my-0"><span class="fw-bold">Serie:</span> {{data.No_Serie}}</p>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <ul class="list-unstyled mb-0">
+
+                                                                    <li>
+                                                                        <p class="my-0"><span class="fw-bold">Poliza:</span>{{data.poliza}}</p>
+                                                                    </li>
+                                                                    <li>
+                                                                        <p class="my-0"><span class="fw-bold">Vencimiendo de la poliza:</span> {{data.vencepoliza}}</p>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <!-- end card body -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="my-2">
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h4 class="card-title">Historial de tarjetones del operador: @(Model.firstName != null ? Model.firstName.ToUpper() : "") @(Model.lastNameF != null ? Model.lastNameF.ToUpper() : "") @(Model.lastNameM != null ? Model.lastNameM.ToUpper() :"")</h4>
+                                                    <h4 class="card-title">Historial de tarjetones del operador No.: @(Model.partnerReference != null ? Model.partnerReference : "")</h4>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="table-rep-plugin">
+                                                        <div class="table-responsive mb-0" data-pattern="priority-columns">
+                                                            <table id="tech-companies-1" class="table table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th data-priority="1">Taxi</th>
+                                                                        <th data-priority="3">Fecha de alta</th>
+                                                                        <th data-priority="1">Fecha de baja</th>
+                                                                        <th data-priority="3">Horario</th>
+                                                                        <th data-priority="3">Acciones</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="t-content">
+                                                                    @foreach (var item in ViewBag.cars)
+                                                                    {
+                                                                        <tr>
+
+                                                                            <td>@(item.taxi != null ? item.taxi : "")</td>
+                                                                            <td>@(item.asignedDate != null ? item.asignedDate : "")</td>
+                                                                            <td>@(item.expiration_date != null ? item.expiration_date : "")</td>
+                                                                            <td>
+                                                                                @(item.turn == 1 ? "Matutino" : " ")
+                                                                                @(item.turn == 2 ? "Vespertino" : " ")
+                                                                                @(item.turn == 3 ? "Ambos" : " ")
+                                                                            </td>
+                                                                            <td>
+                                                                                @if (Permissions.allow("Admin, tarjeton"))
+                                                                                {
+                                                                                    <a href="~/card/edit/@(item.id)" class="btn btn-success waves-effect btn-label waves-light">
+                                                                                        <i class="bx bx-edit-alt label-icon"></i> Editar
+                                                                                    </a>
+                                                                                    <a href="~/card/details/@(item.id)" class="btn btn-success waves-effect btn-label waves-light">
+                                                                                        <i class="bx bx-detail label-icon"></i> Detalles
+                                                                                    </a>
+                                                                                }
+
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- end card -->
+                                        </div> <!-- end col -->
+                                    </div>
+
+
+                                    <!-- end row -->
+                                    <!-- end post -->
+
+                                    <hr class="my-5">
+
+                                    <!-- end post -->
+                                </div>
+                                <!-- end col -->
+
+                            </div>
+                            <!-- end row -->
+                        </div>
+                    </div>
+
+                    <!-- end card body -->
+                </div>
+                <!-- end card -->
+            </div>
+            <!-- end tab pane -->
+
+            <div class="tab-pane" id="pavos" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0"><i class="mdi mdi-food-turkey"></i> Pavos (Generar Cupón)</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-4  mb-3">
+                                @if (ViewBag.amountdebs <= ViewBag.maxdeb)
+                                {
+                                    <div class="card bg-success border-success text-white-50">
+                                        <div class="card-body">
+                                            <h5 class="mb-4 text-white"><i class="mdi mdi-food-turkey me-3"></i>Deuda</h5>
+                                            <p class="mb-3 fw-bolder h2 p-0 text-white">@(ViewBag.amountdebs.ToString("C", new System.Globalization.CultureInfo("es-MX"))) MXN</p>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="card bg-danger border-danger text-white-50">
+                                        <div class="card-body">
+                                            <h5 class="mb-4 text-white"><i class="mdi mdi-block-helper me-3"></i>Deuda</h5>
+                                            <p class="mb-3 fw-bolder h2 p-0 text-white">@(ViewBag.amountdebs.ToString("C", new System.Globalization.CultureInfo("es-MX"))) MXN</p>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="col-md-4  mb-3">
+                                <span class="text-muted mb-3 lh-1 d-block text-truncate">Información de entrega</span>
+                                <div class="px-3" data-simplebar="init" style="max-height: 352px;">
+                                    <div class="simplebar-wrapper" style="margin: 0px -16px;">
+                                        <div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask">
+                                            <div class="simplebar-offset" style="right: -17px; bottom: 0px;">
+                                                <div class="simplebar-content-wrapper" style="height: auto; overflow: hidden scroll;">
+                                                    <div class="simplebar-content" style="padding: 0px 16px;">
+                                                        <ul class="list-unstyled activity-wid mb-0">
+                                                            @foreach (radiotaxi.Model.ChristmasgiftPrinted printed in ViewBag.christmasgiftPrinted)
+                                                            {
+                                                                <li class="activity-list activity-border">
+                                                                    <div class="activity-icon avatar-md">
+                                                                        <span class="avatar-title bg-warning-subtle text-warning rounded-circle">
+                                                                            <i class="bx bx-bitcoin font-size-24"></i>
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="timeline-list-item">
+                                                                        <div class="d-flex">
+                                                                            <div class="flex-grow-1 overflow-hidden me-4">
+                                                                                <h5 class="font-size-14 mb-1">@(printed.PrintedDate)</h5>
+                                                                                <p class="text-truncate text-muted font-size-13">
+                                                                                    <strong>Ticket Expedido</strong><br />
+                                                                                    <strong>@(printed.PrintedBy)</strong>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            }
+                                                            @if (ViewBag.christmasgift != null)
+                                                            {
+                                                                <li class="activity-list">
+                                                                    <div class="activity-icon avatar-md">
+                                                                        <span class="avatar-title  bg-primary-subtle text-primary rounded-circle">
+                                                                            <i class="mdi mdi-litecoin font-size-24"></i>
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="timeline-list-item">
+                                                                        <div class="d-flex">
+                                                                            <div class="flex-grow-1 overflow-hidden me-4">
+                                                                                <h5 class="font-size-14 mb-1">@(((radiotaxi.Model.Christmasgift)(ViewBag.christmasgift)).DeliveryDate)</h5>
+                                                                                <p class="text-truncate text-muted font-size-13">
+                                                                                    <strong>Pavo Entregado</strong><br />
+                                                                                    <strong>@(((radiotaxi.Model.Christmasgift)(ViewBag.christmasgift)).DeliveryBy)</strong>
+
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><div class="simplebar-placeholder" style="width: auto; height: 438px;"></div>
+                                    </div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="height: 282px; transform: translate3d(0px, 0px, 0px); display: block;"></div></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4  mb-3">
+                                @if ((ViewBag.christmasgiftPrinted).Count > 0 && ViewBag.christmasgift == null)
+                                {
+                                    <div class="alert alert-warning alert-dismissible fade show px-4 mb-0 text-center" role="alert">
+                                        <i class="mdi mdi-qrcode d-block display-4 mt-2 mb-3 text-warning"></i>
+                                        <h5 class="text-warning">Warning</h5>
+                                        <p>El agremiado ya cuentas con un ticket único, <br /> el cual podra cambiar por un pavo.</p>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        @if (Permissions.allow("Admin,Practi-AdminTurkey"))
+                                        {
+                                            <a v-on:click="generateTicket('G','@(Model.partnerReference)')" href="#" class="btn btn-success waves-effect btn-label waves-light"><i class="bx bxs-paper-plane label-icon"></i> Reimprimir Cupón</a>
+                                        }
+                                    </div>
+                                }
+                                else if ((ViewBag.christmasgiftPrinted).Count > 0 && ViewBag.christmasgift != null)
+                                {
+                                    <div class="alert alert-success alert-dismissible fade show px-4 mb-0 text-center" role="alert">
+                                        <i class="mdi mdi-qrcode d-block display-4 mt-2 mb-3 text-success"></i>
+                                        <h5 class="text-success">Felicidades, pavo entregado</h5>
+                                        <p>El pavo fue entregado, usando el tikcet con el QR único correspondiente.</p>
+                                    </div>
+                                }
+                                else if (ViewBag.amountdebs <= ViewBag.maxdeb || Permissions.allow("Admin,Practi-AdminTurkey"))
+                                {
+                            <div class="alert alert-info alert-dismissible fade show px-4 mb-0 text-center" role="alert">
+                                <i class="mdi mdi-check-all d-block display-4 mt-2 mb-3 text-success"></i>
+                                <h5 class="text-success">Felicidades</h5>
+                                <p>Queremos agradecerte sinceramente por mantener tu cuenta al corriente de los pagos.</p>
+                                <label for="note" class="form-label">Nota</label>
+                                <textarea class="form-control mb-3" id="note" rows="2" placeholder="Agregar nota a la entrega."></textarea>
+                                <a v-on:click="generateTicket('G','@(Model.partnerReference)')" href="#" class="btn btn-success waves-effect btn-label waves-light mb-3"><i class="bx bxs-paper-plane label-icon"></i> Generar Cupón</a>
+                                @if (Permissions.allow("Admin, Practi-AdminTurkey"))
+                                {
+                                    <a v-on:click="generateTicket('D','@(Model.partnerReference)')" href="#" class="btn btn-success waves-effect btn-label waves-light mb-3"><i class="mdi mdi-food-turkey label-icon"></i> Entregar Pavo</a>
+                                }
+                            </div>
+                                }
+                                else
+                                {
+                                    <div class="alert alert-danger alert-dismissible fade show px-4 mb-0 text-center" role="alert">
+                                        <i class="mdi mdi-block-helper d-block display-4 mt-2 mb-3 text-danger"></i>
+                                        <h5 class="text-danger">Sin derecho a pavo</h5>
+                                        <p>Lamentablemente, no podemos hacerte entrega del pavo que se había previsto, ya que tu cuenta no se encuentra al corriente de los pagos correspondientes.</p>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card body -->
+                </div>
+            </div>
+
+            <div class="tab-pane" id="finanzas" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0"> <i class="bx bx-dollar"></i> Finanzas</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-pills nav-justified" role="tablist">
+                            <li class="nav-item waves-effect waves-light">
+                                <a class="nav-link active" data-bs-toggle="tab" href="#deudas" role="tab">
+                                    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                    <span class="d-none d-sm-block"><i class="fas fa-file-invoice-dollar"></i>  Deudas</span>
+                                </a>
+                            </li>
+                            <li class="nav-item waves-effect waves-light">
+                                <a class="nav-link" data-bs-toggle="tab" href="#pagos" role="tab">
+                                    <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                    <span class="d-none d-sm-block"><i class="bx bx-dollar"></i>  Pagos</span>
+                                </a>
+                            </li>
+
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content p-3 text-muted">
+
+                            <div class="tab-pane active" id="deudas" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">
+
+                                                <table class="table">
+                                                    <tr>
+                                                        <td>CLAVE</td>
+                                                        <td>Cargo</td>
+                                                        <td>Debe</td>
+                                                        <td>Precio unitario</td>
+                                                        <td>Total</td>
+                                                    </tr>
+
+                                                    @foreach (radiotaxi.Model.caja_cargos_DTO cargo in ViewBag.debs)
+                                                    {
+
+                                                        <tr>
+                                                            <td>@(cargo.CLAVE)</td>
+                                                            <td>@(cargo.CARGO)</td>
+                                                            <td>@(cargo.DEBE)</td>
+                                                            <td>@(cargo.PRECIO.ToString("C", new System.Globalization.CultureInfo("es-MX")))</td>
+                                                            <td class="mb-0 fw-bold">@((cargo.PRECIO * cargo.DEBE).ToString("C", new System.Globalization.CultureInfo("es-MX")))</td>
+                                                        </tr>
+                                                    }
+                                                </table>
+                                                <div class="row g-1 align-items-center">
+
+                                                    <div class="col-8 col-md-8">
+
+                                                    </div>
+                                                    <div class="col-2 col-md-2 text-end text-md-end align-content-end">
+                                                        <p class="mb-0 p-0 fw-bolder h5">Total:</p>
+                                                    </div>
+                                                    <div class="col-2 col-md-2 text-end text-md-end align-content-end">
+                                                        <p class="mb-0 fw-bolder h5 p-0">@(ViewBag.amountdebs.ToString("C", new System.Globalization.CultureInfo("es-MX")))</p>
+                                                    </div>
+                                                </div>
+                                                @*<span>Total debe : @(ViewBag.amountdebs)</span>*@
+
+                                            </div>
+                                        </div>
+                                        <!-- end card -->
+                                    </div> <!-- end col -->
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="pagos" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">
+
+                                                <div class="table-rep-plugin">
+                                                    <div class="table-responsive mb-0">
+                                                        <table id="" class="table table-striped" style="width:100%" data-page-length='100'>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="text-center">Ticket</th>
+                                                                    <th class="text-center">Fecha</th>
+                                                                    <th class="text-center">Total</th>
+                                                                    <th class="text-center">Acciones</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="">
+                                                                @foreach (radiotaxi.Model.Venta _sale in ViewBag.sales)
+                                                                {
+                                                                    <tr>
+                                                                        <td class="text-center">@(_sale.Id_Op)</td>
+                                                                        <td class="text-center">@(_sale.FechaOp)</td>
+                                                                        <td class="text-center mb-0 fw-bold">@(_sale.CostoTotal.ToString("C", new System.Globalization.CultureInfo("es-MX")))</td>
+                                                                        <td class="text-center">
+                                                                            <a href="/ticket/detalle/@(_sale.Id_Op)" class="btn btn-success waves-effect btn-label waves-light" target="_blank">
+                                                                                <i class="bx bx-show label-icon"></i> Ver más
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+                                                            </tbody>
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <th class="text-center">Ticket</th>
+                                                                    <th class="text-center">Fecha</th>
+                                                                    <th class="text-center">Total</th>
+                                                                    <th class="text-center">Acciones</th>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end card -->
+                                    </div> <!-- end col -->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!-- end card-body -->
+                </div>
+                <!-- end card -->
+            </div>
+            <!-- end tab pane -->
+            <div class="tab-pane" id="bloqueos" role="tabpanel">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0"> <i class="bx bx-block"></i> Bloqueos</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-rep-plugin">
+                                    <div class="table-responsive mb-0" data-pattern="priority-columns">
+                                        <table id="tbloqueos" class="table table-striped display" style="width:100%" data-page-length='100'>
+                                            <thead>
+                                                <tr>
+                                                    <th data-priority="2">Taxi</th>
+                                                    <th data-priority="2">Fecha</th>
+                                                    <th data-priority="2">Detener</th>
+                                                    <th data-priority="1">Mensaje</th>
+                                                    <th data-priority="2">Secretaria</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="t-contet">
+                                                @foreach (radiotaxi.Model.MENSAJE message in ViewBag.message)
+                                                {
+                                                    <tr role="button" onclick="showAlert('@Html.Raw(message.MENSAJE1)')">
+                                                        <th>@(message.TAXI)</th>
+                                                        <td>@((message.FECHA).ToString("dd/MM/yyyy"))</td>
+                                                        @if (message.DETENER == "1")
+                                                        {
+                                                            <td class="text-center"> <span class="badge bg-danger">DETENER</span></td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td class="text-center"> <span class="badge bg-success">NO DETENER</span></td>
+                                                        }
+                                                        <td>@(message.MENSAJE1)</td>
+                                                        @* <td>@(message.MENSAJE1.Length > 30 ? message.MENSAJE1.Substring(0, 30) + "..." : message.MENSAJE1)</td> *@
+                                                        <td>@(message.SECRETARIA)</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th data-priority="2">Taxi</th>
+                                                    <th data-priority="2">Fecha</th>
+                                                    <th data-priority="2">Detener</th>
+                                                    <th data-priority="1">Mensaje</th>
+                                                    <th data-priority="2">Secretaria</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end card -->
+                    </div> <!-- end col -->
+                </div>
+            </div>
+            <!-- end tab pane -->
+            <div class="tab-pane" id="reportes" role="tabpanel">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0"> <i class="mdi mdi-format-list-checks"></i> Reportes</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-rep-plugin">
+                                    <div class="table-responsive mb-0" data-pattern="priority-columns">
+                                        <table id="treportes" class="table table-striped display" style="width:100%" data-page-length='100'>
+                                            <thead>
+                                                <tr>
+                                                    <th data-priority="2">Taxi</th>
+                                                    <th data-priority="2">Turno</th>
+                                                    <th data-priority="1">Fecha de reporte</th>
+                                                    <th data-priority="2">Fecha de pago</th>
+                                                    <th data-priority="2">Ticket</th>
+                                                    <th data-priority="2">Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="t-contet">
+
+
+                                                @foreach (radiotaxi.Model.HistAsistencia reporte in ViewBag.reportes)
+                                                {
+                                                    <tr>
+                                                        <th>@(reporte.Taxi)</th>
+                                                        @switch (reporte.Turno)
+                                                        {
+                                                            case "Completo":
+                                                                <td class="text-center"> <span class="badge bg-success">@(reporte.Turno)</span></td>
+                                                                ;
+                                                                break;
+                                                            case "Falta":
+                                                                <td class="text-center"> <span class="badge bg-danger">@(reporte.Turno)</span></td>
+                                                                ;
+                                                                break;
+                                                            case "Matutino":
+                                                                <td class="text-center"> <span class="badge bg-warning"> @(reporte.Turno)</span></td>
+                                                                break;
+                                                            case "Vespertino":
+                                                                <td class="text-center"> <span class="badge bg-info"> @(reporte.Turno)</span></td>
+                                                                break;
+                                                            default:
+                                                                break;
+                                                        }
+                                                        <td>@(reporte.FechaReporte)</td>
+                                                        <td>@(reporte.FechaOp)</td>
+                                                        <td>
+                                                            <span class="badge" style="background: @(reporte.color.ToString());">@(reporte.Ticket)</span>
+                                                        </td>
+                                                        <td>
+                                                            <a href="/ticket/detalle/@(reporte.Ticket)" class="btn btn-success waves-effect btn-label waves-light" target="_blank">
+                                                                <i class="bx bx-show label-icon"></i> Ver más
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th data-priority="2">Taxi</th>
+                                                    <th data-priority="2">Turno</th>
+                                                    <th data-priority="1">Fecha de reporte</th>
+                                                    <th data-priority="2">Fecha de pago</th>
+                                                    <th data-priority="2">Ticket</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end card -->
+                    </div> <!-- end col -->
+                </div>
+            </div>
+            <!-- end tab pane -->
+            <div class="tab-pane" id="convenios" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0"> <i class="fas fa-hands-helping"></i> Convenios</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-rep-plugin">
+                            <div class="table-responsive mb-0" data-pattern="priority-columns">
+                                <table id="tconvenios" class="table table-striped display" style="width:100%" data-page-length='100'>
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="2">N° Convenio</th>
+                                            <th data-priority="2">Concepto</th>
+                                            <th data-priority="2">Fecha</th>
+                                            <th data-priority="2">Afavor</th>
+                                            <th data-priority="2">a favor nombre</th>
+                                            <th data-priority="2">Cargo a operador</th>
+                                            <th data-priority="1">Nombre</th>
+                                            <th data-priority="2">Partidas</th>
+                                            <th data-priority="2">Importe</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="t-contet">
+                                        @foreach (radiotaxi.Model.Convenio convenio in ViewBag.agreements)
+                                        {
+                                            <tr>
+                                                <th>@(convenio.Id_Op)</th>
+                                                <th>@(convenio.Concepto)</th>
+                                                <th>@(convenio.FechaOp)</th>
+                                                <td>@(convenio.AfavordeNum)</td>
+                                                <td>@(convenio.AfavordeNombre)</td>
+                                                <td>@(convenio.CargoANum)</td>
+                                                <td>@(convenio.CargoANombre)</td>
+                                                <td>@(convenio.Partidas.Value.ToString("0.##"))</td>
+                                                <td>@((convenio.Monto ?? 0).ToString("C", new System.Globalization.CultureInfo("es-MX")))</td>
+
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th data-priority="2">N° Convenio</th>
+                                            <th data-priority="2">Concepto</th>
+                                            <th data-priority="2">Fecha</th>
+                                            <th data-priority="2">Afavor</th>
+                                            <th data-priority="2">a favor nombre</th>
+                                            <th data-priority="2">Cargo a operador</th>
+                                            <th data-priority="1">Nombre</th>
+                                            <th data-priority="2">Partidas</th>
+                                            <th data-priority="2">Importe</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card body -->
+                </div>
+                <!-- end card -->
+            </div>
+            <!-- end tab pane -->
+        </div>
+        <!-- end tab content -->
+    </div>
+    <!-- end col -->
+
+    <div class="col-xl-3 col-lg-4">
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title mb-3"><i class="bx bx-car"></i> Emplacamiento</h5>
+                <div class="flex-wrap gap-2 font-size-14">
+                    @if (ViewBag.emplaactual != null)
+                    {
+
+                        if (((radiotaxi.Model.Emplacamiento)ViewBag.emplaactual).Operacion != "EMPLACADO")
+                        {
+                            <h5 class="card-title mb-3">
+                                <i class="bx bxs-downvote text-danger"></i>
+                                <span class="badge bg-danger-subtle text-danger">Vehículo : <strong>BAJA </strong> - @(((DateTime)ViewBag.emplaactual.FechaOp).ToShortDateString())</span>
+                            </h5>
+                        }
+                        else
+                        {
+                            <h5 class="card-title mb-3">
+                                <i class="bx bxs-upvote text-success"></i>
+                                <span class="badge bg-success-subtle text-success">
+                                    Vehículo : <strong>ALTA</strong>
+                                </span>
+                            </h5>
+
+                        }
+
+                        if (ViewBag.emplaactual.Bloqueado == true)
+                        {
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="alert alert-danger" role="alert">
+                                        <i class=" bx bx-block"></i> <i class=" bx bx-car"></i> El VIN del vehiculo esta Bloqueado, favor de comunicarse con sistemas.
+                                    </div>
+                                </div><!-- end col -->
+                            </div>
+
+                        }
+
+                        if (ViewBag.emplaactual.Protegido == true)
+                        {
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="alert alert-danger" role="alert">
+                                        <i class=" bx bx-block"></i> <i class=" bx bx-car"></i> El número económico esta protegido, favor de comunicarse con sistemas.
+                                    </div>
+                                </div><!-- end col -->
+                            </div>
+                        }
+
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Marca:</span> @(ViewBag.emplaactual.Marca)</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Modelo:</span> @(ViewBag.emplaactual.Modelo)</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Año del vehiculo:</span> @(ViewBag.emplaactual.AutoAno)</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Responsable:</span> @(ViewBag.emplaactual.Responsable)</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Eco/Gafet del responsable:</span> @(ViewBag.emplaactual.EconoResp)</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Teléfono del responsable:</span> @(ViewBag.emplaactual.resp_telefono)</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Celular del Responsable:</span> @(ViewBag.emplaactual.resp_celular)</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Placas:</span> @(ViewBag.emplaactual.Placas.ToUpper())</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Motor:</span> @(ViewBag.emplaactual.Motor.ToUpper())</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">N° de serie:</span> @(ViewBag.emplaactual.No_Serie.ToUpper())</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Capacidad:</span> @(ViewBag.emplaactual.Capacidad) PASAJEROS MÁS CONDUCTOR</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Poliza:</span> @(ViewBag.emplaactual.poliza != null ? ViewBag.emplaactual.poliza.ToUpper() : "")</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Tipo de poliza:</span> @(ViewBag.emplaactual.tipopoliza != null ? ViewBag.emplaactual.tipopoliza.ToUpper() : "")</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Aseguradora:</span> @(ViewBag.emplaactual.aseguradora)</p>
+                            </li>
+                            <li>
+                                <p class="mb-1">
+                                    <span class="fw-bold">Vencimiento de poliza:</span> @(ViewBag.emplaactual.vencepoliza != null ? Convert.ToDateTime(ViewBag.emplaactual.vencepoliza).ToString("dd/MM/yyyy"): "")
+                                </p>
+                            </li>
+                        </ul>
+                        <hr />
+                        <p class="mb-1"><span class="fw-bold">Observaciones:</span> @(ViewBag.emplaactual.Observaciones.ToUpper())</p>
+                        <p>
+                            <span class="fw-bold">Fecha de operación :</span>
+                             @(((DateTime)ViewBag.emplaactual.FechaOp).ToShortDateString())
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                            Sin Emplacar
+                        </p>
+                    }
+                </div>
+            </div>
+            <!-- end card body -->
+        </div>
+
+        @if (Permissions.allow("Admin"))
+        {
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-3"><i class="bx bx-folder"></i>  Documentación importante</h5>
+
+                    <div class="flex-wrap gap-2 font-size-14">
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                @if (Model.ine != null)
+                                {
+                                    <p class="my-0"><span class="fw-bold">INE:</span> @Model.ine</p>
+                                }
+                                else
+                                {
+                                    <p class="my-0"><span class="fw-bold">INE:</span> NO REGISTRADO</p>
+                                }
+                            </li>
+                            <li>
+                                @if (Model.urfc != null)
+                                {
+                                    <p class="my-0"><span class="fw-bold">RFC:</span> @Model.urfc</p>
+                                }
+                                else
+                                {
+                                    <p class="my-0"><span class="fw-bold">RFC:</span> NO REGISTRADO</p>
+                                }
+                            </li>
+                            <li>
+                                @if (Model.curp != null)
+                                {
+                                    <p class="my-0"><span class="fw-bold">CURP:</span> @Model.curp</p>
+                                }
+                                else
+                                {
+                                    <p class="my-0"><span class="fw-bold">CURP:</span> NO REGISTRADO</p>
+                                }
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- end card body -->
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-3"><i class="mdi mdi-hospital"></i>Información médica</h5>
+                    <div>
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                @if (Model.bloodType != null)
+                                {
+                                    <p class="my-0"><span class="fw-bold">Tipo de sangre:</span> @Model.bloodType</p>
+                                }
+                                else
+                                {
+                                    <p class="my-0"><span class="fw-bold">Tipo de sangre:</span> NO REGISTRADO</p>
+                                }
+                            </li>
+                            <li>
+                                @if (Model.organDonor != false)
+                                {
+                                    <p class="my-0"><span class="fw-bold">Donador:</span> Si</p>
+                                }
+                                else
+                                {
+                                    <p class="my-0"><span class="fw-bold">Donador:</span> No</p>
+                                }
+                            </li>
+
+                            <li>
+                                @if (Model.allergies != null)
+                                {
+                                    <p class="my-0"><span class="fw-bold">Alergias:</span> @Model.allergies</p>
+                                }
+                                else
+                                {
+                                    <p class="my-0"><span class="fw-bold">Alergias:</span> NO REGISTRADO</p>
+                                }
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- end card body -->
+            </div>
+            <!-- end card -->
+        }
+    </div>
+    <!-- end col -->
+</div>
+
+@section Scripts {
+   <script src="~/Content/js/Views/Partner/tarjeton.js"></script>
+}

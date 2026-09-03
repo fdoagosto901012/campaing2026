@@ -1,0 +1,107 @@
+﻿@model IEnumerable<radiotaxi.Model.client>
+
+<div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-th"></i></span>
+                    <h5>Clientes Radio Taxi</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.name)
+                                </th>
+                                <!--<th>
+                                    @Html.DisplayNameFor(model => model.lastname1)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.lastname2)
+                                </th>-->
+                                <th>
+                                    @Html.DisplayNameFor(model => model.address)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.note)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.isBlocked)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.blockedReason)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.phone)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.createdBy)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.isHome)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.name) @Html.DisplayFor(modelItem => item.lastname1) @Html.DisplayFor(modelItem => item.lastname2)
+                                    </td>
+                                   
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.address)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.note)
+                                    </td>
+                                    <td>
+                                        @if (item.isBlocked == true)
+                                        {
+                                            @Html.Raw("Si");
+                                        }
+                                        else
+                                        {
+                                            @Html.Raw("No");
+
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.blockedReason)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.phone)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.createdBy)
+                                    </td>
+                                    <td>
+                                        @if (item.isHome == true)
+                                        {
+                                            @Html.Raw("Si");
+                                        }
+                                        else
+                                        {
+                                            @Html.Raw("No");
+                                        }
+                                    </td>
+                                    <td>
+                                        <a href="/Client/Edit/@(item.phone)"><span class="badge badge-info " style="width: 10px;"><i class="icon-edit"></i></span></a><br>
+                                        <a href="/TaxiService/Create/?phone=@(item.phone)&observation=@(item.blockedReason)&address=@(item.address)"><span class="badge badge-info " style="width: 10px;"><i class="icon-plus"></i></span></a><br>
+                                        <a href="/TaxiService/IndexPendingByClient/?id=@(item.phone)"><span class="badge badge-info " style="width: 10px;"><i class="icon-time"></i></span></a><br>
+                                        <a href="/TaxiService/IndexAssignedByClient/?id=@(item.phone)"><span class="badge badge-info " style="width: 10px;"><i class="icon-ok-sign"></i></span></a><br>
+                                        <a href="/taxiReport/Create/?phone=@(item.phone)"><span class="badge badge-info " style="width: 10px;"><i class="icon-thumbs-down"></i></span></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--End-Chart-box-->
+        <hr />
+    </div>

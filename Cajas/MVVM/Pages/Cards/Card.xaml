@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cajas.MVVM.Pages.Cards.Card"
+             xmlns:cards="clr-namespace:Cajas.MVVM.ViewModels.cards"
+             xmlns:Converter="clr-namespace:Cajas.Converters"
+             BackgroundColor="{StaticResource complement}"
+             Title="Tarjetón">
+    <ContentPage.BindingContext>
+        <cards:CardViewModel/>
+    </ContentPage.BindingContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout Grid.Row="0" Margin="30,30,30,10">
+            <Label Text="IDENTIFACIÓN" TextColor="Gray" HorizontalOptions="Start" FontSize="18"/>
+            <Label Text="{Binding Name}" TextColor="Black" FontAttributes="Bold" FontFamily="LatoBold"
+                HorizontalOptions="Start" FontSize="24"/>
+        </VerticalStackLayout>
+        <StackLayout  Grid.Row="1" Margin="30,10,30,10">
+            <Grid RowSpacing="10">
+                <Grid.ColumnSpacing>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="iOS" Value="30"/>
+                        <On Platform="Android" Value="10"/>
+                    </OnPlatform>
+                </Grid.ColumnSpacing>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition Width="0.6*"/>
+                </Grid.ColumnDefinitions>
+
+                <Frame
+                   Padding="0"
+                    
+                   Grid.Row="0" 
+                   Grid.RowSpan="2" 
+                   Grid.Column="0"
+                   CornerRadius="20"
+                   BorderColor="Transparent"
+                   HasShadow="True"
+                   BackgroundColor="Transparent">
+                    <AbsoluteLayout 
+                        Padding="0"
+                        Margin="0"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center">
+                        <Image
+                            AbsoluteLayout.LayoutBounds="0,0,1,1"
+                            AbsoluteLayout.LayoutFlags="HeightProportional,WidthProportional,PositionProportional"
+                            Background="red"
+                            Margin="0,0,0,0"
+                            Scale="1.1"
+                            Source="{Binding Imgs}"
+                            Aspect="AspectFit"
+                            HorizontalOptions="CenterAndExpand"
+                            VerticalOptions="CenterAndExpand" />
+                    </AbsoluteLayout>
+                    
+                </Frame>
+  
+                <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="{StaticResource base}"
+                    BorderColor="Transparent" CornerRadius="20" Padding="0">
+
+                    <Grid ColumnSpacing="5" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="10" Padding="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Frame Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" BackgroundColor="White"
+                            HeightRequest="40" WidthRequest="40" CornerRadius="20" BorderColor="Transparent">
+                        </Frame>
+
+                        <Image Margin="5" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Source="taxi.svg"></Image>
+
+                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding Gefet}" TextColor="{StaticResource complement}" FontFamily="LatoBold"
+                            FontSize="24"/>
+                        <Label Grid.Row="1" Grid.Column="1" Text="Operador" TextColor="{StaticResource complement}"/>
+                    </Grid>
+                </Frame>
+
+                <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="{StaticResource base}"
+                    BorderColor="Transparent" CornerRadius="20" Padding="0">
+                    <Grid ColumnSpacing="5" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  Margin="10" Padding="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Frame Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" BackgroundColor="White"
+                            HeightRequest="40" WidthRequest="40" CornerRadius="20" BorderColor="Transparent">
+                        </Frame>
+                        <Image Margin="5" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Source="money.svg"></Image>
+                        <HorizontalStackLayout Grid.Row="0" Grid.Column="1">
+                            <Label  Text="{Binding Status}" TextColor="{StaticResource complement}" FontFamily="LatoBold" FontSize="18"/>
+                            <!--<Label  Text="MXN" TextColor="{StaticResource complement}" FontFamily="LatoBold" FontSize="18"/>-->
+                        </HorizontalStackLayout>
+                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Ingreso}" TextColor="{StaticResource complement}"/>
+                    </Grid>
+                </Frame>
+            </Grid>
+        </StackLayout>
+        <Grid IsVisible="{Binding Existcar}" Grid.Row="3" VerticalOptions="FillAndExpand" Padding="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4.*" />
+                <ColumnDefinition Width="6.*" />
+            </Grid.ColumnDefinitions>
+                        
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".2*" />
+                <RowDefinition Height=".1*" />
+                <RowDefinition Height=".7*" />
+            </Grid.RowDefinitions>
+
+            <VerticalStackLayout VerticalOptions="FillAndExpand">
+            </VerticalStackLayout>
+
+            <Frame Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" BackgroundColor="{StaticResource base}" BorderColor="Transparent" CornerRadius="20" Padding="0" VerticalOptions="StartAndExpand">
+                <Grid Margin="20,40,20,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="0"
+                            Style="{StaticResource TagLabel}"
+                            Text="N° Serie"
+                               TextColor="white"
+                            HorizontalOptions="StartAndExpand"/>
+
+                    <Label Grid.Column="1" Grid.Row="0"
+                            Style="{StaticResource TagLabelR}"
+                            Text="{Binding Car.No_Serie}" 
+                               TextColor="white"
+                            HorizontalOptions="EndAndExpand"/>
+
+                    <Label Grid.Column="0" Grid.Row="1"
+                            Style="{StaticResource TagLabel}"
+                            Text="Motor"  
+                               TextColor="white"
+                            HorizontalOptions="StartAndExpand"/>
+
+                    <Label Grid.Column="1" Grid.Row="1"
+                            Style="{StaticResource TagLabelR}"
+                            Text="{Binding Car.Motor}"
+                               TextColor="white"
+                            HorizontalOptions="EndAndExpand"/>
+
+                    <Label Grid.Column="0" Grid.Row="2"
+                            Style="{StaticResource TagLabel}"
+                            Text="Póliza"  
+                               TextColor="white"
+                            HorizontalOptions="StartAndExpand"/>
+
+                    <Label Grid.Column="1" Grid.Row="2"
+                            Style="{StaticResource TagLabelR}"
+                            Text="{Binding Car.poliza}" 
+                               TextColor="white"
+                            HorizontalOptions="EndAndExpand"/>
+
+                    <Label Grid.Column="0" Grid.Row="3"
+                            Style="{StaticResource TagLabel}"
+                            Text="Aseguradora"  
+                               TextColor="white"
+                            HorizontalOptions="StartAndExpand"/>
+
+                    <Label Grid.Column="1" Grid.Row="3"
+                            Style="{StaticResource TagLabelR}"
+                            Text="{Binding Car.aseguradora}"  
+                               TextColor="white"
+                            HorizontalOptions="EndAndExpand"/>
+
+
+                    <Label Grid.Column="0" Grid.Row="4"
+                            Style="{StaticResource TagLabel}"
+                            Text="Vence" 
+                               TextColor="white"
+                            HorizontalOptions="StartAndExpand"/>
+
+                    <Label Grid.Column="1" Grid.Row="4"
+                            Style="{StaticResource TagLabelR}"
+                            Text="{Binding Car.vencepoliza}"
+                               TextColor="white"
+                            HorizontalOptions="EndAndExpand"/>
+                </Grid>
+            </Frame>
+            <Image Grid.Column="1" Grid.ColumnSpan="2" Margin="5" Grid.Row="0" Grid.RowSpan="2" Source="taxiimg.png">
+                <Image.Shadow>
+                    <Shadow Brush="Black"
+                            Offset="10,10"
+                            Radius="20"
+                            Opacity="0.8" />
+
+                </Image.Shadow>
+            </Image>
+            <Frame Margin="5"
+                   Padding="0"
+                   Grid.Row="0" Grid.Column="0" 
+                   BackgroundColor="Black" 
+                   BorderColor="Transparent" 
+                   CornerRadius="20" 
+                   HorizontalOptions="FillAndExpand" >
+                <Label 
+                    FontAttributes="Bold"
+                    FontFamily="LatoBlack"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Grid.Row="1" 
+                    Grid.Column="1" 
+                    Text="{Binding Data.Card.taxi}" 
+                    FontSize="26"
+                    TextColor="{StaticResource complement}"/>
+
+            </Frame>
+        </Grid>
+
+        <Grid IsVisible="{Binding Existcar, Converter={Converter:InverseBoolConverter}}" Grid.Row="3" VerticalOptions="FillAndExpand" Padding="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".4*"></RowDefinition>
+                <RowDefinition Height=".1*"></RowDefinition>
+                <RowDefinition Height=".5*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="1" Grid.RowSpan="2" VerticalOptions="Start">
+                <Frame Margin="15" BackgroundColor="{StaticResource alert}"
+                       CornerRadius="10"
+                       Padding="10"
+                       HasShadow="True"
+                       BorderColor="Transparent">
+                    <HorizontalStackLayout HorizontalOptions="CenterAndExpand"
+                                           HeightRequest="50"
+                                           VerticalOptions="CenterAndExpand"
+                        Margin="0,0,0,0">
+                        <Label Style="{StaticResource TitleLabel}" VerticalOptions="CenterAndExpand" TextColor="{StaticResource btntexgcolor}" HorizontalOptions="CenterAndExpand" Text="Eco. "></Label>
+                        <Label Style="{StaticResource TitleLabel}" VerticalOptions="CenterAndExpand" TextColor="{StaticResource btntexgcolor}" HorizontalOptions="CenterAndExpand" Text="{Binding Data.Card.taxi}"></Label>
+                        <Label Style="{StaticResource TitleLabel}" VerticalOptions="CenterAndExpand" TextColor="{StaticResource btntexgcolor}" HorizontalOptions="CenterAndExpand" Text="DADO DE BAJA"></Label>
+                    </HorizontalStackLayout>
+                </Frame>
+            </Grid>
+            <Grid Grid.Row="0" Grid.RowSpan="2">
+                <Image
+                       VerticalOptions="EndAndExpand"
+                       Source="taxiblancoalert.png"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

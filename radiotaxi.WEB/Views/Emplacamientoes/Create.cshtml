@@ -1,0 +1,397 @@
+﻿@model radiotaxi.Model.Emplacamiento
+
+@{
+    ViewBag.Title = "Emplacar " + @ViewBag.soc.partnerReference;
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0"><i class="bx bx-car"></i> Emplacamiento</h4>
+            </div>
+            <div class="card-body">
+                <form id="" class="formjs" v-on:submit="onSubmit" action="/emplacamiento/enviar" method="POST" enctype="multipart/form-data">
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+
+                        <div class="form-group row">
+                            <div class="d-flex justify-content-between">
+                                <div class="col-md-3">
+                                    <label for="No_Economico">Eco:</label>
+                                    <input v-validate="'required'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('No_Economico')}" id="No_Economico" name="No_Economico" value="@(ViewBag.soc.partnerReference != null ? ViewBag.soc.partnerReference : "")" @(Permissions.allow("Admin") ? " " : " readonly " )>
+                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                    <span class="text-danger" v-show="this.errors.has('No_Economico')">{{ this.errors.first('No_Economico') }}</span>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label for="Status" class="control-label col-md-6">Estatus</label>
+                                    <select id="Status" name="Status" class="form-control" v-validate="'required'" v-bind:class="{ 'border-danger' : this.errors.has('Status')}">
+                                        <option value="ALTA" selected>Alta</option>
+                                        <option value="BAJA">Baja</option>
+                                    </select>
+                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                    <span class="text-danger" v-show="this.errors.has('Status')">{{ this.errors.first('Status') }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label for="Nombre">Nombres</label>
+                                <input v-validate="'required'" type="text" class="form-control text-uppercase" id="Nombre"
+                                       name="Nombre" placeholder="Ingrese el nombre del operador" v-bind:class="{ 'border-danger' : this.errors.has('Status')}"
+                                       value="@(ViewBag.soc.firstName != null ? ViewBag.soc.firstName : "")" @(Permissions.allow("Admin") ? " " : " readonly " )>
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Nombre')">{{ this.errors.first('Nombre') }}</span>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="Paterno">Apellido Paterno</label>
+                                <input v-validate="'required'" type="text" class="form-control text-uppercase" id="Paterno"
+                                       name="Paterno" placeholder=""
+                                       value="@(ViewBag.soc.lastNameF != null ? ViewBag.soc.lastNameF : "")" @(Permissions.allow("Admin") ? " " : " readonly " ) v-bind:class="{ 'border-danger' : this.errors.has('Paterno')}">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Paterno')">{{ this.errors.first('Paterno') }}</span>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="Materno">Apellido Materno</label>
+                                <input v-validate="'required'" type="text" class="form-control text-uppercase" id="Materno"
+                                       name="Materno" placeholder=""
+                                       value="@(ViewBag.soc.lastNameM != null ? ViewBag.soc.lastNameM : "")" @(Permissions.allow("Admin") ? " " : " readonly " ) v-bind:class="{ 'border-danger' : this.errors.has('Materno')}">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Materno')">{{ this.errors.first('Materno') }}</span>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <label for="Id_Op" class="control-label col-md-6">Movimiento</label>
+                                <select id="Id_Mov" name="Id_Mov" class="form-control" v-validate="'required'" v-bind:class="{ 'border-danger' : this.errors.has('Id_Mov')}">
+                                    <option value="0">N/A</option>
+                                    @foreach (radiotaxi.Model.EmplaMovimiento movimiento in ((List<radiotaxi.Model.EmplaMovimiento>)ViewBag.movimientos).Where(x => x.Tipo_Mov == "A"))
+                                    {
+                                        <option value="@(movimiento.Id_Mov)">@(movimiento.Movimiento)</option>
+                                    }
+                                </select>
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Id_Op')">{{ this.errors.first('Id_Op') }}</span>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="form-group row">
+                            <div class="col-md-5">
+                                <label for="Id_Marca" class="control-label col-md-2">Marca</label>
+                                <select v-on:change="onSeach($event)" id="Id_Marca" name="Id_Marca" class="form-control" v-validate="'required'" v-bind:class="{ 'border-danger' : this.errors.has('Id_Marca')}">
+                                    <option value="0">N/A</option>
+                                    @foreach (radiotaxi.Model.EmplaMarca marca in ViewBag.marcas)
+                                    {
+                                        <option value="@(marca.Id_Marca)">@(marca.Marca)</option>
+                                    }
+                                </select>
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Id_Marca')">{{ this.errors.first('Id_Marca') }}</span>
+                            </div>
+
+                            <div class="col-md-5">
+                                <label for="Id_Modelo" class="control-label col-md-2">Modelo</label>
+                                <select id="Id_Modelo" name="Id_Modelo" class="form-control" v-validate="'required'" v-bind:class="{ 'border-danger' : this.errors.has('Id_Modelo')}">
+                                    <option value="0">N/A</option>
+                                    @foreach (radiotaxi.Model.EmplaModelo modelo in ViewBag.modelos)
+                                    {
+                                        <option value="@(modelo.Id_Modelo)">@(modelo.Modelo)</option>
+                                    }
+                                </select>
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Id_Modelo')">{{ this.errors.first('Id_Modelo') }}</span>
+                            </div>
+
+                            <div class="col-md-2">
+                                <label for="AutoAno">Año del auto</label>
+                                <input v-validate="'required|integer|min:4|max:4'" type="number" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('AutoAno')}" id="AutoAno" name="AutoAno">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('AutoAno')">{{ this.errors.first('AutoAno') }}</span>
+                            </div>
+                            @*
+                @Html.Label("AutoAno", "Año del auto", new { @class = "control-label col-md-6" })
+                @Html.LabelFor(model => model.AutoAno, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.AutoAno, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AutoAno, "", new { @class = "text-danger" })
+                            *@
+                        </div>
+
+                        <br />
+
+                        <div class="form-group row">
+                            <div class="col-md-2">
+
+                                <label for="Motor">Motor</label>
+                                <input v-validate="'required'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('Motor')}" id="Motor" name="Motor">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Motor')">{{ this.errors.first('Motor') }}</span>
+                                @*
+                    @Html.LabelFor(model => model.Motor, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.EditorFor(model => model.Motor, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Motor, "", new { @class = "text-danger" })
+                                *@
+                            </div>
+
+                            <div class="col-md-2">
+
+                                <label for="No_Serie">N° de Serie (VIN)</label>
+                                <input v-validate="'required|vin'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('No_Serie')}" id="No_Serie" name="No_Serie">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('No_Serie')">{{ this.errors.first('No_Serie') }}</span>
+                                @*
+                    @Html.Label("No_Serie", "N° de Serie (VIN)", new { @class = "control-label col-md-6" })
+
+                    @Html.LabelFor(model => model.No_Serie, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.EditorFor(model => model.No_Serie, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.No_Serie, "", new { @class = "text-danger" })
+                                *@
+                            </div>
+
+                            <div class="col-md-2">
+
+                                <label for="Placas">Placas</label>
+                                <input v-validate="'required'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('Placas')}" id="No_Serie" name="Placas">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Placas')">{{ this.errors.first('Placas') }}</span>
+
+                                @*
+                    @Html.LabelFor(model => model.Placas, htmlAttributes: new { @class = "control-label col-md-6" })
+                    @Html.EditorFor(model => model.Placas, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Placas, "", new { @class = "text-danger" })
+                                *@
+                            </div>
+
+                            <div class="col-md-2">
+
+                                <label for="Capacidad">Capacidad</label>
+                                <input v-validate="'required|integer'" type="number" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('Capacidad')}" id="Capacidad" name="Capacidad">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Capacidad')">{{ this.errors.first('Capacidad') }}</span>
+                                @*
+                    @Html.LabelFor(model => model.Capacidad, htmlAttributes: new { @class = "control-label col-md-6" })
+                    @Html.EditorFor(model => model.Capacidad, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Capacidad, "", new { @class = "text-danger" })
+                                *@
+                            </div>
+
+                            <div class="col-md-2">
+
+                                <div class="form-check form-check mb-3">
+                                    <label class="control-label" for="Bloqueado">
+                                        Bloqueado
+                                    </label>
+                                    <div>
+                                        <!-- Campo oculto por defecto (valor cuando NO está marcado) -->
+                                        <input type="hidden" name="Bloqueado" value="false">
+                                        <!-- Checkbox (valor cuando SÍ está marcado) -->
+                                        <input type="checkbox" id="Bloqueado" name="Bloqueado" value="true">
+                                    </div>
+
+                                    @*<small id="emailHelp" class="form-text text-muted"></small>
+                        <span class="text-danger" v-show="this.errors.has('Bloqueado')">{{ this.errors.first('Bloqueado') }}</span>*@
+                                </div>
+                                @*
+                    @Html.LabelFor(model => model.Bloqueado, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Bloqueado)
+                        @Html.ValidationMessageFor(model => model.Bloqueado, "", new { @class = "text-danger" })
+                    </div>
+                                *@
+                            </div>
+
+                            <div class="col-md-2">
+
+                                <div class="form-check form-check mb-3">
+                                    <label class="control-label" for="Protegido">
+                                        Protegido
+                                    </label>
+                                    <div>
+                                        <!-- Valor por defecto si el checkbox NO está marcado -->
+                                        <input type="hidden" name="Protegido" value="false">
+                                        <!-- Checkbox que sobreescribirá el valor si está marcado -->
+                                        <input type="checkbox" id="Protegido" name="Protegido" value="true">
+                                    </div>
+
+                                    @*<small id="emailHelp" class="form-text text-muted"></small>
+                        <span class="text-danger" v-show="this.errors.has('Bloqueado')">{{ this.errors.first('Bloqueado') }}</span>*@
+                                </div>
+                                @*
+                    @Html.LabelFor(model => model.Protegido, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="checkbox">
+                        <input type="checkbox" name="Protegido" value="true" @(Model != null && Model.Protegido == true ? "checked" : "") />
+                        <input type="hidden" name="Protegido" value="false" />
+                        @Html.ValidationMessageFor(model => model.Protegido, "", new { @class = "text-danger" })
+                    </div>*@
+                            </div>
+                        </div>
+
+                        <hr />
+                        <br />
+
+                        <div class="form-group row">
+                            <div class="col-md-2">
+                                <label for="EconoResp">N° Eco del responsable</label>
+                                <input v-validate="'required'" v-on:change="onUser($event)" type="text" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('EconoResp')}" id="EconoResp" name="EconoResp">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('EconoResp')">{{ this.errors.first('EconoResp') }}</span>
+                                
+                                @*
+                    @Html.Label("EconoResp", "N° Eco del responsable", new { @class = "control-label col-md-12" })
+                    @Html.LabelFor(model => model.EconoResp, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.EditorFor(model => model.EconoResp, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EconoResp, "", new { @class = "text-danger" })
+                                *@
+                            </div>
+
+                            <div class="col-md-4">
+
+                                <label for="Responsable">Nombre del responsable</label>
+                                <input v-validate="'required'" type="text" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('Responsable')}" id="Responsable" name="Responsable" readonly>
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Responsable')">{{ this.errors.first('Responsable') }}</span>
+                                @*
+        @Html.Label("Responsable", "Nombre del responsable", new { @class = "control-label col-md-6" })
+        @Html.LabelFor(model => model.Responsable, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.Responsable, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Responsable, "", new { @class = "text-danger" })
+                                *@
+                            </div>
+
+                            <div class="col-md-3">
+
+                                <label for="resp_telefono">Teléfono del responsable</label>
+                                <input v-on:input="setAndFilter($event)" v-validate="{ required: true, regex: /\(\d\d\d\)\s+\d\d\d\s+\d\d\d\d/i }" type="tel" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('resp_telefono')}" id="resp_telefono" name="resp_telefono" placeholder="Ingrese el número de teléfono" />
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('resp_telefono')">{{ this.errors.first('resp_telefono') }}</span>
+
+                                @*
+                    @Html.Label("resp_telefono", "Teléfono del responsable", new { @class = "control-label col-md-6" })
+                    @Html.LabelFor(model => model.resp_telefono, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.EditorFor(model => model.resp_telefono, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.resp_telefono, "", new { @class = "text-danger" })
+                                *@
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="resp_celular">Celular del responsable</label>
+                                <input v-on:input="setAndFilter($event)" v-validate="{ required: true, regex: /\(\d\d\d\)\s+\d\d\d\s+\d\d\d\d/i }" type="tel" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('resp_celular')}" id="resp_celular" name="resp_celular" placeholder="Ingrese el número de celular" />
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('resp_celular')">{{ this.errors.first('resp_celular') }}</span>
+
+                                @*
+                    @Html.Label("resp_celular", "Celular del responsable", new { @class = "control-label col-md-6" })
+                    @Html.LabelFor(model => model.resp_celular, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.EditorFor(model => model.resp_celular, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.resp_celular, "", new { @class = "text-danger" })
+                                *@
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <label for="poliza">Poliza</label>
+                                <input v-validate="'required'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('poliza')}" id="poliza" name="poliza">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('poliza')">{{ this.errors.first('poliza') }}</span>
+                                @*
+                    @Html.Label("poliza", "Poliza", new { @class = "control-label col-md-6" })
+                    @Html.LabelFor(model => model.poliza, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.EditorFor(model => model.poliza, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.poliza, "", new { @class = "text-danger" })
+                                *@
+                            </div>
+
+                            <div class="col-md-3">
+
+                                <label for="tipopoliza">Tipo de poliza</label>
+                                <input v-validate="'required'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('tipopoliza')}" id="tipopoliza" name="tipopoliza">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('tipopoliza')">{{ this.errors.first('tipopoliza') }}</span>
+
+                                @*
+                    @Html.Label("tipopoliza", "Tipo de poliza", new { @class = "control-label col-md-6" })
+                    @Html.LabelFor(model => model.tipopoliza, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.EditorFor(model => model.tipopoliza, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.tipopoliza, "", new { @class = "text-danger" })
+                                *@
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="aseguradora" class="control-label col-md-6">Aseguradora</label>
+                                <select v-validate="'required'" v-bind:class="{ 'border-danger' : this.errors.has('aseguradora')}" id="aseguradora" name="aseguradora" class="form-control">
+                                    <option value="0">N/A</option>
+                                    @foreach (radiotaxi.Model.AseguradorasEmpla asegura in ViewBag.aseguradoras)
+                                    {
+                                        <option value="@(asegura.aseguradora)">@(asegura.aseguradora)</option>
+                                    }
+                                </select>
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('aseguradora')">{{ this.errors.first('aseguradora') }}</span>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="vencepoliza" class="form-label col-md-8">Fecha de vencimiento de poliza</label>
+                                <input v-validate="'required'" v-bind:class="{ 'border-danger' : this.errors.has('vencepoliza')}" class="form-control" type="date" value="" id="vencepoliza" name="vencepoliza">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('vencepoliza')">{{ this.errors.first('vencepoliza') }}</span>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
+
+                                <label for="Observaciones">Observaciones</label>
+                                <input v-validate="'required'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('Observaciones')}" id="Observaciones" name="Observaciones">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Observaciones')">{{ this.errors.first('Observaciones') }}</span>
+
+                                @*
+                    @Html.LabelFor(model => model.Observaciones, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.EditorFor(model => model.Observaciones, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Observaciones, "", new { @class = "text-danger" })
+                                *@
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="form-group row d-flex justify-content-between">
+                            <div class="col-md-2 align-content-start">
+                                <a href="/emplacamiento/detalle/@(ViewBag.soc.partnerReference)" class="btn btn-danger">
+                                    <i class=""></i> Cancelar
+                                </a>
+                            </div>
+
+                            <div class="col-md-2 d-flex  justify-content-end">
+                                <input type="submit" value="Guardar" class="btn btn-success" id="SendForm" />
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+
+@section Scripts {
+    <script src="~/Content/js/Views/Emplacamiento/Create.js"></script>
+}

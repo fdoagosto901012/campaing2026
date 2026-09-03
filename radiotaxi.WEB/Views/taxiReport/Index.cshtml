@@ -1,0 +1,203 @@
+﻿@model PagedList.IPagedList<radiotaxi.Model.report>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="content-header">
+    <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="/Search/" class="tip-bottom">Búsqueda</a> </div>
+    <h1>Búsqueda de Reportes</h1>
+</div>
+<div class="container-fluid">
+    <hr>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"> <i class="icon-align-justify"></i> </span>
+                    <h5>Datos de busqueda</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    @using (Html.BeginForm("Index", "taxiReport", FormMethod.Get, new { @class = "form-horizontal", id = "reportForm" }))
+                    {
+                        <div class="control-group">
+                            <label class="control-label">Número telefónico :</label>
+                            <div class="controls">
+                                <!--<input type="text" name="phoneNumber" id="phoneNumber" class="span11" placeholder="Número telefónico" value="@ViewBag.phoneNumberValue"/>-->
+                                @Html.TextBox("phone", ViewBag.phoneValue as string)
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Nombre del creador</label>
+                            <div class="controls">
+                                <!--<input type="text" name="rtNumber" id="rtNumber" class="span11" placeholder="Número radio taxi" value="@ViewBag.rtNumberValue" />-->
+                                @Html.TextBox("createdBy", ViewBag.createdByValue as string)
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Fecha</label>
+                            <div class="controls">
+                                <div id="datetimepicker2" class="input-append">
+                                    <!-- <input type="text" name="datePickUp" id="datePickUp" class="span11" placeholder="Fecha del servicio" value="@ViewBag.datePickUpValue" />-->
+                                    @Html.TextBox("dateCreated", ViewBag.dateCreatedValue as string)
+                                    <span class="add-on timepickerCalendar">
+                                        <i class="icon-calendar"></i>
+                                    </span>
+
+                                </div>
+                                <button type="button" id="reset-date" class="icon-remove-circle"></button>
+
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Número de filas</label>
+                            <div class="controls">
+                                <!--<input type="text" name="phoneNumber" id="phoneNumber" class="span11" placeholder="Número telefónico" value="@ViewBag.phoneNumberValue"/>-->
+                                @Html.TextBox("size", ViewBag.sizeValue as string)
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" name="searchd" id="searchd" value="Buscar" class="btn btn-success">Buscar</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-th"></i></span>
+                    <h5>Reportes de Radio Taxi</h5>
+                </div>
+                <div id="dvSearchReportsResult" class="widget-content nopadding">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Nombre del Reportado
+                                </th>
+                                <th>
+                                    Teléfono
+                                </th>
+                                <th>
+                                    dirección
+                                </th>
+                                <th>
+                                    Descripción
+                                </th>
+                                <th>
+                                    Fecha de Creación
+                                </th>
+                                <th>
+                                    Creado Por
+                                </th>
+                                <th>
+                                    Fecha de Edición
+                                </th>
+                                <th>
+                                    Editado Por
+                                </th>
+                                <th>
+                                    Taxi(s) Involucrado(s)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.phone)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.address)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.description)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.dateCreated)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.createdBy)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.dateEdited)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.editedBy)
+                                    </td>
+                                    <td>
+                                        @{
+                                string numeros = "*";
+                                if (item.taxiReports.Count > 0)
+                                {
+                                    foreach (var rtItem in item.taxiReports)
+                                    {
+                                        numeros = rtItem.taxiNumber + ", " + numeros;
+                                    }
+                                    numeros = numeros.Replace(", *", "");
+                                    @Html.Raw(numeros);
+                                }
+                                else
+                                {
+                                    @Html.Raw("");
+                                }
+                                        }
+                                    </td>
+                                    <td>
+                                        <a href="/taxiReport/Edit/@item.id" class="btn btn-mini btn-primary"><i class="icon icon-edit"></i></a>
+                                        <a href="/taxiReport/Details/@item.id" class="btn btn-mini btn-primary"><i class="icon icon-cog"></i></a>
+                                        <a href="/taxiReport/GenerateReport/@item.id" class=" btn btn-mini btn-primary"><i class="icon icon-print"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+                                                new { page, phone = ViewBag.phoneValue, createdBy = ViewBag.createdByValue, dateCreated = ViewBag.dateCreatedValue, size = ViewBag.sizeValue }))
+        </div>
+        <!--End-Chart-box-->
+        <hr />
+    </div>
+    <!--<div class="row-fluid">
+        <div class="span12" id="dvSearchServicesResult">
+        </div>
+    </div>-->
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/formBundle")
+    <script>
+        //$('.textarea_editor').wysihtml5();
+        var time = $('.timepicker').wickedpicker({ twentyFour: true });
+        $("#datePickUp").datepicker({ format: 'dd-mm-yyyy', });
+
+        $(document).on('click', ".wickedpicker__close", function () {
+            var split = $("#datePickUp").val().split(" ");
+            $("#datePickUp").val(split[0]);
+            $("#datePickUp").val($("#datePickUp").val() + " " + $(".wickedpicker__controls__control--hours").text());
+            $("#datePickUp").val($("#datePickUp").val() + ":" + $(".wickedpicker__controls__control--minutes").text());
+            //alert("cancel wicked");
+        });
+
+
+        $(document).on('click', "#reset-date", function () {
+            $('#datePickUp').val("");
+        });
+
+    </script>
+}

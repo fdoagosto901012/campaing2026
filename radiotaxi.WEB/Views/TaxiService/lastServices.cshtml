@@ -1,0 +1,18 @@
+﻿@model IEnumerable<radiotaxi.Model.taxiService>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.startPoint)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td data-origin="@Html.DisplayFor(modelItem => item.startPoint)" class="addressSource address">
+            @Html.DisplayFor(modelItem => item.startPoint)
+        </td>
+    </tr>
+}
+
+</table>

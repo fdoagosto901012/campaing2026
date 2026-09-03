@@ -1,0 +1,1 @@
+$(document).ready(function () { $(".datatable").DataTable({ responsive: !1, ordering: false, searching: false, paging: false, autoWidth: true, info: false }),$(".dataTables_length select").addClass("form-select form-select-sm")});

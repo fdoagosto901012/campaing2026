@@ -1,0 +1,223 @@
+﻿@{
+    ViewBag.Title = "Crear tarifas";
+}
+
+<div class="container-fluid">
+
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <div>
+            <h4 class="mb-1">Tarifas de cupones</h4>
+            <p class="text-muted mb-0">
+                Administra las tarifas asignadas a hoteles y clientes.
+            </p>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="d-flex align-items-center">
+                <i class="ri ri-money-dollar-circle-line me-2 text-primary"></i>
+                <h5 class="mb-0">Crear nueva tarifa</h5>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <form v-on:submit.prevent="saveRate($event)">
+
+                <div class="row g-3 align-items-end">
+
+                    <div class="col-12 col-md-4">
+                        <label class="form-label fw-medium">
+                            Hotel / Cliente
+                        </label>
+
+                        <select class="form-select"
+                                v-model="hotel">
+                            <option value="" disabled>
+                                Selecciona un hotel o cliente
+                            </option>
+
+                            <option v-for="item in data.hotels"
+                                    :key="item.HotelID"
+                                    :value="item">
+                                {{ item.Name }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-12 col-md-3">
+                        <label class="form-label fw-medium">
+                            Tipo de tarifa
+                        </label>
+
+                        <select class="form-select"
+                                v-model="Cupontype">
+                            <option value="" disabled>
+                                Selecciona un tipo
+                            </option>
+
+                            <option v-for="item in data.Cupontypes"
+                                    :key="item.CupontypeID"
+                                    :value="item">
+                                {{ item.Name }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-12 col-md-3">
+                        <label class="form-label fw-medium">
+                            Valor / Costo
+                        </label>
+
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                $
+                            </span>
+
+                            <input type="number"
+                                   class="form-control"
+                                   v-model.number="value"
+                                   min="0"
+                                   step="0.01"
+                                   placeholder="0.00" />
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-2">
+                        <button type="submit"
+                                class="btn btn-primary w-100"
+                                :disabled="savingRate">
+
+                            <span v-if="savingRate"
+                                  class="spinner-border spinner-border-sm me-1">
+                            </span>
+
+                            <i v-else class="ri ri-add-line me-1"></i>
+
+                            {{ savingRate ? 'Creando...' : 'Crear' }}
+                        </button>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header border-bottom">
+            <div class="d-flex align-items-center justify-content-between">
+                <div>
+                    <h5 class="mb-1">Tarifas registradas</h5>
+                    <small class="text-muted">
+                        Listado de tarifas asignadas a hoteles y clientes
+                    </small>
+                </div>
+
+                <span class="badge bg-label-primary">
+                    {{ grouscupons ? grouscupons.length : 0 }} registros
+                </span>
+            </div>
+        </div>
+
+        <div class="card-body p-0">
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th style="width: 30%;">Empresa / Hotel</th>
+                            <th style="width: 20%;">Tipo</th>
+                            <th class="text-end" style="width: 15%;">Valor</th>
+                            <th style="width: 20%;">Fecha de creación</th>
+                            <th class="text-center" style="width: 15%;">Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr v-for="item in grouscupons"
+                            :key="item.id">
+
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar avatar-sm me-3">
+                                        <span class="avatar-initial rounded bg-label-primary">
+                                            <i class="ri ri-hotel-line"></i>
+                                        </span>
+                                    </div>
+
+                                    <div>
+                                        <div class="fw-semibold text-dark">
+                                            {{ item.cliente.Name }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <span class="badge bg-label-info text-info px-3 py-2">
+                                    {{ item.tipo.Name }}
+                                </span>
+                            </td>
+
+                            <td class="text-end">
+                                <span class="fw-semibold text-dark">
+                                    {{ formatoMoneda(item.valor) }}
+                                </span>
+                            </td>
+
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <i class="ri ri-calendar-line me-2 text-muted"></i>
+                                    <span>
+                                        {{ item.fechaCreacion || 'Sin fecha' }}
+                                    </span>
+                                </div>
+                            </td>
+
+                            <td class="text-center">
+
+                                <div class="btn-group shadow-sm">
+
+                                    <button type="button"
+                                            class="btn btn-danger"
+                                            v-on:click="remove($event, item)">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+
+                                    <button type="button"
+                                            class="btn btn-danger"
+                                            v-on:click="remove($event, item)">
+                                        Borrar
+                                    </button>
+
+                                </div>
+
+                            </td>
+                        </tr>
+
+                        <tr v-if="!grouscupons || grouscupons.length === 0">
+                            <td colspan="5"
+                                class="text-center py-5">
+
+                                <i class="ri ri-inbox-line fs-1 text-muted d-block mb-2"></i>
+
+                                <span class="text-muted">
+                                    No hay tarifas registradas.
+                                </span>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script src="~/Content/js/Views/Coupons/createrate.js"></script>
+}

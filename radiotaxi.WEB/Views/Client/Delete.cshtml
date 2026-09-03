@@ -1,0 +1,113 @@
+﻿@model radiotaxi.Model.client
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>client</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastname1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastname1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastname2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastname2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateUpdated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateUpdated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isBlocked)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isBlocked)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.blockedReason)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.blockedReason)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.createdBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.createdBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.editedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.editedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,168 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">Usuario / Accesos</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Inicio</a></li>
+                    <li class="breadcrumb-item">usuario/Accesos</li>
+                    <li class="breadcrumb-item active">Crear usuario</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div id="content" class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Registro de contraseña para</h4>
+                        <p class="card-category">Contraseña para entrar a plataforma o app.</p>
+                    </div>
+
+                    <div class="card-body">
+                        @if (false)
+                        {
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="alert alert-success">
+                                        <h3>El usuario ya cuenta con contraseña</h3>
+                                        <p>Si desea cambiar la contraseña favor de comunicarse con el departamento de sistemas.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <form v-on:submit="submit($event)" action="/Users/Create" method="post" class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="Name">Nombre</label>
+                                        <input v-validate="'required'" type="text" class="form-control " v-bind:class="{ 'border-danger' : this.errors.has('firstName')}" id="Name" name="Name" aria-describedby="Name" placeholder="">
+                                        <small id="emailHelp" class="form-text text-muted"></small>
+                                        <span class="text-danger" v-show="this.errors.has('Name')">{{ this.errors.first('Name') }}</span>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="lastNameF">Apellido Paterno</label>
+                                        <input v-validate="'required'" type="text" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('lastNameF')}" id="lastNameF" name="lastNameF" aria-describedby="emailHelp" placeholder="">
+                                        <small id="emailHelp" class="form-text text-muted"></small>
+                                        <span class="text-danger" v-show="this.errors.has('lastNameF')">{{ this.errors.first('lastNameF') }}</span>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="lastNameM">Apellido Materno</label>
+                                        <input v-validate="'required'" type="text" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('lastNameM')}" id="lastNameM" name="lastNameM" aria-describedby="emailHelp" placeholder="">
+                                        <small id="emailHelp" class="form-text text-muted"></small>
+                                        <span class="text-danger" v-show="this.errors.has('lastNameM')">{{ this.errors.first('lastNameM') }}</span>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="Email">Dirección de correo / Usuario</label>
+                                        <input v-validate="'required'" type="text" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('Email')}" id="Email" name="Email" aria-describedby="emailHelp" placeholder="Ingresa un correo eletrónico o Usuario">
+                                        <small id="emailHelp" class="form-text text-muted"></small>
+                                        <span class="text-danger" v-show="this.errors.has('Email')">{{ this.errors.first('Email') }}</span>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="exampleInputEmail1">Dirección de correo / Usuario</label>
+                                        <input v-validate="'required'" type="text" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('Emailconfirm')}" id="Emailconfirm" name="Emailconfirm" aria-describedby="emailHelp" v-on:change="confirmEmail()" placeholder="Ingresa un correo eletrónico o Usuario ">
+                                        <small id="emailHelp" class="form-text text-muted"></small>
+                                        <span class=" Emailconfirm has-error text-danger" v-show="this.errors.has('Emailconfirm')">{{ this.errors.first('Emailconfirm') }}</span>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="Password">Contraseña</label>
+                                        <input v-validate="'required|min:4'" type="password" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('Password')}" id="Password" name="Password">
+
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <small id="emailHelp" class="form-text text-muted">La contraseña debe contener un mínimo de 4 caracteres.</small>
+                                            </li>
+                                            <li>
+                                                <span class="text-danger" v-show="this.errors.has('Password')">{{ this.errors.first('Password') }}</span>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="exampleInputPassword1">Confirmar Contraseña</label>
+                                        <input v-validate="'required|min:8'" type="password" v-on:change="confirmPassword()" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('Passwordconfirm')}" id="Passwordconfirm" name="Passwordconfirm">
+                                        <!--<span class="confirmPassword has-error text-danger" v-show="this.errors.has('Passwordconfirm')">{{ this.errors.first('Passwordconfirm') }}</span>-->
+                                        <span class="confirmPassword has-error text-danger"></span>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="roleID">Seleccionar role</label>
+                                        <select v-validate data-vv-rules="required" id="roleID" name="roleID" class="form-control">
+                                            <option selected disabled value=""> Selecciona un role</option>
+                                            @foreach (var role in ViewBag.roles)
+                                            {
+                                                <option value="@role.id">@role.name</option>
+                                            }
+                                        </select>
+                                        <span class="confirmPassword has-error text-danger"></span>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="ip">IP</label>
+                                        <input v-validate="'required'" type="text" class="form-control " v-bind:class="{ 'border-danger' : this.errors.has('IP')}" id="IP" name="IP" aria-describedby="IP" placeholder="" pattern="^([0-9]{1,3}\.){3}[0-9]{1,3}$">
+                                        <small id="emailHelp" class="form-text text-muted"></small>
+                                        <span class="text-danger" v-show="this.errors.has('IP')">{{ this.errors.first('IP') }}</span>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="PhoneNumber">Número Teléfonico</label>
+                                        <input v-validate="'required|numeric||min:10|max:10'" type="tel" class="form-control" v-bind:class="{ 'border-danger' : this.errors.has('PhoneNumber')}" id="PhoneNumber" name="PhoneNumber" aria-describedby="emailHelp" placeholder="Ingrese los 10 digítos del número teléfonico">
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <small id="emailHelp" class="form-text text-muted">El número de teléfono proporcionado sera usado para tener una comunicación mas rápida en caso de ser necesario.</small>
+                                            </li>
+                                            <li>
+                                                <span class="text-danger" v-show="this.errors.has('PhoneNumber')">{{ this.errors.first('PhoneNumber') }}</span>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+
+                                    <!--
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    -->
+                                    <button type="submit" class="btn btn-primary">Registrar</button>
+                                </form>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h4>Registro de usuario</h4>
+                                            <p>El registro de usuario permite iniciar sessión en las diferentes plataformas de inforamción del sindicato de Taxistas Andres Quintana Roo.</p>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div>
+                                                <label style="font-size: 20px; font-weight: bold;">Contraseña sugerida</label>
+                                                <div class="input input-ex-1">
+                                                    <input style="padding: 7px; font-size: 20px; font-weight: bold;" type="text" class="input-generator-pass">
+                                                    <button class="btn btn-success">Actualizar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Content/libs/generatePassword/generate-password.min.js"></script>
+    <script src="~/Content/js/Views/Users/Create.js"></script>
+}

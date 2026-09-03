@@ -1,0 +1,1124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props" Condition="Exists('..\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props')" />
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{26A06C45-E70D-4302-B285-87E19D43E85E}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>radiotaxi.WEB</RootNamespace>
+    <AssemblyName>radiotaxi.WEB</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK, Version=2.3.55.2, Culture=neutral, PublicKeyToken=9f476d3089b52be3, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.2.3.55.2\lib\net45\AWSSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="CrockfordBase32, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\crockford-base32-core.2.0.0\lib\netstandard2.0\CrockfordBase32.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=8.0.8.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.8.0.8\lib\net462\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus.Interfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=a694d7f3b0907a61, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.Interfaces.8.0.0\lib\net462\EPPlus.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=1.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.1.1.2\lib\net451\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.1.2\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.3.0.1\lib\netstandard2.0\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.160.1000.6\lib\net462\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.DocumentObjectModel-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\MigraDoc.DocumentObjectModel-gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\MigraDoc.Rendering-gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\MigraDoc.RtfRendering-gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\PdfSharp-gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\PdfSharp.Charting-gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="SharpIpp, Version=0.10.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpIpp.0.10.0\lib\netstandard2.0\SharpIpp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.1.2\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.Cryptography.Xml, Version=8.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Xml.8.0.2\lib\net462\System.Security.Cryptography.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing, Version=0.16.9.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.9\lib\net48\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.16.9.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.9\lib\net48\zxing.presentation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AgreementsController.cs" />
+    <Compile Include="Controllers\cardController.cs" />
+    <Compile Include="Controllers\credentialController.cs" />
+    <Compile Include="Controllers\CuponsController.cs" />
+    <Compile Include="Controllers\doctorsController.cs" />
+    <Compile Include="Controllers\emplacambioplacas_logController.cs" />
+    <Compile Include="Controllers\EmplacamientoController.cs" />
+    <Compile Include="Controllers\EmplacamientoesController.cs" />
+    <Compile Include="Controllers\EmplaMarcasController.cs" />
+    <Compile Include="Controllers\EmplaModeloesController.cs" />
+    <Compile Include="Controllers\EmplaRestriccionsController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\familymembersController.cs" />
+    <Compile Include="Controllers\fdiController.cs" />
+    <Compile Include="Controllers\financeController.cs" />
+    <Compile Include="Controllers\generalController.cs" />
+    <Compile Include="Controllers\GeolocalizationController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MedicalrecordsController.cs" />
+    <Compile Include="Controllers\PartnerController.cs" />
+    <Compile Include="Controllers\OperatorController.cs" />
+    <Compile Include="Controllers\SalesController.cs" />
+    <Compile Include="Controllers\SatController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\TurkeyController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\VisitsController.cs" />
+    <Compile Include="Controllers\webBaseController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\AmazonHelper.cs" />
+    <Compile Include="Helper\Crockbase32.cs" />
+    <Compile Include="Helper\Encrypt.cs" />
+    <Compile Include="Helper\FileUploader.cs" />
+    <Compile Include="Helper\FirstLevelContractResolver.cs" />
+    <Compile Include="Helper\PdfService.cs" />
+    <Compile Include="Helper\Permissions.cs" />
+    <Compile Include="Helper\RESTAuthorizeAttribute.cs" />
+    <Compile Include="Helper\SessionFilter.cs" />
+    <Compile Include="Helper\SMTPconnection.cs" />
+    <Compile Include="PartialStatusService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-fullcalendar.css" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-responsive.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap-wysihtml5.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\colorpicker.css" />
+    <Content Include="Content\css\app.min.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\DataTablesProd.css" />
+    <Content Include="Content\css\icons.min.css" />
+    <Content Include="Content\css\preloader.min.css" />
+    <Content Include="Content\css\PrintTicket.min.css" />
+    <Content Include="Content\css\simplebar.min.css" />
+    <Content Include="Content\datepicker.css" />
+    <Content Include="Content\daterangepicker.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\fonts\boxicons.html" />
+    <Content Include="Content\fonts\boxiconsd41d.svg" />
+    <Content Include="Content\fonts\dripicons-v2.svg" />
+    <Content Include="Content\fonts\fa-brands-400.html" />
+    <Content Include="Content\fonts\fa-brands-400.svg" />
+    <Content Include="Content\fonts\fa-regular-400.html" />
+    <Content Include="Content\fonts\fa-regular-400.svg" />
+    <Content Include="Content\fonts\fa-solid-900.html" />
+    <Content Include="Content\fonts\fa-solid-900.svg" />
+    <Content Include="Content\fonts\materialdesignicons-webfont1d2d.html" />
+    <Content Include="Content\fullcalendar.css" />
+    <Content Include="Content\fullcalendar.print.css" />
+    <Content Include="Content\fullcalendar.print.min.css" />
+    <Content Include="Content\images\AdministracionVerde.png" />
+    <Content Include="Content\images\Back.png" />
+    <Content Include="Content\images\background.png" />
+    <Content Include="Content\images\bg-1.jpg" />
+    <Content Include="Content\images\bg-2.jpg" />
+    <Content Include="Content\images\bg-3.jpg" />
+    <Content Include="Content\images\brands\bitbucket.png" />
+    <Content Include="Content\images\brands\dribbble.png" />
+    <Content Include="Content\images\brands\dropbox.png" />
+    <Content Include="Content\images\brands\github.png" />
+    <Content Include="Content\images\brands\mail_chimp.png" />
+    <Content Include="Content\images\brands\slack.png" />
+    <Content Include="Content\images\cabecera-permisos.png" />
+    <Content Include="Content\images\Cupones\CuponMorado.png" />
+    <Content Include="Content\images\Cupones\CuponRojo.png" />
+    <Content Include="Content\images\Cupones\cuponv1.png" />
+    <Content Include="Content\images\Cupones\unlimitedMedia.jpg" />
+    <Content Include="Content\images\encabezado.png" />
+    <Content Include="Content\images\error-img.png" />
+    <Content Include="Content\images\favicon.ico" />
+    <Content Include="Content\images\flags\germany.jpg" />
+    <Content Include="Content\images\flags\italy.jpg" />
+    <Content Include="Content\images\flags\russia.jpg" />
+    <Content Include="Content\images\flags\spain.jpg" />
+    <Content Include="Content\images\flags\us.jpg" />
+    <Content Include="Content\images\Front.png" />
+    <Content Include="Content\images\FrontOP.png" />
+    <Content Include="Content\images\giftbox.png" />
+    <Content Include="Content\images\logo-sm.svg" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\pavos.png" />
+    <Content Include="Content\images\small\img-1.jpg" />
+    <Content Include="Content\images\small\img-2.jpg" />
+    <Content Include="Content\images\small\img-3.jpg" />
+    <Content Include="Content\images\small\img-4.jpg" />
+    <Content Include="Content\images\small\img-5.jpg" />
+    <Content Include="Content\images\small\img-6.jpg" />
+    <Content Include="Content\images\small\img-7.jpg" />
+    <Content Include="Content\images\tarjeton.png" />
+    <Content Include="Content\images\TC_LOGO.png" />
+    <Content Include="Content\images\TEST.png" />
+    <Content Include="Content\images\TEST2.png" />
+    <Content Include="Content\images\undraw-calendar.svg" />
+    <Content Include="Content\images\users\avatar-1.jpg" />
+    <Content Include="Content\images\users\avatar-10.jpg" />
+    <Content Include="Content\images\users\avatar-2.jpg" />
+    <Content Include="Content\images\users\avatar-3.jpg" />
+    <Content Include="Content\images\users\avatar-4.jpg" />
+    <Content Include="Content\images\users\avatar-5.jpg" />
+    <Content Include="Content\images\users\avatar-6.jpg" />
+    <Content Include="Content\images\users\avatar-8.jpg" />
+    <Content Include="Content\images\users\avatar-9.jpg" />
+    <Content Include="Content\images\users\empty.png" />
+    <Content Include="Content\jquery.easy-pie-chart.css" />
+    <Content Include="Content\jquery.gritter.css" />
+    <Content Include="Content\js\app.js" />
+    <Content Include="Content\js\DataTablesProd.js" />
+    <Content Include="Content\js\pages\alert.init.js" />
+    <Content Include="Content\js\pages\apexcharts.init.js" />
+    <Content Include="Content\js\pages\bootstrap-toasts.init.js" />
+    <Content Include="Content\js\pages\calendar.init.js" />
+    <Content Include="Content\js\pages\chartjs.init.js" />
+    <Content Include="Content\js\pages\coming-soon.init.js" />
+    <Content Include="Content\js\pages\dashboard.init.js" />
+    <Content Include="Content\js\pages\datatable-pages.init.js" />
+    <Content Include="Content\js\pages\datatables.init.js" />
+    <Content Include="Content\js\pages\echarts.init.js" />
+    <Content Include="Content\js\pages\email-editor.init.js" />
+    <Content Include="Content\js\pages\fontawesome.init.js" />
+    <Content Include="Content\js\pages\form-advanced.init.js" />
+    <Content Include="Content\js\pages\form-editor.init.js" />
+    <Content Include="Content\js\pages\form-mask.init.js" />
+    <Content Include="Content\js\pages\form-validation.init.js" />
+    <Content Include="Content\js\pages\form-wizard.init.js" />
+    <Content Include="Content\js\pages\gmaps.init.js" />
+    <Content Include="Content\js\pages\invoices-list.init.js" />
+    <Content Include="Content\js\pages\jquery-knob.init.js" />
+    <Content Include="Content\js\pages\leaflet-map.init.js" />
+    <Content Include="Content\js\pages\leaflet-us-states.js" />
+    <Content Include="Content\js\pages\lightbox.init.js" />
+    <Content Include="Content\js\pages\materialdesign.init.js" />
+    <Content Include="Content\js\pages\modal.init.js" />
+    <Content Include="Content\js\pages\notification.init.js" />
+    <Content Include="Content\js\pages\pass-addon.init.js" />
+    <Content Include="Content\js\pages\pristine.min.js" />
+    <Content Include="Content\js\pages\rangeslider.init.js" />
+    <Content Include="Content\js\pages\rating.init.js" />
+    <Content Include="Content\js\pages\session-timeout.init.js" />
+    <Content Include="Content\js\pages\SimpleBar.js" />
+    <Content Include="Content\js\pages\sparklines.init.js" />
+    <Content Include="Content\js\pages\sweetalert.init.js" />
+    <Content Include="Content\js\pages\table-editable.int.js" />
+    <Content Include="Content\js\pages\table-responsive.init.js" />
+    <Content Include="Content\js\pages\two-step-verification.init.js" />
+    <Content Include="Content\js\pages\validation.init.js" />
+    <Content Include="Content\js\pages\vector-maps.init.js" />
+    <Content Include="Content\js\Views\Agreements\agreements.js" />
+    <Content Include="Content\js\Views\Cards\Create.js" />
+    <Content Include="Content\js\Views\Cards\vee-validate-TEST.js" />
+    <Content Include="Content\js\Views\Coupons\createrate.js" />
+    <Content Include="Content\js\Views\Coupons\create.js" />
+    <Content Include="Content\js\Views\Coupons\edit.js" />
+    <Content Include="Content\js\Views\Coupons\impresion.js" />
+    <Content Include="Content\js\Views\Coupons\index.js" />
+    <Content Include="Content\js\Views\Coupons\PayCoupon.js" />
+    <Content Include="Content\js\Views\Emplacamiento\Create.js" />
+    <Content Include="Content\js\Views\Emplacamiento\details.js" />
+    <Content Include="Content\js\Views\Emplacamiento\edit.js" />
+    <Content Include="Content\js\Views\Emplacamiento\filter.js" />
+    <Content Include="Content\js\Views\Finance\families.js" />
+    <Content Include="Content\js\Views\Finance\fdi.js" />
+    <Content Include="Content\js\Views\Finance\main.js" />
+    <Content Include="Content\js\Views\geolocalization\map.js" />
+    <Content Include="Content\js\Views\Operator\bloqueos.js" />
+    <Content Include="Content\js\Views\Operator\correctivo.js" />
+    <Content Include="Content\js\Views\Operator\CreatePermits.js" />
+    <Content Include="Content\js\Views\Operator\Edit.js" />
+    <Content Include="Content\js\Views\Operator\Create.js" />
+    <Content Include="Content\js\Views\Operator\generate-password.js" />
+    <Content Include="Content\js\Views\Operator\GeneratePassword.js" />
+    <Content Include="Content\js\Views\Operator\identity.js" />
+    <Content Include="Content\js\Views\Operator\PermisoDetalle.js" />
+    <Content Include="Content\js\Views\Operator\permits.js" />
+    <Content Include="Content\js\Views\Operator\tarjeton.js" />
+    <Content Include="Content\js\Views\Operator\vee-validate-operador.js" />
+    <Content Include="Content\js\Views\Partner\100.js" />
+    <Content Include="Content\js\Views\Partner\bloqueos.js" />
+    <Content Include="Content\js\Views\Partner\cancelarCuotas.js" />
+    <Content Include="Content\js\Views\Partner\Create.js" />
+    <Content Include="Content\js\Views\Partner\edit.js" />
+    <Content Include="Content\js\Views\Partner\generate-password.js" />
+    <Content Include="Content\js\Views\Partner\GeneratePassword.js" />
+    <Content Include="Content\js\Views\Partner\tarjeton.js" />
+    <Content Include="Content\js\Views\Sales\box.js" />
+    <Content Include="Content\js\Views\Sat\edit.js" />
+    <Content Include="Content\js\Views\TaxiService\Create.js" />
+    <Content Include="Content\js\Views\TaxiService\VueCreate.js" />
+    <Content Include="Content\js\Views\Turkeys\ExternalCoupon.js" />
+    <Content Include="Content\js\Views\Turkeys\TurkeysCharts.js" />
+    <Content Include="Content\js\Views\Users\Create.js" />
+    <Content Include="Content\js\Views\Users\Edit.js" />
+    <Content Include="Content\js\Views\Users\generate-password.min.js" />
+    <Content Include="Content\libs\%40curiosityx\bootstrap-session-timeout\index.js" />
+    <Content Include="Content\libs\%40fullcalendar\bootstrap\main.min.css" />
+    <Content Include="Content\libs\%40fullcalendar\bootstrap\main.min.js" />
+    <Content Include="Content\libs\%40fullcalendar\core\main.min.css" />
+    <Content Include="Content\libs\%40fullcalendar\core\main.min.js" />
+    <Content Include="Content\libs\%40fullcalendar\daygrid\main.min.css" />
+    <Content Include="Content\libs\%40fullcalendar\daygrid\main.min.js" />
+    <Content Include="Content\libs\%40fullcalendar\interaction\main.min.js" />
+    <Content Include="Content\libs\%40fullcalendar\timegrid\main.min.css" />
+    <Content Include="Content\libs\%40fullcalendar\timegrid\main.min.js" />
+    <Content Include="Content\libs\%40simonwep\pickr\pickr.es5.min.js" />
+    <Content Include="Content\libs\%40simonwep\pickr\pickr.min.js" />
+    <Content Include="Content\libs\%40simonwep\pickr\themes\classic.min.css" />
+    <Content Include="Content\libs\%40simonwep\pickr\themes\monolith.min.css" />
+    <Content Include="Content\libs\%40simonwep\pickr\themes\nano.min.css" />
+    <Content Include="Content\libs\admin-resources\jquery.vectormap\jquery-jvectormap-1.2.2.css" />
+    <Content Include="Content\libs\admin-resources\jquery.vectormap\jquery-jvectormap-1.2.2.min.js" />
+    <Content Include="Content\libs\admin-resources\jquery.vectormap\maps\jquery-jvectormap-au-mill-en.js" />
+    <Content Include="Content\libs\admin-resources\jquery.vectormap\maps\jquery-jvectormap-ca-lcc-en.js" />
+    <Content Include="Content\libs\admin-resources\jquery.vectormap\maps\jquery-jvectormap-in-mill-en.js" />
+    <Content Include="Content\libs\admin-resources\jquery.vectormap\maps\jquery-jvectormap-uk-mill-en.js" />
+    <Content Include="Content\libs\admin-resources\jquery.vectormap\maps\jquery-jvectormap-us-il-chicago-mill-en.js" />
+    <Content Include="Content\libs\admin-resources\jquery.vectormap\maps\jquery-jvectormap-us-merc-en.js" />
+    <Content Include="Content\libs\admin-resources\jquery.vectormap\maps\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="Content\libs\admin-resources\rwd-table\rwd-table.min.css" />
+    <Content Include="Content\libs\admin-resources\rwd-table\rwd-table.min.js" />
+    <Content Include="Content\libs\apexcharts\apexcharts.min.js" />
+    <Content Include="Content\libs\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\libs\chart.js\chart.umd.js" />
+    <Content Include="Content\libs\choices.js\public\assets\scripts\choices.min.js" />
+    <Content Include="Content\libs\choices.js\public\assets\styles\choices.min.css" />
+    <Content Include="Content\libs\cropperjs\cropper.js" />
+    <Content Include="Content\libs\cropperjs\cropper.min.css" />
+    <Content Include="Content\libs\datatables.net-bs4\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\libs\datatables.net-bs4\js\dataTables.bootstrap4.min.js" />
+    <Content Include="Content\libs\datatables.net-buttons-bs4\css\buttons.bootstrap4.min.css" />
+    <Content Include="Content\libs\datatables.net-buttons-bs4\js\buttons.bootstrap4.min.js" />
+    <Content Include="Content\libs\datatables.net-buttons\js\buttons.colVis.min.js" />
+    <Content Include="Content\libs\datatables.net-buttons\js\buttons.html5.min.js" />
+    <Content Include="Content\libs\datatables.net-buttons\js\buttons.print.min.js" />
+    <Content Include="Content\libs\datatables.net-buttons\js\dataTables.buttons.min.js" />
+    <Content Include="Content\libs\datatables.net-responsive-bs4\css\responsive.bootstrap4.min.css" />
+    <Content Include="Content\libs\datatables.net-responsive-bs4\js\responsive.bootstrap4.min.js" />
+    <Content Include="Content\libs\datatables.net-responsive\js\dataTables.responsive.min.js" />
+    <Content Include="Content\libs\datatables.net\js\jquery.dataTables.min.js" />
+    <Content Include="Content\libs\DataTablesPDF\buttons.dataTables.css" />
+    <Content Include="Content\libs\DataTablesPDF\buttons.dataTables.js" />
+    <Content Include="Content\libs\DataTablesPDF\buttons.html5.min.js" />
+    <Content Include="Content\libs\DataTablesPDF\dataTables.buttons.js" />
+    <Content Include="Content\libs\DataTablesPDF\dataTables.dataTables.css" />
+    <Content Include="Content\libs\DataTablesPDF\dataTables.js" />
+    <Content Include="Content\libs\DataTablesPDF\jquery-3.7.1.js" />
+    <Content Include="Content\libs\DataTablesPDF\jszip.min.js" />
+    <Content Include="Content\libs\DataTablesPDF\pdfmake.min.js" />
+    <Content Include="Content\libs\DataTablesPDF\vfs_fonts.js" />
+    <Content Include="Content\libs\DataTables\datatables.css" />
+    <Content Include="Content\libs\DataTables\datatables.js" />
+    <Content Include="Content\libs\DataTables\datatables.min.css" />
+    <Content Include="Content\libs\DataTables\datatables.min.js" />
+    <Content Include="Content\libs\dropzone\min\dropzone.min.css" />
+    <Content Include="Content\libs\dropzone\min\dropzone.min.js" />
+    <Content Include="Content\libs\echarts\echarts.min.js" />
+    <Content Include="Content\libs\feather-icons\feather.min.js" />
+    <Content Include="Content\libs\flatpickr\flatpickr.min.css" />
+    <Content Include="Content\libs\flatpickr\flatpickr.min.js" />
+    <Content Include="Content\libs\FullCalendar\bootstrap4\index.global.js" />
+    <Content Include="Content\libs\FullCalendar\bootstrap4\index.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\bootstrap5\index.global.js" />
+    <Content Include="Content\libs\FullCalendar\bootstrap5\index.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\index.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\index.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales-all.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales-all.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\af.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\af.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ar-dz.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ar-dz.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ar-kw.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ar-kw.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ar-ly.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ar-ly.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ar-ma.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ar-ma.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ar-sa.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ar-sa.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ar-tn.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ar-tn.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ar.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ar.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\az.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\az.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\bg.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\bg.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\bn.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\bn.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\bs.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\bs.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ca.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ca.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\cs.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\cs.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\cy.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\cy.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\da.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\da.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\de-at.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\de-at.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\de.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\de.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\el.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\el.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\en-au.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\en-au.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\en-gb.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\en-gb.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\en-nz.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\en-nz.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\eo.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\eo.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\es-us.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\es-us.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\es.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\es.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\et.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\et.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\eu.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\eu.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\fa.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\fa.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\fi.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\fi.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\fr-ca.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\fr-ca.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\fr-ch.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\fr-ch.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\fr.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\fr.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\gl.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\gl.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\he.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\he.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\hi.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\hi.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\hr.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\hr.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\hu.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\hu.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\hy-am.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\hy-am.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\id.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\id.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\is.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\is.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\it.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\it.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ja.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ja.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ka.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ka.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\kk.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\kk.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\km.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\km.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ko.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ko.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ku.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ku.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\lb.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\lb.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\lt.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\lt.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\lv.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\lv.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\mk.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\mk.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ms.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ms.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\nb.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\nb.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ne.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ne.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\nl.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\nl.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\nn.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\nn.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\pl.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\pl.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\pt-br.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\pt-br.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\pt.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\pt.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ro.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ro.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ru.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ru.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\si-lk.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\si-lk.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\sk.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\sk.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\sl.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\sl.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\sm.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\sm.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\sq.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\sq.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\sr-cyrl.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\sr-cyrl.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\sr.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\sr.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\sv.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\sv.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ta-in.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ta-in.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\th.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\th.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\tr.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\tr.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ug.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\ug.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\uk.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\uk.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\uz-cy.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\uz-cy.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\uz.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\uz.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\vi.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\vi.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\zh-cn.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\zh-cn.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\zh-tw.global.js" />
+    <Content Include="Content\libs\FullCalendar\core\locales\zh-tw.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\daygrid\index.global.js" />
+    <Content Include="Content\libs\FullCalendar\daygrid\index.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\es.js" />
+    <Content Include="Content\libs\FullCalendar\fullcalendar.min.js" />
+    <Content Include="Content\libs\FullCalendar\fullcalendarvue3.min.js" />
+    <Content Include="Content\libs\FullCalendar\google-calendar\index.global.js" />
+    <Content Include="Content\libs\FullCalendar\google-calendar\index.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\icalendar\index.global.js" />
+    <Content Include="Content\libs\FullCalendar\icalendar\index.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\interaction\index.global.js" />
+    <Content Include="Content\libs\FullCalendar\interaction\index.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\list\index.global.js" />
+    <Content Include="Content\libs\FullCalendar\list\index.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\luxon1\index.global.js" />
+    <Content Include="Content\libs\FullCalendar\luxon1\index.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\luxon2\index.global.js" />
+    <Content Include="Content\libs\FullCalendar\luxon2\index.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\luxon3\index.global.js" />
+    <Content Include="Content\libs\FullCalendar\luxon3\index.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\moment-timezone\index.global.js" />
+    <Content Include="Content\libs\FullCalendar\moment-timezone\index.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\moment\index.global.js" />
+    <Content Include="Content\libs\FullCalendar\moment\index.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\multimonth\index.global.js" />
+    <Content Include="Content\libs\FullCalendar\multimonth\index.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\rrule\index.global.js" />
+    <Content Include="Content\libs\FullCalendar\rrule\index.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\timegrid\index.global.js" />
+    <Content Include="Content\libs\FullCalendar\timegrid\index.global.min.js" />
+    <Content Include="Content\libs\FullCalendar\web-component\index.global.js" />
+    <Content Include="Content\libs\FullCalendar\web-component\index.global.min.js" />
+    <Content Include="Content\libs\glightbox\css\glightbox.min.css" />
+    <Content Include="Content\libs\glightbox\js\glightbox.min.js" />
+    <Content Include="Content\libs\gmaps\gmaps.min.js" />
+    <Content Include="Content\libs\imask\imask.min.js" />
+    <Content Include="Content\libs\jquery-countdown\jquery.countdown.min.js" />
+    <Content Include="Content\libs\jquery-knob\jquery.knob.min.js" />
+    <Content Include="Content\libs\jquery-sparkline\jquery.sparkline.min.js" />
+    <Content Include="Content\libs\jquery\jquery.min.js" />
+    <Content Include="Content\libs\JSPrintManager.js" />
+    <Content Include="Content\libs\jszip\jszip.min.js" />
+    <Content Include="Content\libs\leaflet\images\layers-2x.png" />
+    <Content Include="Content\libs\leaflet\images\layers.png" />
+    <Content Include="Content\libs\leaflet\images\marker-icon.png" />
+    <Content Include="Content\libs\leaflet\leaflet.css" />
+    <Content Include="Content\libs\leaflet\leaflet.js" />
+    <Content Include="Content\libs\masonry-layout\masonry.pkgd.min.js" />
+    <Content Include="Content\libs\metismenu\metisMenu.min.js" />
+    <Content Include="Content\libs\node-waves\waves.min.js" />
+    <Content Include="Content\libs\normalize\normalize.min.css" />
+    <Content Include="Content\libs\nouislider\nouislider.min.css" />
+    <Content Include="Content\libs\nouislider\nouislider.min.js" />
+    <Content Include="Content\libs\pace-js\pace.min.js" />
+    <Content Include="Content\libs\pristinejs\pristine.min.js" />
+    <Content Include="Content\libs\rater-js\index.js" />
+    <Content Include="Content\libs\simplebar\simplebar.min.js" />
+    <Content Include="Content\libs\sweetalert2\sweetalert2.min.css" />
+    <Content Include="Content\libs\sweetalert2\sweetalert2.min.js" />
+    <Content Include="Content\libs\swiper\swiper-bundle.min.css" />
+    <Content Include="Content\libs\swiper\swiper-bundle.min.js" />
+    <Content Include="Content\libs\twitter-bootstrap-wizard\jquery.bootstrap.wizard.min.js" />
+    <Content Include="Content\libs\twitter-bootstrap-wizard\prettify.css" />
+    <Content Include="Content\libs\twitter-bootstrap-wizard\prettify.js" />
+    <Content Include="Content\libs\Vue\vee-validate.js" />
+    <Content Include="Content\libs\Vue\vue.js" />
+    <Content Include="Content\libs\wnumb\wNumb.min.js" />
+    <Content Include="Content\matrix-custom.css" />
+    <Content Include="Content\matrix-login.css" />
+    <Content Include="Content\matrix-media.css" />
+    <Content Include="Content\matrix-style.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\select2.css" />
+    <Content Include="Content\uniform.css" />
+    <Content Include="Content\wickedpicker.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="fonts\fontello.eot" />
+    <Content Include="fonts\fontello.svg" />
+    <Content Include="fonts\fontello.ttf" />
+    <Content Include="fonts\fontello.woff" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\boxicons.eot" />
+    <Content Include="Content\fonts\boxicons.ttf" />
+    <Content Include="Content\fonts\boxicons.woff" />
+    <Content Include="Content\fonts\dripicons-v2.eot" />
+    <Content Include="Content\fonts\dripicons-v2.ttf" />
+    <Content Include="Content\fonts\dripicons-v2.woff" />
+    <Content Include="Content\fonts\dripicons-v2d41d.eot" />
+    <Content Include="Content\fonts\fa-brands-400.eot" />
+    <Content Include="Content\fonts\fa-brands-400.ttf" />
+    <Content Include="Content\fonts\fa-brands-400.woff" />
+    <Content Include="Content\fonts\fa-brands-400d41d.eot" />
+    <Content Include="Content\fonts\fa-regular-400.eot" />
+    <Content Include="Content\fonts\fa-regular-400.ttf" />
+    <Content Include="Content\fonts\fa-regular-400.woff" />
+    <Content Include="Content\fonts\fa-regular-400d41d.eot" />
+    <Content Include="Content\fonts\fa-solid-900.eot" />
+    <Content Include="Content\fonts\fa-solid-900.ttf" />
+    <Content Include="Content\fonts\fa-solid-900.woff" />
+    <Content Include="Content\fonts\fa-solid-900d41d.eot" />
+    <Content Include="Content\fonts\materialdesignicons-webfont1d2d.eot" />
+    <Content Include="Content\fonts\materialdesignicons-webfont1d2d.ttf" />
+    <Content Include="Content\fonts\materialdesignicons-webfont1d2d.woff" />
+    <Content Include="Content\fonts\materialdesignicons-webfontd41d.eot" />
+    <Content Include="Content\fonts\Roboto\Roboto-Black.ttf" />
+    <Content Include="Content\fonts\Roboto\Roboto-BlackItalic.ttf" />
+    <Content Include="Content\fonts\Roboto\Roboto-Bold.ttf" />
+    <Content Include="Content\fonts\Roboto\Roboto-BoldItalic.ttf" />
+    <Content Include="Content\fonts\Roboto\Roboto-Italic.ttf" />
+    <Content Include="Content\fonts\Roboto\Roboto-Light.ttf" />
+    <Content Include="Content\fonts\Roboto\Roboto-LightItalic.ttf" />
+    <Content Include="Content\fonts\Roboto\Roboto-Medium.ttf" />
+    <Content Include="Content\fonts\Roboto\Roboto-MediumItalic.ttf" />
+    <Content Include="Content\fonts\Roboto\Roboto-Regular.ttf" />
+    <Content Include="Content\fonts\Roboto\Roboto-Thin.ttf" />
+    <Content Include="Content\fonts\Roboto\Roboto-ThinItalic.ttf" />
+    <Content Include="Content\libs\generatePassword\generate-password.min.js" />
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\Deployment.pubxml" />
+    <None Include="Properties\PublishProfiles\Developer.pubxml" />
+    <None Include="Properties\PublishProfiles\Produccion.pubxml" />
+    <None Include="Properties\PublishProfiles\radiotaxi.pubxml" />
+    <Content Include="Scripts\bootstrap-colorpicker.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-wysihtml5.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\calendar-custom.js" />
+    <Content Include="Scripts\daterangepicker.js" />
+    <Content Include="Scripts\DynamicElement.js" />
+    <Content Include="Scripts\excanvas.min.js" />
+    <Content Include="Scripts\fullcalendar.js" />
+    <Content Include="Scripts\fullcalendar.min.js" />
+    <Content Include="Scripts\ga.js" />
+    <Content Include="Scripts\gcal.js" />
+    <Content Include="Scripts\gcal.min.js" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.8.1.min.js" />
+    <Content Include="Scripts\jquery-2.1.3.js" />
+    <Content Include="Scripts\jquery-ui-1.8.23.custom.min.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.easy-pie-chart.js" />
+    <Content Include="Scripts\jquery.flot.crosshair.js" />
+    <Content Include="Scripts\jquery.flot.min.js" />
+    <Content Include="Scripts\jquery.flot.pie.js" />
+    <Content Include="Scripts\jquery.flot.pie.min.js" />
+    <Content Include="Scripts\jquery.flot.resize.min.js" />
+    <Content Include="Scripts\jquery.flot.stack.js" />
+    <Content Include="Scripts\jquery.gritter.min.js" />
+    <Content Include="Scripts\jquery.min.dualCalendarjs.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.peity.min.js" />
+    <Content Include="Scripts\jquery.ui.custom.js" />
+    <Content Include="Scripts\jquery.uniform.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.wizard.js" />
+    <Content Include="Scripts\JSPrintManager.js" />
+    <Content Include="Scripts\lang-es.js" />
+    <Content Include="Scripts\lastServices.js" />
+    <Content Include="Scripts\locale-all.js" />
+    <Content Include="Scripts\masked.js" />
+    <Content Include="Scripts\matrix.calendar.js" />
+    <Content Include="Scripts\matrix.charts.js" />
+    <Content Include="Scripts\matrix.chat.js" />
+    <Content Include="Scripts\matrix.dashboard.js" />
+    <Content Include="Scripts\matrix.form_common.js" />
+    <Content Include="Scripts\matrix.form_validation.js" />
+    <Content Include="Scripts\matrix.interface.js" />
+    <Content Include="Scripts\matrix.js" />
+    <Content Include="Scripts\matrix.login.js" />
+    <Content Include="Scripts\matrix.popover.js" />
+    <Content Include="Scripts\matrix.tables.js" />
+    <Content Include="Scripts\matrix.wizard.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\scripts.js" />
+    <Content Include="Scripts\select2.min.js" />
+    <Content Include="Scripts\wickedpicker.js" />
+    <Content Include="Scripts\wysihtml5-0.3.0.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <None Include="Scripts\_references.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Client\Index.cshtml" />
+    <Content Include="Views\Client\Details.cshtml" />
+    <Content Include="Views\Client\Create.cshtml" />
+    <Content Include="Views\Client\Edit.cshtml" />
+    <Content Include="Views\Client\Delete.cshtml" />
+    <Content Include="Views\TaxiService\IndexAsignados.cshtml" />
+    <Content Include="Views\TaxiService\IndexPendientes.cshtml" />
+    <Content Include="Views\TaxiService\IndexCancelados.cshtml" />
+    <Content Include="Views\TaxiService\IndexEspeciales.cshtml" />
+    <Content Include="Views\TaxiService\Details.cshtml" />
+    <Content Include="Views\TaxiService\Create.cshtml" />
+    <Content Include="Views\TaxiService\Edit.cshtml" />
+    <Content Include="Views\TaxiService\Delete.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Search\SearchResult.cshtml" />
+    <Content Include="Views\TaxiService\ServicesByClient.cshtml" />
+    <Content Include="Views\TaxiService\lastServices.cshtml" />
+    <Content Include="Views\TaxiService\ServicesAssignedByClient.cshtml" />
+    <Content Include="Views\Search\SearchServicesResult.cshtml" />
+    <Content Include="Views\Search\History.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Report\total.cshtml" />
+    <Content Include="Views\Report\totalUser.cshtml" />
+    <Content Include="Views\Shared\_LayOut_Report.cshtml" />
+    <Content Include="Views\Report\totalCreated.cshtml" />
+    <Content Include="Views\Report\totalCreatedUser.cshtml" />
+    <Content Include="Views\taxiReport\Index.cshtml" />
+    <Content Include="Views\taxiReport\Create.cshtml" />
+    <Content Include="Views\taxiReport\Edit.cshtml" />
+    <Content Include="Views\taxiReport\Details.cshtml" />
+    <Content Include="Views\Search\Clients.cshtml" />
+    <Content Include="Views\Error\LoginErrors.cshtml" />
+    <Content Include="Views\TaxiService\Index.cshtml" />
+    <Content Include="Views\TaxiService\Pending.cshtml" />
+    <Content Include="Views\TaxiService\Canceled.cshtml" />
+    <Content Include="Views\TaxiService\Assigned.cshtml" />
+    <Content Include="Views\TaxiService\History.cshtml" />
+    <Content Include="Views\Operator\index.cshtml" />
+    <Content Include="Views\Operator\tarjeton.cshtml" />
+    <Content Include="Views\card\Index.cshtml" />
+    <Content Include="Views\card\Edit.cshtml" />
+    <Content Include="Views\card\Details.cshtml" />
+    <Content Include="Views\Operator\Create.cshtml" />
+    <Content Include="Views\Operator\low.cshtml" />
+    <Content Include="Views\Operator\Edit.cshtml" />
+    <Content Include="Views\card\Create.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Partner\Create.cshtml" />
+    <Content Include="Views\Partner\Edit.cshtml" />
+    <Content Include="Views\Partner\index.cshtml" />
+    <Content Include="Views\Partner\low.cshtml" />
+    <Content Include="Views\Partner\tarjeton.cshtml" />
+    <Content Include="Views\finance\fdi.cshtml" />
+    <Content Include="Views\finance\families.cshtml" />
+    <Content Include="Views\finance\familiesID.cshtml" />
+    <Content Include="Views\Partner\cancelarcuotas.cshtml" />
+    <Content Include="Views\Sales\TicketDetails.cshtml" />
+    <Content Include="Views\Sales\box.cshtml" />
+    <Content Include="Views\Operator\QuickEdit.cshtml" />
+    <Content Include="Views\Error\LoginIPERROR.cshtml" />
+    <Content Include="Views\Sales\PrintTicket.cshtml" />
+    <Content Include="Views\Operator\Identity.cshtml" />
+    <Content Include="Views\Error\ErrorView.cshtml" />
+    <Content Include="Views\Partner\Error.cshtml" />
+    <Content Include="Views\Operator\Lows.cshtml" />
+    <Content Include="Views\Turkey\print.cshtml" />
+    <Content Include="Views\Turkey\printWEB.cshtml" />
+    <Content Include="Views\Turkey\CashierTurkeys.cshtml" />
+    <Content Include="Views\Turkey\TotalTurkeys.cshtml" />
+    <Content Include="Views\Turkey\ExternalCoupon.cshtml" />
+    <Content Include="Views\Operator\Permits.cshtml" />
+    <Content Include="Views\Turkey\error.cshtml" />
+    <Content Include="Views\Turkey\printWEBex.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Views\Partner\GeneratePassword.cshtml" />
+    <Content Include="Views\Operator\Bloqueos.cshtml" />
+    <Content Include="Views\Partner\bloqueos.cshtml" />
+    <Content Include="Views\Operator\PermitsList.cshtml" />
+    <Content Include="Views\Operator\CreatePermits.cshtml" />
+    <Content Include="Views\Operator\PermisoDetalle.cshtml" />
+    <Content Include="Views\Emplacamientoes\Create.cshtml" />
+    <Content Include="Views\Emplacamientoes\Delete.cshtml" />
+    <Content Include="Views\Emplacamientoes\Details.cshtml" />
+    <Content Include="Views\Emplacamientoes\Edit.cshtml" />
+    <Content Include="Views\Emplacamientoes\Index.cshtml" />
+    <Content Include="Views\EmplaMarcas\Create.cshtml" />
+    <Content Include="Views\EmplaMarcas\Delete.cshtml" />
+    <Content Include="Views\EmplaMarcas\Details.cshtml" />
+    <Content Include="Views\EmplaMarcas\Edit.cshtml" />
+    <Content Include="Views\EmplaMarcas\Index.cshtml" />
+    <Content Include="Views\EmplaModeloes\Create.cshtml" />
+    <Content Include="Views\EmplaModeloes\Delete.cshtml" />
+    <Content Include="Views\EmplaModeloes\Details.cshtml" />
+    <Content Include="Views\EmplaModeloes\Edit.cshtml" />
+    <Content Include="Views\EmplaModeloes\Index.cshtml" />
+    <Content Include="Views\EmplaRestriccions\Create.cshtml" />
+    <Content Include="Views\EmplaRestriccions\Delete.cshtml" />
+    <Content Include="Views\EmplaRestriccions\Details.cshtml" />
+    <Content Include="Views\EmplaRestriccions\Edit.cshtml" />
+    <Content Include="Views\EmplaRestriccions\Index.cshtml" />
+    <Content Include="Views\emplacambioplacas_log\Create.cshtml" />
+    <Content Include="Views\emplacambioplacas_log\Delete.cshtml" />
+    <Content Include="Views\emplacambioplacas_log\Details.cshtml" />
+    <Content Include="Views\emplacambioplacas_log\Edit.cshtml" />
+    <Content Include="Views\emplacambioplacas_log\Index.cshtml" />
+    <Content Include="Views\Partner\detail.cshtml" />
+    <Content Include="Views\Emplacamientoes\detail.cshtml" />
+    <Content Include="Views\Operator\Correctivo.cshtml" />
+    <Content Include="Views\Emplacamientoes\errormov.cshtml" />
+    <Content Include="Views\Emplacamientoes\AltaCorrecta.cshtml" />
+    <Content Include="Views\Emplacamientoes\Baja.cshtml" />
+    <Content Include="Views\Emplacamientoes\BajaCorrecta.cshtml" />
+    <Content Include="Views\Emplacamientoes\movimiento.cshtml" />
+    <Content Include="Views\Emplacamientoes\oldinx.cshtml" />
+    <Content Include="Views\Sat\Edit.cshtml" />
+    <Content Include="Views\Partner\GeneratePasswordEDIT.cshtml" />
+    <Content Include="Views\Cupons\Block.cshtml" />
+    <Content Include="Views\Cupons\CashierCouponPaymentReport.cshtml" />
+    <Content Include="Views\Cupons\CouponPaymentReport.cshtml" />
+    <Content Include="Views\Cupons\Invoice.cshtml" />
+    <Content Include="Views\Cupons\PayCoupon.cshtml" />
+    <Content Include="Views\Cupons\PrintInvoice.cshtml" />
+    <Content Include="Views\Cupons\Index.cshtml" />
+    <Content Include="Views\Cupons\Create.cshtml" />
+    <Content Include="Views\fdi\PrintSocPolicy.cshtml" />
+    <Content Include="Views\Cupons\Edit.cshtml" />
+    <Content Include="Views\Cupons\PrintModule.cshtml" />
+    <Content Include="Views\Error\EcoSoc.cshtml" />
+    <Content Include="Views\Error\EmplaBloqueo.cshtml" />
+    <Content Include="Views\Emplacamientoes\vinlock.cshtml" />
+    <Content Include="Views\Emplacamientoes\protegido.cshtml" />
+    <Content Include="Views\Geolocalization\geo.cshtml" />
+    <Content Include="Views\Cupons\ratelist.cshtml" />
+    <Content Include="Views\Cupons\createrate.cshtml" />
+    <Content Include="Views\Cupons\reateEdit.cshtml" />
+    <Content Include="Views\Error\ErrorCredencial.cshtml" />
+    <Content Include="Views\Partner\tarjetonCampaing.cshtml" />
+    <Content Include="Views\Operator\GeneratePassword.cshtml" />
+    <Content Include="Views\Operator\GeneratePasswordEDIT.cshtml" />
+    <Content Include="Views\Emplacamientoes\filter.cshtml" />
+    <Content Include="Views\Partner\cien.cshtml" />
+    <Content Include="Views\Agreements\Details.cshtml" />
+    <Content Include="Views\Operator\cancelarcuotas.cshtml" />
+    <Content Include="Views\Cupons\pay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="amazon\" />
+    <Folder Include="App_Data\" />
+    <Folder Include="Content\libs\%40ckeditor\ckeditor5-build-classic\build\" />
+    <Folder Include="Content\libs\alertifyjs\build\css\themes\" />
+    <Folder Include="Views\Clinic\" />
+    <Folder Include="Views\Default\" />
+    <Folder Include="Views\doctors\" />
+    <Folder Include="Views\familymembers\" />
+    <Folder Include="Views\general\" />
+    <Folder Include="Views\Medicalrecords\" />
+    <Folder Include="Views\Statistics\" />
+    <Folder Include="Views\Visits\" />
+    <Folder Include="Views\webBase\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\radiotaxi.Model\radiotaxi.Model.csproj">
+      <Project>{c74a683d-64ed-4951-ad12-bed71f6253cf}</Project>
+      <Name>radiotaxi.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\JSPrintManager.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51703</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:8022/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:8022/</IISAppRootUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

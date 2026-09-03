@@ -1,0 +1,284 @@
+﻿@{
+    ViewBag.Title = "Crear Cupones";
+}
+
+<div class="row g-4">
+
+    <!-- FORMULARIO -->
+    <div class="col-lg-8">
+
+        <div class="card h-100">
+
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <div class="avatar-sm me-3">
+                        <span class="avatar-title rounded-circle bg-primary-subtle text-primary font-size-20">
+                            <i class="bx bxs-coupon"></i>
+                        </span>
+                    </div>
+
+                    <div>
+                        <h4 class="mb-1 font-size-18">Crear cupones</h4>
+                        <p class="text-muted mb-0">
+                            Agrega uno o varios grupos antes de generar los cupones.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body p-4">
+
+                <div class="row g-3 align-items-end">
+
+                    <div class="col-md-4">
+                        <label for="cant" class="form-label">
+                            Cantidad de cupones
+                        </label>
+
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bx bx-hash"></i>
+                            </span>
+
+                            <input v-model="reference"
+                                   type="number"
+                                   min="1"
+                                   class="form-control"
+                                   name="cant"
+                                   id="cant"
+                                   placeholder="Ej. 5" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="cliente" class="form-label">
+                            Cliente
+                        </label>
+
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bx bx-building-house"></i>
+                            </span>
+
+                            <select v-on:change="getRates($event)"
+                                    class="form-select"
+                                    name="cliente"
+                                    id="cliente">
+
+                                @foreach (radiotaxi.Model.Hotel item in ViewBag.hotels)
+                                {
+                                    <option value="@item.HotelID">
+                                        @item.Name - ShortName
+                                    </option>
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="tarifa" class="form-label">
+                            Tarifa / Perforación (MXN)
+                        </label>
+
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bx bx-purchase-tag-alt"></i>
+                            </span>
+
+                            <select class="form-select"
+                                    name="tarifa"
+                                    id="tarifa">
+
+                                <option value="0">
+                                    Seleccione una tarifa
+                                </option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="d-flex justify-content-end mt-4">
+
+                    <button v-on:click="addCuponsGroup($event)"
+                            type="button"
+                            class="btn btn-primary waves-effect btn-label waves-light">
+
+                        <i class="bx bx-plus label-icon"></i>
+                        Agregar a la lista
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- LISTA DE CUPONES -->
+    <div class="col-lg-4">
+
+        <div class="card h-100">
+
+            <div class="card-header">
+
+                <div class="d-flex align-items-center justify-content-between">
+
+                    <div>
+                        <h4 class="mb-1 font-size-18">
+                            <i class="bx bx-list-check me-1"></i>
+                            Cupones por crear
+                        </h4>
+
+                        <p class="text-muted mb-0 font-size-13">
+                            Revisa los grupos agregados.
+                        </p>
+                    </div>
+
+                    <span class="badge rounded-pill bg-primary font-size-13">
+                        {{ grouscupons.length }}
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="card-body d-flex flex-column p-0">
+
+                <!-- LISTA VACÍA -->
+                <div v-if="grouscupons.length === 0"
+                     class="text-center py-5 px-4">
+
+                    <div class="avatar-md mx-auto mb-3">
+                        <span class="avatar-title rounded-circle bg-light text-muted font-size-24">
+                            <i class="bx bx-coupon"></i>
+                        </span>
+                    </div>
+
+                    <h5 class="font-size-15">
+                        No hay grupos agregados
+                    </h5>
+
+                    <p class="text-muted mb-0">
+                        Completa los datos del formulario y presiona
+                        “Agregar a la lista”.
+                    </p>
+
+                </div>
+
+                <!-- GRUPOS AGREGADOS -->
+                <div v-else
+                     class="flex-grow-1"
+                     style="max-height: 430px; overflow-y: auto;">
+
+                    <div v-for="(group, index) in grouscupons"
+                         :key="index"
+                         class="border-bottom p-3">
+
+                        <div class="d-flex align-items-start">
+
+                            <div class="avatar-sm me-3 flex-shrink-0">
+                                <span class="avatar-title rounded-circle bg-success-subtle text-success font-size-16">
+                                    {{ group.cant }}
+                                </span>
+                            </div>
+
+                            <div class="flex-grow-1 overflow-hidden">
+
+                                <div class="d-flex align-items-start justify-content-between">
+
+                                    <div class="pe-2 overflow-hidden">
+
+                                        <h5 class="font-size-14 mb-1 text-truncate">
+                                            {{ group.clientename }}
+                                        </h5>
+
+                                        <p class="mb-2">
+
+                                            <div class="d-flex align-items-center flex-wrap gap-2">
+
+                                                <span class="text-muted">
+                                                    <i class="bx bx-purchase-tag-alt me-1"></i>
+                                                    {{ group.tarifaObj.Cupontype.Name }}
+                                                </span>
+
+                                                <span class="text-muted">
+                                                    -
+                                                </span>
+
+
+                                                <span class="fw-bold text-dark font-size-15">
+                                                    ${{ Number(group.tarifaObj.Valor).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2}) }}
+                                                </span>
+
+                                                <span class="badge rounded-pill bg-success-subtle text-success border border-success-subtle">
+                                                    MXN
+                                                </span>
+
+                                            </div>
+
+                                        </p>
+
+                                        <div class="d-flex flex-wrap gap-2">
+
+                                            <span class="badge bg-light text-dark">
+                                                {{ group.cant }} cupones
+                                            </span>
+
+                                            <span class="badge bg-info-subtle text-info">
+                                                Grupo {{ index + 1 }}
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                    <button v-on:click="removeOfGroup($event, index)"
+                                            type="button"
+                                            class="btn btn-soft-danger btn-sm waves-effect waves-light"
+                                            title="Eliminar grupo">
+
+                                        <i class="bx bx-trash-alt font-size-16"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- BOTÓN CREAR -->
+                <div class="border-top p-3 mt-auto">
+
+                    <button v-on:click="createGroups($event)"
+                            type="button"
+                            class="btn btn-success btn-label waves-effect waves-light w-100"
+                            :disabled="grouscupons.length === 0">
+
+                        <i class="bx bx-check-double label-icon"></i>
+                        Crear cupones
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <script src="~/Content/js/Views/Coupons/create.js"></script>
+}

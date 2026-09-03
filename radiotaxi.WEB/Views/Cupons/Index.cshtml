@@ -1,0 +1,530 @@
+﻿@model List<radiotaxi.Model.Cupon>
+
+@{
+    ViewBag.Title = "Cupones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- start page title -->
+<div class="row">
+
+    <div class="col-12">
+
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+
+            <h4 class="mb-sm-0 font-size-18">
+                <i class="bx bxs-coupon"></i>
+                Cupones
+            </h4>
+
+            <div class="page-title-right">
+
+                <ol class="breadcrumb m-0">
+
+                    <li class="breadcrumb-item">
+                        <a href="javascript:void(0);">
+                            Inicio
+                        </a>
+                    </li>
+
+                    <li class="breadcrumb-item active">
+                        Cupones
+                    </li>
+
+                </ol>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- end page title -->
+<!-- ============================================
+     BÚSQUEDA
+============================================= -->
+<div class="row">
+
+    <div class="col-lg-12">
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <h4 class="card-title bx bx-search-alt-2">
+                    Búsqueda
+                </h4>
+
+                <p class="card-title-desc">
+                    La búsqueda se puede realizar con cualquiera de los siguientes campos.
+                </p>
+
+            </div>
+
+
+            <div class="card-body p-4">
+
+                <div class="row">
+
+                    <div class="col-lg-12">
+
+                        <div>
+
+                            <form action="/cupones/"
+                                  method="POST"
+                                  class="form-horizontal">
+
+
+                                <!-- PRIMERA FILA -->
+                                <div class="row control-group">
+
+
+                                    <!-- Fecha inicial -->
+                                    <div class="col-md-3 mb-3">
+
+                                        <label class="form-label control-label">
+                                            Fecha de pago inicial
+                                        </label>
+
+                                        <input type="date"
+                                               class="form-control"
+                                               name="paymentStartDate"
+                                               id="paymentStartDate" />
+
+                                    </div>
+
+
+                                    <!-- Fecha final -->
+                                    <div class="col-md-3 mb-3">
+
+                                        <label class="form-label control-label">
+                                            Fecha de pago final
+                                        </label>
+
+                                        <input type="date"
+                                               class="form-control"
+                                               name="paymentEndDate"
+                                               id="paymentEndDate" />
+
+                                    </div>
+
+
+                                    <!-- Gafete / Eco -->
+                                    <div class="col-md-3 mb-3">
+
+                                        <label class="form-label control-label">
+                                            Gafete / Eco
+                                        </label>
+
+                                        <input type="text"
+                                               class="form-control"
+                                               name="gafeteEco"
+                                               id="gafeteEco"
+                                               placeholder="Ingrese gafete o eco" />
+
+                                    </div>
+
+
+                                    <!-- Nombre Socio / Operador -->
+                                    <div class="col-md-3 mb-3">
+
+                                        <label class="form-label control-label">
+                                            Nombre Socio / Operador
+                                        </label>
+
+                                        <input type="text"
+                                               class="form-control"
+                                               name="socioOperadorNombre"
+                                               id="socioOperadorNombre"
+                                               placeholder="Ingrese nombre" />
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <!-- SEGUNDA FILA -->
+                                <div class="row control-group">
+
+
+                                    <!-- Proveedor / Hotel -->
+                                    <div class="col-md-4 mb-3">
+
+                                        <label class="form-label control-label">
+                                            Proveedor / Hotel
+                                        </label>
+
+                                        <select class="form-control"
+                                                name="hc"
+                                                id="hc">
+
+                                            <option selected value="0">
+                                                Seleccione una opción
+                                            </option>
+
+                                            @foreach (radiotaxi.Model.Hotel item in ViewBag.hotels)
+                                            {
+                                                <option value="@item.HotelID">
+                                                    @item.Name
+                                                </option>
+                                            }
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <!-- Folio -->
+                                    <div class="col-md-4 mb-3">
+
+                                        <label class="form-label control-label">
+                                            Folio
+                                        </label>
+
+                                        <input type="text"
+                                               class="form-control"
+                                               name="folio"
+                                               id="folio"
+                                               placeholder="Ingrese el folio del cupón" />
+
+                                    </div>
+
+
+                                    <!-- Tarifa / Perforación -->
+                                    <div class="col-md-4 mb-3">
+
+                                        <label class="form-label control-label">
+                                            Tarifa / Perforación
+                                        </label>
+
+                                        <select class="form-control"
+                                                name="cupontype"
+                                                id="cupontype">
+
+                                            <option selected value="0">
+                                                Seleccione una opción
+                                            </option>
+
+                                            @foreach (radiotaxi.Model.Cupontype item in ViewBag.cuponstypes)
+                                            {
+                                                <option value="@item.CupontypeID">
+                                                    @item.Name
+                                                </option>
+                                            }
+
+                                        </select>
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <!-- BOTÓN BUSCAR -->
+                                <div class="mt-4 form-actions">
+
+                                    <button type="submit"
+                                            value="Buscar"
+                                            class="btn btn-success waves-effect btn-label waves-light">
+
+                                        <i class="bx bx-search label-icon"></i>
+
+                                        Buscar
+
+                                    </button>
+
+                                </div>
+
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ============================================
+     TABLA
+============================================= -->
+<div class="row">
+
+    <div class="col-lg-12">
+
+        <div class="card">
+
+
+            <!-- HEADER TABLA -->
+            <div class="card-header">
+
+                <div class="row align-items-center">
+
+
+                    <div class="col-md-6">
+
+                        <div class="mb-3">
+
+                            <h5 class="card-title">
+                                Cupones totales
+                                <span class="text-muted fw-normal ms-2"></span>
+                            </h5>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
+
+                            <div>
+
+                                <a href="/Cupones/crear"
+                                   class="btn btn-light">
+
+                                    <i class="bx bx-plus me-1"></i>
+
+                                    Agregar Cupones
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- BODY TABLA -->
+            <div class="card-body">
+
+
+                <div class="table-rep-plugin">
+
+                    <div class="mb-0">
+
+                        <table id="cuponesTable"
+                               class="table table-striped table-sm align-middle w-100">
+
+
+                            <thead>
+
+                                <tr>
+
+                                    <th data-priority="1">
+                                        Folio
+                                    </th>
+
+                                    <th data-priority="1">
+                                        Fecha de pago
+                                    </th>
+
+                                    <th data-priority="2">
+                                        Socio / Operador
+                                    </th>
+
+                                    <th data-priority="2">
+                                        Proveedor / Hotel
+                                    </th>
+
+                                    <th data-priority="2">
+                                        Tarifa / Perforación
+                                    </th>
+
+                                    <th data-priority="1">
+                                        Valor
+                                    </th>
+
+                                    <th data-priority="3">
+                                        Bloqueado
+                                    </th>
+
+                                    <th data-priority="3">
+                                        Activo
+                                    </th>
+
+                                    <th data-priority="1">
+                                        Acciones
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+
+                                @foreach (radiotaxi.Model.Cupon item in Model)
+                                {
+
+                                    <tr>
+
+
+                                        <!-- Folio -->
+                                        <td>
+                                            @item.CuponsID
+                                        </td>
+
+
+                                        <!-- Fecha de pago -->
+                                        @if (item.PaymentDate.HasValue)
+                                        {
+                                            <td data-order="@item.PaymentDate.Value.ToString("yyyy-MM-dd HH:mm:ss")">
+
+                                                @item.PaymentDate.Value.ToString("dd/MM/yyyy HH:mm")
+
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td data-order="">
+
+                                                <span class="text-muted">
+                                                    Sin pago
+                                                </span>
+
+                                            </td>
+                                        }
+
+
+                                        <!-- Socio / Operador -->
+                                        <td>
+
+                                            <span class="text-muted">
+                                                Pendiente
+                                            </span>
+
+                                        </td>
+
+
+                                        <!-- Proveedor / Hotel -->
+                                        <td>
+
+                                            @item.Couponrate.Hotel.Name
+
+                                        </td>
+
+
+                                        <!-- Tarifa / Perforación -->
+                                        <td>
+
+                                            @item.Couponrate.Cupontype.Name
+
+                                        </td>
+
+
+                                        <!-- Valor -->
+                                        <td>
+
+                                            <span class="badge bg-success-subtle text-success fs-6">
+
+                                                @item.Couponrate.Valor.ToString("$#,##0.00") MXN
+
+                                            </span>
+
+                                        </td>
+
+
+                                        <!-- Bloqueado -->
+                                        <td>
+
+                                            @if (!item.Couponrate.active)
+                                            {
+                                                <span class="badge bg-danger-subtle text-danger">
+                                                    Bloqueado
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-success-subtle text-success">
+                                                    Disponible
+                                                </span>
+                                            }
+
+                                        </td>
+
+
+                                        <!-- Activo -->
+                                        <td>
+
+                                            @if (item.Couponrate.active)
+                                            {
+                                                <span class="badge bg-success-subtle text-success">
+                                                    Activo
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-danger-subtle text-danger">
+                                                    Inactivo
+                                                </span>
+                                            }
+
+                                        </td>
+
+
+                                        <!-- Acciones -->
+                                        <td>
+
+                                            <a href="/cupones/editar/@item.CuponsID"
+                                               class="btn btn-success btn-sm waves-effect btn-label waves-light">
+
+                                                <i class="bx bx-edit-alt label-icon"></i>
+
+                                                Editar
+
+                                            </a>
+
+                                        </td>
+
+
+                                    </tr>
+
+                                }
+
+
+                            </tbody>
+
+
+                        </table>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- end table responsive -->
+
+@section Scripts {
+    <script src="~/Content/libs/DataTables/datatables.min.js"></script>
+    <script src="~/Content/js/Views/Coupons/index.js"></script>
+}

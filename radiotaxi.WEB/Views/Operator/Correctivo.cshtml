@@ -1,0 +1,411 @@
+﻿@model radiotaxi.Model.Operator
+@{
+    ViewBag.Title = "Correctivo disciplinario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- DATOS DE CONTROL JS -->
+<input id="gafet" name="gafet" type="hidden" value="@Model.partnerReference" />
+<input id="userId" name="userId" type="hidden" value="@Model.userId" />
+<input id="porcentaje" name="porcentaje" type="hidden" value="@(ViewBag.Porcentaje)" />
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18"><i class="bx bx-car"></i> @Model.CHOFER</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- end page title -->
+<div class="row">
+    <div class="col-xl-9 col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm order-2 order-sm-1">
+                        <div class="d-flex align-items-start mt-3 mt-sm-0">
+                            <div class="flex-lg-shrink-0">
+                                <div class="avatar-xl me-3">
+                                    @if (Model.urlImage != null)
+                                    {
+                                        if (Model.STATUS == "B")
+                                        {
+
+                                            <img title="Operador dado de baja" src="@(Model.urlImage)" alt="" class="avatar-xl rounded-circle me-2 img-thumbnail" style="background-color: red;">
+                                        }
+                                        else
+                                        {
+                                            <img src="@(Model.urlImage)" alt="" class="avatar-xl rounded-circle me-2 img-thumbnail">
+                                        }
+                                    }
+                                    else
+                                    {
+
+                                        if (Model.STATUS == "B")
+                                        {
+                                            <img title="Operador dado de baja" src="~/Content/images/users/empty.png" alt="" class="avatar-xl rounded-circle me-2 img-thumbnail" style="background-color: red;">
+                                        }
+                                        else
+                                        {
+                                            <img src="@(Model.urlImage)" alt="" class="avatar-xl rounded-circle me-2 img-thumbnail">
+                                        }
+                                    }
+                                </div>
+
+                            </div>
+                            <div class="flex-grow-1">
+                                <div>
+                                    <h4 class="font-size-18 mb-1 fw-bolder">@(Model.CHOFER != null ? Model.CHOFER : "")</h4>
+                                    <h6 class="font-size-14 mb-1">@(Model.NOMBRE != null ? Model.NOMBRE.ToUpper() : "") @(Model.APELLIDOS != null ? Model.APELLIDOS.ToUpper() : "")</h6>
+                                    <p class="text-muted font-size-13 mb-0"> <span class="fw-bold">Fecha de ingreso:</span> @(Model.FECHAING != null ? Model.FECHAING.Value.ToString("dd/MM/yyyy") : "")</p>
+                                    @if (Permissions.deny("Clinica"))
+                                    {
+                                        <p class="text-muted font-size-13 "><span class="fw-bold">Número telefónico:</span> @(Model.TELEFONO != null ? Model.TELEFONO : "")</p>
+                                    }
+
+                                    <div class="d-flex flex-wrap align-items-start gap-2 gap-lg-3 text-muted font-size-13">
+
+                                        @if (Model.express == true)
+                                        {
+                                            <div>
+                                                <i class="mdi mdi-circle-medium me-1 text-success align-middle"></i>
+                                                <span class="badge rounded-pill bg-success">Entrada Express</span>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div>
+                                                <i class="mdi mdi-circle-medium me-1 text-success align-middle"></i>
+                                                <span class="badge rounded-pill bg-primary">Entrada convencional</span>
+                                            </div>
+                                        }
+                                        <!--<div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i>phyllisgatlin@minia.com</div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- FIN PERFIL-->
+
+                </div>
+
+                <ul class="nav nav-tabs-custom card-header-tabs border-top mt-4" id="pills-tab" role="tablist">
+
+                    <li class="nav-item">
+                        <a class="nav-link px-3 active" data-bs-toggle="tab" href="#general" role="tab">General</a>
+                    </li>
+
+
+                    @if (Permissions.deny("Practi-AutoS,Practi-Actas,Practi-Cajas, Clinica, Practi-Finanzas"))
+                    {
+                        <li class="nav-item ms-auto my-auto ">
+                            <a href="/Operator/Edit/@Model.partnerReference" class="btn btn-success btn-label ">
+                                <i class="bx bx-edit-alt label-icon"></i> Editar
+                            </a>
+                            @if (Model.urlImage != null && Permissions.allow("Admin, Credenciales"))
+                            {
+                                <a href="/credential/view/@Model.partnerReference" class="btn btn-success btn-label" target="_blank">
+                                    <i class="bx bx-printer label-icon"></i> Imprimir credencial
+                                </a>
+                            }
+
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-success waves-light waves-effect dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Más <i class="mdi mdi-dots-vertical ms-2"></i>
+                                </button>
+                                <div class="dropdown-menu">
+
+                                    @if (Permissions.allow("Admin"))
+                                    {
+                                        <a class="dropdown-item" href="#">Quitar faltas</a>
+                                    }
+
+
+                                    @if (Permissions.allow("Admin,Archivo"))
+                                    {
+                                        <a class="dropdown-item" href="../Bloqueos/@Model.partnerReference">Bloquear</a>
+                                    }
+
+                                    @if (Permissions.allow("Admin"))
+                                    {
+                                        <a class="dropdown-item" href="/Operator/correctivo/@Model.partnerReference">Correctivo Disciplinario</a>
+                                    }
+                                </div>
+                            </div>
+
+                        </li>
+
+                    }
+
+                </ul>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="general" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0"><i class="bx bx-info-circle"></i> Información general</h5>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <div class="pb-3">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div>
+                                            <h5 class="font-size-15"><span>Fecha de nacimiento :</span></h5>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="text-muted">
+                                            @if (Model.birthDate != null)
+                                            {
+                                                <p class="my-0"> @(((DateTime)Model.birthDate).ToString("dd/MM/yyyy"))</p>
+                                            }
+                                            else
+                                            {
+                                                <p class="my-0"> NO REGISTRADO</p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div>
+                                            <h5 class="font-size-15"><span>Lugar de nacimiento :</span></h5>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="text-muted">
+                                            @if (Model.LUGARNAC != null)
+                                            {
+                                                <p class="my-0"> @Model.LUGARNAC.ToUpper()</p>
+                                            }
+                                            else
+                                            {
+                                                <p class="my-0"> NO REGISTRADO</p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div>
+                                            <h5 class="font-size-15"><span>Sexo :</span></h5>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="text-muted">
+                                            @if (Model.SEXO != null)
+                                            {
+                                                <p class="my-0"> @(Model.SEXO == "" ? "No registrado" : Model.sex == 1 ? "Masculino" : "Femenino")</p>
+                                            }
+                                            else
+                                            {
+                                                <p class="my-0"> NO REGISTRADO</p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div>
+                                            <h5 class="font-size-15"><span>Ciudad actual :</span></h5>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="text-muted">
+                                            @if (Model.CIUDADACT != null)
+                                            {
+                                                <p class="my-0"> @Model.CIUDADACT</p>
+                                            }
+                                            else
+                                            {
+                                                <p class="my-0"> NO REGISTRADO</p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                @if (Permissions.deny("Clinica"))
+                                {
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <div>
+                                                <h5 class="font-size-15"><span>Domicilio actual :</span></h5>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-8">
+                                            <div class="text-muted">
+                                                @if (Model.userAddresses != null && Model.userAddresses.Count() > 0)
+                                                {
+                                                    try
+                                                    {
+                                                        <p>
+                                                            @(Model.userAddresses.FirstOrDefault().address + ", " + Model.userAddresses.FirstOrDefault().address2 + ", " + Model.userAddresses.FirstOrDefault().colony + ", SM " + Model.userAddresses.FirstOrDefault().supermanzana + ", MZ " + Model.userAddresses.FirstOrDefault().manzana + ", LT " + Model.userAddresses.FirstOrDefault().lote + ", Calle " + Model.userAddresses.FirstOrDefault().street + ", CP " + Model.userAddresses.FirstOrDefault().postalCode)
+                                                        </p>
+                                                    }
+                                                    catch (Exception)
+                                                    {
+                                                        <span>Error al cargar la direccion</span>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <p class="my-0"> NO REGISTRADO</p>
+                                                }
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                }
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- end card body -->
+                </div>
+                <!-- end card -->
+            </div>
+            <!-- end tab pane -->
+        </div>
+        <!-- end tab content -->
+    </div>
+    <!-- end col -->
+
+    <div class="col-xl-3 col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Porcentaje</h5>
+                <div class="flex-wrap gap-2 font-size-14">
+                    <div class="col-sm order-2 order-sm-1">
+                        <div class="d-flex align-items-start mt-sm-0">
+                            <div class="col-sm">
+                                <div id="invested-overview" data-colors='["#5156be", "#34c38f"]'
+                                     class="apex-charts"></div>
+                            </div>
+                        </div>
+                    </div> <!-- FIN PORCENTAJE-->
+                </div>
+            </div>
+            <!-- end card body -->
+            <div class="card-footer text-center ">
+                <!--<h6 class="bg-primary badge font-size-14 ">FALTAS: 88</h6>-->
+                <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                    <i class="mdi mdi-block-helper label-icon"></i>Faltas: <strong>@(ViewBag.faltas)</strong>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title mb-3"><i class="bx bx-folder"></i> Documentación importante</h5>
+
+                <div class="flex-wrap gap-2 font-size-14">
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            @if (Model.ine != null)
+                            {
+                                <p class="my-0"><span class="fw-bold">INE:</span> @Model.ine.ToUpper()</p>
+                            }
+                            else
+                            {
+                                <p class="my-0"><span class="fw-bold">INE:</span> NO REGISTRADO</p>
+                            }
+                        </li>
+                        <li>
+                            @if (Model.urfc != null)
+                            {
+                                <p class="my-0"><span class="fw-bold">RFC:</span> @Model.urfc.ToUpper()</p>
+                            }
+                            else
+                            {
+                                <p class="my-0"><span class="fw-bold">RFC:</span> NO REGISTRADO</p>
+                            }
+                        </li>
+                        <li>
+                            @if (Model.curp != null)
+                            {
+                                <p class="my-0"><span class="fw-bold">CURP:</span> @Model.curp.ToUpper()</p>
+                            }
+                            else
+                            {
+                                <p class="my-0"><span class="fw-bold">CURP:</span> NO REGISTRADO</p>
+                            }
+                        </li>
+                        <li>
+                            @if (Model.LUGARNAC != null)
+                            {
+                                <p class="my-0"><span class="fw-bold">Lugar de nacimiendo:</span> @Model.LUGARNAC.ToUpper()</p>
+                            }
+                            else
+                            {
+                                <p class="my-0"><span class="fw-bold">Lugar de nacimiendo:</span> NO REGISTRADO</p>
+                            }
+                        </li>
+                        <li>
+                            @if (Model.birthDate != null)
+                            {
+                                <p class="my-0"><span class="fw-bold">Fecha de nacimiendo:</span> @(((DateTime)Model.birthDate).ToString("dd/MM/yyyy"))</p>
+                            }
+                            else
+                            {
+                                <p class="my-0"><span class="fw-bold">Fecha de nacimiendo:</span> NO REGISTRADO</p>
+                            }
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title mb-3"><i class="bx bx-id-card"></i> Licencia de conducir</h5>
+
+                <div>
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            @if (Model.LICENCIA != null)
+                            {
+                                <p class="my-0"><span class="fw-bold">Licencia:</span> @Model.LICENCIA.ToUpper()</p>
+                            }
+                            else
+                            {
+                                <p class="my-0"><span class="fw-bold">Licencia:</span> NO REGISTRADO</p>
+                            }
+                        </li>
+                        <li>
+                            @if (Model.LICVENCE != null)
+                            {
+                                <p class="my-0"><span class="fw-bold">Expira:</span> @*@@Model.LICVENCE.Value.ToString("yy/MM/dddd")**@</p>
+                            }
+                            else
+                            {
+                                <p class="my-0"><span class="fw-bold">Expira:</span> NO REGISTRADO</p>
+                            }
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- end card body -->
+        </div>
+    </div>
+    <!-- end col -->
+</div>
+
+
+@section Scripts {
+    <script src="~/Content/js/Views/Operator/correctivo.js"></script>
+
+
+}

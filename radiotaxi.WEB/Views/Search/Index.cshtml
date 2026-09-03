@@ -1,0 +1,109 @@
+﻿@model IEnumerable<radiotaxi.Model.client>
+@{
+    ViewBag.Title = "Seach";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div id="content-header">
+    <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="/Search/" class="tip-bottom">Búsqueda</a> </div>
+    <h1>Clientes Búsqueda</h1>
+</div>
+<div class="container-fluid">
+    <hr>
+    <div class="row-fluid">
+        <div class="span8 text-right">
+            <a href="/Client/Create" class="btn btn-success btn-mini"><i class="icon-plus"></i>  Agregar Cliente</a>
+        </div>
+        <div class="span8">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"> <i class="icon-align-justify"></i> </span>
+                    <h5>Información Personal</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <form action="#" method="get" class="form-horizontal search-form">
+                        <div class="control-group">
+                            <label class="control-label">Número telefónico :</label>
+                            <div class="controls">
+                                <input type="text" name="phoneNumber" id="phoneNumber" class="span11" placeholder="Número telefónico" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Nombre :</label>
+                            <div class="controls">
+                                <input type="text" name="name" id="name" class="span11" placeholder="Nombre" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Apellido Paterno :</label>
+                            <div class="controls">
+                                <input type="text" name="lastName1" id="lastName1" class="span11" placeholder="Apellido Paterno" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Apellido Materno :</label>
+                            <div class="controls">
+                                <input type="text" name="lastName2" id="lastName2" class="span11" placeholder="Apellido Materno" />
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" name="search" id="searchb" value="Buscar" class="btn btn-success">Buscar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12" id="dvSearchResult">
+
+        </div>
+    </div>
+</div>
+
+<!--
+<h2>Index</h2>
+
+<div id="container">
+    <label for="Busqueda"><strong>Busqueda</strong></label>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Tel&eacute;fono</label>
+                <input type="text" name="phoneNumber" id="phoneNumber" value="" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" name="name" id="name" value="" class="form-control" />
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Apellido Paterno</label>
+                <input type="text" name="lastName1" id="lastName1" value="" class="form-control" />
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Apellido Materno</label>
+                <input type="text" name="lastName2" id="lastName2" value="" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="form-group">
+                <br />
+                <input type="button" name="searchb" id="searchb" value="Buscar" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+
+    -->

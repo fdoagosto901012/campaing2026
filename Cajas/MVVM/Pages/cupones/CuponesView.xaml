@@ -1,0 +1,2426 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    Title="Cajas"
+    x:Class="Cajas.MVVM.Pages.cupones.CuponesView"
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:cupones="clr-namespace:Cajas.MVVM.ViewModels.cupones" 
+    Style="{StaticResource ApplicationPageStyle}"
+	xmlns:viewModels="clr-namespace:Cajas.MVVM.ViewModels.cupones"
+	xmlns:Models="clr-namespace:radiotaxi.Model;assembly=radiotaxi.Model"
+    x:DataType="viewModels:CuponesViewModel"
+	xmlns:utils="clr-namespace:Cajas.Utils"
+	xmlns:behaviors="clr-namespace:Cajas.Behaviors">
+    <Grid
+        ColumnDefinitions="370,*"
+        RowDefinitions="*,58">
+        <!-- ===================================================== -->
+        <!-- PANEL IZQUIERDO -->
+        <!-- ===================================================== -->
+
+        <Button Command="{Binding ReprintPaymentCommand}"></Button>
+        <Border
+            Grid.Row="0"
+            Grid.Column="0"
+            BackgroundColor="{StaticResource PanelGreen}"
+            Stroke="{StaticResource BorderColor}"
+            StrokeThickness="1">
+            <ScrollView
+                Orientation="Vertical"
+                VerticalScrollBarVisibility="Default">
+                <Grid
+                    Padding="0"
+                    RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                    <Grid
+                        Padding="26,25,26,20"
+                        RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,*">
+                        <!-- LOGOS -->
+                        <HorizontalStackLayout
+                            Grid.Row="0"
+                            Margin="0,0,0,22"
+                            HorizontalOptions="Center"
+                            Spacing="20">
+                            <Image
+                                Source="logotc.png"
+                                HeightRequest="80"
+                                WidthRequest="100"
+                                Aspect="AspectFit" />
+                            <BoxView
+                                WidthRequest="1"
+                                HeightRequest="75"
+                                BackgroundColor="#D6DDD6"
+                                VerticalOptions="Center" />
+                            <Image
+                                Source="adm.png"
+                                HeightRequest="80"
+                                WidthRequest="100"
+                                Aspect="AspectFit" />
+                        </HorizontalStackLayout>
+                        <!-- SEPARADOR -->
+                        <BoxView
+                            Grid.Row="1"
+                            Margin="0,0,0,25"
+                            HeightRequest="1"
+                            BackgroundColor="#DCE3DC" />
+                        <!-- OPERADOR / SOCIO -->
+                        <HorizontalStackLayout
+                            Grid.Row="2"
+                            Margin="0,0,0,14"
+                            Spacing="9">
+                            <Label
+                                Text="&#xf007;"
+                                FontFamily="FASolid"
+                                FontSize="18"
+                                TextColor="{StaticResource PrimaryGreen}"
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                Style="{StaticResource SectionTitle}"
+                                Text="OPERADOR / SOCIO" />
+                        </HorizontalStackLayout>
+                        <!-- BUSCADOR DE OPERADOR -->
+                        <VerticalStackLayout
+                            Grid.Row="3"
+                            Spacing="8">
+                            <Label
+                                Text="ID o Número de identificación"
+                                Style="{StaticResource FieldLabel}" />
+                            <Grid ColumnDefinitions="*,52">
+                                <Border
+                                    Grid.Column="0"
+                                    Margin="0,0,10,0"
+                                    Style="{StaticResource InputBorder}">
+                                    <Entry
+                                        x:Name="OperatorEntry"
+                                        Text="{Binding OperatorCredential, Mode=TwoWay}"
+                                        Style="{StaticResource InputEntry}"
+                                        Placeholder="Ingrese ID o número"
+                                        ReturnType="Search"
+                                        utils:WindowsTabNavigation.Order="1"
+                                        ReturnCommand="{ Binding SearchOperatorCommand}"
+                                        />
+                                </Border>
+                                <ImageButton
+                                    x:Name="SearchOperatorButton"
+                                    Grid.Column="1"
+                                    behaviors:HandCursor.Enabled="True"
+                                    Command="{Binding SearchOperatorCommand}"
+                                    Style="{StaticResource SquarePrimaryImageButton}">
+                                    <ImageButton.Source>
+                                        <FontImageSource
+                                            FontFamily="FASolid"
+                                            Glyph="&#xf002;"
+                                            Size="19"
+                                            Color="White" />
+                                    </ImageButton.Source>
+                                </ImageButton>
+                            </Grid>
+                        </VerticalStackLayout>
+                        <!-- TARJETA DEL OPERADOR -->
+                        <Border
+                            Grid.Row="4"
+                            Margin="0,18,0,24"
+                            Style="{StaticResource CardBorder}">
+                            <Grid
+                                ColumnDefinitions="82,*"
+                                RowDefinitions="Auto,Auto,Auto">
+                                <!-- AVATAR -->
+                                <Border
+                                    Grid.RowSpan="3"
+                                    WidthRequest="72"
+                                    HeightRequest="72"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Center"
+                                    BackgroundColor="#E8F5E4"
+                                    StrokeThickness="0">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="36" />
+                                    </Border.StrokeShape>
+                                    <Grid>
+                                        <Image
+                                            Source="{Binding Imgs}"
+                                            Aspect="AspectFill"
+                                            HorizontalOptions="Fill"
+                                            VerticalOptions="Fill" />
+                                        <ActivityIndicator
+                                            IsRunning="{Binding IsLoadingImage}"
+                                            IsVisible="{Binding IsLoadingImage}"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center"
+                                            Color="{StaticResource PrimaryGreen}" />
+                                    </Grid>
+                                </Border>
+                                <Label
+                                    Grid.Column="1"
+                                    Text="{Binding OperatorName}"
+                                    FontSize="17"
+                                    FontAttributes="Bold"
+                                    TextColor="{StaticResource TextPrimary}" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Margin="0,5,0,0"
+                                    Text="{Binding OperatorCredential, StringFormat='Gafete: {0}'}"
+                                    FontSize="14"
+                                    TextColor="{StaticResource TextSecondary}" />
+                                <HorizontalStackLayout
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    Margin="0,5,0,0"
+                                    Spacing="4">
+                                    <Label
+                                        Text="Estado:"
+                                        FontSize="14"
+                                        TextColor="{StaticResource TextSecondary}"/>
+                                    <Label
+                                        Text="{Binding OperatorStatus}"
+                                        FontSize="14"
+                                        FontAttributes="Bold"
+                                        TextColor="#24803D" />
+                                </HorizontalStackLayout>
+                            </Grid>
+                        </Border>
+                        <!-- SEPARADOR -->
+                        <BoxView
+                            Grid.Row="5"
+                            Margin="0,0,0,22"
+                            HeightRequest="1"
+                            BackgroundColor="#DCE3DC" />
+                        <!-- TÍTULO RESUMEN -->
+                        <HorizontalStackLayout
+                            Grid.Row="6"
+                            Margin="0,0,0,14"
+                            Spacing="9">
+                            <Label
+                                Text="&#xf080;"
+                                FontFamily="FASolid"
+                                FontSize="18"
+                                TextColor="{StaticResource PrimaryGreen}"
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                Style="{StaticResource SectionTitle}"
+                                Text="RESUMEN" />
+                        </HorizontalStackLayout>
+                        <!-- TARJETAS Y BOTONES -->
+                        <VerticalStackLayout
+                            Grid.Row="7"
+                            Spacing="12">
+                            <!-- CUPONES ESCANEADOS -->
+                            <Border
+                                Style="{StaticResource CardBorder}"
+                                Padding="18,14">
+                                <Grid
+                                    ColumnDefinitions="62,*"
+                                    RowDefinitions="Auto,Auto">
+                                    <Label
+                                        Grid.RowSpan="2"
+                                        Text="&#xf145;"
+                                        FontFamily="FASolid"
+                                        FontSize="28"
+                                        TextColor="{StaticResource PrimaryGreen}"
+                                        HorizontalTextAlignment="Center"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        Grid.Column="1"
+                                        Text="Cupones escaneados"
+                                        FontSize="14"
+                                        TextColor="{StaticResource TextSecondary}" />
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Text="{Binding CouponsCount}"
+                                        FontSize="28"
+                                        FontAttributes="Bold"
+                                        TextColor="{StaticResource TextPrimary}" />
+                                </Grid>
+                            </Border>
+                            <!-- TOTAL ACUMULADO -->
+                            <Border
+                                Style="{StaticResource CardBorder}"
+                                Padding="18,14">
+                                <Grid
+                                    ColumnDefinitions="62,*"
+                                    RowDefinitions="Auto,Auto">
+                                    <Label
+                                        Grid.RowSpan="2"
+                                        Text="&#xf0d6;"
+                                        FontFamily="FASolid"
+                                        FontSize="28"
+                                        TextColor="{StaticResource PrimaryGreen}"
+                                        HorizontalTextAlignment="Center"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        Grid.Column="1"
+                                        Text="Total acumulado"
+                                        FontSize="14"
+                                        TextColor="{StaticResource TextSecondary}" />
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Text="{Binding TotalAmount, StringFormat='${0:N2}'}"
+                                        FontSize="28"
+                                        FontAttributes="Bold"
+                                        TextColor="{StaticResource PrimaryGreen}" />
+                                </Grid>
+                            </Border>
+                            <!-- COBRAR CUPONES -->
+                            <Button
+                                Margin="0,10,0,0"
+                                HeightRequest="64"
+                                Text="PAGAR CUPONES"
+                                FontSize="16"
+                                Command="{Binding PrePayCuponCommand}"
+                                Style="{StaticResource PrimaryButton}"
+                                behaviors:HandCursor.Enabled="True"
+                                ContentLayout="Left,12">
+                                <Button.ImageSource>
+                                    <FontImageSource
+                                        FontFamily="FASolid"
+                                        Glyph="&#xf0d6;"
+                                        Size="20"
+                                        Color="White" />
+                                </Button.ImageSource>
+                            </Button>
+                            <!-- LIMPIAR TODO -->
+                            <Button
+                                HeightRequest="58"
+                                Text="LIMPIAR TODO"
+                                Style="{StaticResource SecondaryButton}"
+                                behaviors:HandCursor.Enabled="True"
+                                ContentLayout="Left,12"
+                                Command="{Binding CleanCommand}"
+                                >
+                                
+                                <Button.ImageSource>
+                                    <FontImageSource
+                                        FontFamily="FASolid"
+                                        Glyph="&#xf0e2;"
+                                        Size="18"
+                                        Color="{StaticResource TextPrimary}" />
+                                </Button.ImageSource>
+                            </Button>
+                            <!-- ===================================================== -->
+                            <!-- AQUI EMPIEZA MI MODIFICACION MI INTENDO DE MVVM PARA LO DEL SLIDE BOTON -->
+                            <!-- ===================================================== -->
+                            <Button
+                                HeightRequest="58"
+                                Text="HISTORIAL DE PAGOS"
+                                Command="{Binding ShowHistoryCommand}"
+                                Style="{StaticResource SecondaryButton}"
+                                behaviors:HandCursor.Enabled="True"
+                                ContentLayout="Left,12">
+                                <Button.ImageSource>
+                                    <FontImageSource
+                                        FontFamily="FASolid"
+                                        Glyph="&#xf1da;"
+                                        Size="18"
+                                        Color="{StaticResource TextPrimary}" />
+                                </Button.ImageSource>
+                            </Button>
+                            <!-- ===================================================== -->
+                            <!-- FIN BOTÓN OFFCANVAS - HISTORIAL DE PAGOS -->
+                            <!-- ===================================================== -->
+                        </VerticalStackLayout>
+                    </Grid>
+                </Grid>
+            </ScrollView>
+        </Border>
+        <!-- ===================================================== -->
+        <!-- PANEL DERECHO -->
+        <!-- ===================================================== -->
+        <Grid
+            Grid.Row="0"
+            Grid.Column="1"
+            Padding="40,38,40,30"
+            RowDefinitions="Auto,Auto,Auto,*"
+            BackgroundColor="#FFFFFF">
+            <!-- ===================================================== -->
+            <!-- TÍTULO -->
+            <!-- ===================================================== -->
+            <Label
+                Grid.Row="0"
+                Text="ESCANEAR CUPÓN"
+                Style="{StaticResource SectionTitle}"
+                FontSize="17" />
+            <!-- ===================================================== -->
+            <!-- ENTRADA DEL CUPÓN -->
+            <!-- ===================================================== -->
+            <!-- ===================================================== -->
+            <!-- PROVEEDOR + ESCANEAR CUPÓN -->
+            <!-- ===================================================== -->
+
+            <Grid
+                Grid.Row="1"
+                Margin="0,18,0,0"
+                ColumnDefinitions="1*,4*"
+                ColumnSpacing="16">
+
+                <!-- ================================================= -->
+                <!-- PROVEEDOR -->
+                <!-- ================================================= -->
+
+                <VerticalStackLayout
+                    Grid.Column="0"
+                    Spacing="8">
+
+                    <HorizontalStackLayout
+                        Spacing="7"
+                        VerticalOptions="Center">
+
+                        <Label
+                            Text="&#xf007;"
+                            FontFamily="FASolid"
+                            FontSize="14"
+                            TextColor="{StaticResource PrimaryGreen}"
+                            VerticalTextAlignment="Center" />
+
+                        <Label
+                            Text="Proveedor"
+                            Style="{StaticResource FieldLabel}"
+                            VerticalTextAlignment="Center" />
+
+                    </HorizontalStackLayout>
+
+                    <Border
+                        HeightRequest="61"
+                        Style="{StaticResource InputBorder}">
+
+                        <Picker
+                            Margin="10,0"
+                            TextColor="{StaticResource TextPrimary}"
+                            VerticalOptions="Center"
+                            VerticalTextAlignment="Center"
+                            ItemsSource="{Binding Hotels}"
+                            ItemDisplayBinding="{Binding DisplayName}"
+                            SelectedItem="{Binding SelectedHotel}"
+                            SelectedIndex="0">
+                   
+                        </Picker>
+
+                    </Border>
+
+                </VerticalStackLayout>
+
+
+                <!-- ================================================= -->
+                <!-- CUPÓN -->
+                <!-- ================================================= -->
+
+                <VerticalStackLayout
+                    Grid.Column="1"
+                    Spacing="8">
+
+                    <HorizontalStackLayout
+                        Spacing="7"
+                        VerticalOptions="Center">
+
+                        <Label
+                            Text="&#xf02b;"
+                            FontFamily="FASolid"
+                            FontSize="14"
+                            TextColor="{StaticResource PrimaryGreen}"
+                            VerticalTextAlignment="Center" />
+
+                        <Label
+                            Text="Código del cupón"
+                            Style="{StaticResource FieldLabel}"
+                            VerticalTextAlignment="Center" />
+
+                    </HorizontalStackLayout>
+
+                    <Border
+                        HeightRequest="61"
+                        Style="{StaticResource InputBorder}">
+
+                        <Grid ColumnDefinitions="*,65">
+
+                            <!-- Entry oculto, necesario para mantener compatibilidad -->
+                            <Entry
+                                x:Name="CouponCodeEntry"
+                                Grid.Column="0"
+                                Placeholder=""
+                                ReturnType="Done"
+                                Opacity="0.01"
+                                FontSize="1"
+                                IsVisible="True"
+                                TranslationX="-5000"
+                                WidthRequest="1"
+                                HeightRequest="1" />
+
+                            <!-- Entry visible -->
+                            <Entry
+                                x:Name="CoupontTextInsertEntry"
+                                Grid.Column="0"
+                                Style="{StaticResource InputEntry}"
+                                Text="{Binding CouponCode}"
+                                Margin="15,0"
+                                HeightRequest="61"
+                                FontSize="16"
+                                Placeholder="Escanee o ingrese el código del cupón..."
+                                ReturnType="Done"
+                                utils:WindowsTabNavigation.Order="2"
+                                ReturnCommand="{Binding AddCouponCommand}" />
+
+                            <!-- Separador -->
+                            <BoxView
+                                Grid.Column="1"
+                                WidthRequest="1"
+                                BackgroundColor="#E3E3E3"
+                                HorizontalOptions="Start" />
+
+                            <!-- Botón buscar -->
+                            <ImageButton
+                                Grid.Column="1"
+                                WidthRequest="58"
+                                HeightRequest="58"
+                                Padding="17"
+                                BackgroundColor="Transparent"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                behaviors:HandCursor.Enabled="True"
+                                Command="{Binding AddCouponCommand}">
+
+                                <ImageButton.Source>
+                                    <FontImageSource
+                                        FontFamily="FASolid"
+                                        Glyph="&#xf002;"
+                                        Size="21"
+                                        Color="{StaticResource PrimaryGreen}" />
+                                </ImageButton.Source>
+
+                            </ImageButton>
+
+                        </Grid>
+
+                    </Border>
+
+                </VerticalStackLayout>
+
+            </Grid>
+            <!-- ===================================================== -->
+            <!-- TEXTO DE AYUDA -->
+            <!-- ===================================================== -->
+            <HorizontalStackLayout
+                Grid.Row="2"
+                Margin="0,14,0,35"
+                Spacing="8">
+                <Label
+                    Text="El lector de código QR agregará el cupón automáticamente."
+                    FontSize="13"
+                    TextColor="{StaticResource TextSecondary}"
+                    VerticalTextAlignment="Center" />
+                <Label
+                    Text="&#xf05a;"
+                    FontFamily="FASolid"
+                    FontSize="14"
+                    TextColor="{StaticResource PrimaryGreen}"
+                    VerticalTextAlignment="Center" />
+            </HorizontalStackLayout>
+            <!-- ===================================================== -->
+            <!-- TABLA -->
+            <!-- ===================================================== -->
+            <Grid
+            Grid.Row="3"
+            RowDefinitions="Auto,*">
+                <!-- ===================================================== -->
+                <!-- TÍTULO -->
+                <!-- ===================================================== -->
+                <Label
+                Grid.Row="0"
+                Margin="0,0,0,17"
+                Text="CUPONES ESCANEADOS"
+                Style="{StaticResource SectionTitle}"
+                FontSize="17" />
+                <!-- ===================================================== -->
+                <!-- CONTENEDOR DE LA TABLA -->
+                <!-- ===================================================== -->
+                <Border
+                Grid.Row="1"
+                Style="{StaticResource CardBorder}"
+                Padding="0">
+                    <Grid RowDefinitions="57,*">
+                        <!-- ===================================================== -->
+                        <!-- ENCABEZADO -->
+                        <!-- ===================================================== -->
+                        <Grid
+                        Grid.Row="0"
+                        Padding="20,0"
+                        ColumnDefinitions="1.5*,0.8*,1.2*,1*,1.1*,75"
+                        BackgroundColor="{StaticResource TableHeaderBackground}">
+                            <Label
+                            Grid.Column="0"
+                            Style="{StaticResource TableHeader}"
+                            Text="Serie del cupón"
+                            VerticalTextAlignment="Center" />
+                            <Label
+                            Grid.Column="1"
+                            Style="{StaticResource TableHeader}"
+                            Text="Valor"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center" />
+                            <Label
+                            Grid.Column="2"
+                            Style="{StaticResource TableHeader}"
+                            Text="Vigencia"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center" />
+                            <Label
+                            Grid.Column="3"
+                            Style="{StaticResource TableHeader}"
+                            Text="Pago"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center" />
+                            <Label
+                            Grid.Column="4"
+                            Style="{StaticResource TableHeader}"
+                            Text="Estado"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center" />
+                            <Label
+                            Grid.Column="5"
+                            Style="{StaticResource TableHeader}"
+                            Text="Acciones"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center" />
+                        </Grid>
+                        <!-- ===================================================== -->
+                        <!-- LISTADO -->
+                        <!-- ===================================================== -->
+                        <CollectionView
+                            Grid.Row="1"
+                            ItemsSource="{Binding Cupons}"
+                            SelectionMode="None"
+                            BackgroundColor="White"
+                            VerticalScrollBarVisibility="Always"
+                            ItemsUpdatingScrollMode="KeepScrollOffset">
+                            <!-- ================================================= -->
+                            <!-- VISTA VACÍA -->
+                            <!-- ================================================= -->
+                            <CollectionView.EmptyView>
+                                <VerticalStackLayout
+                                Margin="0,80,0,0"
+                                HorizontalOptions="Center"
+                                Spacing="8">
+                                    <Label
+                                    Text="&#xf029;"
+                                    FontFamily="FASolid"
+                                    FontSize="42"
+                                    TextColor="#D5D5D5"
+                                    HorizontalTextAlignment="Center" />
+                                    <Label
+                                    Text="No hay cupones escaneados"
+                                    FontSize="16"
+                                    TextColor="{StaticResource TextMuted}"
+                                    HorizontalTextAlignment="Center" />
+                                    <Label
+                                    Text="Escanea un código QR para comenzar"
+                                    FontSize="13"
+                                    TextColor="{StaticResource TextLight}"
+                                    HorizontalTextAlignment="Center" />
+                                </VerticalStackLayout>
+                            </CollectionView.EmptyView>
+                            <!-- ================================================= -->
+                            <!-- FILAS -->
+                            <!-- ================================================= -->
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="Models:Cupon">
+                                    <Grid
+                                    RowDefinitions="64,1"
+                                    BackgroundColor="White"
+                                    IsClippedToBounds="True">
+                                        <!-- ===================================== -->
+                                        <!-- CONTENEDOR DE LA FILA -->
+                                        <!-- ===================================== -->
+                                        <Border
+                                        Grid.Row="0"
+                                        BackgroundColor="White"
+                                        StrokeThickness="0">
+                                            <!-- Fondo y sombra cuando está pagado -->
+                                            <Border.Triggers>
+                                                <DataTrigger
+                                                TargetType="Border"
+                                                Binding="{Binding Paid}"
+                                                Value="True">
+                                                    <Setter
+                                                    Property="BackgroundColor"
+                                                    Value="#FFF1F1" />
+                                                    <Setter Property="Shadow">
+                                                        <Setter.Value>
+                                                            <Shadow
+                                                            Brush="#80D32F2F"
+                                                            Offset="0,2"
+                                                            Radius="7"
+                                                            Opacity="0.28" />
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                                <DataTrigger
+                                                    TargetType="Border"
+                                                    Binding="{Binding Paid}"
+                                                    Value="False">
+                                                    <Setter
+                                                        Property="BackgroundColor"
+                                                        Value="White" />
+                                                    <Setter
+                                                        Property="Shadow"
+                                                        Value="{x:Null}" />
+                                                </DataTrigger>
+                                            </Border.Triggers>
+                                            <!-- ================================= -->
+                                            <!-- CONTENIDO DE LA FILA -->
+                                            <!-- ================================= -->
+                                            <Grid ColumnDefinitions="5,1.5*,0.8*,1.2*,1*,1.1*,75">
+                                                <!-- Línea lateral roja -->
+                                                <BoxView
+                                                Grid.Column="0"
+                                                BackgroundColor="Transparent">
+                                                    <BoxView.Triggers>
+                                                        <DataTrigger
+                                                        TargetType="BoxView"
+                                                        Binding="{Binding Paid}"
+                                                        Value="True">
+                                                            <Setter
+                                                            Property="BackgroundColor"
+                                                            Value="#D32F2F" />
+                                                        </DataTrigger>
+                                                    </BoxView.Triggers>
+                                                </BoxView>
+                                                <!-- ================================= -->
+                                                <!-- SERIE DEL CUPÓN -->
+                                                <!-- ================================= -->
+                                                <Label
+                                                Grid.Column="1"
+                                                Margin="15,0,0,0"
+                                                Style="{StaticResource TableCell}"
+                                                FontAttributes="Bold"
+                                                LineBreakMode="NoWrap"
+                                                VerticalTextAlignment="Center">
+                                                    <Label.Text>
+                                                        <MultiBinding StringFormat="{}{0}-{1}-{2}">
+                                                            <Binding Path="Couponrate.Hotel.shortname" />
+                                                            <Binding Path="DisplayFolio" />
+                                                            <Binding Path="Couponrate.Cupontype.Name" />
+                                                        </MultiBinding>
+                                                    </Label.Text>
+                                                    <Label.Triggers>
+                                                        <DataTrigger
+                                                        TargetType="Label"
+                                                        Binding="{Binding Paid}"
+                                                        Value="True">
+                                                            <Setter
+                                                            Property="TextColor"
+                                                            Value="#7A4040" />
+                                                        </DataTrigger>
+                                                    </Label.Triggers>
+                                                </Label>
+                                                <!-- ================================= -->
+                                                <!-- VALOR -->
+                                                <!-- ================================= -->
+                                                <Label
+                                                Grid.Column="2"
+                                                Style="{StaticResource TableCell}"
+                                                Text="{Binding Couponrate.Valor, StringFormat='${0:N2}'}"
+                                                FontAttributes="Bold"
+                                                HorizontalTextAlignment="Center"
+                                                VerticalTextAlignment="Center">
+                                                    <Label.Triggers>
+                                                        <DataTrigger
+                                                        TargetType="Label"
+                                                        Binding="{Binding Paid}"
+                                                        Value="True">
+                                                            <Setter
+                                                            Property="TextColor"
+                                                            Value="#7A4040" />
+                                                        </DataTrigger>
+                                                    </Label.Triggers>
+                                                </Label>
+                                                <!-- ================================= -->
+                                                <!-- VIGENCIA -->
+                                                <!-- ================================= -->
+                                                <Label
+                                                Grid.Column="3"
+                                                Style="{StaticResource TableCell}"
+                                                Text="{Binding CreateDate, StringFormat='{0:dd/MM/yyyy}'}"
+                                                TextColor="{StaticResource TextSecondary}"
+                                                HorizontalTextAlignment="Center"
+                                                VerticalTextAlignment="Center">
+                                                    <Label.Triggers>
+                                                        <DataTrigger
+                                                        TargetType="Label"
+                                                        Binding="{Binding Paid}"
+                                                        Value="True">
+                                                            <Setter
+                                                            Property="TextColor"
+                                                            Value="#9A6666" />
+                                                        </DataTrigger>
+                                                    </Label.Triggers>
+                                                </Label>
+                                                <!-- ================================= -->
+                                                <!-- PAGO -->
+                                                <!-- ================================= -->
+                                                <Border
+                                                Grid.Column="4"
+                                                Padding="10,5"
+                                                StrokeThickness="1"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="5" />
+                                                    </Border.StrokeShape>
+                                                    <Border.Triggers>
+                                                        <!-- PAGADO EN ROJO -->
+                                                        <DataTrigger
+                                                        TargetType="Border"
+                                                        Binding="{Binding Paid}"
+                                                        Value="True">
+                                                            <Setter
+                                                            Property="BackgroundColor"
+                                                            Value="#FDE4E4" />
+                                                            <Setter
+                                                            Property="Stroke"
+                                                            Value="#D32F2F" />
+                                                        </DataTrigger>
+                                                        <!-- PENDIENTE EN AMARILLO -->
+                                                        <DataTrigger
+                                                        TargetType="Border"
+                                                        Binding="{Binding Paid}"
+                                                        Value="False">
+                                                            <Setter
+                                                            Property="BackgroundColor"
+                                                            Value="{StaticResource WarningBackground}" />
+                                                            <Setter
+                                                            Property="Stroke"
+                                                            Value="{StaticResource Warning}" />
+                                                        </DataTrigger>
+                                                    </Border.Triggers>
+                                                    <Label
+                                                    FontSize="12"
+                                                    FontAttributes="Bold"
+                                                    HorizontalTextAlignment="Center"
+                                                    VerticalTextAlignment="Center">
+                                                        <Label.Triggers>
+                                                            <!-- Texto pagado -->
+                                                            <DataTrigger
+                                                            TargetType="Label"
+                                                            Binding="{Binding Paid}"
+                                                            Value="True">
+                                                                <Setter
+                                                                Property="Text"
+                                                                Value="PAGADO" />
+                                                                <Setter
+                                                                Property="TextColor"
+                                                                Value="#C62828" />
+                                                            </DataTrigger>
+                                                            <!-- Texto pendiente -->
+                                                            <DataTrigger
+                                                            TargetType="Label"
+                                                            Binding="{Binding Paid}"
+                                                            Value="False">
+                                                                <Setter
+                                                                Property="Text"
+                                                                Value="PENDIENTE" />
+                                                                <Setter
+                                                                Property="TextColor"
+                                                                Value="{StaticResource Warning}" />
+                                                            </DataTrigger>
+                                                        </Label.Triggers>
+                                                    </Label>
+                                                </Border>
+                                                <!-- ================================= -->
+                                                <!-- ESTADO ACTIVO / INACTIVO -->
+                                                <!-- ================================= -->
+                                                <Border
+                                                Grid.Column="5"
+                                                Padding="10,5"
+                                                StrokeThickness="1"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="5" />
+                                                    </Border.StrokeShape>
+                                                    <Border.Triggers>
+                                                        <!-- Habilitado -->
+                                                        <DataTrigger
+                                                        TargetType="Border"
+                                                        Binding="{Binding active}"
+                                                        Value="True">
+                                                            <Setter
+                                                            Property="BackgroundColor"
+                                                            Value="{StaticResource SuccessBackground}" />
+                                                            <Setter
+                                                            Property="Stroke"
+                                                            Value="{StaticResource Success}" />
+                                                        </DataTrigger>
+                                                        <!-- Bloqueado -->
+                                                        <DataTrigger
+                                                        TargetType="Border"
+                                                        Binding="{Binding active}"
+                                                        Value="False">
+                                                            <Setter
+                                                            Property="BackgroundColor"
+                                                            Value="{StaticResource DangerBackground}" />
+                                                            <Setter
+                                                            Property="Stroke"
+                                                            Value="{StaticResource Danger}" />
+                                                        </DataTrigger>
+                                                    </Border.Triggers>
+                                                    <Label
+                                                    FontSize="12"
+                                                    FontAttributes="Bold"
+                                                    HorizontalTextAlignment="Center"
+                                                    VerticalTextAlignment="Center">
+                                                        <Label.Triggers>
+                                                            <!-- Habilitado -->
+                                                            <DataTrigger
+                                                            TargetType="Label"
+                                                            Binding="{Binding active}"
+                                                            Value="True">
+                                                                <Setter
+                                                                Property="Text"
+                                                                Value="HABILITADO" />
+                                                                <Setter
+                                                                Property="TextColor"
+                                                                Value="{StaticResource Success}" />
+                                                            </DataTrigger>
+                                                            <!-- Bloqueado -->
+                                                            <DataTrigger
+                                                            TargetType="Label"
+                                                            Binding="{Binding active}"
+                                                            Value="False">
+                                                                <Setter
+                                                                Property="Text"
+                                                                Value="BLOQUEADO" />
+                                                                <Setter
+                                                                Property="TextColor"
+                                                                Value="{StaticResource Danger}" />
+                                                            </DataTrigger>
+                                                        </Label.Triggers>
+                                                    </Label>
+                                                </Border>
+                                                <!-- ================================= -->
+                                                <!-- ELIMINAR -->
+                                                <!-- ================================= -->
+                                                <ImageButton
+                                                Grid.Column="6"
+                                                Style="{StaticResource DangerImageButton}"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteCuponCommand}"
+                                                behaviors:HandCursor.Enabled="True"
+                                                CommandParameter="{Binding .}">
+                                                    <ImageButton.Source>
+                                                        <FontImageSource
+                                                        FontFamily="FASolid"
+                                                        Glyph="&#xf2ed;"
+                                                        Size="19"
+                                                        Color="{StaticResource Danger}" />
+                                                    </ImageButton.Source>
+                                                </ImageButton>
+                                            </Grid>
+                                        </Border>
+                                        <!-- ===================================== -->
+                                        <!-- SEPARADOR INFERIOR -->
+                                        <!-- ===================================== -->
+                                        <BoxView
+                                        Grid.Row="1"
+                                        HeightRequest="1"
+                                        BackgroundColor="{StaticResource SeparatorColor}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+        <!-- ===================================================== -->
+        <!-- BARRA INFERIOR IZQUIERDA -->
+        <!-- ===================================================== -->
+        <Border
+        Grid.Row="1"
+        Grid.Column="0"
+        Padding="25,0"
+        BackgroundColor="{StaticResource PanelGreen}"
+        Stroke="{StaticResource BorderColor}"
+        StrokeThickness="1">
+            <Grid ColumnDefinitions="*,Auto">
+                <HorizontalStackLayout
+                VerticalOptions="Center"
+                Spacing="8">
+                    <Border
+                    WidthRequest="30"
+                    HeightRequest="30"
+                    BackgroundColor="#E6F2E6"
+                    StrokeThickness="0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="15" />
+                        </Border.StrokeShape>
+                        <Label
+                        Text="&#xf007;"
+                        FontFamily="FASolid"
+                        FontSize="14"
+                        TextColor="{StaticResource PrimaryGreen}"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center" />
+                    </Border>
+                    <Label
+                    Text="Usuario:"
+                    FontSize="13"
+                    TextColor="{StaticResource TextSecondary}"
+                    VerticalTextAlignment="Center" />
+                    <Label
+                    Text="{Binding CurrentUser}"
+                    FontSize="13"
+                    FontAttributes="Bold"
+                    TextColor="{StaticResource TextPrimary}"
+                    VerticalTextAlignment="Center" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout
+                Grid.Column="1"
+                VerticalOptions="Center"
+                Spacing="5">
+                    <Label
+                    Text="Caja:"
+                    FontSize="13"
+                    TextColor="{StaticResource TextSecondary}"
+                    VerticalTextAlignment="Center" />
+                    <Label
+                    Text="{Binding RegisterNumber}"
+                    FontSize="13"
+                    FontAttributes="Bold"
+                    TextColor="{StaticResource TextPrimary}"
+                    VerticalTextAlignment="Center" />
+                </HorizontalStackLayout>
+            </Grid>
+        </Border>
+        <!-- ===================================================== -->
+        <!-- BARRA INFERIOR DERECHA -->
+        <!-- ===================================================== -->
+        <Border
+        Grid.Row="1"
+        Grid.Column="1"
+        Padding="40,0"
+        BackgroundColor="{StaticResource PanelGreen}"
+        Stroke="{StaticResource BorderColor}"
+        StrokeThickness="1">
+            <Grid ColumnDefinitions="*,Auto">
+                <HorizontalStackLayout
+                VerticalOptions="Center"
+                Spacing="10">
+                    <Label
+                    Text="&#xf058;"
+                    FontFamily="FASolid"
+                    FontSize="22"
+                    TextColor="{StaticResource PrimaryGreen}"
+                    VerticalTextAlignment="Center" />
+                    <Label
+                    Text="{Binding StatusMessage}"
+                    FontSize="13"
+                    TextColor="#55725D"
+                    VerticalTextAlignment="Center" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout
+                Grid.Column="1"
+                VerticalOptions="Center"
+                Spacing="5">
+                    <Label
+                    Text="Último cupón:"
+                    FontSize="13"
+                    TextColor="#55725D"
+                    VerticalTextAlignment="Center" />
+                    <Label
+                    Text="{Binding LastCouponCode}"
+                    FontSize="13"
+                    FontAttributes="Bold"
+                    TextColor="#36523D"
+                    VerticalTextAlignment="Center" />
+                </HorizontalStackLayout>
+            </Grid>
+        </Border>
+        <!-- ===================================================== -->
+        <!-- OFFCANVAS COMPLETO - HISTORIAL DE PAGOS -->
+        <!-- ===================================================== -->
+        <Grid
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.RowSpan="2"
+                Grid.ColumnSpan="2"
+                ZIndex="90"
+                IsVisible="{Binding ShowPaymentsDrawer}"
+                BackgroundColor="#66000000">
+            <!-- ================================================= -->
+            <!-- CONTENEDOR PRINCIPAL -->
+            <!--
+         45% IZQUIERDO = DETALLE DEL PAGO
+         55% DERECHO   = HISTORIAL DE PAGOS
+    -->
+            <!-- ================================================= -->
+            <Grid
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            ColumnDefinitions="45*,55*">
+                <!-- ===================================================== -->
+                <!-- ===================================================== -->
+                <!-- PANEL IZQUIERDO 45% -->
+                <!-- DETALLE DEL PAGO -->
+                <!-- ===================================================== -->
+                <!-- ===================================================== -->
+                <Border
+                    Grid.Column="0"
+                    IsVisible="{Binding ShowPaymentDetailDrawer}"
+                    BackgroundColor="White"
+                    Stroke="{StaticResource BorderColor}"
+                    StrokeThickness="1"
+                    Padding="0"
+                    ZIndex="2">
+                    <!-- SOMBRA -->
+                    <Border.Shadow>
+                        <Shadow
+                    Brush="#50000000"
+                    Offset="8,0"
+                    Radius="18"
+                    Opacity="0.35" />
+                    </Border.Shadow>
+                    <!-- ================================================= -->
+                    <!-- CONTENIDO -->
+                    <!-- ================================================= -->
+                    <Grid
+                        Padding="24,24,24,22"
+                        RowDefinitions="Auto,Auto,Auto,*"
+                        RowSpacing="16">
+                        <!-- ================================================= -->
+                        <!-- ENCABEZADO -->
+                        <!-- ================================================= -->
+                        <Grid
+                            Grid.Row="0"
+                            ColumnDefinitions="*,42">
+                            <VerticalStackLayout
+                        Grid.Column="0"
+                        Spacing="4">
+                                <HorizontalStackLayout
+                            Spacing="9">
+                                    <Label
+                                Text="&#xf15c;"
+                                FontFamily="FASolid"
+                                FontSize="19"
+                                TextColor="{StaticResource PrimaryGreen}"
+                                VerticalTextAlignment="Center" />
+                                    <Label
+                                Text="PAGO #1058"
+                                Style="{StaticResource SectionTitle}"
+                                FontSize="19"
+                                VerticalTextAlignment="Center" />
+                                </HorizontalStackLayout>
+                                <Label
+                            Text="Consulta de los cupones incluidos en el pago seleccionado."
+                            FontSize="13"
+                            TextColor="{StaticResource TextSecondary}" />
+                            </VerticalStackLayout>
+                            <!-- CERRAR DETALLE -->
+                            <ImageButton
+                                Grid.Column="1"
+                                WidthRequest="38"
+                                HeightRequest="38"
+                                Padding="10"
+                                BackgroundColor="red"
+                                HorizontalOptions="End"
+                                VerticalOptions="Start"
+                                behaviors:HandCursor.Enabled="True">
+                                <ImageButton.Source>
+                                    <FontImageSource
+                                    FontFamily="FASolid"
+                                    Glyph="&#xf00d;"
+                                    Size="18"
+                                    Color="{StaticResource TextPrimary}" />
+                                </ImageButton.Source>
+                            </ImageButton>
+                        </Grid>
+                        <!-- ================================================= -->
+                        <!-- INFORMACIÓN DEL PAGO -->
+                        <!-- ================================================= -->
+                        <Border
+                            Grid.Row="1"
+                            Style="{StaticResource CardBorder}"
+                            Padding="18,14">
+                            <Grid
+                                ColumnDefinitions="*,*"
+                                RowDefinitions="Auto,Auto,Auto"
+                                ColumnSpacing="20"
+                                RowSpacing="10">
+                                <!-- OPERADOR -->
+                                <VerticalStackLayout
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Spacing="2">
+                                    <Label
+                                        Text="Operador / Socio"
+                                        FontSize="12"
+                                        TextColor="{StaticResource TextSecondary}" />
+                                    <Label
+                                        Text="Juan Carlos Hernández"
+                                        FontSize="14"
+                                        FontAttributes="Bold"
+                                        TextColor="{StaticResource TextPrimary}"
+                                        LineBreakMode="TailTruncation" />
+                                </VerticalStackLayout>
+                                <!-- FECHA -->
+                                <VerticalStackLayout
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Spacing="2">
+                                    <Label
+                                Text="Fecha de pago"
+                                FontSize="12"
+                                TextColor="{StaticResource TextSecondary}" />
+                                    <Label
+                                Text="16/08/2026 09:35"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                TextColor="{StaticResource TextPrimary}" />
+                                </VerticalStackLayout>
+                                <!-- CUPONES -->
+                                <VerticalStackLayout
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Spacing="2">
+                                    <Label
+                                Text="Cupones pagados"
+                                FontSize="12"
+                                TextColor="{StaticResource TextSecondary}" />
+                                    <Label
+                                Text="4"
+                                FontSize="22"
+                                FontAttributes="Bold"
+                                TextColor="{StaticResource TextPrimary}" />
+                                </VerticalStackLayout>
+                                <!-- TOTAL -->
+                                <VerticalStackLayout
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Spacing="2">
+                                    <Label
+                                Text="Total pagado"
+                                FontSize="12"
+                                TextColor="{StaticResource TextSecondary}" />
+                                    <Label
+                                Text="$650.00"
+                                FontSize="22"
+                                FontAttributes="Bold"
+                                TextColor="{StaticResource PrimaryGreen}" />
+                                </VerticalStackLayout>
+                                <!-- SEPARADOR -->
+                                <BoxView
+                            Grid.Row="2"
+                            Grid.ColumnSpan="2"
+                            HeightRequest="1"
+                            Margin="0,2,0,0"
+                            BackgroundColor="{StaticResource SeparatorColor}" />
+                            </Grid>
+                        </Border>
+                        <!-- ================================================= -->
+                        <!-- TITULO DE TABLA -->
+                        <!-- ================================================= -->
+                        <Grid
+                    Grid.Row="2"
+                    ColumnDefinitions="*,Auto">
+                            <Label
+                        Text="CUPONES DEL PAGO"
+                        Style="{StaticResource SectionTitle}"
+                        FontSize="15"
+                        VerticalTextAlignment="Center" />
+                            <HorizontalStackLayout
+                        Grid.Column="1"
+                        Spacing="5"
+                        VerticalOptions="Center">
+                                <Label
+                            Text="4"
+                            FontSize="13"
+                            FontAttributes="Bold"
+                            TextColor="{StaticResource PrimaryGreen}" />
+                                <Label
+                            Text="cupón(es)"
+                            FontSize="13"
+                            TextColor="{StaticResource TextSecondary}" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                        <!-- ================================================= -->
+                        <!-- TABLA CUPONES DEL PAGO -->
+                        <!-- ================================================= -->
+                        <Border
+                            Grid.Row="3"
+                            Padding="0"
+                            Style="{StaticResource CardBorder}">
+                            <Grid
+                        RowDefinitions="56,*">
+                                <!-- ============================================= -->
+                                <!-- CABECERA -->
+                                <!-- ============================================= -->
+                                <Grid
+                            Grid.Row="0"
+                            Padding="12,0"
+                            ColumnDefinitions="5,1.6*,0.8*,1.1*,1*,1.1*"
+                            BackgroundColor="{StaticResource TableHeaderBackground}">
+                                    <BoxView
+                                Grid.Column="0"
+                                BackgroundColor="Transparent" />
+                                    <Label
+                                Grid.Column="1"
+                                Text="Serie del cupón"
+                                Style="{StaticResource TableHeader}"
+                                VerticalTextAlignment="Center" />
+                                    <Label
+                                Grid.Column="2"
+                                Text="Valor"
+                                Style="{StaticResource TableHeader}"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center" />
+                                    <Label
+                                Grid.Column="3"
+                                Text="Vigencia"
+                                Style="{StaticResource TableHeader}"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center" />
+                                    <Label
+                                Grid.Column="4"
+                                Text="Pago"
+                                Style="{StaticResource TableHeader}"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center" />
+                                    <Label
+                                Grid.Column="5"
+                                Text="Estado"
+                                Style="{StaticResource TableHeader}"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center" />
+                                </Grid>
+                                <!-- ============================================= -->
+                                <!-- FILAS DUMMY -->
+                                <!-- ============================================= -->
+                                <ScrollView
+                            Grid.Row="1"
+                            Orientation="Vertical">
+                                    <VerticalStackLayout
+                                Spacing="0"
+                                BackgroundColor="White">
+                                        <!-- ================================================= -->
+                                        <!-- CUPÓN 1 -->
+                                        <!-- ================================================= -->
+                                        <Grid
+                                    RowDefinitions="64,1"
+                                    BackgroundColor="White">
+                                            <Border
+                                        Grid.Row="0"
+                                        BackgroundColor="#FFF1F1"
+                                        StrokeThickness="0">
+                                                <Grid
+                                            ColumnDefinitions="5,1.6*,0.8*,1.1*,1*,1.1*">
+                                                    <BoxView
+                                                Grid.Column="0"
+                                                BackgroundColor="#D32F2F" />
+                                                    <Label
+                                                Grid.Column="1"
+                                                Margin="12,0,0,0"
+                                                Text="ADM-15789-TRASLADO"
+                                                Style="{StaticResource TableCell}"
+                                                FontAttributes="Bold"
+                                                TextColor="#7A4040"
+                                                LineBreakMode="NoWrap"
+                                                VerticalTextAlignment="Center" />
+                                                    <Label
+                                                Grid.Column="2"
+                                                Text="$150.00"
+                                                Style="{StaticResource TableCell}"
+                                                FontAttributes="Bold"
+                                                TextColor="#7A4040"
+                                                HorizontalTextAlignment="Center"
+                                                VerticalTextAlignment="Center" />
+                                                    <Label
+                                                Grid.Column="3"
+                                                Text="30/08/2026"
+                                                Style="{StaticResource TableCell}"
+                                                TextColor="#9A6666"
+                                                HorizontalTextAlignment="Center"
+                                                VerticalTextAlignment="Center" />
+                                                    <Border
+                                                Grid.Column="4"
+                                                Padding="8,4"
+                                                BackgroundColor="#FDE4E4"
+                                                Stroke="#D32F2F"
+                                                StrokeThickness="1"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center">
+                                                        <Border.StrokeShape>
+                                                            <RoundRectangle CornerRadius="5" />
+                                                        </Border.StrokeShape>
+                                                        <Label
+                                                    Text="PAGADO"
+                                                    FontSize="11"
+                                                    FontAttributes="Bold"
+                                                    TextColor="#C62828"
+                                                    HorizontalTextAlignment="Center"
+                                                    VerticalTextAlignment="Center" />
+                                                    </Border>
+                                                    <Border
+                                                Grid.Column="5"
+                                                Padding="8,4"
+                                                BackgroundColor="{StaticResource SuccessBackground}"
+                                                Stroke="{StaticResource Success}"
+                                                StrokeThickness="1"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center">
+                                                        <Border.StrokeShape>
+                                                            <RoundRectangle CornerRadius="5" />
+                                                        </Border.StrokeShape>
+                                                        <Label
+                                                    Text="HABILITADO"
+                                                    FontSize="11"
+                                                    FontAttributes="Bold"
+                                                    TextColor="{StaticResource Success}"
+                                                    HorizontalTextAlignment="Center"
+                                                    VerticalTextAlignment="Center" />
+                                                    </Border>
+                                                </Grid>
+                                            </Border>
+                                            <BoxView
+                                        Grid.Row="1"
+                                        HeightRequest="1"
+                                        BackgroundColor="{StaticResource SeparatorColor}" />
+                                        </Grid>
+                                        <!-- ================================================= -->
+                                        <!-- CUPÓN 2 -->
+                                        <!-- ================================================= -->
+                                        <Grid
+                                    RowDefinitions="64,1"
+                                    BackgroundColor="White">
+                                            <Border
+                                        Grid.Row="0"
+                                        BackgroundColor="#FFF1F1"
+                                        StrokeThickness="0">
+                                                <Grid
+                                            ColumnDefinitions="5,1.6*,0.8*,1.1*,1*,1.1*">
+                                                    <BoxView
+                                                Grid.Column="0"
+                                                BackgroundColor="#D32F2F" />
+                                                    <Label
+                                                Grid.Column="1"
+                                                Margin="12,0,0,0"
+                                                Text="ADM-15790-AEROPUERTO"
+                                                Style="{StaticResource TableCell}"
+                                                FontAttributes="Bold"
+                                                TextColor="#7A4040"
+                                                LineBreakMode="NoWrap"
+                                                VerticalTextAlignment="Center" />
+                                                    <Label
+                                                Grid.Column="2"
+                                                Text="$200.00"
+                                                Style="{StaticResource TableCell}"
+                                                FontAttributes="Bold"
+                                                TextColor="#7A4040"
+                                                HorizontalTextAlignment="Center"
+                                                VerticalTextAlignment="Center" />
+                                                    <Label
+                                                Grid.Column="3"
+                                                Text="30/08/2026"
+                                                Style="{StaticResource TableCell}"
+                                                TextColor="#9A6666"
+                                                HorizontalTextAlignment="Center"
+                                                VerticalTextAlignment="Center" />
+                                                    <Border
+                                                Grid.Column="4"
+                                                Padding="8,4"
+                                                BackgroundColor="#FDE4E4"
+                                                Stroke="#D32F2F"
+                                                StrokeThickness="1"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center">
+                                                        <Border.StrokeShape>
+                                                            <RoundRectangle CornerRadius="5" />
+                                                        </Border.StrokeShape>
+                                                        <Label
+                                                    Text="PAGADO"
+                                                    FontSize="11"
+                                                    FontAttributes="Bold"
+                                                    TextColor="#C62828" />
+                                                    </Border>
+                                                    <Border
+                                                Grid.Column="5"
+                                                Padding="8,4"
+                                                BackgroundColor="{StaticResource SuccessBackground}"
+                                                Stroke="{StaticResource Success}"
+                                                StrokeThickness="1"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center">
+                                                        <Border.StrokeShape>
+                                                            <RoundRectangle CornerRadius="5" />
+                                                        </Border.StrokeShape>
+                                                        <Label
+                                                    Text="HABILITADO"
+                                                    FontSize="11"
+                                                    FontAttributes="Bold"
+                                                    TextColor="{StaticResource Success}" />
+                                                    </Border>
+                                                </Grid>
+                                            </Border>
+                                            <BoxView
+                                        Grid.Row="1"
+                                        HeightRequest="1"
+                                        BackgroundColor="{StaticResource SeparatorColor}" />
+                                        </Grid>
+                                        <!-- ================================================= -->
+                                        <!-- CUPÓN 3 -->
+                                        <!-- ================================================= -->
+                                        <Grid
+                                    RowDefinitions="64,1"
+                                    BackgroundColor="White">
+                                            <Border
+                                        Grid.Row="0"
+                                        BackgroundColor="#FFF1F1"
+                                        StrokeThickness="0">
+                                                <Grid
+                                            ColumnDefinitions="5,1.6*,0.8*,1.1*,1*,1.1*">
+                                                    <BoxView
+                                                Grid.Column="0"
+                                                BackgroundColor="#D32F2F" />
+                                                    <Label
+                                                Grid.Column="1"
+                                                Margin="12,0,0,0"
+                                                Text="HOTEL-15791-SERVICIO"
+                                                Style="{StaticResource TableCell}"
+                                                FontAttributes="Bold"
+                                                TextColor="#7A4040"
+                                                VerticalTextAlignment="Center" />
+                                                    <Label
+                                                Grid.Column="2"
+                                                Text="$100.00"
+                                                Style="{StaticResource TableCell}"
+                                                FontAttributes="Bold"
+                                                TextColor="#7A4040"
+                                                HorizontalTextAlignment="Center"
+                                                VerticalTextAlignment="Center" />
+                                                    <Label
+                                                Grid.Column="3"
+                                                Text="31/08/2026"
+                                                Style="{StaticResource TableCell}"
+                                                TextColor="#9A6666"
+                                                HorizontalTextAlignment="Center"
+                                                VerticalTextAlignment="Center" />
+                                                    <Border
+                                                Grid.Column="4"
+                                                Padding="8,4"
+                                                BackgroundColor="#FDE4E4"
+                                                Stroke="#D32F2F"
+                                                StrokeThickness="1"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center">
+                                                        <Border.StrokeShape>
+                                                            <RoundRectangle CornerRadius="5" />
+                                                        </Border.StrokeShape>
+                                                        <Label
+                                                    Text="PAGADO"
+                                                    FontSize="11"
+                                                    FontAttributes="Bold"
+                                                    TextColor="#C62828" />
+                                                    </Border>
+                                                    <Border
+                                                Grid.Column="5"
+                                                Padding="8,4"
+                                                BackgroundColor="{StaticResource SuccessBackground}"
+                                                Stroke="{StaticResource Success}"
+                                                StrokeThickness="1"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center">
+                                                        <Border.StrokeShape>
+                                                            <RoundRectangle CornerRadius="5" />
+                                                        </Border.StrokeShape>
+                                                        <Label
+                                                    Text="HABILITADO"
+                                                    FontSize="11"
+                                                    FontAttributes="Bold"
+                                                    TextColor="{StaticResource Success}" />
+                                                    </Border>
+                                                </Grid>
+                                            </Border>
+                                            <BoxView
+                                        Grid.Row="1"
+                                        HeightRequest="1"
+                                        BackgroundColor="{StaticResource SeparatorColor}" />
+                                        </Grid>
+                                        <!-- ================================================= -->
+                                        <!-- CUPÓN 4 -->
+                                        <!-- ================================================= -->
+                                        <Grid
+                                    RowDefinitions="64,1"
+                                    BackgroundColor="White">
+                                            <Border
+                                        Grid.Row="0"
+                                        BackgroundColor="#FFF1F1"
+                                        StrokeThickness="0">
+                                                <Grid
+                                            ColumnDefinitions="5,1.6*,0.8*,1.1*,1*,1.1*">
+                                                    <BoxView
+                                                Grid.Column="0"
+                                                BackgroundColor="#D32F2F" />
+                                                    <Label
+                                                Grid.Column="1"
+                                                Margin="12,0,0,0"
+                                                Text="ADM-15792-CUN"
+                                                Style="{StaticResource TableCell}"
+                                                FontAttributes="Bold"
+                                                TextColor="#7A4040"
+                                                VerticalTextAlignment="Center" />
+                                                    <Label
+                                                Grid.Column="2"
+                                                Text="$200.00"
+                                                Style="{StaticResource TableCell}"
+                                                FontAttributes="Bold"
+                                                TextColor="#7A4040"
+                                                HorizontalTextAlignment="Center"
+                                                VerticalTextAlignment="Center" />
+                                                    <Label
+                                                Grid.Column="3"
+                                                Text="31/08/2026"
+                                                Style="{StaticResource TableCell}"
+                                                TextColor="#9A6666"
+                                                HorizontalTextAlignment="Center"
+                                                VerticalTextAlignment="Center" />
+                                                    <Border
+                                                Grid.Column="4"
+                                                Padding="8,4"
+                                                BackgroundColor="#FDE4E4"
+                                                Stroke="#D32F2F"
+                                                StrokeThickness="1"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center">
+                                                        <Border.StrokeShape>
+                                                            <RoundRectangle CornerRadius="5" />
+                                                        </Border.StrokeShape>
+                                                        <Label
+                                                    Text="PAGADO"
+                                                    FontSize="11"
+                                                    FontAttributes="Bold"
+                                                    TextColor="#C62828" />
+                                                    </Border>
+                                                    <Border
+                                                Grid.Column="5"
+                                                Padding="8,4"
+                                                BackgroundColor="{StaticResource SuccessBackground}"
+                                                Stroke="{StaticResource Success}"
+                                                StrokeThickness="1"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center">
+                                                        <Border.StrokeShape>
+                                                            <RoundRectangle CornerRadius="5" />
+                                                        </Border.StrokeShape>
+                                                        <Label
+                                                    Text="HABILITADO"
+                                                    FontSize="11"
+                                                    FontAttributes="Bold"
+                                                    TextColor="{StaticResource Success}" />
+                                                    </Border>
+                                                </Grid>
+                                            </Border>
+                                            <BoxView
+                                        Grid.Row="1"
+                                        HeightRequest="1"
+                                        BackgroundColor="{StaticResource SeparatorColor}" />
+                                        </Grid>
+                                    </VerticalStackLayout>
+                                </ScrollView>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+                <!-- ===================================================== -->
+                <!-- ===================================================== -->
+                <!-- PANEL DERECHO 55% -->
+                <!-- HISTORIAL DE PAGOS -->
+                <!-- SIEMPRE VISIBLE CUANDO ShowPaymentsDrawer = true -->
+                <!-- ===================================================== -->
+                <!-- ===================================================== -->
+                <Border
+    Grid.Column="1"
+    BackgroundColor="White"
+    Stroke="{StaticResource BorderColor}"
+    StrokeThickness="1"
+    Padding="0">
+                    <!-- SOMBRA -->
+                    <Border.Shadow>
+                        <Shadow
+            Brush="#50000000"
+            Offset="-8,0"
+            Radius="18"
+            Opacity="0.35" />
+                    </Border.Shadow>
+                    <Grid
+                            Padding="28,26,28,24"
+                            RowDefinitions="Auto,Auto,Auto,*"
+                            RowSpacing="18">            
+                        <!-- ================================================= -->
+                        <!-- ENCABEZADO -->
+                        <!-- ================================================= -->
+                        <Grid
+            Grid.Row="0"
+            ColumnDefinitions="*,42">
+                            <VerticalStackLayout
+                Grid.Column="0"
+                Spacing="4">
+                                <HorizontalStackLayout
+                    Spacing="9">
+                                    <Label
+                        Text="&#xf1da;"
+                        FontFamily="FASolid"
+                        FontSize="19"
+                        TextColor="{StaticResource PrimaryGreen}"
+                        VerticalTextAlignment="Center" />
+                                    <Label
+                        Text="HISTORIAL DE PAGOS"
+                        Style="{StaticResource SectionTitle}"
+                        FontSize="20"
+                        VerticalTextAlignment="Center" />
+                                </HorizontalStackLayout>
+                                <Label
+                    Text="Consulta y reimprime comprobantes de pagos realizados."
+                    FontSize="13"
+                    TextColor="{StaticResource TextSecondary}" />
+                            </VerticalStackLayout>
+                            <!-- CERRAR DRAWER -->
+                            <ImageButton
+                                Grid.Column="1"
+                                WidthRequest="38"
+                                HeightRequest="38"
+                                Padding="10"
+                                BackgroundColor="Transparent"
+                                HorizontalOptions="End"
+                                VerticalOptions="Start"
+                                behaviors:HandCursor.Enabled="True"
+                                Command="{Binding HideHistoryCommand}"
+                                >
+                                <ImageButton.Source>
+                                    <FontImageSource
+                        FontFamily="FASolid"
+                        Glyph="&#xf00d;"
+                        Size="18"
+                        Color="{StaticResource TextPrimary}" />
+                                </ImageButton.Source>
+                            </ImageButton>
+                        </Grid>
+                        <!-- ================================================= -->
+                        <!-- BUSCADOR -->
+                        <!-- ================================================= -->
+                        <VerticalStackLayout
+            Grid.Row="1"
+            Spacing="8">
+                            <Label
+                Text="Buscar por folio de pago"
+                Style="{StaticResource FieldLabel}" />
+                            <Border
+                HeightRequest="54"
+                Style="{StaticResource InputBorder}">
+                                <Grid
+                    ColumnDefinitions="*,52">
+                                    <Entry
+                        Grid.Column="0"
+                        Margin="14,0,0,0"
+                        Style="{StaticResource InputEntry}"
+                        Placeholder="Ingrese el folio de pago..."
+                        Keyboard="Numeric"
+                        ReturnType="Search" />
+                                    <BoxView
+                        Grid.Column="1"
+                        WidthRequest="1"
+                        HorizontalOptions="Start"
+                        BackgroundColor="#E3E3E3" />
+                                    <ImageButton
+                        Grid.Column="1"
+                        WidthRequest="50"
+                        HeightRequest="50"
+                        Padding="15"
+                        BackgroundColor="Transparent"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        behaviors:HandCursor.Enabled="True">
+                                        <ImageButton.Source>
+                                            <FontImageSource
+                                FontFamily="FASolid"
+                                Glyph="&#xf002;"
+                                Size="18"
+                                Color="{StaticResource PrimaryGreen}" />
+                                        </ImageButton.Source>
+                                    </ImageButton>
+                                </Grid>
+                            </Border>
+                        </VerticalStackLayout>
+                        <!-- ================================================= -->
+                        <!-- CONTADOR -->
+                        <!-- ================================================= -->
+                        <Grid
+            Grid.Row="2"
+            ColumnDefinitions="*,Auto">
+                            <Label
+                Text="REGISTRO DE PAGOS"
+                Style="{StaticResource SectionTitle}"
+                FontSize="15"
+                VerticalTextAlignment="Center" />
+                            <HorizontalStackLayout
+                Grid.Column="1"
+                Spacing="5"
+                VerticalOptions="Center">
+                                <Label
+                    Text="{Binding Payments.Count}"
+                    FontSize="13"
+                    FontAttributes="Bold"
+                    TextColor="{StaticResource PrimaryGreen}" />
+                                <Label
+                    Text="registro(s)"
+                    FontSize="13"
+                    TextColor="{StaticResource TextSecondary}" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                        <!-- ================================================= -->
+                        <!-- TABLA HISTORIAL -->
+                        <!-- ================================================= -->
+                        <Border
+            Grid.Row="3"
+            Padding="0"
+            Style="{StaticResource CardBorder}">
+                            <Grid
+                RowDefinitions="56,*">
+                                <!-- ============================================= -->
+                                <!-- CABECERA -->
+                                <!-- ============================================= -->
+                                <Grid
+                    Grid.Row="0"
+                    Padding="16,0"
+                    ColumnDefinitions="0.75*,1.75*,0.85*,0.95*,1.35*,1.05*"
+                    BackgroundColor="{StaticResource TableHeaderBackground}">
+                                    <Label
+                        Grid.Column="0"
+                        Text="Folio"
+                        Style="{StaticResource TableHeader}"
+                        VerticalTextAlignment="Center" />
+                                    <Label
+                        Grid.Column="1"
+                        Text="Operador / Socio"
+                        Style="{StaticResource TableHeader}"
+                        VerticalTextAlignment="Center" />
+                                    <Label
+                        Grid.Column="2"
+                        Text="Cupones"
+                        Style="{StaticResource TableHeader}"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center" />
+                                    <Label
+                        Grid.Column="3"
+                        Text="Total"
+                        Style="{StaticResource TableHeader}"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center" />
+                                    <Label
+                                    Grid.Column="4"
+                                    Text="Fecha de pago"
+                                    Style="{StaticResource TableHeader}"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center" />
+                                    <Label
+                                        
+                                    Grid.Column="5"
+                                    Text="Acción"
+                                    Style="{StaticResource TableHeader}"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center" />
+                                </Grid>
+                                <!-- ============================================= -->
+                                <!-- COLLECTION VIEW -->
+                                <!-- ============================================= -->
+                                <CollectionView
+                                    
+                                    Grid.Row="1"
+                                    ItemsSource="{Binding Payments}"
+                                    BackgroundColor="White"
+                                    VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    SelectionMode="None">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout
+                            Orientation="Vertical"
+                            ItemSpacing="0" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.EmptyView>
+                                        <VerticalStackLayout
+                            Padding="20"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center">
+                                            <Label
+                                Text="No hay pagos registrados."
+                                FontSize="14"
+                                TextColor="{StaticResource TextSecondary}"
+                                HorizontalTextAlignment="Center" />
+                                        </VerticalStackLayout>
+                                    </CollectionView.EmptyView>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="viewModels:CouponPaymentItemViewModel">
+                                            <VerticalStackLayout
+                                                Spacing="0"
+                                                BackgroundColor="White">
+                                                <!-- ================================================= -->
+                                                <!-- FILA PRINCIPAL DEL PAGO -->
+                                                <!-- ================================================= -->
+                                                <Grid
+                                                    Background="White"
+                                                    HeightRequest="66"
+                                                    Padding="16,0"
+                                                    ColumnDefinitions="0.75*,1.75*,0.85*,0.95*,1.35*,1.05*">
+                                                    <!-- FOLIO -->
+                                                    <Label
+                                                        Grid.Column="0"
+                                                        Text="{Binding Payment.CouponPaymentId}"
+                                                        FontAttributes="Bold"
+                                                        TextColor="{StaticResource TextPrimary}"
+                                                        VerticalTextAlignment="Center" />
+                                                    <!-- OPERADOR / SOCIO -->
+                                                    <Label
+                                                        Grid.Column="1"
+                                                        Text="{Binding Payment.user.partnerReference}"
+                                                        TextColor="{StaticResource TextPrimary}"
+                                                        LineBreakMode="TailTruncation"
+                                                        VerticalTextAlignment="Center" />
+                                                    <!-- TOTAL DE CUPONES -->
+                                                    <Label
+                                                        Grid.Column="2"
+                                                        Text="{Binding Payment.Cupons.Count}"
+                                                        TextColor="{StaticResource TextPrimary}"
+                                                        HorizontalTextAlignment="Center"
+                                                        VerticalTextAlignment="Center" />
+                                                    <!-- TOTAL -->
+                                                    <Label
+                                                        Grid.Column="3"
+                                                        Text="{Binding Payment.TotalAmount, StringFormat='${0:N2}'}"
+                                                        FontAttributes="Bold"
+                                                        TextColor="{StaticResource PrimaryGreen}"
+                                                        HorizontalTextAlignment="Center"
+                                                        VerticalTextAlignment="Center" />
+                                                    <!-- FECHA DE PAGO -->
+                                                    <Label
+                                                        Grid.Column="4"
+                                                        Text="{Binding Payment.CreatedDate, StringFormat='{0:dd/MM/yyyy HH:mm}'}"
+                                                        TextColor="{StaticResource TextPrimary}"
+                                                        HorizontalTextAlignment="Center"
+                                                        VerticalTextAlignment="Center" />
+                                                    <!-- ACCIÓN -->
+                                                    <!-- ACCIONES -->
+                                                    <HorizontalStackLayout
+                                                        Grid.Column="5"
+                                                        Spacing="10"
+                                                        HorizontalOptions="Center"
+                                                        VerticalOptions="Center">
+
+                                                        <!-- ============================================= -->
+                                                        <!-- VER DETALLE -->
+                                                        <!-- FontAwesome: Eye -->
+                                                        <!-- ============================================= -->
+                                                        <ImageButton
+                                                            WidthRequest="38"
+                                                            HeightRequest="38"
+                                                            Padding="10"
+                                                            BackgroundColor="Transparent"
+                                                            HorizontalOptions="Center"
+                                                            VerticalOptions="Center"
+                                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.TogglePaymentCommand}"
+                                                            CommandParameter="{Binding .}"
+                                                            behaviors:HandCursor.Enabled="True">
+
+                                                            <ImageButton.Source>
+                                                                <FontImageSource
+                                                                    FontFamily="FASolid"
+                                                                    Glyph="&#xf06e;"
+                                                                    Size="17"
+                                                                    Color="{StaticResource PrimaryGreen}" />
+                                                            </ImageButton.Source>
+
+                                                        </ImageButton>
+
+
+                                                        <!-- ============================================= -->
+                                                        <!-- REIMPRIMIR TICKET -->
+                                                        <!-- FontAwesome: Print -->
+                                                        <!-- ============================================= -->
+                                                        <ImageButton
+                                                            WidthRequest="38"
+                                                            HeightRequest="38"
+                                                            Padding="10"
+                                                            BackgroundColor="Transparent"
+                                                            HorizontalOptions="Center"
+                                                            VerticalOptions="Center"
+                                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ReprintPaymentCommand}"
+                                                            CommandParameter="{Binding .}"
+                                                            behaviors:HandCursor.Enabled="True">
+
+                                                            <ImageButton.Source>
+                                                                <FontImageSource
+                                                                    FontFamily="FASolid"
+                                                                    Glyph="&#xf02f;"
+                                                                    Size="17"
+                                                                    Color="{StaticResource TextPrimary}" />
+                                                            </ImageButton.Source>
+
+                                                        </ImageButton>
+
+                                                    </HorizontalStackLayout>
+                                                </Grid>
+                                                <!-- ================================================= -->
+                                                <!-- SUBLISTA DE CUPONES -->
+                                                <!-- ================================================= -->
+                                                <!-- ================================================= -->
+                                                <!-- SUBLISTA DE CUPONES DEL PAGO -->
+                                                <!-- ================================================= -->
+
+                                                <Border
+                                                    IsVisible="{Binding IsExpanded}"
+                                                    Margin="16,8,16,12"
+                                                    Padding="0"
+                                                    BackgroundColor="#F8FAF8"
+                                                    Stroke="{StaticResource BorderColor}"
+                                                    StrokeThickness="1">
+
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="8" />
+                                                    </Border.StrokeShape>
+
+                                                    <VerticalStackLayout Spacing="0">
+
+                                                        <!-- ============================================= -->
+                                                        <!-- CABECERA DE LA SUBLISTA -->
+                                                        <!-- ============================================= -->
+
+                                                        <Grid
+                                                            HeightRequest="42"
+                                                            Padding="14,0"
+                                                            BackgroundColor="#EEF5EF"
+                                                            ColumnDefinitions="0.75*,1.60*,0.90*,1.10*">
+
+                                                            <Label
+                                                                Grid.Column="0"
+                                                                Text="ID"
+                                                                FontSize="11"
+                                                                FontAttributes="Bold"
+                                                                TextColor="{StaticResource PrimaryGreen}"
+                                                                VerticalTextAlignment="Center" />
+
+                                                            <Label
+                                                                Grid.Column="1"
+                                                                Text="Cupón"
+                                                                FontSize="11"
+                                                                FontAttributes="Bold"
+                                                                TextColor="{StaticResource PrimaryGreen}"
+                                                                VerticalTextAlignment="Center" />
+
+                                                            <Label
+                                                                Grid.Column="2"
+                                                                Text="Valor"
+                                                                FontSize="11"
+                                                                FontAttributes="Bold"
+                                                                TextColor="{StaticResource PrimaryGreen}"
+                                                                HorizontalTextAlignment="Center"
+                                                                VerticalTextAlignment="Center" />
+
+                                                            <Label
+                                                                Grid.Column="3"
+                                                                Text="Fecha"
+                                                                FontSize="11"
+                                                                FontAttributes="Bold"
+                                                                TextColor="{StaticResource PrimaryGreen}"
+                                                                HorizontalTextAlignment="Center"
+                                                                VerticalTextAlignment="Center" />
+
+                                                        </Grid>
+
+                                                        <!-- ============================================= -->
+                                                        <!-- CUPONES DEL PAGO -->
+                                                        <!-- ============================================= -->
+
+                                                        <VerticalStackLayout
+                                                            Padding="14,0"
+                                                            Spacing="0">
+
+                                                            <BindableLayout.ItemsSource>
+                                                                <Binding Path="Payment.Cupons" />
+                                                            </BindableLayout.ItemsSource>
+
+                                                            <BindableLayout.ItemTemplate>
+
+                                                                <DataTemplate x:DataType="Models:Cupon">
+
+                                                                    <Grid
+                                                                        HeightRequest="46"
+                                                                        ColumnDefinitions="0.75*,1.60*,0.90*,1.10*">
+
+                                                                        <!-- ID -->
+
+                                                                        <Label
+                                                                            Grid.Column="0"
+                                                                            Text="{Binding DisplayFolio}"
+                                                                            FontSize="12"
+                                                                            FontAttributes="Bold"
+                                                                            TextColor="{StaticResource TextPrimary}"
+                                                                            VerticalTextAlignment="Center" />
+
+                                                                        <!-- CUPÓN -->
+
+                                                                        <Label
+                                                                            Grid.Column="1"
+                                                                            FontSize="12"
+                                                                            TextColor="{StaticResource TextPrimary}"
+                                                                            LineBreakMode="TailTruncation"
+                                                                            VerticalTextAlignment="Center">
+
+                                                                            <Label.Text>
+
+                                                                                <MultiBinding StringFormat="{}{0}-{1}-{2}">
+
+                                                                                    <Binding Path="Couponrate.Hotel.shortname" />
+
+                                                                                    <Binding Path="DisplayFolio" />
+
+                                                                                    <Binding Path="Couponrate.Cupontype.Name" />
+
+                                                                                </MultiBinding>
+
+                                                                            </Label.Text>
+
+                                                                        </Label>
+
+                                                                        <!-- VALOR -->
+
+                                                                        <Label
+                                                                            Grid.Column="2"
+                                                                            Text="{Binding Couponrate.Valor, StringFormat='${0:N2}'}"
+                                                                            FontSize="12"
+                                                                            FontAttributes="Bold"
+                                                                            TextColor="{StaticResource PrimaryGreen}"
+                                                                            HorizontalTextAlignment="Center"
+                                                                            VerticalTextAlignment="Center" />
+
+                                                                        <!-- FECHA -->
+
+                                                                        <Label
+                                                                            Grid.Column="3"
+                                                                            Text="{Binding PaymentDate, StringFormat='{0:dd/MM/yyyy}'}"
+                                                                            FontSize="12"
+                                                                            TextColor="{StaticResource TextSecondary}"
+                                                                            HorizontalTextAlignment="Center"
+                                                                            VerticalTextAlignment="Center" />
+
+                                                                    </Grid>
+
+                                                                </DataTemplate>
+
+                                                            </BindableLayout.ItemTemplate>
+
+                                                        </VerticalStackLayout>
+
+                                                    </VerticalStackLayout>
+
+                                                </Border>
+                                                <!-- SEPARADOR ENTRE PAGOS -->
+                                                <BoxView
+                                                    HeightRequest="1"
+                                                    BackgroundColor="{StaticResource SeparatorColor}" />
+                                            </VerticalStackLayout>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+        <!-- ===================================================== -->
+        <!-- MODAL CONFIRMAR COBRO -->
+        <!-- ===================================================== -->
+        <Grid
+        x:Name="ChargeModalOverlay"
+        Grid.Row="0"
+        Grid.Column="0"
+        Grid.RowSpan="2"
+        Grid.ColumnSpan="2"
+        ZIndex="100"
+        IsVisible="{Binding ShowChargeModal}"
+        BackgroundColor="{StaticResource ModalOverlayColor}">
+            <Border
+            x:Name="ChargeModalCard"
+            WidthRequest="520"
+            Style="{StaticResource ModalCard}"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Scale="0.92">
+                <Grid
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+                RowSpacing="14">
+                    <!-- CERRAR -->
+                    <ImageButton
+                    Grid.Row="0"
+                    WidthRequest="35"
+                    HeightRequest="35"
+                    Padding="10"
+                    Margin="0,-8,-10,0"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="End"
+                    VerticalOptions="Start"
+                    Command="{Binding CloseChargeModalCommand}">
+                        <ImageButton.Source>
+                            <FontImageSource
+                            FontFamily="FASolid"
+                            Glyph="&#xf00d;"
+                            Size="17"
+                            Color="#333333" />
+                        </ImageButton.Source>
+                    </ImageButton>
+                    <!-- ENCABEZADO -->
+                    <VerticalStackLayout
+                    Grid.Row="1"
+                    Margin="0,-15,0,0"
+                    Spacing="9"
+                    HorizontalOptions="Center">
+                        <Border
+                        WidthRequest="66"
+                        HeightRequest="66"
+                        BackgroundColor="#E4F5E6"
+                        StrokeThickness="0"
+                        HorizontalOptions="Center">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="33" />
+                            </Border.StrokeShape>
+                            <Label
+                            Text="&#xf00c;"
+                            FontFamily="FASolid"
+                            FontSize="30"
+                            TextColor="{StaticResource PrimaryGreen}"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center" />
+                        </Border>
+                        <Label
+                        Text="¿Confirmar cobro de cupones?"
+                        FontSize="21"
+                        FontAttributes="Bold"
+                        TextColor="{StaticResource PrimaryGreen}"
+                        HorizontalTextAlignment="Center" />
+                        <Label
+                        Text="Se cobrarán los cupones por un total de:"
+                        FontSize="13"
+                        TextColor="{StaticResource TextSecondary}"
+                        HorizontalTextAlignment="Center" />
+                        <Label
+                        Text="{Binding TotalAmount, StringFormat='${0:N2}'}"
+                        FontSize="31"
+                        FontAttributes="Bold"
+                        TextColor="{StaticResource PrimaryGreen}"
+                        HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                    <!-- RESUMEN -->
+                    <Border
+                    Grid.Row="2"
+                    Margin="5,4,5,0"
+                    Padding="18,13"
+                    BackgroundColor="#F3FAF3"
+                    StrokeThickness="0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="7" />
+                        </Border.StrokeShape>
+                        <Grid
+                        ColumnDefinitions="32,*,Auto"
+                        RowDefinitions="Auto,Auto,Auto"
+                        RowSpacing="12">
+                            <!-- CANTIDAD -->
+                            <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Text="&#xf145;"
+                            FontFamily="FASolid"
+                            FontSize="17"
+                            TextColor="{StaticResource PrimaryGreen}"
+                            VerticalTextAlignment="Center" />
+                            <Label
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Text="Cantidad de cupones:"
+                            FontSize="13"
+                            TextColor="{StaticResource TextPrimary}"
+                            VerticalTextAlignment="Center" />
+                            <Label
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Text="{Binding CouponsCount}"
+                            FontSize="13"
+                            FontAttributes="Bold"
+                            TextColor="{StaticResource TextPrimary}"
+                            VerticalTextAlignment="Center"
+                            HorizontalOptions="Fill"
+                            HorizontalTextAlignment="End" />
+                            <!-- TOTAL -->
+                            <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Text="&#xf0d6;"
+                            FontFamily="FASolid"
+                            FontSize="17"
+                            TextColor="{StaticResource PrimaryGreen}"
+                            VerticalTextAlignment="Center" />
+                            <Label
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Text="Total a cobrar:"
+                            FontSize="13"
+                            TextColor="{StaticResource TextPrimary}"
+                            VerticalTextAlignment="Center" />
+                            <Label
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Text="{Binding TotalAmount, StringFormat='${0:N2}'}"
+                            FontSize="13"
+                            FontAttributes="Bold"
+                            TextColor="{StaticResource PrimaryGreen}"
+                            VerticalTextAlignment="Center"
+                            HorizontalOptions="Fill"
+                            HorizontalTextAlignment="End" />
+                            <!-- OPERADOR -->
+                            <Label
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Text="&#xf007;"
+                            FontFamily="FASolid"
+                            FontSize="17"
+                            TextColor="{StaticResource PrimaryGreen}"
+                            VerticalTextAlignment="Center" />
+                            <Label
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Text="Operador / Socio:"
+                            FontSize="13"
+                            TextColor="{StaticResource TextPrimary}"
+                            VerticalTextAlignment="Center" />
+                            <Label
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            HorizontalOptions="Fill"
+                            HorizontalTextAlignment="End"
+                            VerticalTextAlignment="Center"
+                            FontSize="13"
+                            FontAttributes="Bold"
+                            TextColor="{StaticResource TextPrimary}">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0} - {1}">
+                                        <Binding Path="OperatorNumber"/>
+                                        <Binding Path="OperatorName"/>
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                        </Grid>
+                    </Border>
+                    <!-- SEPARADOR -->
+                    <BoxView
+                    Grid.Row="3"
+                    Margin="-28,4,-28,0"
+                    HeightRequest="1"
+                    BackgroundColor="#E7E7E7" />
+                    <!-- BOTONES -->
+                    <Grid
+                    Grid.Row="4"
+                    Margin="0,4,0,0"
+                    ColumnDefinitions="*,*"
+                    ColumnSpacing="12">
+                        <Button
+                        Grid.Column="0"
+                        HeightRequest="51"
+                        Text="CANCELAR"
+                        FontSize="13"
+                        Style="{StaticResource SecondaryButton}"
+                        Command="{Binding CloseChargeModalCommand}"/>
+                        <Button
+                        Grid.Column="1"
+                        HeightRequest="51"
+                        Text="CONFIRMAR PAGO"
+                        FontSize="13"
+                        Style="{StaticResource PrimaryButton}"
+                        Command="{Binding PayCuponCommand}"
+                        ContentLayout="Left,10">
+                            <Button.ImageSource>
+                                <FontImageSource
+                                FontFamily="FASolid"
+                                Glyph="&#xf058;"
+                                Size="17"
+                                Color="White" />
+                            </Button.ImageSource>
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+        <!-- ===================================================== -->
+        <!-- MODAL DE ALERTA -->
+        <!-- ===================================================== -->
+        <Grid
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.RowSpan="2"
+            Grid.ColumnSpan="2"
+            ZIndex="200"
+            IsVisible="{Binding ShowAlertModal}"
+            BackgroundColor="{StaticResource ModalOverlayColor}">
+            <Border
+                WidthRequest="430"
+                Padding="28,24"
+                BackgroundColor="White"
+                Stroke="{StaticResource BorderColor}"
+                StrokeThickness="1"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Border.Shadow>
+                    <Shadow
+                        Brush="#70000000"
+                        Offset="0,8"
+                        Radius="18"
+                        Opacity="0.45" />
+                </Border.Shadow>
+                <VerticalStackLayout Spacing="16">
+                    <Border
+                        WidthRequest="66"
+                        HeightRequest="66"
+                        BackgroundColor="{Binding AlertBackgroundColor}"
+                        StrokeThickness="0"
+                        HorizontalOptions="Center">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="33" />
+                        </Border.StrokeShape>
+                        <Label
+                            Text="{Binding AlertIcon}"
+                            FontFamily="FASolid"
+                            FontSize="30"
+                            TextColor="{Binding AlertColor}"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center" />
+                    </Border>
+                    <Label
+                        Text="{Binding AlertTitle}"
+                        FontSize="21"
+                        FontAttributes="Bold"
+                        TextColor="{Binding AlertColor}"
+                        HorizontalTextAlignment="Center" />
+                    <Label
+                        Text="{Binding AlertMessage}"
+                        FontSize="14"
+                        TextColor="{StaticResource TextSecondary}"
+                        HorizontalTextAlignment="Center"
+                        LineBreakMode="WordWrap" />
+                    <Button
+                        Margin="0,8,0,0"
+                        HeightRequest="50"
+                        Text="ACEPTAR"
+                        Style="{StaticResource PrimaryButton}"
+                        BackgroundColor="{Binding AlertColor}"
+                        Command="{Binding CloseAlertCommand}" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+    </Grid>
+</ContentPage>

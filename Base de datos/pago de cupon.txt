@@ -1,0 +1,22 @@
+SELECT * FROM pagocupones WHERE id_op='X' 
+
+SELECT id_proveedor,proveedor,operador FROM proveedores WHERE Id_proveedor='4500'
+
+select * from CuponesBloqueo where numero=13555 and sector='XC' and status='BLOQUEADO'
+
+select * from CuponesEntagen where sector='XC' order by cuponinicial
+
+select * from CuponesEntagen where sector='XC' order by cuponinicial
+
+select * from tarifacupones where sector='XC' and proveedor=202 and perforacion='A1'
+
+select * from PAGOCUPONES where sector='XC' and numero=13555
+
+SELECT DOCUMENTO, VALOR FROM CONSECUTIVOS WHERE DOCUMENTO='PagoCupon'
+
+exec sp_executesql N'UPDATE "SINDQR".."CONSECUTIVOS" SET "VALOR"=@P1 WHERE "DOCUMENTO"=@P2 AND "VALOR"=@P3',N'@P1 money,@P2 varchar(8000),@P3 money',$433437.0000,'PagoCupon',$433436.0000
+
+EXECUTE AJR_REGISTRAPAGOCUPON 'P-433437','4500','XC',13555,'A1',1450,'202','20241120','15:35','10-1','EMITIDA'
+
+SELECT * FROM pagocupones WHERE id_op='X' 
+

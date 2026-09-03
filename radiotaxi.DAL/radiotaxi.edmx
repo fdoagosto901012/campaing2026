@@ -1,0 +1,3112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="radiotaxiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="_Group">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="_Group_user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="100" />
+          <Property Name="id_Group" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AppService">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="start_lat" Type="nvarchar" MaxLength="100" />
+          <Property Name="start_lng" Type="nvarchar" MaxLength="100" />
+          <Property Name="end_lat" Type="nvarchar" MaxLength="100" />
+          <Property Name="end_lng" Type="nvarchar" MaxLength="100" />
+          <Property Name="siteId" Type="nvarchar" MaxLength="100" />
+          <Property Name="zoneStart_Id" Type="int" />
+          <Property Name="zoneEnd_Id" Type="int" />
+          <Property Name="amount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="origin" Type="nvarchar(max)" />
+          <Property Name="destiny" Type="nvarchar(max)" />
+          <Property Name="origin_description" Type="nvarchar(max)" />
+          <Property Name="destiny_description" Type="nvarchar(max)" />
+          <Property Name="Refrence" Type="nvarchar(max)" />
+          <Property Name="board_taxi_date" Type="datetime" />
+          <Property Name="finish_taxi_date" Type="datetime" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dispatch.dbo.audience' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="audience">
+          <Key>
+            
+            <PropertyRef Name="clientid" />
+            
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="clientid" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="secret" Type="nvarchar(max)" />
+          <Property Name="name" Type="nvarchar" MaxLength="200" />
+          <Property Name="status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="baseService">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="catalogService">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChatMessage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="_Message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="_NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="itemId" Type="int" Nullable="false" />
+          <Property Name="identify" Type="nvarchar" MaxLength="100" />
+          <Property Name="arrivalTime" Type="datetime" />
+          <Property Name="sendedTime" Type="datetime" />
+          <Property Name="authyId" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="latitude" Type="float" />
+          <Property Name="longitude" Type="float" />
+        </EntityType>
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="phone" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="lastname1" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="lastname2" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="dateCreated" Type="datetime" Nullable="false" />
+          <Property Name="dateUpdated" Type="datetime" />
+          <Property Name="isBlocked" Type="bit" />
+          <Property Name="blockedReason" Type="nvarchar(max)" />
+          <Property Name="createdBy" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="editedBy" Type="nvarchar(max)" />
+          <Property Name="phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="note" Type="nvarchar(max)" />
+          <Property Name="isHome" Type="bit" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+          <Property Name="authyId" Type="nvarchar" MaxLength="100" />
+          <Property Name="connectionId" Type="nvarchar" MaxLength="200" />
+          <Property Name="padronId" Type="int" />
+          <Property Name="gps_hub_connectionId" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dispatch.dbo.company' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="company">
+          <Key>
+            <PropertyRef Name="id" />
+            
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="200" />
+          <Property Name="phone" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dispatch.dbo.department' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="department">
+          <Key>
+            <PropertyRef Name="id" />
+            
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dispatch.dbo.firebase' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="firebase">
+          <Key>
+            <PropertyRef Name="id" />
+            
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="IMEI" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="isActive" Type="int" />
+        </EntityType>
+        <EntityType Name="GPSphones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="phoneID" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+          <Property Name="Heading" Type="float" />
+          <Property Name="Accuracy" Type="float" Nullable="false" />
+          <Property Name="Altitude" Type="float" Nullable="false" />
+          <Property Name="AltitudeAccuracy" Type="float" Nullable="false" />
+          <Property Name="Speed" Type="float" Nullable="false" />
+          <Property Name="GpsDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dispatch.dbo.InterestPoints' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="InterestPoints">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="CreatedByUserId" />
+            <PropertyRef Name="ModifiedByUserId" />
+            <PropertyRef Name="UtcDateModified" />
+            <PropertyRef Name="UtcDateCreated" />
+            <PropertyRef Name="ZoneId" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Data" Type="nvarchar(max)" />
+          <Property Name="CreatedByUserId" Type="int" Nullable="false" />
+          <Property Name="ModifiedByUserId" Type="int" Nullable="false" />
+          <Property Name="UtcDateModified" Type="datetime" Nullable="false" />
+          <Property Name="UtcDateCreated" Type="datetime" Nullable="false" />
+          <Property Name="ZoneId" Type="int" Nullable="false" />
+          <Property Name="PointTypeId" Type="int" />
+        </EntityType>
+        <EntityType Name="package">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="50" />
+          <Property Name="amount" Type="float" />
+          <Property Name="validDays" Type="int" Nullable="false" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="dateCreate" Type="datetime" />
+          <Property Name="deteDeleted" Type="datetime" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dispatch.dbo.parameter' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="parameter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="status" Type="bit" />
+        </EntityType>
+        <EntityType Name="paymentPackages">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="conektaId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="package_id" Type="int" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="payment_status" Type="nvarchar" MaxLength="30" />
+          <Property Name="payment_method" Type="nvarchar" MaxLength="30" />
+          <Property Name="dateStart" Type="datetime" Nullable="false" />
+          <Property Name="dateEnd" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dispatch.dbo.PointTypes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="PointTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dispatch.dbo.profile' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="profile">
+          <Key>
+            <PropertyRef Name="profileId" />
+            
+            
+            
+            
+          </Key>
+          <Property Name="profileId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="systemId" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="objectACLId" Type="int" Nullable="false" />
+          <Property Name="objectAcl_objectACLId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dispatch.dbo.Rates' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Rates">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="CreatedByUserId" />
+            <PropertyRef Name="ModifiedByUserId" />
+            <PropertyRef Name="UtcDateModified" />
+            <PropertyRef Name="UtcDateCreated" />
+            <PropertyRef Name="TariffId" />
+            <PropertyRef Name="Currency" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Data" Type="nvarchar(max)" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="CreatedByUserId" Type="int" Nullable="false" />
+          <Property Name="ModifiedByUserId" Type="int" Nullable="false" />
+          <Property Name="UtcDateModified" Type="datetime" Nullable="false" />
+          <Property Name="UtcDateCreated" Type="datetime" Nullable="false" />
+          <Property Name="TariffId" Type="int" Nullable="false" />
+          <Property Name="Currency" Type="varchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="report">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" />
+          <Property Name="phone" Type="nvarchar" MaxLength="15" />
+          <Property Name="address" Type="nvarchar(max)" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="dateCreated" Type="datetime" />
+          <Property Name="dateEdited" Type="datetime" />
+          <Property Name="createdBy" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="editedBy" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dispatch.dbo.role' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dispatch.dbo.roleparam' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="roleparam">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="paramId" Type="int" />
+          <Property Name="roleId" Type="int" />
+        </EntityType>
+        <EntityType Name="rtNumberService">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="taxiNumber" Type="int" />
+          <Property Name="rtNumber" Type="int" />
+          <Property Name="serviceId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="statusService">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dispatch.dbo.SuperBlocks' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="SuperBlocks">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CreatedByUserId" />
+            <PropertyRef Name="ModifiedByUserId" />
+            <PropertyRef Name="UtcDateModified" />
+            <PropertyRef Name="UtcDateCreated" />
+            <PropertyRef Name="ZoneId" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Data" Type="nvarchar(max)" />
+          <Property Name="CreatedByUserId" Type="int" Nullable="false" />
+          <Property Name="ModifiedByUserId" Type="int" Nullable="false" />
+          <Property Name="UtcDateModified" Type="datetime" Nullable="false" />
+          <Property Name="UtcDateCreated" Type="datetime" Nullable="false" />
+          <Property Name="ZoneId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dispatch.dbo.Tariffs' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Tariffs">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="CreatedByUserId" />
+            <PropertyRef Name="ModifiedByUserId" />
+            <PropertyRef Name="UtcDateModified" />
+            <PropertyRef Name="UtcDateCreated" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="CreatedByUserId" Type="int" Nullable="false" />
+          <Property Name="ModifiedByUserId" Type="int" Nullable="false" />
+          <Property Name="UtcDateModified" Type="datetime" Nullable="false" />
+          <Property Name="UtcDateCreated" Type="datetime" Nullable="false" />
+          <Property Name="ImageUrl" Type="nvarchar(max)" />
+          <Property Name="Type" Type="int" />
+          <Property Name="ProfileImgUrl" Type="nvarchar(max)" />
+          <Property Name="MapCenter" Type="nvarchar(max)" />
+          <Property Name="ZoomLevel" Type="int" />
+          <Property Name="SearchRadius" Type="int" />
+        </EntityType>
+        <EntityType Name="taxiApp">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="originLatitude" Type="float" Nullable="false" />
+          <Property Name="originLongitude" Type="float" Nullable="false" />
+          <Property Name="destinationLatitude" Type="float" Nullable="false" />
+          <Property Name="destinationLongitude" Type="float" Nullable="false" />
+          <Property Name="isReservation" Type="bit" Nullable="false" />
+          <Property Name="dataService" Type="datetime" />
+          <Property Name="timeService" Type="bigint" />
+          <Property Name="noteService" Type="nvarchar(max)" />
+          <Property Name="statusServiceId" Type="int" />
+          <Property Name="phone" Type="nvarchar" MaxLength="100" />
+          <Property Name="name" Type="nvarchar(max)" />
+          <Property Name="editedBy" Type="nvarchar(max)" />
+          <Property Name="noteOperator" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="taxiReport">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="taxiNumber" Type="int" />
+          <Property Name="reportId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="taxiService">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="startPoint" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="endPoint" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="dateRequested" Type="datetime" Nullable="false" />
+          <Property Name="createdBy" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="editedBy" Type="nvarchar(max)" />
+          <Property Name="phoneId" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="statusServiceId" Type="int" Nullable="false" />
+          <Property Name="note" Type="nvarchar(max)" />
+          <Property Name="datePickUp" Type="datetime" Nullable="false" />
+          <Property Name="autoRenew" Type="bit" Nullable="false" />
+          <Property Name="baseServiceId" Type="int" Nullable="false" />
+          <Property Name="catalogServiceId" Type="int" Nullable="false" />
+          <Property Name="days" Type="nvarchar(max)" />
+          <Property Name="AppServiceId" Type="int" />
+          <Property Name="operatorPhoneId" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dispatch.dbo.token' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="token">
+          <Key>
+            <PropertyRef Name="tokenId" />
+            
+          </Key>
+          <Property Name="tokenId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="tokenTypeId" Type="int" />
+          <Property Name="tokenValue" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="expirationDt" Type="datetime" />
+          <Property Name="userId" Type="int" />
+          <Property Name="users_userId" Type="int" />
+        </EntityType>
+        <EntityType Name="unit_taxi">
+          <Key>
+            <PropertyRef Name="rtNumber" />
+          </Key>
+          <Property Name="rtNumber" Type="int" Nullable="false" />
+          <Property Name="id_padron" Type="int" Nullable="false" />
+          <Property Name="phoneId" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dispatch.dbo.user' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="userId" />
+            
+            
+            
+            
+            
+          </Key>
+          <Property Name="userId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="80" />
+          <Property Name="email" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="createdDt" Type="datetime" Nullable="false" />
+          <Property Name="lastLoginDt" Type="datetime" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="userpassword" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="authyId" Type="nvarchar(max)" />
+          <Property Name="fcmToken" Type="nvarchar" MaxLength="300" />
+          <Property Name="padronID" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dispatch.dbo.userBiometricData' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="userBiometricData">
+          <Key>
+            <PropertyRef Name="userBiometricDataId" />
+            
+            
+            
+          </Key>
+          <Property Name="userBiometricDataId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="userPadronId" Type="int" Nullable="false" />
+          <Property Name="biometricData" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="registrationDt" Type="datetime" Nullable="false" />
+          <Property Name="biometricImageBytes" Type="varbinary(max)" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dispatch.dbo.userCompany' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="userCompany">
+          <Key>
+            <PropertyRef Name="id" />
+            
+            
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="companyId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dispatch.dbo.userDepartment' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="userDepartment">
+          <Key>
+            <PropertyRef Name="id" />
+            
+            
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="departmentId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dispatch.dbo.userProfile' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="userProfile">
+          <Key>
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="profileId" />
+          </Key>
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="profileId" Type="int" Nullable="false" />
+          <Property Name="profile_profileId" Type="int" />
+          <Property Name="users_userId" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dispatch.dbo.userRole' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="userRole">
+          <Key>
+            <PropertyRef Name="id" />
+            
+            
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="roleId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dispatch.dbo.userSession' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="userSession">
+          <Key>
+            
+            
+            
+            <PropertyRef Name="userSessionId" />
+          </Key>
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="hashKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="expirarionDt" Type="datetime" />
+          <Property Name="createdDt" Type="datetime" Nullable="false" />
+          <Property Name="systemId" Type="int" />
+          <Property Name="userSessionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="users_userId" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dispatch.dbo.Zones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Zones">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="CreatedByUserId" />
+            <PropertyRef Name="ModifiedByUserId" />
+            <PropertyRef Name="UtcDateModified" />
+            <PropertyRef Name="UtcDateCreated" />
+            <PropertyRef Name="TariffId" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Data" Type="nvarchar(max)" />
+          <Property Name="CreatedByUserId" Type="int" Nullable="false" />
+          <Property Name="ModifiedByUserId" Type="int" Nullable="false" />
+          <Property Name="UtcDateModified" Type="datetime" Nullable="false" />
+          <Property Name="UtcDateCreated" Type="datetime" Nullable="false" />
+          <Property Name="TariffId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK___Group_us__id_Gr__778AC167">
+          <End Role="_Group" Type="Self._Group" Multiplicity="1" />
+          <End Role="_Group_user" Type="Self._Group_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="_Group">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="_Group_user">
+              <PropertyRef Name="id_Group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChatMessa___NAME__787EE5A0">
+          <End Role="_Group" Type="Self._Group" Multiplicity="1" />
+          <End Role="ChatMessage" Type="Self.ChatMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="_Group">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="ChatMessage">
+              <PropertyRef Name="_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GPSphones__phone__797309D9">
+          <End Role="client" Type="Self.client" Multiplicity="1" />
+          <End Role="GPSphones" Type="Self.GPSphones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="phone" />
+            </Principal>
+            <Dependent Role="GPSphones">
+              <PropertyRef Name="phoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__paymentPa__packa__7A672E12">
+          <End Role="package" Type="Self.package" Multiplicity="1" />
+          <End Role="paymentPackages" Type="Self.paymentPackages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="package">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="paymentPackages">
+              <PropertyRef Name="package_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__paymentPa__phone__7B5B524B">
+          <End Role="client" Type="Self.client" Multiplicity="1" />
+          <End Role="paymentPackages" Type="Self.paymentPackages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="phone" />
+            </Principal>
+            <Dependent Role="paymentPackages">
+              <PropertyRef Name="phone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__taxiApp__statusS__7E37BEF6">
+          <End Role="statusService" Type="Self.statusService" Multiplicity="0..1" />
+          <End Role="taxiApp" Type="Self.taxiApp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statusService">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="taxiApp">
+              <PropertyRef Name="statusServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__taxiServi__AppSe__01142BA1">
+          <End Role="AppService" Type="Self.AppService" Multiplicity="0..1" />
+          <End Role="taxiService" Type="Self.taxiService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppService">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="taxiService">
+              <PropertyRef Name="AppServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__taxiServi__baseS__00200768">
+          <End Role="baseService" Type="Self.baseService" Multiplicity="1" />
+          <End Role="taxiService" Type="Self.taxiService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="baseService">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="taxiService">
+              <PropertyRef Name="baseServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__taxiServi__opera__02084FDA">
+          <End Role="client" Type="Self.client" Multiplicity="0..1" />
+          <End Role="taxiService" Type="Self.taxiService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="phone" />
+            </Principal>
+            <Dependent Role="taxiService">
+              <PropertyRef Name="operatorPhoneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_RNSTS">
+          <End Role="taxiService" Type="Self.taxiService" Multiplicity="1" />
+          <End Role="rtNumberService" Type="Self.rtNumberService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="taxiService">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rtNumberService">
+              <PropertyRef Name="serviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRR">
+          <End Role="report" Type="Self.report" Multiplicity="1" />
+          <End Role="taxiReport" Type="Self.taxiReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="report">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="taxiReport">
+              <PropertyRef Name="reportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TSC">
+          <End Role="client" Type="Self.client" Multiplicity="1" />
+          <End Role="taxiService" Type="Self.taxiService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="phone" />
+            </Principal>
+            <Dependent Role="taxiService">
+              <PropertyRef Name="phoneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TSCS">
+          <End Role="catalogService" Type="Self.catalogService" Multiplicity="1" />
+          <End Role="taxiService" Type="Self.taxiService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catalogService">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="taxiService">
+              <PropertyRef Name="catalogServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TSSS">
+          <End Role="statusService" Type="Self.statusService" Multiplicity="1" />
+          <End Role="taxiService" Type="Self.taxiService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statusService">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="taxiService">
+              <PropertyRef Name="statusServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Unit_taxi_Client">
+          <End Role="client" Type="Self.client" Multiplicity="0..1" />
+          <End Role="unit_taxi" Type="Self.unit_taxi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="phone" />
+            </Principal>
+            <Dependent Role="unit_taxi">
+              <PropertyRef Name="phoneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Unit_taxi_rtNumberService">
+          <End Role="unit_taxi" Type="Self.unit_taxi" Multiplicity="0..1" />
+          <End Role="rtNumberService" Type="Self.rtNumberService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unit_taxi">
+              <PropertyRef Name="rtNumber" />
+            </Principal>
+            <Dependent Role="rtNumberService">
+              <PropertyRef Name="rtNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="radiotaxiModelStoreContainer">
+          <EntitySet Name="_Group" EntityType="Self._Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="_Group_user" EntityType="Self._Group_user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppService" EntityType="Self.AppService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="baseService" EntityType="Self.baseService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="catalogService" EntityType="Self.catalogService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChatMessage" EntityType="Self.ChatMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="client" EntityType="Self.client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GPSphones" EntityType="Self.GPSphones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="package" EntityType="Self.package" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="paymentPackages" EntityType="Self.paymentPackages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="report" EntityType="Self.report" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rtNumberService" EntityType="Self.rtNumberService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="statusService" EntityType="Self.statusService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="taxiApp" EntityType="Self.taxiApp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="taxiReport" EntityType="Self.taxiReport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="taxiService" EntityType="Self.taxiService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="unit_taxi" EntityType="Self.unit_taxi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="audience" EntityType="Self.audience" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [audience].[id] AS [id], 
+    [audience].[clientid] AS [clientid], 
+    [audience].[secret] AS [secret], 
+    [audience].[name] AS [name], 
+    [audience].[status] AS [status]
+    FROM [dbo].[audience] AS [audience]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="company" EntityType="Self.company" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [company].[id] AS [id], 
+    [company].[name] AS [name], 
+    [company].[address] AS [address], 
+    [company].[phone] AS [phone]
+    FROM [dbo].[company] AS [company]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="department" EntityType="Self.department" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [department].[id] AS [id], 
+    [department].[name] AS [name]
+    FROM [dbo].[department] AS [department]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="firebase" EntityType="Self.firebase" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [firebase].[id] AS [id], 
+    [firebase].[IMEI] AS [IMEI], 
+    [firebase].[UserId] AS [UserId], 
+    [firebase].[isActive] AS [isActive]
+    FROM [dbo].[firebase] AS [firebase]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="InterestPoints" EntityType="Self.InterestPoints" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [InterestPoints].[ID] AS [ID], 
+    [InterestPoints].[Description] AS [Description], 
+    [InterestPoints].[Status] AS [Status], 
+    [InterestPoints].[Data] AS [Data], 
+    [InterestPoints].[CreatedByUserId] AS [CreatedByUserId], 
+    [InterestPoints].[ModifiedByUserId] AS [ModifiedByUserId], 
+    [InterestPoints].[UtcDateModified] AS [UtcDateModified], 
+    [InterestPoints].[UtcDateCreated] AS [UtcDateCreated], 
+    [InterestPoints].[ZoneId] AS [ZoneId], 
+    [InterestPoints].[PointTypeId] AS [PointTypeId]
+    FROM [dbo].[InterestPoints] AS [InterestPoints]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="parameter" EntityType="Self.parameter" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [parameter].[id] AS [id], 
+    [parameter].[name] AS [name], 
+    [parameter].[status] AS [status]
+    FROM [dbo].[parameter] AS [parameter]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PointTypes" EntityType="Self.PointTypes" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PointTypes].[ID] AS [ID], 
+    [PointTypes].[Name] AS [Name]
+    FROM [dbo].[PointTypes] AS [PointTypes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="profile" EntityType="Self.profile" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [profile].[profileId] AS [profileId], 
+    [profile].[systemId] AS [systemId], 
+    [profile].[name] AS [name], 
+    [profile].[objectACLId] AS [objectACLId], 
+    [profile].[objectAcl_objectACLId] AS [objectAcl_objectACLId]
+    FROM [dbo].[profile] AS [profile]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Rates" EntityType="Self.Rates" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Rates].[ID] AS [ID], 
+    [Rates].[Data] AS [Data], 
+    [Rates].[Status] AS [Status], 
+    [Rates].[CreatedByUserId] AS [CreatedByUserId], 
+    [Rates].[ModifiedByUserId] AS [ModifiedByUserId], 
+    [Rates].[UtcDateModified] AS [UtcDateModified], 
+    [Rates].[UtcDateCreated] AS [UtcDateCreated], 
+    [Rates].[TariffId] AS [TariffId], 
+    [Rates].[Currency] AS [Currency]
+    FROM [dbo].[Rates] AS [Rates]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="role" EntityType="Self.role" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [role].[id] AS [id], 
+    [role].[name] AS [name]
+    FROM [dbo].[role] AS [role]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="roleparam" EntityType="Self.roleparam" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [roleparam].[id] AS [id], 
+    [roleparam].[paramId] AS [paramId], 
+    [roleparam].[roleId] AS [roleId]
+    FROM [dbo].[roleparam] AS [roleparam]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SuperBlocks" EntityType="Self.SuperBlocks" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SuperBlocks].[ID] AS [ID], 
+    [SuperBlocks].[Name] AS [Name], 
+    [SuperBlocks].[Data] AS [Data], 
+    [SuperBlocks].[CreatedByUserId] AS [CreatedByUserId], 
+    [SuperBlocks].[ModifiedByUserId] AS [ModifiedByUserId], 
+    [SuperBlocks].[UtcDateModified] AS [UtcDateModified], 
+    [SuperBlocks].[UtcDateCreated] AS [UtcDateCreated], 
+    [SuperBlocks].[ZoneId] AS [ZoneId]
+    FROM [dbo].[SuperBlocks] AS [SuperBlocks]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Tariffs" EntityType="Self.Tariffs" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Tariffs].[ID] AS [ID], 
+    [Tariffs].[Name] AS [Name], 
+    [Tariffs].[Description] AS [Description], 
+    [Tariffs].[Status] AS [Status], 
+    [Tariffs].[CreatedByUserId] AS [CreatedByUserId], 
+    [Tariffs].[ModifiedByUserId] AS [ModifiedByUserId], 
+    [Tariffs].[UtcDateModified] AS [UtcDateModified], 
+    [Tariffs].[UtcDateCreated] AS [UtcDateCreated], 
+    [Tariffs].[ImageUrl] AS [ImageUrl], 
+    [Tariffs].[Type] AS [Type], 
+    [Tariffs].[ProfileImgUrl] AS [ProfileImgUrl], 
+    [Tariffs].[MapCenter] AS [MapCenter], 
+    [Tariffs].[ZoomLevel] AS [ZoomLevel], 
+    [Tariffs].[SearchRadius] AS [SearchRadius]
+    FROM [dbo].[Tariffs] AS [Tariffs]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="token" EntityType="Self.token" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [token].[tokenId] AS [tokenId], 
+    [token].[tokenTypeId] AS [tokenTypeId], 
+    [token].[tokenValue] AS [tokenValue], 
+    [token].[expirationDt] AS [expirationDt], 
+    [token].[userId] AS [userId], 
+    [token].[users_userId] AS [users_userId]
+    FROM [dbo].[token] AS [token]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="user" EntityType="Self.user" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [user].[userId] AS [userId], 
+    [user].[firstName] AS [firstName], 
+    [user].[lastName] AS [lastName], 
+    [user].[email] AS [email], 
+    [user].[createdDt] AS [createdDt], 
+    [user].[lastLoginDt] AS [lastLoginDt], 
+    [user].[isActive] AS [isActive], 
+    [user].[phone] AS [phone], 
+    [user].[userpassword] AS [userpassword], 
+    [user].[authyId] AS [authyId], 
+    [user].[fcmToken] AS [fcmToken], 
+    [user].[padronID] AS [padronID]
+    FROM [dbo].[user] AS [user]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="userBiometricData" EntityType="Self.userBiometricData" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [userBiometricData].[userBiometricDataId] AS [userBiometricDataId], 
+    [userBiometricData].[userPadronId] AS [userPadronId], 
+    [userBiometricData].[biometricData] AS [biometricData], 
+    [userBiometricData].[registrationDt] AS [registrationDt], 
+    [userBiometricData].[biometricImageBytes] AS [biometricImageBytes]
+    FROM [dbo].[userBiometricData] AS [userBiometricData]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="userCompany" EntityType="Self.userCompany" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [userCompany].[id] AS [id], 
+    [userCompany].[userId] AS [userId], 
+    [userCompany].[companyId] AS [companyId]
+    FROM [dbo].[userCompany] AS [userCompany]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="userDepartment" EntityType="Self.userDepartment" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [userDepartment].[id] AS [id], 
+    [userDepartment].[userId] AS [userId], 
+    [userDepartment].[departmentId] AS [departmentId]
+    FROM [dbo].[userDepartment] AS [userDepartment]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="userProfile" EntityType="Self.userProfile" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [userProfile].[userId] AS [userId], 
+    [userProfile].[profileId] AS [profileId], 
+    [userProfile].[profile_profileId] AS [profile_profileId], 
+    [userProfile].[users_userId] AS [users_userId]
+    FROM [dbo].[userProfile] AS [userProfile]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="userRole" EntityType="Self.userRole" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [userRole].[id] AS [id], 
+    [userRole].[userId] AS [userId], 
+    [userRole].[roleId] AS [roleId]
+    FROM [dbo].[userRole] AS [userRole]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="userSession" EntityType="Self.userSession" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [userSession].[userId] AS [userId], 
+    [userSession].[hashKey] AS [hashKey], 
+    [userSession].[expirarionDt] AS [expirarionDt], 
+    [userSession].[createdDt] AS [createdDt], 
+    [userSession].[systemId] AS [systemId], 
+    [userSession].[userSessionId] AS [userSessionId], 
+    [userSession].[users_userId] AS [users_userId]
+    FROM [dbo].[userSession] AS [userSession]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Zones" EntityType="Self.Zones" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Zones].[ID] AS [ID], 
+    [Zones].[Name] AS [Name], 
+    [Zones].[Description] AS [Description], 
+    [Zones].[Status] AS [Status], 
+    [Zones].[Data] AS [Data], 
+    [Zones].[CreatedByUserId] AS [CreatedByUserId], 
+    [Zones].[ModifiedByUserId] AS [ModifiedByUserId], 
+    [Zones].[UtcDateModified] AS [UtcDateModified], 
+    [Zones].[UtcDateCreated] AS [UtcDateCreated], 
+    [Zones].[TariffId] AS [TariffId]
+    FROM [dbo].[Zones] AS [Zones]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK___Group_us__id_Gr__778AC167" Association="Self.FK___Group_us__id_Gr__778AC167">
+            <End Role="_Group" EntitySet="_Group" />
+            <End Role="_Group_user" EntitySet="_Group_user" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChatMessa___NAME__787EE5A0" Association="Self.FK__ChatMessa___NAME__787EE5A0">
+            <End Role="_Group" EntitySet="_Group" />
+            <End Role="ChatMessage" EntitySet="ChatMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GPSphones__phone__797309D9" Association="Self.FK__GPSphones__phone__797309D9">
+            <End Role="client" EntitySet="client" />
+            <End Role="GPSphones" EntitySet="GPSphones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__paymentPa__packa__7A672E12" Association="Self.FK__paymentPa__packa__7A672E12">
+            <End Role="package" EntitySet="package" />
+            <End Role="paymentPackages" EntitySet="paymentPackages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__paymentPa__phone__7B5B524B" Association="Self.FK__paymentPa__phone__7B5B524B">
+            <End Role="client" EntitySet="client" />
+            <End Role="paymentPackages" EntitySet="paymentPackages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__taxiApp__statusS__7E37BEF6" Association="Self.FK__taxiApp__statusS__7E37BEF6">
+            <End Role="statusService" EntitySet="statusService" />
+            <End Role="taxiApp" EntitySet="taxiApp" />
+          </AssociationSet>
+          <AssociationSet Name="FK__taxiServi__AppSe__01142BA1" Association="Self.FK__taxiServi__AppSe__01142BA1">
+            <End Role="AppService" EntitySet="AppService" />
+            <End Role="taxiService" EntitySet="taxiService" />
+          </AssociationSet>
+          <AssociationSet Name="FK__taxiServi__baseS__00200768" Association="Self.FK__taxiServi__baseS__00200768">
+            <End Role="baseService" EntitySet="baseService" />
+            <End Role="taxiService" EntitySet="taxiService" />
+          </AssociationSet>
+          <AssociationSet Name="FK__taxiServi__opera__02084FDA" Association="Self.FK__taxiServi__opera__02084FDA">
+            <End Role="client" EntitySet="client" />
+            <End Role="taxiService" EntitySet="taxiService" />
+          </AssociationSet>
+          <AssociationSet Name="fk_RNSTS" Association="Self.fk_RNSTS">
+            <End Role="taxiService" EntitySet="taxiService" />
+            <End Role="rtNumberService" EntitySet="rtNumberService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRR" Association="Self.FK_TRR">
+            <End Role="report" EntitySet="report" />
+            <End Role="taxiReport" EntitySet="taxiReport" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TSC" Association="Self.fk_TSC">
+            <End Role="client" EntitySet="client" />
+            <End Role="taxiService" EntitySet="taxiService" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TSCS" Association="Self.fk_TSCS">
+            <End Role="catalogService" EntitySet="catalogService" />
+            <End Role="taxiService" EntitySet="taxiService" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TSSS" Association="Self.fk_TSSS">
+            <End Role="statusService" EntitySet="statusService" />
+            <End Role="taxiService" EntitySet="taxiService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Unit_taxi_Client" Association="Self.FK_Unit_taxi_Client">
+            <End Role="client" EntitySet="client" />
+            <End Role="unit_taxi" EntitySet="unit_taxi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Unit_taxi_rtNumberService" Association="Self.FK_Unit_taxi_rtNumberService">
+            <End Role="unit_taxi" EntitySet="unit_taxi" />
+            <End Role="rtNumberService" EntitySet="rtNumberService" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="radiotaxiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="radiotaxiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C_Group" EntityType="radiotaxiModel.C_Group" />
+          <EntitySet Name="C_Group_user" EntityType="radiotaxiModel.C_Group_user" />
+          <EntitySet Name="AppServices" EntityType="radiotaxiModel.AppService" />
+          <EntitySet Name="baseServices" EntityType="radiotaxiModel.baseService" />
+          <EntitySet Name="catalogServices" EntityType="radiotaxiModel.catalogService" />
+          <EntitySet Name="ChatMessages" EntityType="radiotaxiModel.ChatMessage" />
+          <EntitySet Name="clients" EntityType="radiotaxiModel.client" />
+          <EntitySet Name="GPSphones" EntityType="radiotaxiModel.GPSphone" />
+          <EntitySet Name="packages" EntityType="radiotaxiModel.package" />
+          <EntitySet Name="paymentPackages" EntityType="radiotaxiModel.paymentPackage" />
+          <EntitySet Name="reports" EntityType="radiotaxiModel.report" />
+          <EntitySet Name="rtNumberServices" EntityType="radiotaxiModel.rtNumberService" />
+          <EntitySet Name="statusServices" EntityType="radiotaxiModel.statusService" />
+          <EntitySet Name="taxiApps" EntityType="radiotaxiModel.taxiApp" />
+          <EntitySet Name="taxiReports" EntityType="radiotaxiModel.taxiReport" />
+          <EntitySet Name="taxiServices" EntityType="radiotaxiModel.taxiService" />
+          <EntitySet Name="unit_taxi" EntityType="radiotaxiModel.unit_taxi" />
+          <AssociationSet Name="FK___Group_us__id_Gr__37A5467C" Association="radiotaxiModel.FK___Group_us__id_Gr__37A5467C">
+            <End Role="C_Group" EntitySet="C_Group" />
+            <End Role="C_Group_user" EntitySet="C_Group_user" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChatMessa___NAME__38996AB5" Association="radiotaxiModel.FK__ChatMessa___NAME__38996AB5">
+            <End Role="C_Group" EntitySet="C_Group" />
+            <End Role="ChatMessage" EntitySet="ChatMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__taxiServi__AppSe__403A8C7D" Association="radiotaxiModel.FK__taxiServi__AppSe__403A8C7D">
+            <End Role="AppService" EntitySet="AppServices" />
+            <End Role="taxiService" EntitySet="taxiServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__taxiServi__baseS__3F466844" Association="radiotaxiModel.FK__taxiServi__baseS__3F466844">
+            <End Role="baseService" EntitySet="baseServices" />
+            <End Role="taxiService" EntitySet="taxiServices" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TSCS" Association="radiotaxiModel.fk_TSCS">
+            <End Role="catalogService" EntitySet="catalogServices" />
+            <End Role="taxiService" EntitySet="taxiServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GPSphones__phone__398D8EEE" Association="radiotaxiModel.FK__GPSphones__phone__398D8EEE">
+            <End Role="client" EntitySet="clients" />
+            <End Role="GPSphone" EntitySet="GPSphones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__paymentPa__phone__3B75D760" Association="radiotaxiModel.FK__paymentPa__phone__3B75D760">
+            <End Role="client" EntitySet="clients" />
+            <End Role="paymentPackage" EntitySet="paymentPackages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__taxiServi__opera__412EB0B6" Association="radiotaxiModel.FK__taxiServi__opera__412EB0B6">
+            <End Role="client" EntitySet="clients" />
+            <End Role="taxiService" EntitySet="taxiServices" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TSC" Association="radiotaxiModel.fk_TSC">
+            <End Role="client" EntitySet="clients" />
+            <End Role="taxiService" EntitySet="taxiServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__paymentPa__packa__3A81B327" Association="radiotaxiModel.FK__paymentPa__packa__3A81B327">
+            <End Role="package" EntitySet="packages" />
+            <End Role="paymentPackage" EntitySet="paymentPackages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRR" Association="radiotaxiModel.FK_TRR">
+            <End Role="report" EntitySet="reports" />
+            <End Role="taxiReport" EntitySet="taxiReports" />
+          </AssociationSet>
+          <AssociationSet Name="fk_RNSTS" Association="radiotaxiModel.fk_RNSTS">
+            <End Role="taxiService" EntitySet="taxiServices" />
+            <End Role="rtNumberService" EntitySet="rtNumberServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Unit_taxi_rtNumberService" Association="radiotaxiModel.FK_Unit_taxi_rtNumberService">
+            <End Role="unit_taxi" EntitySet="unit_taxi" />
+            <End Role="rtNumberService" EntitySet="rtNumberServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__taxiApp__statusS__3D5E1FD2" Association="radiotaxiModel.FK__taxiApp__statusS__3D5E1FD2">
+            <End Role="statusService" EntitySet="statusServices" />
+            <End Role="taxiApp" EntitySet="taxiApps" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TSSS" Association="radiotaxiModel.fk_TSSS">
+            <End Role="statusService" EntitySet="statusServices" />
+            <End Role="taxiService" EntitySet="taxiServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Unit_taxi_Client" Association="radiotaxiModel.FK_Unit_taxi_Client">
+            <End Role="client" EntitySet="clients" />
+            <End Role="unit_taxi" EntitySet="unit_taxi" />
+          </AssociationSet>
+          <EntitySet Name="audiences" EntityType="radiotaxiModel.audience" />
+          <EntitySet Name="companies" EntityType="radiotaxiModel.company" />
+          <EntitySet Name="departments" EntityType="radiotaxiModel.department" />
+          <EntitySet Name="firebases" EntityType="radiotaxiModel.firebase" />
+          <EntitySet Name="parameters" EntityType="radiotaxiModel.parameter" />
+          <EntitySet Name="profiles" EntityType="radiotaxiModel.profile" />
+          <EntitySet Name="roles" EntityType="radiotaxiModel.role" />
+          <EntitySet Name="roleparams" EntityType="radiotaxiModel.roleparam" />
+          <EntitySet Name="tokens" EntityType="radiotaxiModel.token" />
+          <EntitySet Name="users" EntityType="radiotaxiModel.user" />
+          <EntitySet Name="userBiometricDatas" EntityType="radiotaxiModel.userBiometricData" />
+          <EntitySet Name="userCompanies" EntityType="radiotaxiModel.userCompany" />
+          <EntitySet Name="userDepartments" EntityType="radiotaxiModel.userDepartment" />
+          <EntitySet Name="userProfiles" EntityType="radiotaxiModel.userProfile" />
+          <EntitySet Name="userRoles" EntityType="radiotaxiModel.userRole" />
+          <EntitySet Name="userSessions" EntityType="radiotaxiModel.userSession" />
+          <AssociationSet Name="fk_UCCompany" Association="radiotaxiModel.fk_UCCompany">
+            <End Role="company" EntitySet="companies" />
+            <End Role="userCompany" EntitySet="userCompanies" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UD" Association="radiotaxiModel.fk_UD">
+            <End Role="department" EntitySet="departments" />
+            <End Role="userDepartment" EntitySet="userDepartments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_RPParam" Association="radiotaxiModel.fk_RPParam">
+            <End Role="parameter" EntitySet="parameters" />
+            <End Role="roleparam" EntitySet="roleparams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_profile_userProfile" Association="radiotaxiModel.FK_profile_userProfile">
+            <End Role="profile" EntitySet="profiles" />
+            <End Role="userProfile" EntitySet="userProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_role" Association="radiotaxiModel.fk_role">
+            <End Role="role" EntitySet="roles" />
+            <End Role="userRole" EntitySet="userRoles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_RPRole" Association="radiotaxiModel.fk_RPRole">
+            <End Role="role" EntitySet="roles" />
+            <End Role="roleparam" EntitySet="roleparams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_token" Association="radiotaxiModel.FK_users_token">
+            <End Role="user" EntitySet="users" />
+            <End Role="token" EntitySet="tokens" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UCUser" Association="radiotaxiModel.fk_UCUser">
+            <End Role="user" EntitySet="users" />
+            <End Role="userCompany" EntitySet="userCompanies" />
+          </AssociationSet>
+          <AssociationSet Name="fk_user" Association="radiotaxiModel.fk_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="userRole" EntitySet="userRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_userProfile" Association="radiotaxiModel.FK_users_userProfile">
+            <End Role="user" EntitySet="users" />
+            <End Role="userProfile" EntitySet="userProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_userSession" Association="radiotaxiModel.FK_users_userSession">
+            <End Role="user" EntitySet="users" />
+            <End Role="userSession" EntitySet="userSessions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UUD" Association="radiotaxiModel.fk_UUD">
+            <End Role="user" EntitySet="users" />
+            <End Role="userDepartment" EntitySet="userDepartments" />
+          </AssociationSet>
+          <EntitySet Name="C_Group1" EntityType="radiotaxiModel.C_Group1" />
+          <EntitySet Name="C_Group_user1" EntityType="radiotaxiModel.C_Group_user1" />
+          <EntitySet Name="AppService1" EntityType="radiotaxiModel.AppService1" />
+          <EntitySet Name="baseService1" EntityType="radiotaxiModel.baseService1" />
+          <EntitySet Name="catalogService1" EntityType="radiotaxiModel.catalogService1" />
+          <EntitySet Name="ChatMessage1" EntityType="radiotaxiModel.ChatMessage1" />
+          <EntitySet Name="client1" EntityType="radiotaxiModel.client1" />
+          <EntitySet Name="GPSphone1" EntityType="radiotaxiModel.GPSphone1" />
+          <EntitySet Name="package1" EntityType="radiotaxiModel.package1" />
+          <EntitySet Name="paymentPackage1" EntityType="radiotaxiModel.paymentPackage1" />
+          <EntitySet Name="report1" EntityType="radiotaxiModel.report1" />
+          <EntitySet Name="rtNumberService1" EntityType="radiotaxiModel.rtNumberService1" />
+          <EntitySet Name="statusService1" EntityType="radiotaxiModel.statusService1" />
+          <EntitySet Name="taxiApp1" EntityType="radiotaxiModel.taxiApp1" />
+          <EntitySet Name="taxiReport1" EntityType="radiotaxiModel.taxiReport1" />
+          <EntitySet Name="taxiService1" EntityType="radiotaxiModel.taxiService1" />
+          <EntitySet Name="unit_taxi1" EntityType="radiotaxiModel.unit_taxi1" />
+          <EntitySet Name="InterestPoints" EntityType="radiotaxiModel.InterestPoint" />
+          <EntitySet Name="PointTypes" EntityType="radiotaxiModel.PointType" />
+          <EntitySet Name="Rates" EntityType="radiotaxiModel.Rate" />
+          <EntitySet Name="SuperBlocks" EntityType="radiotaxiModel.SuperBlock" />
+          <EntitySet Name="Tariffs" EntityType="radiotaxiModel.Tariff" />
+          <EntitySet Name="Zones" EntityType="radiotaxiModel.Zone" />
+          <AssociationSet Name="FK___Group_us__id_Gr__778AC167" Association="radiotaxiModel.FK___Group_us__id_Gr__778AC167">
+            <End Role="C_Group1" EntitySet="C_Group1" />
+            <End Role="C_Group_user1" EntitySet="C_Group_user1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChatMessa___NAME__787EE5A0" Association="radiotaxiModel.FK__ChatMessa___NAME__787EE5A0">
+            <End Role="C_Group1" EntitySet="C_Group1" />
+            <End Role="ChatMessage1" EntitySet="ChatMessage1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__taxiServi__AppSe__01142BA1" Association="radiotaxiModel.FK__taxiServi__AppSe__01142BA1">
+            <End Role="AppService1" EntitySet="AppService1" />
+            <End Role="taxiService1" EntitySet="taxiService1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__taxiServi__baseS__00200768" Association="radiotaxiModel.FK__taxiServi__baseS__00200768">
+            <End Role="baseService1" EntitySet="baseService1" />
+            <End Role="taxiService1" EntitySet="taxiService1" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TSCS1" Association="radiotaxiModel.fk_TSCS1">
+            <End Role="catalogService1" EntitySet="catalogService1" />
+            <End Role="taxiService1" EntitySet="taxiService1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GPSphones__phone__797309D9" Association="radiotaxiModel.FK__GPSphones__phone__797309D9">
+            <End Role="client1" EntitySet="client1" />
+            <End Role="GPSphone1" EntitySet="GPSphone1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__paymentPa__phone__7B5B524B" Association="radiotaxiModel.FK__paymentPa__phone__7B5B524B">
+            <End Role="client1" EntitySet="client1" />
+            <End Role="paymentPackage1" EntitySet="paymentPackage1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__taxiServi__opera__02084FDA" Association="radiotaxiModel.FK__taxiServi__opera__02084FDA">
+            <End Role="client1" EntitySet="client1" />
+            <End Role="taxiService1" EntitySet="taxiService1" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TSC1" Association="radiotaxiModel.fk_TSC1">
+            <End Role="client1" EntitySet="client1" />
+            <End Role="taxiService1" EntitySet="taxiService1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Unit_taxi_Client1" Association="radiotaxiModel.FK_Unit_taxi_Client1">
+            <End Role="client1" EntitySet="client1" />
+            <End Role="unit_taxi1" EntitySet="unit_taxi1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__paymentPa__packa__7A672E12" Association="radiotaxiModel.FK__paymentPa__packa__7A672E12">
+            <End Role="package1" EntitySet="package1" />
+            <End Role="paymentPackage1" EntitySet="paymentPackage1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRR1" Association="radiotaxiModel.FK_TRR1">
+            <End Role="report1" EntitySet="report1" />
+            <End Role="taxiReport1" EntitySet="taxiReport1" />
+          </AssociationSet>
+          <AssociationSet Name="fk_RNSTS1" Association="radiotaxiModel.fk_RNSTS1">
+            <End Role="taxiService1" EntitySet="taxiService1" />
+            <End Role="rtNumberService1" EntitySet="rtNumberService1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Unit_taxi_rtNumberService1" Association="radiotaxiModel.FK_Unit_taxi_rtNumberService1">
+            <End Role="unit_taxi1" EntitySet="unit_taxi1" />
+            <End Role="rtNumberService1" EntitySet="rtNumberService1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__taxiApp__statusS__7E37BEF6" Association="radiotaxiModel.FK__taxiApp__statusS__7E37BEF6">
+            <End Role="statusService1" EntitySet="statusService1" />
+            <End Role="taxiApp1" EntitySet="taxiApp1" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TSSS1" Association="radiotaxiModel.fk_TSSS1">
+            <End Role="statusService1" EntitySet="statusService1" />
+            <End Role="taxiService1" EntitySet="taxiService1" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="C_Group">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="C_Group_user" Relationship="radiotaxiModel.FK___Group_us__id_Gr__37A5467C" FromRole="C_Group" ToRole="C_Group_user" />
+          <NavigationProperty Name="ChatMessages" Relationship="radiotaxiModel.FK__ChatMessa___NAME__38996AB5" FromRole="C_Group" ToRole="ChatMessage" />
+        </EntityType>
+        <EntityType Name="C_Group_user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="id_Group" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="C_Group" Relationship="radiotaxiModel.FK___Group_us__id_Gr__37A5467C" FromRole="C_Group_user" ToRole="C_Group" />
+        </EntityType>
+        <EntityType Name="AppService">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="start_lat" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="start_lng" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="end_lat" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="end_lng" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="siteId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="zoneStart_Id" Type="Int32" />
+          <Property Name="zoneEnd_Id" Type="Int32" />
+          <Property Name="amount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="origin" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="destiny" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="origin_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="destiny_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Refrence" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="board_taxi_date" Type="DateTime" Precision="3" />
+          <Property Name="finish_taxi_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="taxiServices" Relationship="radiotaxiModel.FK__taxiServi__AppSe__403A8C7D" FromRole="AppService" ToRole="taxiService" />
+        </EntityType>
+        <EntityType Name="baseService">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="taxiServices" Relationship="radiotaxiModel.FK__taxiServi__baseS__3F466844" FromRole="baseService" ToRole="taxiService" />
+        </EntityType>
+        <EntityType Name="catalogService">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="taxiServices" Relationship="radiotaxiModel.fk_TSCS" FromRole="catalogService" ToRole="taxiService" />
+        </EntityType>
+        <EntityType Name="ChatMessage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="C_Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="C_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="itemId" Type="Int32" Nullable="false" />
+          <Property Name="identify" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="arrivalTime" Type="DateTime" Precision="3" />
+          <Property Name="sendedTime" Type="DateTime" Precision="3" />
+          <Property Name="authyId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="C_Group" Relationship="radiotaxiModel.FK__ChatMessa___NAME__38996AB5" FromRole="ChatMessage" ToRole="C_Group" />
+          <Property Name="latitude" Type="Double" />
+          <Property Name="longitude" Type="Double" />
+        </EntityType>
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="phone" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="lastname1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="lastname2" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dateUpdated" Type="DateTime" Precision="3" />
+          <Property Name="isBlocked" Type="Boolean" />
+          <Property Name="blockedReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="createdBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="editedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isHome" Type="Boolean" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="authyId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="connectionId" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="padronId" Type="Int32" />
+          <Property Name="gps_hub_connectionId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GPSphones" Relationship="radiotaxiModel.FK__GPSphones__phone__398D8EEE" FromRole="client" ToRole="GPSphone" />
+          <NavigationProperty Name="paymentPackages" Relationship="radiotaxiModel.FK__paymentPa__phone__3B75D760" FromRole="client" ToRole="paymentPackage" />
+          <NavigationProperty Name="taxiServices" Relationship="radiotaxiModel.FK__taxiServi__opera__412EB0B6" FromRole="client" ToRole="taxiService" />
+          <NavigationProperty Name="taxiServices1" Relationship="radiotaxiModel.fk_TSC" FromRole="client" ToRole="taxiService" />
+          <NavigationProperty Name="unit_taxi" Relationship="radiotaxiModel.FK_Unit_taxi_Client" FromRole="client" ToRole="unit_taxi" />
+        </EntityType>
+        <EntityType Name="GPSphone">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="phoneID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="Heading" Type="Double" />
+          <Property Name="Accuracy" Type="Double" Nullable="false" />
+          <Property Name="Altitude" Type="Double" Nullable="false" />
+          <Property Name="AltitudeAccuracy" Type="Double" Nullable="false" />
+          <Property Name="Speed" Type="Double" Nullable="false" />
+          <Property Name="GpsDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="client" Relationship="radiotaxiModel.FK__GPSphones__phone__398D8EEE" FromRole="GPSphone" ToRole="client" />
+        </EntityType>
+        <EntityType Name="package">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="amount" Type="Double" />
+          <Property Name="validDays" Type="Int32" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="dateCreate" Type="DateTime" Precision="3" />
+          <Property Name="deteDeleted" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="paymentPackages" Relationship="radiotaxiModel.FK__paymentPa__packa__3A81B327" FromRole="package" ToRole="paymentPackage" />
+        </EntityType>
+        <EntityType Name="paymentPackage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="conektaId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="package_id" Type="Int32" Nullable="false" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="payment_status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="payment_method" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="dateStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dateEnd" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="client" Relationship="radiotaxiModel.FK__paymentPa__phone__3B75D760" FromRole="paymentPackage" ToRole="client" />
+          <NavigationProperty Name="package" Relationship="radiotaxiModel.FK__paymentPa__packa__3A81B327" FromRole="paymentPackage" ToRole="package" />
+        </EntityType>
+        <EntityType Name="report">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dateCreated" Type="DateTime" Precision="3" />
+          <Property Name="dateEdited" Type="DateTime" Precision="3" />
+          <Property Name="createdBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="editedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="taxiReports" Relationship="radiotaxiModel.FK_TRR" FromRole="report" ToRole="taxiReport" />
+        </EntityType>
+        <EntityType Name="rtNumberService">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="taxiNumber" Type="Int32" />
+          <Property Name="rtNumber" Type="Int32" />
+          <Property Name="serviceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="taxiService" Relationship="radiotaxiModel.fk_RNSTS" FromRole="rtNumberService" ToRole="taxiService" />
+          <NavigationProperty Name="unit_taxi" Relationship="radiotaxiModel.FK_Unit_taxi_rtNumberService" FromRole="rtNumberService" ToRole="unit_taxi" />
+        </EntityType>
+        <EntityType Name="statusService">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="taxiApps" Relationship="radiotaxiModel.FK__taxiApp__statusS__3D5E1FD2" FromRole="statusService" ToRole="taxiApp" />
+          <NavigationProperty Name="taxiServices" Relationship="radiotaxiModel.fk_TSSS" FromRole="statusService" ToRole="taxiService" />
+        </EntityType>
+        <EntityType Name="taxiApp">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="originLatitude" Type="Double" Nullable="false" />
+          <Property Name="originLongitude" Type="Double" Nullable="false" />
+          <Property Name="destinationLatitude" Type="Double" Nullable="false" />
+          <Property Name="destinationLongitude" Type="Double" Nullable="false" />
+          <Property Name="isReservation" Type="Boolean" Nullable="false" />
+          <Property Name="dataService" Type="DateTime" Precision="3" />
+          <Property Name="timeService" Type="Int64" />
+          <Property Name="noteService" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="statusServiceId" Type="Int32" />
+          <Property Name="phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="editedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="noteOperator" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="statusService" Relationship="radiotaxiModel.FK__taxiApp__statusS__3D5E1FD2" FromRole="taxiApp" ToRole="statusService" />
+        </EntityType>
+        <EntityType Name="taxiReport">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="taxiNumber" Type="Int32" />
+          <Property Name="reportId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="report" Relationship="radiotaxiModel.FK_TRR" FromRole="taxiReport" ToRole="report" />
+        </EntityType>
+        <EntityType Name="taxiService">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="startPoint" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="endPoint" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dateRequested" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createdBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="editedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="phoneId" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="statusServiceId" Type="Int32" Nullable="false" />
+          <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="datePickUp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="autoRenew" Type="Boolean" Nullable="false" />
+          <Property Name="baseServiceId" Type="Int32" Nullable="false" />
+          <Property Name="catalogServiceId" Type="Int32" Nullable="false" />
+          <Property Name="days" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AppServiceId" Type="Int32" />
+          <Property Name="operatorPhoneId" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AppService" Relationship="radiotaxiModel.FK__taxiServi__AppSe__403A8C7D" FromRole="taxiService" ToRole="AppService" />
+          <NavigationProperty Name="baseService" Relationship="radiotaxiModel.FK__taxiServi__baseS__3F466844" FromRole="taxiService" ToRole="baseService" />
+          <NavigationProperty Name="catalogService" Relationship="radiotaxiModel.fk_TSCS" FromRole="taxiService" ToRole="catalogService" />
+          <NavigationProperty Name="client" Relationship="radiotaxiModel.FK__taxiServi__opera__412EB0B6" FromRole="taxiService" ToRole="client" />
+          <NavigationProperty Name="client1" Relationship="radiotaxiModel.fk_TSC" FromRole="taxiService" ToRole="client" />
+          <NavigationProperty Name="rtNumberServices" Relationship="radiotaxiModel.fk_RNSTS" FromRole="taxiService" ToRole="rtNumberService" />
+          <NavigationProperty Name="statusService" Relationship="radiotaxiModel.fk_TSSS" FromRole="taxiService" ToRole="statusService" />
+        </EntityType>
+        <EntityType Name="unit_taxi">
+          <Key>
+            <PropertyRef Name="rtNumber" />
+          </Key>
+          <Property Name="rtNumber" Type="Int32" Nullable="false" />
+          <Property Name="id_padron" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="rtNumberServices" Relationship="radiotaxiModel.FK_Unit_taxi_rtNumberService" FromRole="unit_taxi" ToRole="rtNumberService" />
+          <Property Name="phoneId" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="client" Relationship="radiotaxiModel.FK_Unit_taxi_Client" FromRole="unit_taxi" ToRole="client" />
+        </EntityType>
+        <Association Name="FK___Group_us__id_Gr__37A5467C">
+          <End Type="radiotaxiModel.C_Group" Role="C_Group" Multiplicity="1" />
+          <End Type="radiotaxiModel.C_Group_user" Role="C_Group_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C_Group">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="C_Group_user">
+              <PropertyRef Name="id_Group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChatMessa___NAME__38996AB5">
+          <End Type="radiotaxiModel.C_Group" Role="C_Group" Multiplicity="1" />
+          <End Type="radiotaxiModel.ChatMessage" Role="ChatMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C_Group">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="ChatMessage">
+              <PropertyRef Name="C_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__taxiServi__AppSe__403A8C7D">
+          <End Type="radiotaxiModel.AppService" Role="AppService" Multiplicity="0..1" />
+          <End Type="radiotaxiModel.taxiService" Role="taxiService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppService">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="taxiService">
+              <PropertyRef Name="AppServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__taxiServi__baseS__3F466844">
+          <End Type="radiotaxiModel.baseService" Role="baseService" Multiplicity="1" />
+          <End Type="radiotaxiModel.taxiService" Role="taxiService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="baseService">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="taxiService">
+              <PropertyRef Name="baseServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TSCS">
+          <End Type="radiotaxiModel.catalogService" Role="catalogService" Multiplicity="1" />
+          <End Type="radiotaxiModel.taxiService" Role="taxiService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catalogService">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="taxiService">
+              <PropertyRef Name="catalogServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GPSphones__phone__398D8EEE">
+          <End Type="radiotaxiModel.client" Role="client" Multiplicity="1" />
+          <End Type="radiotaxiModel.GPSphone" Role="GPSphone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="phone" />
+            </Principal>
+            <Dependent Role="GPSphone">
+              <PropertyRef Name="phoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__paymentPa__phone__3B75D760">
+          <End Type="radiotaxiModel.client" Role="client" Multiplicity="1" />
+          <End Type="radiotaxiModel.paymentPackage" Role="paymentPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="phone" />
+            </Principal>
+            <Dependent Role="paymentPackage">
+              <PropertyRef Name="phone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__taxiServi__opera__412EB0B6">
+          <End Type="radiotaxiModel.client" Role="client" Multiplicity="0..1" />
+          <End Type="radiotaxiModel.taxiService" Role="taxiService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="phone" />
+            </Principal>
+            <Dependent Role="taxiService">
+              <PropertyRef Name="operatorPhoneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TSC">
+          <End Type="radiotaxiModel.client" Role="client" Multiplicity="1" />
+          <End Type="radiotaxiModel.taxiService" Role="taxiService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="phone" />
+            </Principal>
+            <Dependent Role="taxiService">
+              <PropertyRef Name="phoneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__paymentPa__packa__3A81B327">
+          <End Type="radiotaxiModel.package" Role="package" Multiplicity="1" />
+          <End Type="radiotaxiModel.paymentPackage" Role="paymentPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="package">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="paymentPackage">
+              <PropertyRef Name="package_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRR">
+          <End Type="radiotaxiModel.report" Role="report" Multiplicity="1" />
+          <End Type="radiotaxiModel.taxiReport" Role="taxiReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="report">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="taxiReport">
+              <PropertyRef Name="reportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_RNSTS">
+          <End Type="radiotaxiModel.taxiService" Role="taxiService" Multiplicity="1" />
+          <End Type="radiotaxiModel.rtNumberService" Role="rtNumberService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="taxiService">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rtNumberService">
+              <PropertyRef Name="serviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Unit_taxi_rtNumberService">
+          <End Type="radiotaxiModel.unit_taxi" Role="unit_taxi" Multiplicity="0..1" />
+          <End Type="radiotaxiModel.rtNumberService" Role="rtNumberService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unit_taxi">
+              <PropertyRef Name="rtNumber" />
+            </Principal>
+            <Dependent Role="rtNumberService">
+              <PropertyRef Name="rtNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__taxiApp__statusS__3D5E1FD2">
+          <End Type="radiotaxiModel.statusService" Role="statusService" Multiplicity="0..1" />
+          <End Type="radiotaxiModel.taxiApp" Role="taxiApp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statusService">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="taxiApp">
+              <PropertyRef Name="statusServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TSSS">
+          <End Type="radiotaxiModel.statusService" Role="statusService" Multiplicity="1" />
+          <End Type="radiotaxiModel.taxiService" Role="taxiService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statusService">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="taxiService">
+              <PropertyRef Name="statusServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Unit_taxi_Client">
+          <End Type="radiotaxiModel.client" Role="client" Multiplicity="0..1" />
+          <End Type="radiotaxiModel.unit_taxi" Role="unit_taxi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="phone" />
+            </Principal>
+            <Dependent Role="unit_taxi">
+              <PropertyRef Name="phoneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="audience">
+          <Key>
+            <PropertyRef Name="clientid" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clientid" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="secret" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="company">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="userCompanies" Relationship="radiotaxiModel.fk_UCCompany" FromRole="company" ToRole="userCompany" />
+        </EntityType>
+        <EntityType Name="department">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="userDepartments" Relationship="radiotaxiModel.fk_UD" FromRole="department" ToRole="userDepartment" />
+        </EntityType>
+        <EntityType Name="firebase">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="IMEI" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="isActive" Type="Int32" />
+        </EntityType>
+        <EntityType Name="parameter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Boolean" />
+          <NavigationProperty Name="roleparams" Relationship="radiotaxiModel.fk_RPParam" FromRole="parameter" ToRole="roleparam" />
+        </EntityType>
+        <EntityType Name="profile">
+          <Key>
+            <PropertyRef Name="profileId" />
+          </Key>
+          <Property Name="profileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="systemId" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="objectACLId" Type="Int32" Nullable="false" />
+          <Property Name="objectAcl_objectACLId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="userProfiles" Relationship="radiotaxiModel.FK_profile_userProfile" FromRole="profile" ToRole="userProfile" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="userRoles" Relationship="radiotaxiModel.fk_role" FromRole="role" ToRole="userRole" />
+          <NavigationProperty Name="roleparams" Relationship="radiotaxiModel.fk_RPRole" FromRole="role" ToRole="roleparam" />
+        </EntityType>
+        <EntityType Name="roleparam">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="paramId" Type="Int32" />
+          <Property Name="roleId" Type="Int32" />
+          <NavigationProperty Name="parameter" Relationship="radiotaxiModel.fk_RPParam" FromRole="roleparam" ToRole="parameter" />
+          <NavigationProperty Name="role" Relationship="radiotaxiModel.fk_RPRole" FromRole="roleparam" ToRole="role" />
+        </EntityType>
+        <EntityType Name="token">
+          <Key>
+            <PropertyRef Name="tokenId" />
+          </Key>
+          <Property Name="tokenId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tokenTypeId" Type="Int32" />
+          <Property Name="tokenValue" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="expirationDt" Type="DateTime" Precision="3" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="users_userId" Type="Int32" />
+          <NavigationProperty Name="user" Relationship="radiotaxiModel.FK_users_token" FromRole="token" ToRole="user" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="createdDt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="lastLoginDt" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="userpassword" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="authyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fcmToken" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="padronID" Type="Int32" />
+          <NavigationProperty Name="tokens" Relationship="radiotaxiModel.FK_users_token" FromRole="user" ToRole="token" />
+          <NavigationProperty Name="userCompanies" Relationship="radiotaxiModel.fk_UCUser" FromRole="user" ToRole="userCompany" />
+          <NavigationProperty Name="userRoles" Relationship="radiotaxiModel.fk_user" FromRole="user" ToRole="userRole" />
+          <NavigationProperty Name="userProfiles" Relationship="radiotaxiModel.FK_users_userProfile" FromRole="user" ToRole="userProfile" />
+          <NavigationProperty Name="userSessions" Relationship="radiotaxiModel.FK_users_userSession" FromRole="user" ToRole="userSession" />
+          <NavigationProperty Name="userDepartments" Relationship="radiotaxiModel.fk_UUD" FromRole="user" ToRole="userDepartment" />
+        </EntityType>
+        <EntityType Name="userBiometricData">
+          <Key>
+            <PropertyRef Name="userBiometricDataId" />
+          </Key>
+          <Property Name="userBiometricDataId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userPadronId" Type="Int32" Nullable="false" />
+          <Property Name="biometricData" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="registrationDt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="biometricImageBytes" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="userCompany">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="companyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="company" Relationship="radiotaxiModel.fk_UCCompany" FromRole="userCompany" ToRole="company" />
+          <NavigationProperty Name="user" Relationship="radiotaxiModel.fk_UCUser" FromRole="userCompany" ToRole="user" />
+        </EntityType>
+        <EntityType Name="userDepartment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="departmentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="department" Relationship="radiotaxiModel.fk_UD" FromRole="userDepartment" ToRole="department" />
+          <NavigationProperty Name="user" Relationship="radiotaxiModel.fk_UUD" FromRole="userDepartment" ToRole="user" />
+        </EntityType>
+        <EntityType Name="userProfile">
+          <Key>
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="profileId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="profileId" Type="Int32" Nullable="false" />
+          <Property Name="profile_profileId" Type="Int32" />
+          <Property Name="users_userId" Type="Int32" />
+          <NavigationProperty Name="profile" Relationship="radiotaxiModel.FK_profile_userProfile" FromRole="userProfile" ToRole="profile" />
+          <NavigationProperty Name="user" Relationship="radiotaxiModel.FK_users_userProfile" FromRole="userProfile" ToRole="user" />
+        </EntityType>
+        <EntityType Name="userRole">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="roleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="role" Relationship="radiotaxiModel.fk_role" FromRole="userRole" ToRole="role" />
+          <NavigationProperty Name="user" Relationship="radiotaxiModel.fk_user" FromRole="userRole" ToRole="user" />
+        </EntityType>
+        <EntityType Name="userSession">
+          <Key>
+            <PropertyRef Name="userSessionId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="hashKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="expirarionDt" Type="DateTime" Precision="3" />
+          <Property Name="createdDt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="systemId" Type="Int32" />
+          <Property Name="userSessionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="users_userId" Type="Int32" />
+          <NavigationProperty Name="user" Relationship="radiotaxiModel.FK_users_userSession" FromRole="userSession" ToRole="user" />
+        </EntityType>
+        <Association Name="fk_UCCompany">
+          <End Type="radiotaxiModel.company" Role="company" Multiplicity="1" />
+          <End Type="radiotaxiModel.userCompany" Role="userCompany" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="userCompany">
+              <PropertyRef Name="companyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UD">
+          <End Type="radiotaxiModel.department" Role="department" Multiplicity="1" />
+          <End Type="radiotaxiModel.userDepartment" Role="userDepartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="department">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="userDepartment">
+              <PropertyRef Name="departmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_RPParam">
+          <End Type="radiotaxiModel.parameter" Role="parameter" Multiplicity="0..1" />
+          <End Type="radiotaxiModel.roleparam" Role="roleparam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="parameter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="roleparam">
+              <PropertyRef Name="paramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_profile_userProfile">
+          <End Type="radiotaxiModel.profile" Role="profile" Multiplicity="0..1" />
+          <End Type="radiotaxiModel.userProfile" Role="userProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="profile">
+              <PropertyRef Name="profileId" />
+            </Principal>
+            <Dependent Role="userProfile">
+              <PropertyRef Name="profile_profileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_role">
+          <End Type="radiotaxiModel.role" Role="role" Multiplicity="1" />
+          <End Type="radiotaxiModel.userRole" Role="userRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="userRole">
+              <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_RPRole">
+          <End Type="radiotaxiModel.role" Role="role" Multiplicity="0..1" />
+          <End Type="radiotaxiModel.roleparam" Role="roleparam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="roleparam">
+              <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_token">
+          <End Type="radiotaxiModel.user" Role="user" Multiplicity="0..1" />
+          <End Type="radiotaxiModel.token" Role="token" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="token">
+              <PropertyRef Name="users_userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UCUser">
+          <End Type="radiotaxiModel.user" Role="user" Multiplicity="1" />
+          <End Type="radiotaxiModel.userCompany" Role="userCompany" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="userCompany">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_user">
+          <End Type="radiotaxiModel.user" Role="user" Multiplicity="1" />
+          <End Type="radiotaxiModel.userRole" Role="userRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="userRole">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_userProfile">
+          <End Type="radiotaxiModel.user" Role="user" Multiplicity="0..1" />
+          <End Type="radiotaxiModel.userProfile" Role="userProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="userProfile">
+              <PropertyRef Name="users_userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_userSession">
+          <End Type="radiotaxiModel.user" Role="user" Multiplicity="0..1" />
+          <End Type="radiotaxiModel.userSession" Role="userSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="userSession">
+              <PropertyRef Name="users_userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UUD">
+          <End Type="radiotaxiModel.user" Role="user" Multiplicity="1" />
+          <End Type="radiotaxiModel.userDepartment" Role="userDepartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="userDepartment">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="C_Group1">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="C_Group_user" Relationship="radiotaxiModel.FK___Group_us__id_Gr__778AC167" FromRole="C_Group1" ToRole="C_Group_user1" />
+          <NavigationProperty Name="ChatMessages" Relationship="radiotaxiModel.FK__ChatMessa___NAME__787EE5A0" FromRole="C_Group1" ToRole="ChatMessage1" />
+        </EntityType>
+        <EntityType Name="C_Group_user1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="id_Group" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="C_Group" Relationship="radiotaxiModel.FK___Group_us__id_Gr__778AC167" FromRole="C_Group_user1" ToRole="C_Group1" />
+        </EntityType>
+        <EntityType Name="AppService1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="start_lat" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="start_lng" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="end_lat" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="end_lng" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="siteId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="zoneStart_Id" Type="Int32" />
+          <Property Name="zoneEnd_Id" Type="Int32" />
+          <Property Name="amount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="origin" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="destiny" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="origin_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="destiny_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Refrence" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="board_taxi_date" Type="DateTime" Precision="3" />
+          <Property Name="finish_taxi_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="taxiServices" Relationship="radiotaxiModel.FK__taxiServi__AppSe__01142BA1" FromRole="AppService1" ToRole="taxiService1" />
+        </EntityType>
+        <EntityType Name="baseService1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="taxiServices" Relationship="radiotaxiModel.FK__taxiServi__baseS__00200768" FromRole="baseService1" ToRole="taxiService1" />
+        </EntityType>
+        <EntityType Name="catalogService1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="taxiServices" Relationship="radiotaxiModel.fk_TSCS1" FromRole="catalogService1" ToRole="taxiService1" />
+        </EntityType>
+        <EntityType Name="ChatMessage1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="C_Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="C_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="itemId" Type="Int32" Nullable="false" />
+          <Property Name="identify" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="arrivalTime" Type="DateTime" Precision="3" />
+          <Property Name="sendedTime" Type="DateTime" Precision="3" />
+          <Property Name="authyId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="latitude" Type="Double" />
+          <Property Name="longitude" Type="Double" />
+          <NavigationProperty Name="C_Group" Relationship="radiotaxiModel.FK__ChatMessa___NAME__787EE5A0" FromRole="ChatMessage1" ToRole="C_Group1" />
+        </EntityType>
+        <EntityType Name="client1">
+          <Key>
+            <PropertyRef Name="phone" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="lastname1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="lastname2" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dateUpdated" Type="DateTime" Precision="3" />
+          <Property Name="isBlocked" Type="Boolean" />
+          <Property Name="blockedReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="createdBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="editedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isHome" Type="Boolean" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="authyId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="connectionId" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="padronId" Type="Int32" />
+          <Property Name="gps_hub_connectionId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GPSphones" Relationship="radiotaxiModel.FK__GPSphones__phone__797309D9" FromRole="client1" ToRole="GPSphone1" />
+          <NavigationProperty Name="paymentPackages" Relationship="radiotaxiModel.FK__paymentPa__phone__7B5B524B" FromRole="client1" ToRole="paymentPackage1" />
+          <NavigationProperty Name="taxiServices" Relationship="radiotaxiModel.FK__taxiServi__opera__02084FDA" FromRole="client1" ToRole="taxiService1" />
+          <NavigationProperty Name="taxiServices1" Relationship="radiotaxiModel.fk_TSC1" FromRole="client1" ToRole="taxiService1" />
+          <NavigationProperty Name="unit_taxi" Relationship="radiotaxiModel.FK_Unit_taxi_Client1" FromRole="client1" ToRole="unit_taxi1" />
+        </EntityType>
+        <EntityType Name="GPSphone1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="phoneID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="Heading" Type="Double" />
+          <Property Name="Accuracy" Type="Double" Nullable="false" />
+          <Property Name="Altitude" Type="Double" Nullable="false" />
+          <Property Name="AltitudeAccuracy" Type="Double" Nullable="false" />
+          <Property Name="Speed" Type="Double" Nullable="false" />
+          <Property Name="GpsDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="client" Relationship="radiotaxiModel.FK__GPSphones__phone__797309D9" FromRole="GPSphone1" ToRole="client1" />
+        </EntityType>
+        <EntityType Name="package1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="amount" Type="Double" />
+          <Property Name="validDays" Type="Int32" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="dateCreate" Type="DateTime" Precision="3" />
+          <Property Name="deteDeleted" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="paymentPackages" Relationship="radiotaxiModel.FK__paymentPa__packa__7A672E12" FromRole="package1" ToRole="paymentPackage1" />
+        </EntityType>
+        <EntityType Name="paymentPackage1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="conektaId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="package_id" Type="Int32" Nullable="false" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="payment_status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="payment_method" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="dateStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dateEnd" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="client" Relationship="radiotaxiModel.FK__paymentPa__phone__7B5B524B" FromRole="paymentPackage1" ToRole="client1" />
+          <NavigationProperty Name="package" Relationship="radiotaxiModel.FK__paymentPa__packa__7A672E12" FromRole="paymentPackage1" ToRole="package1" />
+        </EntityType>
+        <EntityType Name="report1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dateCreated" Type="DateTime" Precision="3" />
+          <Property Name="dateEdited" Type="DateTime" Precision="3" />
+          <Property Name="createdBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="editedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="taxiReports" Relationship="radiotaxiModel.FK_TRR1" FromRole="report1" ToRole="taxiReport1" />
+        </EntityType>
+        <EntityType Name="rtNumberService1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="taxiNumber" Type="Int32" />
+          <Property Name="rtNumber" Type="Int32" />
+          <Property Name="serviceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="taxiService" Relationship="radiotaxiModel.fk_RNSTS1" FromRole="rtNumberService1" ToRole="taxiService1" />
+          <NavigationProperty Name="unit_taxi" Relationship="radiotaxiModel.FK_Unit_taxi_rtNumberService1" FromRole="rtNumberService1" ToRole="unit_taxi1" />
+        </EntityType>
+        <EntityType Name="statusService1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="taxiApps" Relationship="radiotaxiModel.FK__taxiApp__statusS__7E37BEF6" FromRole="statusService1" ToRole="taxiApp1" />
+          <NavigationProperty Name="taxiServices" Relationship="radiotaxiModel.fk_TSSS1" FromRole="statusService1" ToRole="taxiService1" />
+        </EntityType>
+        <EntityType Name="taxiApp1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="originLatitude" Type="Double" Nullable="false" />
+          <Property Name="originLongitude" Type="Double" Nullable="false" />
+          <Property Name="destinationLatitude" Type="Double" Nullable="false" />
+          <Property Name="destinationLongitude" Type="Double" Nullable="false" />
+          <Property Name="isReservation" Type="Boolean" Nullable="false" />
+          <Property Name="dataService" Type="DateTime" Precision="3" />
+          <Property Name="timeService" Type="Int64" />
+          <Property Name="noteService" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="statusServiceId" Type="Int32" />
+          <Property Name="phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="editedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="noteOperator" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="statusService" Relationship="radiotaxiModel.FK__taxiApp__statusS__7E37BEF6" FromRole="taxiApp1" ToRole="statusService1" />
+        </EntityType>
+        <EntityType Name="taxiReport1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="taxiNumber" Type="Int32" />
+          <Property Name="reportId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="report" Relationship="radiotaxiModel.FK_TRR1" FromRole="taxiReport1" ToRole="report1" />
+        </EntityType>
+        <EntityType Name="taxiService1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="startPoint" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="endPoint" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dateRequested" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createdBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="editedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="phoneId" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="statusServiceId" Type="Int32" Nullable="false" />
+          <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="datePickUp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="autoRenew" Type="Boolean" Nullable="false" />
+          <Property Name="baseServiceId" Type="Int32" Nullable="false" />
+          <Property Name="catalogServiceId" Type="Int32" Nullable="false" />
+          <Property Name="days" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AppServiceId" Type="Int32" />
+          <Property Name="operatorPhoneId" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AppService" Relationship="radiotaxiModel.FK__taxiServi__AppSe__01142BA1" FromRole="taxiService1" ToRole="AppService1" />
+          <NavigationProperty Name="baseService" Relationship="radiotaxiModel.FK__taxiServi__baseS__00200768" FromRole="taxiService1" ToRole="baseService1" />
+          <NavigationProperty Name="catalogService" Relationship="radiotaxiModel.fk_TSCS1" FromRole="taxiService1" ToRole="catalogService1" />
+          <NavigationProperty Name="client" Relationship="radiotaxiModel.FK__taxiServi__opera__02084FDA" FromRole="taxiService1" ToRole="client1" />
+          <NavigationProperty Name="client1" Relationship="radiotaxiModel.fk_TSC1" FromRole="taxiService1" ToRole="client1" />
+          <NavigationProperty Name="rtNumberServices" Relationship="radiotaxiModel.fk_RNSTS1" FromRole="taxiService1" ToRole="rtNumberService1" />
+          <NavigationProperty Name="statusService" Relationship="radiotaxiModel.fk_TSSS1" FromRole="taxiService1" ToRole="statusService1" />
+        </EntityType>
+        <EntityType Name="unit_taxi1">
+          <Key>
+            <PropertyRef Name="rtNumber" />
+          </Key>
+          <Property Name="rtNumber" Type="Int32" Nullable="false" />
+          <Property Name="id_padron" Type="Int32" Nullable="false" />
+          <Property Name="phoneId" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="client" Relationship="radiotaxiModel.FK_Unit_taxi_Client1" FromRole="unit_taxi1" ToRole="client1" />
+          <NavigationProperty Name="rtNumberServices" Relationship="radiotaxiModel.FK_Unit_taxi_rtNumberService1" FromRole="unit_taxi1" ToRole="rtNumberService1" />
+        </EntityType>
+        <EntityType Name="InterestPoint">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="CreatedByUserId" />
+            <PropertyRef Name="ModifiedByUserId" />
+            <PropertyRef Name="UtcDateModified" />
+            <PropertyRef Name="UtcDateCreated" />
+            <PropertyRef Name="ZoneId" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedByUserId" Type="Int32" Nullable="false" />
+          <Property Name="UtcDateModified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UtcDateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ZoneId" Type="Int32" Nullable="false" />
+          <Property Name="PointTypeId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PointType">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Rate">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="CreatedByUserId" />
+            <PropertyRef Name="ModifiedByUserId" />
+            <PropertyRef Name="UtcDateModified" />
+            <PropertyRef Name="UtcDateCreated" />
+            <PropertyRef Name="TariffId" />
+            <PropertyRef Name="Currency" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedByUserId" Type="Int32" Nullable="false" />
+          <Property Name="UtcDateModified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UtcDateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TariffId" Type="Int32" Nullable="false" />
+          <Property Name="Currency" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SuperBlock">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CreatedByUserId" />
+            <PropertyRef Name="ModifiedByUserId" />
+            <PropertyRef Name="UtcDateModified" />
+            <PropertyRef Name="UtcDateCreated" />
+            <PropertyRef Name="ZoneId" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedByUserId" Type="Int32" Nullable="false" />
+          <Property Name="UtcDateModified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UtcDateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ZoneId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tariff">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="CreatedByUserId" />
+            <PropertyRef Name="ModifiedByUserId" />
+            <PropertyRef Name="UtcDateModified" />
+            <PropertyRef Name="UtcDateCreated" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedByUserId" Type="Int32" Nullable="false" />
+          <Property Name="UtcDateModified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UtcDateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="ProfileImgUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MapCenter" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ZoomLevel" Type="Int32" />
+          <Property Name="SearchRadius" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Zone">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="CreatedByUserId" />
+            <PropertyRef Name="ModifiedByUserId" />
+            <PropertyRef Name="UtcDateModified" />
+            <PropertyRef Name="UtcDateCreated" />
+            <PropertyRef Name="TariffId" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedByUserId" Type="Int32" Nullable="false" />
+          <Property Name="UtcDateModified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UtcDateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TariffId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK___Group_us__id_Gr__778AC167">
+          <End Type="radiotaxiModel.C_Group1" Role="C_Group1" Multiplicity="1" />
+          <End Type="radiotaxiModel.C_Group_user1" Role="C_Group_user1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C_Group1">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="C_Group_user1">
+              <PropertyRef Name="id_Group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChatMessa___NAME__787EE5A0">
+          <End Type="radiotaxiModel.C_Group1" Role="C_Group1" Multiplicity="1" />
+          <End Type="radiotaxiModel.ChatMessage1" Role="ChatMessage1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C_Group1">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="ChatMessage1">
+              <PropertyRef Name="C_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__taxiServi__AppSe__01142BA1">
+          <End Type="radiotaxiModel.AppService1" Role="AppService1" Multiplicity="0..1" />
+          <End Type="radiotaxiModel.taxiService1" Role="taxiService1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppService1">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="taxiService1">
+              <PropertyRef Name="AppServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__taxiServi__baseS__00200768">
+          <End Type="radiotaxiModel.baseService1" Role="baseService1" Multiplicity="1" />
+          <End Type="radiotaxiModel.taxiService1" Role="taxiService1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="baseService1">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="taxiService1">
+              <PropertyRef Name="baseServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TSCS1">
+          <End Type="radiotaxiModel.catalogService1" Role="catalogService1" Multiplicity="1" />
+          <End Type="radiotaxiModel.taxiService1" Role="taxiService1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catalogService1">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="taxiService1">
+              <PropertyRef Name="catalogServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GPSphones__phone__797309D9">
+          <End Type="radiotaxiModel.client1" Role="client1" Multiplicity="1" />
+          <End Type="radiotaxiModel.GPSphone1" Role="GPSphone1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client1">
+              <PropertyRef Name="phone" />
+            </Principal>
+            <Dependent Role="GPSphone1">
+              <PropertyRef Name="phoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__paymentPa__phone__7B5B524B">
+          <End Type="radiotaxiModel.client1" Role="client1" Multiplicity="1" />
+          <End Type="radiotaxiModel.paymentPackage1" Role="paymentPackage1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client1">
+              <PropertyRef Name="phone" />
+            </Principal>
+            <Dependent Role="paymentPackage1">
+              <PropertyRef Name="phone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__taxiServi__opera__02084FDA">
+          <End Type="radiotaxiModel.client1" Role="client1" Multiplicity="0..1" />
+          <End Type="radiotaxiModel.taxiService1" Role="taxiService1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client1">
+              <PropertyRef Name="phone" />
+            </Principal>
+            <Dependent Role="taxiService1">
+              <PropertyRef Name="operatorPhoneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TSC1">
+          <End Type="radiotaxiModel.client1" Role="client1" Multiplicity="1" />
+          <End Type="radiotaxiModel.taxiService1" Role="taxiService1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client1">
+              <PropertyRef Name="phone" />
+            </Principal>
+            <Dependent Role="taxiService1">
+              <PropertyRef Name="phoneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Unit_taxi_Client1">
+          <End Type="radiotaxiModel.client1" Role="client1" Multiplicity="0..1" />
+          <End Type="radiotaxiModel.unit_taxi1" Role="unit_taxi1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client1">
+              <PropertyRef Name="phone" />
+            </Principal>
+            <Dependent Role="unit_taxi1">
+              <PropertyRef Name="phoneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__paymentPa__packa__7A672E12">
+          <End Type="radiotaxiModel.package1" Role="package1" Multiplicity="1" />
+          <End Type="radiotaxiModel.paymentPackage1" Role="paymentPackage1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="package1">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="paymentPackage1">
+              <PropertyRef Name="package_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRR1">
+          <End Type="radiotaxiModel.report1" Role="report1" Multiplicity="1" />
+          <End Type="radiotaxiModel.taxiReport1" Role="taxiReport1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="report1">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="taxiReport1">
+              <PropertyRef Name="reportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_RNSTS1">
+          <End Type="radiotaxiModel.taxiService1" Role="taxiService1" Multiplicity="1" />
+          <End Type="radiotaxiModel.rtNumberService1" Role="rtNumberService1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="taxiService1">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rtNumberService1">
+              <PropertyRef Name="serviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Unit_taxi_rtNumberService1">
+          <End Type="radiotaxiModel.unit_taxi1" Role="unit_taxi1" Multiplicity="0..1" />
+          <End Type="radiotaxiModel.rtNumberService1" Role="rtNumberService1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unit_taxi1">
+              <PropertyRef Name="rtNumber" />
+            </Principal>
+            <Dependent Role="rtNumberService1">
+              <PropertyRef Name="rtNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__taxiApp__statusS__7E37BEF6">
+          <End Type="radiotaxiModel.statusService1" Role="statusService1" Multiplicity="0..1" />
+          <End Type="radiotaxiModel.taxiApp1" Role="taxiApp1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statusService1">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="taxiApp1">
+              <PropertyRef Name="statusServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TSSS1">
+          <End Type="radiotaxiModel.statusService1" Role="statusService1" Multiplicity="1" />
+          <End Type="radiotaxiModel.taxiService1" Role="taxiService1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statusService1">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="taxiService1">
+              <PropertyRef Name="statusServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="radiotaxiModelStoreContainer" CdmEntityContainer="radiotaxiEntities">
+          <EntitySetMapping Name="audiences">
+            <EntityTypeMapping TypeName="radiotaxiModel.audience">
+              <MappingFragment StoreEntitySet="audience">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="secret" ColumnName="secret" />
+                <ScalarProperty Name="clientid" ColumnName="clientid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="companies">
+            <EntityTypeMapping TypeName="radiotaxiModel.company">
+              <MappingFragment StoreEntitySet="company">
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="departments">
+            <EntityTypeMapping TypeName="radiotaxiModel.department">
+              <MappingFragment StoreEntitySet="department">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="firebases">
+            <EntityTypeMapping TypeName="radiotaxiModel.firebase">
+              <MappingFragment StoreEntitySet="firebase">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IMEI" ColumnName="IMEI" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="parameters">
+            <EntityTypeMapping TypeName="radiotaxiModel.parameter">
+              <MappingFragment StoreEntitySet="parameter">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="profiles">
+            <EntityTypeMapping TypeName="radiotaxiModel.profile">
+              <MappingFragment StoreEntitySet="profile">
+                <ScalarProperty Name="objectAcl_objectACLId" ColumnName="objectAcl_objectACLId" />
+                <ScalarProperty Name="objectACLId" ColumnName="objectACLId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="systemId" ColumnName="systemId" />
+                <ScalarProperty Name="profileId" ColumnName="profileId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="radiotaxiModel.role">
+              <MappingFragment StoreEntitySet="role">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roleparams">
+            <EntityTypeMapping TypeName="radiotaxiModel.roleparam">
+              <MappingFragment StoreEntitySet="roleparam">
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
+                <ScalarProperty Name="paramId" ColumnName="paramId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tokens">
+            <EntityTypeMapping TypeName="radiotaxiModel.token">
+              <MappingFragment StoreEntitySet="token">
+                <ScalarProperty Name="users_userId" ColumnName="users_userId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="expirationDt" ColumnName="expirationDt" />
+                <ScalarProperty Name="tokenValue" ColumnName="tokenValue" />
+                <ScalarProperty Name="tokenTypeId" ColumnName="tokenTypeId" />
+                <ScalarProperty Name="tokenId" ColumnName="tokenId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="radiotaxiModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="padronID" ColumnName="padronID" />
+                <ScalarProperty Name="fcmToken" ColumnName="fcmToken" />
+                <ScalarProperty Name="authyId" ColumnName="authyId" />
+                <ScalarProperty Name="userpassword" ColumnName="userpassword" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="lastLoginDt" ColumnName="lastLoginDt" />
+                <ScalarProperty Name="createdDt" ColumnName="createdDt" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userBiometricDatas">
+            <EntityTypeMapping TypeName="radiotaxiModel.userBiometricData">
+              <MappingFragment StoreEntitySet="userBiometricData">
+                <ScalarProperty Name="biometricImageBytes" ColumnName="biometricImageBytes" />
+                <ScalarProperty Name="registrationDt" ColumnName="registrationDt" />
+                <ScalarProperty Name="biometricData" ColumnName="biometricData" />
+                <ScalarProperty Name="userPadronId" ColumnName="userPadronId" />
+                <ScalarProperty Name="userBiometricDataId" ColumnName="userBiometricDataId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userCompanies">
+            <EntityTypeMapping TypeName="radiotaxiModel.userCompany">
+              <MappingFragment StoreEntitySet="userCompany">
+                <ScalarProperty Name="companyId" ColumnName="companyId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userDepartments">
+            <EntityTypeMapping TypeName="radiotaxiModel.userDepartment">
+              <MappingFragment StoreEntitySet="userDepartment">
+                <ScalarProperty Name="departmentId" ColumnName="departmentId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userProfiles">
+            <EntityTypeMapping TypeName="radiotaxiModel.userProfile">
+              <MappingFragment StoreEntitySet="userProfile">
+                <ScalarProperty Name="users_userId" ColumnName="users_userId" />
+                <ScalarProperty Name="profile_profileId" ColumnName="profile_profileId" />
+                <ScalarProperty Name="profileId" ColumnName="profileId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userRoles">
+            <EntityTypeMapping TypeName="radiotaxiModel.userRole">
+              <MappingFragment StoreEntitySet="userRole">
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userSessions">
+            <EntityTypeMapping TypeName="radiotaxiModel.userSession">
+              <MappingFragment StoreEntitySet="userSession">
+                <ScalarProperty Name="users_userId" ColumnName="users_userId" />
+                <ScalarProperty Name="userSessionId" ColumnName="userSessionId" />
+                <ScalarProperty Name="systemId" ColumnName="systemId" />
+                <ScalarProperty Name="createdDt" ColumnName="createdDt" />
+                <ScalarProperty Name="expirarionDt" ColumnName="expirarionDt" />
+                <ScalarProperty Name="hashKey" ColumnName="hashKey" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C_Group1">
+            <EntityTypeMapping TypeName="radiotaxiModel.C_Group1">
+              <MappingFragment StoreEntitySet="_Group">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C_Group_user1">
+            <EntityTypeMapping TypeName="radiotaxiModel.C_Group_user1">
+              <MappingFragment StoreEntitySet="_Group_user">
+                <ScalarProperty Name="id_Group" ColumnName="id_Group" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppService1">
+            <EntityTypeMapping TypeName="radiotaxiModel.AppService1">
+              <MappingFragment StoreEntitySet="AppService">
+                <ScalarProperty Name="finish_taxi_date" ColumnName="finish_taxi_date" />
+                <ScalarProperty Name="board_taxi_date" ColumnName="board_taxi_date" />
+                <ScalarProperty Name="Refrence" ColumnName="Refrence" />
+                <ScalarProperty Name="destiny_description" ColumnName="destiny_description" />
+                <ScalarProperty Name="origin_description" ColumnName="origin_description" />
+                <ScalarProperty Name="destiny" ColumnName="destiny" />
+                <ScalarProperty Name="origin" ColumnName="origin" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="zoneEnd_Id" ColumnName="zoneEnd_Id" />
+                <ScalarProperty Name="zoneStart_Id" ColumnName="zoneStart_Id" />
+                <ScalarProperty Name="siteId" ColumnName="siteId" />
+                <ScalarProperty Name="end_lng" ColumnName="end_lng" />
+                <ScalarProperty Name="end_lat" ColumnName="end_lat" />
+                <ScalarProperty Name="start_lng" ColumnName="start_lng" />
+                <ScalarProperty Name="start_lat" ColumnName="start_lat" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="baseService1">
+            <EntityTypeMapping TypeName="radiotaxiModel.baseService1">
+              <MappingFragment StoreEntitySet="baseService">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catalogService1">
+            <EntityTypeMapping TypeName="radiotaxiModel.catalogService1">
+              <MappingFragment StoreEntitySet="catalogService">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChatMessage1">
+            <EntityTypeMapping TypeName="radiotaxiModel.ChatMessage1">
+              <MappingFragment StoreEntitySet="ChatMessage">
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="authyId" ColumnName="authyId" />
+                <ScalarProperty Name="sendedTime" ColumnName="sendedTime" />
+                <ScalarProperty Name="arrivalTime" ColumnName="arrivalTime" />
+                <ScalarProperty Name="identify" ColumnName="identify" />
+                <ScalarProperty Name="itemId" ColumnName="itemId" />
+                <ScalarProperty Name="C_NAME" ColumnName="_NAME" />
+                <ScalarProperty Name="C_Message" ColumnName="_Message" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="client1">
+            <EntityTypeMapping TypeName="radiotaxiModel.client1">
+              <MappingFragment StoreEntitySet="client">
+                <ScalarProperty Name="gps_hub_connectionId" ColumnName="gps_hub_connectionId" />
+                <ScalarProperty Name="padronId" ColumnName="padronId" />
+                <ScalarProperty Name="connectionId" ColumnName="connectionId" />
+                <ScalarProperty Name="authyId" ColumnName="authyId" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="isHome" ColumnName="isHome" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="editedBy" ColumnName="editedBy" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="blockedReason" ColumnName="blockedReason" />
+                <ScalarProperty Name="isBlocked" ColumnName="isBlocked" />
+                <ScalarProperty Name="dateUpdated" ColumnName="dateUpdated" />
+                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="lastname2" ColumnName="lastname2" />
+                <ScalarProperty Name="lastname1" ColumnName="lastname1" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GPSphone1">
+            <EntityTypeMapping TypeName="radiotaxiModel.GPSphone1">
+              <MappingFragment StoreEntitySet="GPSphones">
+                <ScalarProperty Name="GpsDate" ColumnName="GpsDate" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="AltitudeAccuracy" ColumnName="AltitudeAccuracy" />
+                <ScalarProperty Name="Altitude" ColumnName="Altitude" />
+                <ScalarProperty Name="Accuracy" ColumnName="Accuracy" />
+                <ScalarProperty Name="Heading" ColumnName="Heading" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="phoneID" ColumnName="phoneID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="package1">
+            <EntityTypeMapping TypeName="radiotaxiModel.package1">
+              <MappingFragment StoreEntitySet="package">
+                <ScalarProperty Name="deteDeleted" ColumnName="deteDeleted" />
+                <ScalarProperty Name="dateCreate" ColumnName="dateCreate" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="validDays" ColumnName="validDays" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="paymentPackage1">
+            <EntityTypeMapping TypeName="radiotaxiModel.paymentPackage1">
+              <MappingFragment StoreEntitySet="paymentPackages">
+                <ScalarProperty Name="dateEnd" ColumnName="dateEnd" />
+                <ScalarProperty Name="dateStart" ColumnName="dateStart" />
+                <ScalarProperty Name="payment_method" ColumnName="payment_method" />
+                <ScalarProperty Name="payment_status" ColumnName="payment_status" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="package_id" ColumnName="package_id" />
+                <ScalarProperty Name="conektaId" ColumnName="conektaId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="report1">
+            <EntityTypeMapping TypeName="radiotaxiModel.report1">
+              <MappingFragment StoreEntitySet="report">
+                <ScalarProperty Name="editedBy" ColumnName="editedBy" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="dateEdited" ColumnName="dateEdited" />
+                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rtNumberService1">
+            <EntityTypeMapping TypeName="radiotaxiModel.rtNumberService1">
+              <MappingFragment StoreEntitySet="rtNumberService">
+                <ScalarProperty Name="serviceId" ColumnName="serviceId" />
+                <ScalarProperty Name="rtNumber" ColumnName="rtNumber" />
+                <ScalarProperty Name="taxiNumber" ColumnName="taxiNumber" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="statusService1">
+            <EntityTypeMapping TypeName="radiotaxiModel.statusService1">
+              <MappingFragment StoreEntitySet="statusService">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="taxiApp1">
+            <EntityTypeMapping TypeName="radiotaxiModel.taxiApp1">
+              <MappingFragment StoreEntitySet="taxiApp">
+                <ScalarProperty Name="noteOperator" ColumnName="noteOperator" />
+                <ScalarProperty Name="editedBy" ColumnName="editedBy" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="statusServiceId" ColumnName="statusServiceId" />
+                <ScalarProperty Name="noteService" ColumnName="noteService" />
+                <ScalarProperty Name="timeService" ColumnName="timeService" />
+                <ScalarProperty Name="dataService" ColumnName="dataService" />
+                <ScalarProperty Name="isReservation" ColumnName="isReservation" />
+                <ScalarProperty Name="destinationLongitude" ColumnName="destinationLongitude" />
+                <ScalarProperty Name="destinationLatitude" ColumnName="destinationLatitude" />
+                <ScalarProperty Name="originLongitude" ColumnName="originLongitude" />
+                <ScalarProperty Name="originLatitude" ColumnName="originLatitude" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="taxiReport1">
+            <EntityTypeMapping TypeName="radiotaxiModel.taxiReport1">
+              <MappingFragment StoreEntitySet="taxiReport">
+                <ScalarProperty Name="reportId" ColumnName="reportId" />
+                <ScalarProperty Name="taxiNumber" ColumnName="taxiNumber" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="taxiService1">
+            <EntityTypeMapping TypeName="radiotaxiModel.taxiService1">
+              <MappingFragment StoreEntitySet="taxiService">
+                <ScalarProperty Name="operatorPhoneId" ColumnName="operatorPhoneId" />
+                <ScalarProperty Name="AppServiceId" ColumnName="AppServiceId" />
+                <ScalarProperty Name="days" ColumnName="days" />
+                <ScalarProperty Name="catalogServiceId" ColumnName="catalogServiceId" />
+                <ScalarProperty Name="baseServiceId" ColumnName="baseServiceId" />
+                <ScalarProperty Name="autoRenew" ColumnName="autoRenew" />
+                <ScalarProperty Name="datePickUp" ColumnName="datePickUp" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="statusServiceId" ColumnName="statusServiceId" />
+                <ScalarProperty Name="phoneId" ColumnName="phoneId" />
+                <ScalarProperty Name="editedBy" ColumnName="editedBy" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="dateRequested" ColumnName="dateRequested" />
+                <ScalarProperty Name="endPoint" ColumnName="endPoint" />
+                <ScalarProperty Name="startPoint" ColumnName="startPoint" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="unit_taxi1">
+            <EntityTypeMapping TypeName="radiotaxiModel.unit_taxi1">
+              <MappingFragment StoreEntitySet="unit_taxi">
+                <ScalarProperty Name="phoneId" ColumnName="phoneId" />
+                <ScalarProperty Name="id_padron" ColumnName="id_padron" />
+                <ScalarProperty Name="rtNumber" ColumnName="rtNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InterestPoints">
+            <EntityTypeMapping TypeName="radiotaxiModel.InterestPoint">
+              <MappingFragment StoreEntitySet="InterestPoints">
+                <ScalarProperty Name="PointTypeId" ColumnName="PointTypeId" />
+                <ScalarProperty Name="ZoneId" ColumnName="ZoneId" />
+                <ScalarProperty Name="UtcDateCreated" ColumnName="UtcDateCreated" />
+                <ScalarProperty Name="UtcDateModified" ColumnName="UtcDateModified" />
+                <ScalarProperty Name="ModifiedByUserId" ColumnName="ModifiedByUserId" />
+                <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PointTypes">
+            <EntityTypeMapping TypeName="radiotaxiModel.PointType">
+              <MappingFragment StoreEntitySet="PointTypes">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rates">
+            <EntityTypeMapping TypeName="radiotaxiModel.Rate">
+              <MappingFragment StoreEntitySet="Rates">
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="TariffId" ColumnName="TariffId" />
+                <ScalarProperty Name="UtcDateCreated" ColumnName="UtcDateCreated" />
+                <ScalarProperty Name="UtcDateModified" ColumnName="UtcDateModified" />
+                <ScalarProperty Name="ModifiedByUserId" ColumnName="ModifiedByUserId" />
+                <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuperBlocks">
+            <EntityTypeMapping TypeName="radiotaxiModel.SuperBlock">
+              <MappingFragment StoreEntitySet="SuperBlocks">
+                <ScalarProperty Name="ZoneId" ColumnName="ZoneId" />
+                <ScalarProperty Name="UtcDateCreated" ColumnName="UtcDateCreated" />
+                <ScalarProperty Name="UtcDateModified" ColumnName="UtcDateModified" />
+                <ScalarProperty Name="ModifiedByUserId" ColumnName="ModifiedByUserId" />
+                <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tariffs">
+            <EntityTypeMapping TypeName="radiotaxiModel.Tariff">
+              <MappingFragment StoreEntitySet="Tariffs">
+                <ScalarProperty Name="SearchRadius" ColumnName="SearchRadius" />
+                <ScalarProperty Name="ZoomLevel" ColumnName="ZoomLevel" />
+                <ScalarProperty Name="MapCenter" ColumnName="MapCenter" />
+                <ScalarProperty Name="ProfileImgUrl" ColumnName="ProfileImgUrl" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="UtcDateCreated" ColumnName="UtcDateCreated" />
+                <ScalarProperty Name="UtcDateModified" ColumnName="UtcDateModified" />
+                <ScalarProperty Name="ModifiedByUserId" ColumnName="ModifiedByUserId" />
+                <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zones">
+            <EntityTypeMapping TypeName="radiotaxiModel.Zone">
+              <MappingFragment StoreEntitySet="Zones">
+                <ScalarProperty Name="TariffId" ColumnName="TariffId" />
+                <ScalarProperty Name="UtcDateCreated" ColumnName="UtcDateCreated" />
+                <ScalarProperty Name="UtcDateModified" ColumnName="UtcDateModified" />
+                <ScalarProperty Name="ModifiedByUserId" ColumnName="ModifiedByUserId" />
+                <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

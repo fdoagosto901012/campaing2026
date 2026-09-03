@@ -1,0 +1,454 @@
+﻿@{
+    ViewBag.Title = "TicketDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row no-print">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-xl-9 col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm order-2 order-sm-1">
+                                <div class="row mt-4">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div>
+                                                    <form v-on:submit="search($event)" class="row gx-3 gy-2 align-items-end mb-4 mb-lg-0">
+                                                        <div class="col-5">
+                                                            <label class="form-label control-label" for="taxi">Taxi</label>
+                                                            <input type="text" class="form-control span11" name="taxi" id="taxi" placeholder="Ingrese el número de económico" v-model="taxi">
+                                                        </div>
+                                                        <div class="col-5">
+                                                            <label class="form-label control-label">Soc./Op.</label>
+                                                            <input type="text" class="form-control span11" placeholder="" name="reference" id="reference" v-model="reference">
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <button href="#" class="btn btn-success waves-effect btn-label waves-light"> <i class="bx bx-search label-icon "></i>Buscar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- FIN PERFIL-->
+                        </div>
+                    </div>
+                    <!-- end card body -->
+                </div>
+                <!-- end card -->
+                <div v-if="data != null" class="tab-content">
+                    <div class="tab-pane active" id="general" role="tabpanel">
+                        <div class="mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="row">
+                                            <div class="col-sm order-2 order-sm-1">
+                                                <div class="d-flex align-items-start mt-3 mt-sm-0">
+                                                    <div class="flex-lg-shrink-0">
+                                                        <div class="avatar-xl me-3">
+                                                            <img v-if="data.Operator.STATUS === 'B'" v-bind:src="data.Operator.urlImage" alt="" class="avatar-xl rounded-circle me-2 img-thumbnail" style="background-color: #fd625e;">
+                                                            <img v-else v-bind:src="data.Operator.urlImage" alt="" class="avatar-xl rounded-circle me-2 img-thumbnail">
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <div>
+                                                            <h4 class="font-size-18 mb-1 fw-bolder"> ECO/GAFET {{data.Operator.partnerReference}}</h4>
+                                                            <h6 class="font-size-14 mb-1">{{data.Operator.firstName}} {{data.Operator.firstName}}  {{data.Operator.lastNameF}}  {{data.Operator.lastNameM}} </h6>
+
+                                                            <div class="d-flex flex-wrap align-items-start gap-2 gap-lg-3 text-muted font-size-13">
+                                                                <div>
+                                                                    <span v-if="data.Operator.STATUS === 'B'">
+                                                                        <i class="mdi mdi-circle-medium me-1 text-danger align-middle"></i>
+                                                                        BAJA
+                                                                    </span>
+                                                                    <span v-else>
+                                                                        <i class="mdi mdi-circle-medium me-1 text-success  align-middle"></i>
+                                                                        ALTA
+                                                                    </span>
+
+                                                                    <span v-if="data.Operator.STATUS === 'B'">
+                                                                        <i class="mdi mdi-circle-medium me-1 text-danger align-middle"></i>fecha baja : {{data.Operator.FECHABAJ}}
+                                                                    </span>
+                                                                    <span v-else>
+                                                                        <i class="mdi mdi-circle-medium me-1 text-success align-middle"></i>fecha ingreso : {{data.Operator.FECHAING}}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> <!-- FIN PERFIL-->
+                                            <div class="col-sm order-2 order-sm-1">
+                                                <div class="d-flex align-items-start mt-3 mt-sm-0">
+                                                    <div class="flex-grow-1">
+                                                        <div v-if="data.Car != null">
+                                                            <h4 class="font-size-18 mb-1 fw-bolder"> ECO {{data.Car.No_Economico}}</h4>
+                                                            <h6 class="font-size-14 mb-1">{{data.Car.Marca}} {{data.Car.Modelo}}  {{data.Car.AutoAno}}</h6>
+
+                                                            <div class="d-flex flex-wrap align-items-start gap-2 gap-lg-3 text-muted font-size-13">
+                                                                <div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i>{{data.Car.Operacion}}</div>
+                                                                <div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i> {{ data.Car.FechaOp ? new Date(data.Car.FechaOp).toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' }) : '' }}</div>
+                                                            </div>
+                                                        </div>
+                                                        <div v-else>
+                                                            vehiculo dado de baja o no resgitrado en emplacamiento
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> <!-- FIN PERFIL-->
+                                        </div> <!-- FIN PERFIL-->
+                                    </div>
+
+                                </div>
+                                <!-- end card body -->
+                            </div>
+                            <!-- end card -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <!-- CABECERAS -->
+                                    <div class="row g-1 align-items-center">
+                                        <div class="col-12 col-md-1 d-flex text-center">
+                                            <div class="form-check mb-3">
+                                                <input v-on:change="payall($event)" checked class="form-check-input" type="checkbox" id="Payall">
+                                                <label class="form-check-label" for="formCheck1">
+                                                    Pagar todo
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-3 d-flex text-center text-md-start justify-content-center">
+                                            <p class="fw-bold font-size-13">Concepto</p>
+                                        </div>
+                                        <div class="col-12 col-md-2 d-flex justify-content-center">
+                                            <p class="fw-bold font-size-13">Cantidad</p>
+                                        </div>
+                                        <!---->
+                                        <div class="col-12 col-md-3 d-flex justify-content-center">
+                                            <p class="fw-bold font-size-13">Turno</p>
+                                        </div>
+
+                                        <!---->
+                                        <div class="col-12 col-md-1 d-flex justify-content-center">
+                                            <p class="fw-bold font-size-13">Cantidad</p>
+                                        </div>
+                                        <div class="col-12 col-md-1 d-flex justify-content-center">
+                                            <p class="fw-bold font-size-13">Precio unitario</p>
+                                        </div>
+                                        <div class="col-12 col-md-1 d-flex justify-content-center">
+                                            <p class="fw-bold font-size-13">Total</p>
+                                        </div>
+                                    </div>
+                                    <hr class="divider">
+                                    <!-- FIN CABECERAS -->
+                                    <form id="app"
+                                          v-on:submit="pay($event)"
+                                          action="/ticket/box"
+                                          method="post"
+                                          class="row g-3 align-items-center">
+                                        <div class="row g-1 align-items-center" v-for="cargo in cargos">
+                                            <div class="col-12 col-md-1 text-center">
+                                                <i v-if="cargo.A == 'OPERADOR'" class="bx bxs-user" style="font-size: 15px; margin-right: 15px;"></i>
+                                                <i v-else class="bx bxs-taxi" style="font-size: 15px; margin-right: 15px;"></i>
+                                                <i v-if="cargo.CONVENIO != null " class="bx bxs-copy-alt" style="font-size: 15px; margin-right: 15px;"></i>
+                                                <i v-else class="bx bxs-wallet-alt" style="font-size: 15px; margin-right: 15px;"></i>
+                                                <input v-on:change="check(cargo)" v-model="cargo.CHECK" class="form-check-input" type="checkbox" id="pay" name="pay">
+                                            </div>
+                                            <div class="col-12 col-md-3 text-center text-md-start ">
+                                                <a v-on:click="detailpay(cargo.CLAVE)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                                                    <p class="mb-0 " role="button">
+
+
+                                                        {{cargo.CARGO}}
+                                                    </p>
+                                                </a>
+                                            </div>
+                                            <div class="col-12 col-md-2 d-flex justify-content-center">
+                                                <div class="input-group">
+                                                    <a v-on:click="less(cargo)" href="#" type="button" class="btn btn-danger text-white"><i class="bx bx-minus"></i></a>
+                                                    <input v-on:change="validate(cargo)" type="number" class="form-control text-center" min="0" v-model="cargo.PAGA">
+                                                    <a v-on:click="add(cargo)" href="#" type="button" class="btn btn-success text-white"><i class="bx bx-plus"></i></a>
+                                                </div>
+                                            </div>
+                                            <!---->
+                                            <div class="col-12 col-md-3 text-center text-md-end">
+                                                <div class="d-flex align-items-center justify-content-evenly">
+                                                    <div v-if="cargo.CLAVE == 1000" class="form-check me-2">
+                                                        <input v-on:change="double($event,cargo)" v-model="cargo.RDOUBLE" value="true" class="form-check-input" type="checkbox" id="formCheck2">
+                                                        <label class="form-check-label" for="formCheck2">Doble</label>
+                                                    </div>
+
+                                                    <div v-if="cargo.CLAVE == 0">
+                                                        <select v-model="cargo.RTYPE" v-on:change="turno($event, cargo)" class="form-select">
+
+                                                            <option :selected="cargo.RTYPE == 'D'" value="D">Doble</option>
+                                                            <option :selected="cargo.RTYPE == 'V'" value="V">Vespertino</option>
+                                                            <option :selected="cargo.RTYPE == 'M'" value="M">Matutino</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!---->
+                                            <div class="col-12 col-md-1 text-center">
+                                                <p class="mb-0">{{cargo.DEBE}}</p>
+                                            </div>
+                                            <div class="col-12 col-md-1 text-center">
+                                                <p class="mb-0">{{cargo.PRECIO.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' })}}</p>
+                                            </div>
+                                            <div class="col-12 col-md-1 text-center text-md-end">
+                                                <p class="mb-0 fw-bold">{{(cargo.PRECIO * cargo.PAGA * cargo.MULTIPLICADOR).toLocaleString('es-MX', { style: 'currency', currency: 'MXN' })}}</p>
+                                            </div>
+                                        </div>
+
+                                        <hr class="divider">
+
+                                        <div class="row g-1 align-items-center">
+
+                                            <div class="col-8 col-md-8">
+
+                                            </div>
+                                            <div class="col-2 col-md-2 text-end text-md-end align-content-end">
+                                                <p class="mb-0 p-0 fw-bolder h5">Total:</p>
+                                            </div>
+                                            <div class="col-2 col-md-2 text-end text-md-end align-content-end">
+                                                <p class="mb-0 fw-bolder h5 p-0">{{total.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' })}}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row justify-content-end m-3 ">
+                                            <div class="col-3 col-md-12 text-end text-md-end align-items-end ">
+
+                                                <div v-if="loading" role="status" class="spinner-border text-success" style="width: 30px;height: 30px;margin: 0px 14px -10px 1px;"><span class="sr-only">Loading...</span></div>
+                                                <button type="submit" class="btn btn-success waves-effect btn-label waves-light">
+                                                    <i class="bx bx-wallet label-icon"></i>
+                                                    Pagar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <!-- right offcanvas -->
+                                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                                        <div class="offcanvas-header">
+                                            <h5 id="offcanvasRightLabel">DETALLES DE MOVIMIENTO</h5>
+                                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                        </div>
+                                        <div class="offcanvas-body">
+                                            <div class="table-rep-plugin">
+                                                <div class="table-responsive mb-0">
+                                                    <table v-if="datadetail != null" id="tdesc" class="table table-striped display" style="width:100%" data-page-length='100'>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Descripción</th>
+                                                                <th>Fecha</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="t-contet">
+                                                            <tr v-for="detail in datadetail.charges">
+                                                                <th class="text-break">{{ detail.Descripcion.length > 25 ? detail.Descripcion.slice(0, 25) + '...' : detail.Descripcion }}</th>
+                                                                <td>{{ new Date(detail.FechaOp).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }) }}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <th>Descripción</th>
+                                                                <th>Fecha</th>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end tab content -->
+            </div>
+            <!-- end col -->
+            <div class="col-xl-3 col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-pills nav-justified" role="tablist">
+                            <li class="nav-item waves-effect waves-light">
+                                <a class="nav-link active" data-bs-toggle="tab" href="#buscador" role="tab">
+                                    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                    <span class="d-none d-sm-block"><i class="bx bx-search"></i></span>
+                                </a>
+                            </li>
+                            <li class="nav-item waves-effect waves-light">
+                                <a class="nav-link" data-bs-toggle="tab" href="#bloqueos" role="tab">
+                                    <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                    <span class="d-none d-sm-block"><i class="bx bx-block"></i></span>
+                                </a>
+                            </li>
+                            <li class="nav-item waves-effect waves-light">
+                                <a class="nav-link" data-bs-toggle="tab" href="#pavos" role="tab">
+                                    <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                    <span class="d-none d-sm-block">Pavos</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content p-3 text-muted">
+                            <div class="tab-pane active" id="buscador" role="tabpanel">
+                                <div class="row mb-3">
+                                    <div class="col-md-12">
+                                        <h5 class="font-size-14 mb-3 text-center">Buscador de productos y servicios</h5>
+                                        <label for="choices-single-default" class="form-label font-size-13 text-muted">Servicios</label>
+                                        <select v-on:change="onSelect" class="form-control" data-trigger name="choices-single-default"
+                                                id="choices-single-default"
+                                                placeholder="This is a search placeholder">
+                                            @foreach (radiotaxi.Model.Servicio service in ViewBag.services)
+                                            {
+                                                <option value="@(service.id_producto)">@(service.descripcion)</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-12">
+                                        <a class="btn btn-success">
+                                            Agregar servicio
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="bloqueos" role="tabpanel">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>TAXI</th>
+                                            <th>COFER</th>
+                                            <th>MENSAJE</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="item in blocks">
+                                            <td>{{item.TAXI}}</td>
+                                            <td>{{item.CHOFER}}</td>
+                                            <td>
+                                                <a class="btn btn-success" v-on:click="showmessage(item)">
+                                                    Ver más
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="tab-pane" id="pavos" role="tabpanel">
+                                <p class="mb-0">
+                                    Etsy mixtape wayfarers, ethical wes anderson tofu before they
+                                    sold out mcsweeney's organic lomo retro fanny pack lo-fi
+                                    farm-to-table readymade. Messenger bag gentrify pitchfork
+                                    tattooed craft beer, iphone skateboard locavore carles etsy
+                                    salvia banksy hoodie helvetica.
+                                </p>
+                            </div>
+                        </div>
+                    </div><!-- end card-body -->
+                </div><!-- end card -->
+            </div>
+            <!-- end col -->
+        </div>
+
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row print">
+    <div class="col-md-12">
+        <div class="ticket">
+            <div class="header">
+                <img src="~/Content/images/TC_LOGO.png" alt="LOGO TC" class="img-logo">
+                <h2 class="text-center pt-3">SINDICATO DE CHOFERES, TAXISTAS Y SIMILARES ANDRES Q.ROO</h2>
+            </div>
+            <p class="text-center">SOCIO</p>
+            <hr>
+            <p>TICKET: T-6473440</p>
+            <p>FECHA: 10/08/2024 13:56</p>
+            <p>USUARIO: 10-1 SISTEMAS</p>
+            <p>SE REPORTA CON EL TAXI: 5670</p>
+            <hr>
+            <P>ECONOMICO: 5670</P>
+            <p>ANGELICA ALEJANDRA BERRON ARIAS</p>
+
+            <hr>
+            <table class="table table-borderless">
+                <thead>
+                    <tr>
+                        <th>Cantidad</th>
+                        <th>Codigo</th>
+                        <th>Descripción</th>
+                        <th class="text-end">Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">1</td>
+                        <td class="text-center">1</td>
+                        <td>Producto 1</td>
+                        <td class="text-end">$10.00</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">2</td>
+                        <td class="text-center">2</td>
+                        <td>Producto 2</td>
+                        <td class="text-end">$20.00</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">3</td>
+                        <td class="text-center">3</td>
+                        <td>Producto 3</td>
+                        <td class="text-end">$15.00</td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <p>REPORTADO HASTA: 04/08/2024</p>
+            <p>A ESTA FECHA SU PORCENTAJE ES 100%</p>
+            <p class="text-end"><strong>Total:</strong> $45.00</p>
+            <hr>
+            <p class="text-center">
+                Se le informa que a partir del 15 de julio todo operador debera portar a la vista del usuario
+                su tarjeton de identidad vigente
+            </p>
+            <br>
+            <p class="text-center">SÚBETE A LA OLA.</p>
+            <p class="text-center">Para registrarse, envia un mensaje a los números: 9989371528 o 9988962606</p>
+        </div>
+    </div>
+</div>
+
+<div id="messagemodal" class="modal fade" tabindex="-1" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Bloqueo</h5>
+                
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="messagecontent">
+
+                </p>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+@section Scripts {
+    <script src="~/Content/js/Views/Sales/box.js"></script>
+    <script src="~/Content/js/pages/materialdesign.init.js"></script>
+}

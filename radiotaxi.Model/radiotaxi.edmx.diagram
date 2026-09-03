@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="67737e0ddb80497aa883d528e2d4f992" Name="Diagram1" ZoomLevel="12">
+        <EntityTypeShape EntityType="SindQRModel.C_permissions" Width="1.5" PointX="8.25" PointY="185.625" />
+        <EntityTypeShape EntityType="SindQRModel.academicGrade" Width="1.5" PointX="12" PointY="123.25" />
+        <EntityTypeShape EntityType="SindQRModel.accident" Width="1.5" PointX="20.25" PointY="85.5" />
+        <EntityTypeShape EntityType="SindQRModel.activist" Width="1.5" PointX="15" PointY="120.25" />
+        <EntityTypeShape EntityType="SindQRModel.address_sectors" Width="1.5" PointX="21.5" PointY="104.625" />
+        <EntityTypeShape EntityType="SindQRModel.adjuster" Width="1.5" PointX="18" PointY="133.5" />
+        <EntityTypeShape EntityType="SindQRModel.alcohol" Width="1.5" PointX="18" PointY="117.125" />
+        <EntityTypeShape EntityType="SindQRModel.amazonPicture" Width="1.5" PointX="11.25" PointY="89.375" />
+        <EntityTypeShape EntityType="SindQRModel.AseguradorasEmpla" Width="1.5" PointX="5.75" PointY="1.25" />
+        <EntityTypeShape EntityType="SindQRModel.assignment" Width="1.5" PointX="17.25" PointY="90.875" />
+        <EntityTypeShape EntityType="SindQRModel.autoinsurance" Width="1.5" PointX="18" PointY="126.5" />
+        <EntityTypeShape EntityType="SindQRModel.BANCO" Width="1.5" PointX="5.75" PointY="5.25" />
+        <EntityTypeShape EntityType="SindQRModel.Boletine" Width="1.5" PointX="15.75" PointY="19.25" />
+        <EntityTypeShape EntityType="SindQRModel.box" Width="1.5" PointX="12" PointY="110.375" />
+        <EntityTypeShape EntityType="SindQRModel.box_user" Width="1.5" PointX="14.25" PointY="89.25" />
+        <EntityTypeShape EntityType="SindQRModel.candidate" Width="1.5" PointX="3.75" PointY="103.75" />
+        <EntityTypeShape EntityType="SindQRModel.Capturist" Width="1.5" PointX="12" PointY="65.375" />
+        <EntityTypeShape EntityType="SindQRModel.card" Width="1.5" PointX="8.25" PointY="149.375" />
+        <EntityTypeShape EntityType="SindQRModel.cardsPrinted" Width="1.5" PointX="10.5" PointY="150.625" />
+        <EntityTypeShape EntityType="SindQRModel.Carge" Width="1.5" PointX="20.75" PointY="11.25" />
+        <EntityTypeShape EntityType="SindQRModel.categoriesQuestProblem" Width="1.5" PointX="14.25" PointY="108.5" />
+        <EntityTypeShape EntityType="SindQRModel.causeaccident" Width="1.5" PointX="18" PointY="63.625" />
+        <EntityTypeShape EntityType="SindQRModel.Charge" Width="1.5" PointX="10.75" PointY="21.25" />
+        <EntityTypeShape EntityType="SindQRModel.ChargesItem" Width="1.5" PointX="13" PointY="20.625" />
+        <EntityTypeShape EntityType="SindQRModel.Chof_Detalle" Width="1.5" PointX="20.75" PointY="22.25" />
+        <EntityTypeShape EntityType="SindQRModel.Chof_Fondo_Fallecidos" Width="1.5" PointX="22.75" PointY="11.25" />
+        <EntityTypeShape EntityType="SindQRModel.Chof_Head" Width="1.5" PointX="22.75" PointY="22.25" />
+        <EntityTypeShape EntityType="SindQRModel.Christmasgift" Width="1.5" PointX="8.25" PointY="210.625" />
+        <EntityTypeShape EntityType="SindQRModel.ChristmasgiftPrinted" Width="1.5" PointX="10.5" PointY="210.625" />
+        <EntityTypeShape EntityType="SindQRModel.city" Width="1.5" PointX="14" PointY="114.5" />
+        <EntityTypeShape EntityType="SindQRModel.client" Width="1.5" PointX="9" PointY="111.75" />
+        <EntityTypeShape EntityType="SindQRModel.Cliente" Width="1.5" PointX="23.75" PointY="1.25" />
+        <EntityTypeShape EntityType="SindQRModel.Cobro" Width="1.5" PointX="7.75" PointY="7.25" />
+        <EntityTypeShape EntityType="SindQRModel.Comando" Width="1.5" PointX="7.75" PointY="1.25" />
+        <EntityTypeShape EntityType="SindQRModel.commentsreport" Width="1.5" PointX="13.5" PointY="75.25" />
+        <EntityTypeShape EntityType="SindQRModel.company" Width="1.5" PointX="6" PointY="104.75" />
+        <EntityTypeShape EntityType="SindQRModel.company1" Width="1.5" PointX="10.75" PointY="14" />
+        <EntityTypeShape EntityType="SindQRModel.Compra" Width="1.5" PointX="15.75" PointY="24.25" />
+        <EntityTypeShape EntityType="SindQRModel.ComprasDetalle" Width="1.5" PointX="24.75" PointY="7.25" />
+        <EntityTypeShape EntityType="SindQRModel.ConceptoAgrupador" Width="1.5" PointX="10.75" PointY="17.25" />
+        <EntityTypeShape EntityType="SindQRModel.ConceptosConvenio" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="SindQRModel.ConceptosConveniosRelacion" Width="1.5" PointX="3" PointY="1.5" />
+        <EntityTypeShape EntityType="SindQRModel.confinement" Width="1.5" PointX="18" PointY="81" />
+        <EntityTypeShape EntityType="SindQRModel.Convenio" Width="1.5" PointX="24.75" PointY="12.25" />
+        <EntityTypeShape EntityType="SindQRModel.coordinate" Width="1.5" PointX="3" PointY="93.625" />
+        <EntityTypeShape EntityType="SindQRModel.CouponPaymentDetail" Width="1.5" PointX="15.75" PointY="178" />
+        <EntityTypeShape EntityType="SindQRModel.CouponPayment" Width="1.5" PointX="8.25" PointY="206" />
+        <EntityTypeShape EntityType="SindQRModel.Couponrate" Width="1.5" PointX="11.25" PointY="156.75" />
+        <EntityTypeShape EntityType="SindQRModel.crane" Width="1.5" PointX="18" PointY="74" />
+        <EntityTypeShape EntityType="SindQRModel.creditcard" Width="1.5" PointX="8.25" PointY="201.75" />
+        <EntityTypeShape EntityType="SindQRModel.CUENTA" Width="1.5" PointX="2.75" PointY="9.25" />
+        <EntityTypeShape EntityType="SindQRModel.CuponesBloqueo" Width="1.5" PointX="17.75" PointY="25.25" />
+        <EntityTypeShape EntityType="SindQRModel.CuponesEntagen" Width="1.5" PointX="24.75" PointY="19.25" />
+        <EntityTypeShape EntityType="SindQRModel.Cupon" Width="1.5" PointX="13.5" PointY="148.25" />
+        <EntityTypeShape EntityType="SindQRModel.cuponsGroupPrinted" Width="1.5" PointX="11.25" PointY="139.875" />
+        <EntityTypeShape EntityType="SindQRModel.Cupontype" Width="1.5" PointX="9" PointY="159" />
+        <EntityTypeShape EntityType="SindQRModel.CxC" Width="1.5" PointX="24.75" PointY="23.25" />
+        <EntityTypeShape EntityType="SindQRModel.CxP" Width="1.5" PointX="25.75" PointY="1.25" />
+        <EntityTypeShape EntityType="SindQRModel.CxPChof" Width="1.5" PointX="10.75" PointY="26.25" />
+        <EntityTypeShape EntityType="SindQRModel.delegateintransit" Width="1.5" PointX="18" PointY="138.125" />
+        <EntityTypeShape EntityType="SindQRModel.delegateoperational" Width="1.5" PointX="18" PointY="140.5" />
+        <EntityTypeShape EntityType="SindQRModel.Departamento" Width="1.5" PointX="12.75" PointY="26.25" />
+        <EntityTypeShape EntityType="SindQRModel.department" Width="1.5" PointX="9.75" PointY="120.75" />
+        <EntityTypeShape EntityType="SindQRModel.descriptionLoss" Width="1.5" PointX="9" PointY="66.125" />
+        <EntityTypeShape EntityType="SindQRModel.descriptionOperator" Width="1.5" PointX="9" PointY="74.5" />
+        <EntityTypeShape EntityType="SindQRModel.descriptionVehicle" Width="1.5" PointX="9" PointY="71.75" />
+        <EntityTypeShape EntityType="SindQRModel.doctor" Width="1.5" PointX="8.25" PointY="127.375" />
+        <EntityTypeShape EntityType="SindQRModel.document" Width="1.5" PointX="22.5" PointY="87.625" />
+        <EntityTypeShape EntityType="SindQRModel.dtproperty" Width="1.5" PointX="5.75" PointY="27.25" />
+        <EntityTypeShape EntityType="SindQRModel.email" Width="1.5" PointX="11.25" PointY="101.5" />
+        <EntityTypeShape EntityType="SindQRModel.emailPriorityType" Width="1.5" PointX="9" PointY="123.875" />
+        <EntityTypeShape EntityType="SindQRModel.emplaBitacora" Width="1.5" PointX="21" PointY="18.5" />
+        <EntityTypeShape EntityType="SindQRModel.emplacambioplacas_log" Width="1.5" PointX="26.75" PointY="7.25" />
+        <EntityTypeShape EntityType="SindQRModel.Emplacamiento" Width="1.5" PointX="18.75" PointY="15.75" />
+        <EntityTypeShape EntityType="SindQRModel.EmplaMarca" Width="1.5" PointX="7.75" PointY="27.25" />
+        <EntityTypeShape EntityType="SindQRModel.EmplaModelo" Width="1.5" PointX="26.75" PointY="11.25" />
+        <EntityTypeShape EntityType="SindQRModel.EmplaMovimiento" Width="1.5" PointX="26.75" PointY="15.25" />
+        <EntityTypeShape EntityType="SindQRModel.EmplaProtegido" Width="1.5" PointX="26.75" PointY="19.25" />
+        <EntityTypeShape EntityType="SindQRModel.EmplaRestriccion" Width="1.5" PointX="26.75" PointY="25.25" />
+        <EntityTypeShape EntityType="SindQRModel.entregapavos_activacion_1" Width="1.5" PointX="27.75" PointY="1.25" />
+        <EntityTypeShape EntityType="SindQRModel.entregatarifarios_1" Width="1.5" PointX="28.75" PointY="4.25" />
+        <EntityTypeShape EntityType="SindQRModel.ExamenesClinica" Width="1.5" PointX="28.75" PointY="8.25" />
+        <EntityTypeShape EntityType="SindQRModel.ExistenciaFisica" Width="1.5" PointX="28.75" PointY="12.25" />
+        <EntityTypeShape EntityType="SindQRModel.Factura" Width="1.5" PointX="28.75" PointY="16.25" />
+        <EntityTypeShape EntityType="SindQRModel.FacturasDetalle" Width="1.5" PointX="17.75" PointY="29.25" />
+        <EntityTypeShape EntityType="SindQRModel.Familia" Width="1.5" PointX="28.75" PointY="23.25" />
+        <EntityTypeShape EntityType="SindQRModel.family_members" Width="1.5" PointX="8.25" PointY="168.375" />
+        <EntityTypeShape EntityType="SindQRModel.FDI_NE_chof_turnados" Width="1.5" PointX="22.75" PointY="29.25" />
+        <EntityTypeShape EntityType="SindQRModel.FDI_NE_entregado" Width="1.5" PointX="24.75" PointY="29.25" />
+        <EntityTypeShape EntityType="SindQRModel.FDI_NE_soc_turnados" Width="1.5" PointX="28.75" PointY="27.25" />
+        <EntityTypeShape EntityType="SindQRModel.filtrocobro" Width="1.5" PointX="29.75" PointY="1.25" />
+        <EntityTypeShape EntityType="SindQRModel.filtrocobroscaja" Width="1.5" PointX="7.75" PointY="30.25" />
+        <EntityTypeShape EntityType="SindQRModel.fingerInfo" Width="1.5" PointX="8.25" PointY="80.875" />
+        <EntityTypeShape EntityType="SindQRModel.FormasPago" Width="1.5" PointX="12.75" PointY="30.25" />
+        <EntityTypeShape EntityType="SindQRModel.fotoid" Width="1.5" PointX="26.75" PointY="30.25" />
+        <EntityTypeShape EntityType="SindQRModel.garage" Width="1.5" PointX="18" PointY="135.875" />
+        <EntityTypeShape EntityType="SindQRModel.gp" Width="1.5" PointX="0.75" PointY="93.375" />
+        <EntityTypeShape EntityType="SindQRModel.grouping" Width="1.5" PointX="9" PointY="117.875" />
+        <EntityTypeShape EntityType="SindQRModel.hardvote" Width="1.5" PointX="13.5" PointY="99.375" />
+        <EntityTypeShape EntityType="SindQRModel.historyreport" Width="1.5" PointX="13.5" PointY="81.5" />
+        <EntityTypeShape EntityType="SindQRModel.hospital" Width="1.5" PointX="18" PointY="119.375" />
+        <EntityTypeShape EntityType="SindQRModel.Hotel" Width="1.5" PointX="9" PointY="155.5" />
+        <EntityTypeShape EntityType="SindQRModel.incident" Width="1.5" PointX="18.5" PointY="105" />
+        <EntityTypeShape EntityType="SindQRModel.insurance" Width="1.5" PointX="18" PointY="128.75" />
+        <EntityTypeShape EntityType="SindQRModel.Inventario" Width="1.5" PointX="8" PointY="17.75" />
+        <EntityTypeShape EntityType="SindQRModel.InventarioOrig" Width="1.5" PointX="28.75" PointY="30.25" />
+        <EntityTypeShape EntityType="SindQRModel.involved" Width="1.5" PointX="18" PointY="71.625" />
+        <EntityTypeShape EntityType="SindQRModel.IronRolle" Width="1.5" PointX="18.75" PointY="2.375" />
+        <EntityTypeShape EntityType="SindQRModel.IronUser" Width="1.5" PointX="15.75" PointY="7" />
+        <EntityTypeShape EntityType="SindQRModel.IronUserRoll" Width="1.5" PointX="21" PointY="3.25" />
+        <EntityTypeShape EntityType="SindQRModel.licincourt" Width="1.5" PointX="18" PointY="112.375" />
+        <EntityTypeShape EntityType="SindQRModel.managerinmp" Width="1.5" PointX="18" PointY="78.625" />
+        <EntityTypeShape EntityType="SindQRModel.manageroperational" Width="1.5" PointX="18" PointY="114.75" />
+        <EntityTypeShape EntityType="SindQRModel.medical_records" Width="1.5" PointX="13.5" PointY="129.625" />
+        <EntityTypeShape EntityType="SindQRModel.membership" Width="1.5" PointX="8.25" PointY="214" />
+        <EntityTypeShape EntityType="SindQRModel.MensajesAVariosTemp" Width="1.5" PointX="30.75" PointY="4.25" />
+        <EntityTypeShape EntityType="SindQRModel.Modulo" Width="1.5" PointX="30.75" PointY="7.25" />
+        <EntityTypeShape EntityType="SindQRModel.Movimiento" Width="1.5" PointX="30.75" PointY="10.25" />
+        <EntityTypeShape EntityType="SindQRModel.MovimientosDetalle" Width="1.5" PointX="30.75" PointY="15.25" />
+        <EntityTypeShape EntityType="SindQRModel.network" Width="1.5" PointX="8.25" PointY="105.375" />
+        <EntityTypeShape EntityType="SindQRModel.Network_capturist" Width="1.5" PointX="10.5" PointY="106.875" />
+        <EntityTypeShape EntityType="SindQRModel.objectAcl" Width="1.5" PointX="8.5" PointY="4.5" />
+        <EntityTypeShape EntityType="SindQRModel.Observacione" Width="1.5" PointX="12.75" PointY="12.25" />
+        <EntityTypeShape EntityType="SindQRModel.occupation" Width="1.5" PointX="12" PointY="68.875" />
+        <EntityTypeShape EntityType="SindQRModel.occupationsUsersList" Width="1.5" PointX="14.25" PointY="85.5" />
+        <EntityTypeShape EntityType="SindQRModel.Operadores_Baja_Datos" Width="1.5" PointX="14.75" PointY="31.25" />
+        <EntityTypeShape EntityType="SindQRModel.operatorgeneral" Width="1.5" PointX="8.25" PointY="97.5" />
+        <EntityTypeShape EntityType="SindQRModel.originReport" Width="1.5" PointX="9" PointY="87.625" />
+        <EntityTypeShape EntityType="SindQRModel.padronRadioTaxi" Width="1.5" PointX="30.75" PointY="19.25" />
+        <EntityTypeShape EntityType="SindQRModel.pagocupone" Width="1.5" PointX="30.75" PointY="22.25" />
+        <EntityTypeShape EntityType="SindQRModel.PanicAlert" Width="1.5" PointX="25.5" PointY="85.625" />
+        <EntityTypeShape EntityType="SindQRModel.panicAlertReport" Width="1.5" PointX="23.25" PointY="83.625" />
+        <EntityTypeShape EntityType="SindQRModel.parameter" Width="1.5" PointX="13.75" PointY="17" />
+        <EntityTypeShape EntityType="SindQRModel.partnerType" Width="1.5" PointX="3.75" PointY="90.375" />
+        <EntityTypeShape EntityType="SindQRModel.payrollCapturist" Width="1.5" PointX="14.25" PointY="96.75" />
+        <EntityTypeShape EntityType="SindQRModel.PerfilDeAcceso" Width="1.5" PointX="30.75" PointY="27.25" />
+        <EntityTypeShape EntityType="SindQRModel.PerfilDeComando" Width="1.5" PointX="30.75" PointY="30.25" />
+        <EntityTypeShape EntityType="SindQRModel.permisos_especiales" Width="1.5" PointX="31.75" PointY="1.25" />
+        <EntityTypeShape EntityType="SindQRModel.phoneType" Width="1.5" PointX="9" PointY="102.875" />
+        <EntityTypeShape EntityType="SindQRModel.pictureType" Width="1.5" PointX="9" PointY="114.875" />
+        <EntityTypeShape EntityType="SindQRModel.policysecure" Width="1.5" PointX="18" PointY="131.125" />
+        <EntityTypeShape EntityType="SindQRModel.PoliticasVenta" Width="1.5" PointX="9.75" PointY="32.25" />
+        <EntityTypeShape EntityType="SindQRModel.PolizasAseguradora" Width="1.5" PointX="22.75" PointY="32.25" />
+        <EntityTypeShape EntityType="SindQRModel.poll" Width="1.5" PointX="16.5" PointY="83.5" />
+        <EntityTypeShape EntityType="SindQRModel.Position" Width="1.5" PointX="12" PointY="120.5" />
+        <EntityTypeShape EntityType="SindQRModel.post" Width="1.5" PointX="32.75" PointY="4.25" />
+        <EntityTypeShape EntityType="SindQRModel.Post1" Width="1.5" PointX="5.75" PointY="33.25" />
+        <EntityTypeShape EntityType="SindQRModel.priority" Width="1.5" PointX="9" PointY="77" />
+        <EntityTypeShape EntityType="SindQRModel.profile" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SindQRModel.Proveedore" Width="1.5" PointX="32.75" PointY="8.25" />
+        <EntityTypeShape EntityType="SindQRModel.ProveedoresAgencia" Width="1.5" PointX="32.75" PointY="15.25" />
+        <EntityTypeShape EntityType="SindQRModel.ProveedoresFDI" Width="1.5" PointX="32.75" PointY="18.25" />
+        <EntityTypeShape EntityType="SindQRModel.rate" Width="1.5" PointX="8.25" PointY="216.875" />
+        <EntityTypeShape EntityType="SindQRModel.RDC_esquema_convenios" Width="1.5" PointX="32.75" PointY="25.25" />
+        <EntityTypeShape EntityType="SindQRModel.relationShipStatu" Width="1.5" PointX="3.75" PointY="96.75" />
+        <EntityTypeShape EntityType="SindQRModel.relationShipType" Width="1.5" PointX="6" PointY="82.875" />
+        <EntityTypeShape EntityType="SindQRModel.report" Width="1.5" PointX="11.25" PointY="75" />
+        <EntityTypeShape EntityType="SindQRModel.report_Files" Width="1.5" PointX="15.75" PointY="76.25" />
+        <EntityTypeShape EntityType="SindQRModel.reportService" Width="1.5" PointX="8.25" PointY="198.125" />
+        <EntityTypeShape EntityType="SindQRModel.ReportType" Width="1.5" PointX="9" PointY="62.875" />
+        <EntityTypeShape EntityType="SindQRModel.reportUnit" Width="1.5" PointX="8.25" PointY="83.625" />
+        <EntityTypeShape EntityType="SindQRModel.responsable" Width="1.5" PointX="18" PointY="124.125" />
+        <EntityTypeShape EntityType="SindQRModel.responsibleincourt" Width="1.5" PointX="18" PointY="121.75" />
+        <EntityTypeShape EntityType="SindQRModel.responsibleinmp" Width="1.5" PointX="18" PointY="76.25" />
+        <EntityTypeShape EntityType="SindQRModel.responsibleintransit" Width="1.5" PointX="18" PointY="110" />
+        <EntityTypeShape EntityType="SindQRModel.role" Width="1.5" PointX="10.75" PointY="11" />
+        <EntityTypeShape EntityType="SindQRModel.roleparam" Width="1.5" PointX="16" PointY="16" />
+        <EntityTypeShape EntityType="SindQRModel.RTYPE" Width="1.5" PointX="32.75" PointY="28.25" />
+        <EntityTypeShape EntityType="SindQRModel.ScannerEvent" Width="1.5" PointX="23.25" PointY="92.25" />
+        <EntityTypeShape EntityType="SindQRModel.SecretariasforMensaje" Width="1.5" PointX="14.75" PointY="12.25" />
+        <EntityTypeShape EntityType="SindQRModel.sectionsTTE" Width="1.5" PointX="3.75" PointY="99.125" />
+        <EntityTypeShape EntityType="SindQRModel.sector" Width="1.5" PointX="19.25" PointY="143.75" />
+        <EntityTypeShape EntityType="SindQRModel.sectors_categories" Width="1.5" PointX="17" PointY="143.75" />
+        <EntityTypeShape EntityType="SindQRModel.Servicio" Width="1.5" PointX="32.75" PointY="31.25" />
+        <EntityTypeShape EntityType="SindQRModel.SisAdmPropietario" Width="1.5" PointX="15.75" PointY="2.75" />
+        <EntityTypeShape EntityType="SindQRModel.SisAdnProveedore" Width="1.5" PointX="33.75" PointY="1.25" />
+        <EntityTypeShape EntityType="SindQRModel.sistAdmCtrlIncidencia" Width="1.5" PointX="11.75" PointY="34.25" />
+        <EntityTypeShape EntityType="SindQRModel.SistAdmCtrlLiq" Width="1.5" PointX="16.75" PointY="34.25" />
+        <EntityTypeShape EntityType="SindQRModel.SistAdmCtrlOperadore" Width="1.5" PointX="18.75" PointY="34.25" />
+        <EntityTypeShape EntityType="SindQRModel.SistAdmCtrlOperadores2" Width="1.5" PointX="5.75" PointY="19.75" />
+        <EntityTypeShape EntityType="SindQRModel.SistAdmCtrlServicioDetalle" Width="1.5" PointX="22.5" PointY="6.625" />
+        <EntityTypeShape EntityType="SindQRModel.SistAdmCtrlServicioHead" Width="1.5" PointX="20.25" PointY="6.375" />
+        <EntityTypeShape EntityType="SindQRModel.SistAdmCtrlVehiculo" Width="1.5" PointX="18" PointY="5.375" />
+        <EntityTypeShape EntityType="SindQRModel.SistAdmServiciosCatalogo" Width="1.5" PointX="18" PointY="12.5" />
+        <EntityTypeShape EntityType="SindQRModel.Soc_DatFiscales" Width="1.5" PointX="3" PointY="19.125" />
+        <EntityTypeShape EntityType="SindQRModel.Soc_DatPersonales" Width="1.5" PointX="0.75" PointY="7" />
+        <EntityTypeShape EntityType="SindQRModel.Soc_DomiciliosFisc" Width="1.5" PointX="3" PointY="15.125" />
+        <EntityTypeShape EntityType="SindQRModel.Soc_DomiciliosPart" Width="1.5" PointX="3" PointY="24.125" />
+        <EntityTypeShape EntityType="SindQRModel.state" Width="1.5" PointX="11.75" PointY="114.5" />
+        <EntityTypeShape EntityType="SindQRModel.status" Width="1.5" PointX="3.75" PointY="87.625" />
+        <EntityTypeShape EntityType="SindQRModel.status_accidents" Width="1.5" PointX="18" PointY="69.25" />
+        <EntityTypeShape EntityType="SindQRModel.statusAssignment" Width="1.5" PointX="15" PointY="111.875" />
+        <EntityTypeShape EntityType="SindQRModel.statusReport" Width="1.5" PointX="9" PointY="69.25" />
+        <EntityTypeShape EntityType="SindQRModel.SubFamilia" Width="1.5" PointX="24.75" PointY="34.25" />
+        <EntityTypeShape EntityType="SindQRModel.sysdiagram" Width="1.5" PointX="30.75" PointY="34.25" />
+        <EntityTypeShape EntityType="SindQRModel.TareasComi" Width="1.5" PointX="1.5" PointY="31.5" />
+        <EntityTypeShape EntityType="SindQRModel.TareasComun" Width="1.5" PointX="8.25" PointY="10.75" />
+        <EntityTypeShape EntityType="SindQRModel.TareasEtapa" Width="1.5" PointX="1.5" PointY="29" />
+        <EntityTypeShape EntityType="SindQRModel.TareasGrupAsig" Width="1.5" PointX="32.75" PointY="34.25" />
+        <EntityTypeShape EntityType="SindQRModel.TareasHead" Width="1.5" PointX="3.75" PointY="30.875" />
+        <EntityTypeShape EntityType="SindQRModel.TareasInvolu" Width="1.5" PointX="8.25" PointY="14.125" />
+        <EntityTypeShape EntityType="SindQRModel.TareasProyInvolu" Width="1.5" PointX="34.75" PointY="4.25" />
+        <EntityTypeShape EntityType="SindQRModel.TareasTask" Width="1.5" PointX="6" PointY="11" />
+        <EntityTypeShape EntityType="SindQRModel.TarifaCupone" Width="1.5" PointX="34.75" PointY="7.25" />
+        <EntityTypeShape EntityType="SindQRModel.Tbcomun" Width="1.5" PointX="34.75" PointY="11.25" />
+        <EntityTypeShape EntityType="SindQRModel.Tbinvolu" Width="1.5" PointX="34.75" PointY="14.25" />
+        <EntityTypeShape EntityType="SindQRModel.Tbitacora" Width="1.5" PointX="34.75" PointY="17.25" />
+        <EntityTypeShape EntityType="SindQRModel.telephone_campaign" Width="1.5" PointX="14.25" PointY="67.375" />
+        <EntityTypeShape EntityType="SindQRModel.telephoneoperator" Width="1.5" PointX="14.25" PointY="63.875" />
+        <EntityTypeShape EntityType="SindQRModel.TGrupotipo" Width="1.5" PointX="3.75" PointY="12.25" />
+        <EntityTypeShape EntityType="SindQRModel.Tienda" Width="1.5" PointX="34.75" PointY="21.25" />
+        <EntityTypeShape EntityType="SindQRModel.tracking" Width="1.5" PointX="13.5" PointY="71.625" />
+        <EntityTypeShape EntityType="SindQRModel.transaction" Width="1.5" PointX="10.5" PointY="143.875" />
+        <EntityTypeShape EntityType="SindQRModel.TUsuario" Width="1.5" PointX="1.5" PointY="34.375" />
+        <EntityTypeShape EntityType="SindQRModel.typeaccident" Width="1.5" PointX="18" PointY="66.375" />
+        <EntityTypeShape EntityType="SindQRModel.user" Width="1.5" PointX="6" PointY="85.5" />
+        <EntityTypeShape EntityType="SindQRModel.userAddress" Width="1.5" PointX="16.25" PointY="100.375" />
+        <EntityTypeShape EntityType="SindQRModel.userBloodType" Width="1.5" PointX="9" PointY="59.875" />
+        <EntityTypeShape EntityType="SindQRModel.userCompany" Width="1.5" PointX="13" PointY="9" />
+        <EntityTypeShape EntityType="SindQRModel.userDepartment" Width="1.5" PointX="13" PointY="14.375" />
+        <EntityTypeShape EntityType="SindQRModel.userFamily" Width="1.5" PointX="8.25" PointY="90.125" />
+        <EntityTypeShape EntityType="SindQRModel.userGeolocation" Width="1.5" PointX="8.25" PointY="191.625" />
+        <EntityTypeShape EntityType="SindQRModel.UserGrouping" Width="1.5" PointX="11.25" PointY="93.375" />
+        <EntityTypeShape EntityType="SindQRModel.userHealthInformation" Width="1.5" PointX="11.25" PointY="85.375" />
+        <EntityTypeShape EntityType="SindQRModel.userHistory" Width="1.5" PointX="34.75" PointY="25.25" />
+        <EntityTypeShape EntityType="SindQRModel.userlog" Width="1.5" PointX="10.75" PointY="4.625" />
+        <EntityTypeShape EntityType="SindQRModel.userOccupation" Width="1.5" PointX="14.25" PointY="93.375" />
+        <EntityTypeShape EntityType="SindQRModel.UserOwner" Width="1.5" PointX="8.25" PointY="195.375" />
+        <EntityTypeShape EntityType="SindQRModel.userPhone" Width="1.5" PointX="11.25" PointY="97.125" />
+        <EntityTypeShape EntityType="SindQRModel.userPhone_telephoneoperators_campaign" Width="1.5" PointX="13.5" PointY="104" />
+        <EntityTypeShape EntityType="SindQRModel.userPrintedCard" Width="1.5" PointX="8.25" PointY="94.5" />
+        <EntityTypeShape EntityType="SindQRModel.userProfile" Width="1.5" PointX="13" PointY="2.875" />
+        <EntityTypeShape EntityType="SindQRModel.userRole" Width="1.5" PointX="13" PointY="6" />
+        <EntityTypeShape EntityType="SindQRModel.userType" Width="1.5" PointX="3.75" PointY="101.375" />
+        <EntityTypeShape EntityType="SindQRModel.Usuario" Width="1.5" PointX="34.75" PointY="29.25" />
+        <EntityTypeShape EntityType="SindQRModel.Usuarios_Acceso_Especiales" Width="1.5" PointX="34.75" PointY="33.25" />
+        <EntityTypeShape EntityType="SindQRModel.Vendedore" Width="1.5" PointX="7.75" PointY="36.25" />
+        <EntityTypeShape EntityType="SindQRModel.Venta" Width="1.5" PointX="20.75" PointY="36.25" />
+        <EntityTypeShape EntityType="SindQRModel.visit" Width="1.5" PointX="10.5" PointY="127" />
+        <EntityTypeShape EntityType="SindQRModel.zone" Width="1.5" PointX="14" PointY="117.25" />
+        <EntityTypeShape EntityType="SindQRModel.Actas_Convenios" Width="1.5" PointX="34.75" PointY="36.25" />
+        <EntityTypeShape EntityType="SindQRModel.AsisAplicar" Width="1.5" PointX="36.75" PointY="1.25" />
+        <EntityTypeShape EntityType="SindQRModel.AUT_RECALCULOCONV" Width="1.5" PointX="3.75" PointY="37.25" />
+        <EntityTypeShape EntityType="SindQRModel.Bitacora" Width="1.5" PointX="36.75" PointY="5.25" />
+        <EntityTypeShape EntityType="SindQRModel.CederAutorizacion" Width="1.5" PointX="36.75" PointY="9.25" />
+        <EntityTypeShape EntityType="SindQRModel.Chof_datbaja" Width="1.5" PointX="36.75" PointY="13.25" />
+        <EntityTypeShape EntityType="SindQRModel.chof_exp" Width="1.5" PointX="36.75" PointY="19.25" />
+        <EntityTypeShape EntityType="SindQRModel.chof_fianza" Width="1.5" PointX="36.75" PointY="25.25" />
+        <EntityTypeShape EntityType="SindQRModel.Chof_FondoHead" Width="1.5" PointX="36.75" PointY="28.25" />
+        <EntityTypeShape EntityType="SindQRModel.choferes_det" Width="1.5" PointX="30.75" PointY="37.25" />
+        <EntityTypeShape EntityType="SindQRModel.CierreDetalle" Width="1.5" PointX="36.75" PointY="34.25" />
+        <EntityTypeShape EntityType="SindQRModel.CobrosDetalle" Width="1.5" PointX="36.75" PointY="37.25" />
+        <EntityTypeShape EntityType="SindQRModel.Concepto" Width="1.5" PointX="9.75" PointY="38.25" />
+        <EntityTypeShape EntityType="SindQRModel.ConceptosCxP" Width="1.5" PointX="11.75" PointY="38.25" />
+        <EntityTypeShape EntityType="SindQRModel.ConceptosCxP2" Width="1.5" PointX="16.75" PointY="38.25" />
+        <EntityTypeShape EntityType="SindQRModel.Consecutivo" Width="1.5" PointX="22.75" PointY="38.25" />
+        <EntityTypeShape EntityType="SindQRModel.Control" Width="1.5" PointX="24.75" PointY="38.25" />
+        <EntityTypeShape EntityType="SindQRModel.ControlObligacione" Width="1.5" PointX="38.75" PointY="1.25" />
+        <EntityTypeShape EntityType="SindQRModel.ConvenioFactura" Width="1.5" PointX="0.75" PointY="39.25" />
+        <EntityTypeShape EntityType="SindQRModel.ConveniosDetalle" Width="1.5" PointX="38.75" PointY="9.25" />
+        <EntityTypeShape EntityType="SindQRModel.CxpFondoGrupoMayor" Width="1.5" PointX="38.75" PointY="14.25" />
+        <EntityTypeShape EntityType="SindQRModel.Emplacamientocopiaresp" Width="1.5" PointX="38.75" PointY="20.25" />
+        <EntityTypeShape EntityType="SindQRModel.EXAMCATALOGO" Width="1.5" PointX="26.75" PointY="39.25" />
+        <EntityTypeShape EntityType="SindQRModel.EXAMCLPAGO" Width="1.5" PointX="38.75" PointY="29.25" />
+        <EntityTypeShape EntityType="SindQRModel.ExamenClDetalle" Width="1.5" PointX="38.75" PointY="33.25" />
+        <EntityTypeShape EntityType="SindQRModel.EXPEDIEN" Width="1.5" PointX="38.75" PointY="38.25" />
+        <EntityTypeShape EntityType="SindQRModel.FDISaldosPorCobrarInv_1" Width="1.5" PointX="5.75" PointY="40.25" />
+        <EntityTypeShape EntityType="SindQRModel.FISC_DOCUMENTACION" Width="1.5" PointX="40.75" PointY="1.25" />
+        <EntityTypeShape EntityType="SindQRModel.HistAsistencia" Width="1.5" PointX="2.75" PointY="41.25" />
+        <EntityTypeShape EntityType="SindQRModel.HistoricoAsisCancelacion" Width="1.5" PointX="40.75" PointY="5.25" />
+        <EntityTypeShape EntityType="SindQRModel.infoautosop" Width="1.5" PointX="40.75" PointY="9.25" />
+        <EntityTypeShape EntityType="SindQRModel.InventarioHistorico" Width="1.5" PointX="11.75" PointY="41.25" />
+        <EntityTypeShape EntityType="SindQRModel.InventarioOK" Width="1.5" PointX="40.75" PointY="13.25" />
+        <EntityTypeShape EntityType="SindQRModel.MensajeGlobal" Width="1.5" PointX="16.75" PointY="41.25" />
+        <EntityTypeShape EntityType="SindQRModel.MENSAJE" Width="1.5" PointX="40.75" PointY="22.25" />
+        <EntityTypeShape EntityType="SindQRModel.MENSAJES_apy" Width="1.5" PointX="40.75" PointY="27.25" />
+        <EntityTypeShape EntityType="SindQRModel.mensajesguardado" Width="1.5" PointX="40.75" PointY="32.25" />
+        <EntityTypeShape EntityType="SindQRModel.MENSAJEStechnopago" Width="1.5" PointX="40.75" PointY="37.25" />
+        <EntityTypeShape EntityType="SindQRModel.movil_detenciones" Width="1.5" PointX="7.75" PointY="42.25" />
+        <EntityTypeShape EntityType="SindQRModel.OfficeContact" Width="1.5" PointX="18.75" PointY="42.25" />
+        <EntityTypeShape EntityType="SindQRModel.Pedido" Width="1.5" PointX="20.75" PointY="42.25" />
+        <EntityTypeShape EntityType="SindQRModel.PedidosReal" Width="1.5" PointX="22.75" PointY="42.25" />
+        <EntityTypeShape EntityType="SindQRModel.Radio_Taxi" Width="1.5" PointX="24.75" PointY="42.25" />
+        <EntityTypeShape EntityType="SindQRModel.RECALCULO" Width="1.5" PointX="26.75" PointY="42.25" />
+        <EntityTypeShape EntityType="SindQRModel.RENUCIAOP" Width="1.5" PointX="40.75" PointY="42.25" />
+        <EntityTypeShape EntityType="SindQRModel.Secretaria" Width="1.5" PointX="42.75" PointY="1.25" />
+        <EntityTypeShape EntityType="SindQRModel.Soc_Documentacion" Width="1.5" PointX="3" PointY="5.5" />
+        <EntityTypeShape EntityType="SindQRModel.Soc_Fondo_Fallecidos" Width="1.5" PointX="42.75" PointY="4.25" />
+        <EntityTypeShape EntityType="SindQRModel.Soc_FondoHead" Width="1.5" PointX="4.75" PointY="43.25" />
+        <EntityTypeShape EntityType="SindQRModel.Soc_Head" Width="1.5" PointX="42.75" PointY="11.25" />
+        <EntityTypeShape EntityType="SindQRModel.socfechanac" Width="1.5" PointX="13.75" PointY="43.25" />
+        <EntityTypeShape EntityType="SindQRModel.Socio" Width="1.5" PointX="42.75" PointY="15.25" />
+        <EntityTypeShape EntityType="SindQRModel.tempFacturarCupone" Width="1.5" PointX="42.75" PointY="18.25" />
+        <EntityTypeShape EntityType="SindQRModel.TempVentasDetalle" Width="1.5" PointX="42.75" PointY="22.25" />
+        <EntityTypeShape EntityType="SindQRModel.UsuariosInternet" Width="1.5" PointX="42.75" PointY="29.25" />
+        <EntityTypeShape EntityType="SindQRModel.USUROOL" Width="1.5" PointX="42.75" PointY="33.25" />
+        <EntityTypeShape EntityType="SindQRModel.USUROOLASIG" Width="1.5" PointX="42.75" PointY="36.25" />
+        <EntityTypeShape EntityType="SindQRModel.VentasDetalle" Width="1.5" PointX="42.75" PointY="39.25" />
+        <EntityTypeShape EntityType="SindQRModel.VentaServiciosTemp" Width="1.5" PointX="9.75" PointY="44.25" />
+        <EntityTypeShape EntityType="SindQRModel.ExamenesPendiente" Width="1.5" PointX="15.75" PointY="44.25" />
+        <EntityTypeShape EntityType="SindQRModel.listadodelfondopagado" Width="1.5" PointX="32.75" PointY="44.25" />
+        <EntityTypeShape EntityType="SindQRModel.SD_LiqCobros" Width="1.5" PointX="34.75" PointY="44.25" />
+        <EntityTypeShape EntityType="SindQRModel.SD_LiqPorPagar" Width="1.5" PointX="36.75" PointY="44.25" />
+        <EntityTypeShape EntityType="SindQRModel.SDLIQOML_INVENT" Width="1.5" PointX="44.75" PointY="1.25" />
+        <EntityTypeShape EntityType="SindQRModel.SindLiq1" Width="1.5" PointX="0.75" PointY="45.25" />
+        <EntityTypeShape EntityType="SindQRModel.SindLiqTTxOperador" Width="1.5" PointX="44.75" PointY="4.25" />
+        <EntityTypeShape EntityType="SindQRModel.Vchofere" Width="1.5" PointX="44.75" PointY="7.25" />
+        <EntityTypeShape EntityType="SindQRModel.VD_Ex_Cl" Width="1.5" PointX="6.75" PointY="45.25" />
+        <AssociationConnector Association="SindQRModel.FK___permissi__id_us__1117EB45" />
+        <AssociationConnector Association="SindQRModel.FK__userOccup__acade__7B92BE7A" />
+        <AssociationConnector Association="SindQRModel.FK__accidents__id_ad__167BBEE0" />
+        <AssociationConnector Association="SindQRModel.FK__accidents__id_al__176FE319" />
+        <AssociationConnector Association="SindQRModel.FK__accidents__id_au__18640752" />
+        <AssociationConnector Association="SindQRModel.FK__accidents__id_ca__19582B8B" />
+        <AssociationConnector Association="SindQRModel.FK__accidents__id_co__1A4C4FC4" />
+        <AssociationConnector Association="SindQRModel.FK__accidents__id_cr__1B4073FD" />
+        <AssociationConnector Association="SindQRModel.FK__accidents__id_de__1C349836" />
+        <AssociationConnector Association="SindQRModel.FK__accidents__id_de__1D28BC6F" />
+        <AssociationConnector Association="SindQRModel.FK__accidents__id_ga__1E1CE0A8" />
+        <AssociationConnector Association="SindQRModel.FK__accidents__id_ho__1F1104E1" />
+        <AssociationConnector Association="SindQRModel.FK__accidents__id_in__2005291A" />
+        <AssociationConnector Association="SindQRModel.FK__accidents__id_in__20F94D53" />
+        <AssociationConnector Association="SindQRModel.FK__accidents__id_li__21ED718C" />
+        <AssociationConnector Association="SindQRModel.FK__accidents__id_ma__22E195C5" />
+        <AssociationConnector Association="SindQRModel.FK__accidents__id_ma__23D5B9FE" />
+        <AssociationConnector Association="SindQRModel.FK__accidents__id_po__24C9DE37" />
+        <AssociationConnector Association="SindQRModel.FK__accidents__id_re__25BE0270" />
+        <AssociationConnector Association="SindQRModel.FK__accidents__id_re__26B226A9" />
+        <AssociationConnector Association="SindQRModel.FK__accidents__id_re__27A64AE2" />
+        <AssociationConnector Association="SindQRModel.FK__accidents__id_re__289A6F1B" />
+        <AssociationConnector Association="SindQRModel.FK__accidents__id_st__298E9354" />
+        <AssociationConnector Association="SindQRModel.FK__accidents__id_ty__2A82B78D" />
+        <AssociationConnector Association="SindQRModel.FK__accidents__id_us__2B76DBC6" />
+        <AssociationConnector Association="SindQRModel.FK__documents__id_ac__39C4FB1D" />
+        <AssociationConnector Association="SindQRModel.FK__PanicAler__accid__49FB62E6" />
+        <AssociationConnector Association="SindQRModel.FK__assignmen__activ__303B90E3" />
+        <AssociationConnector Association="SindQRModel.FK__address_s__id_ad__2C6AFFFF" />
+        <AssociationConnector Association="SindQRModel.FK__address_s__id_zo__2D5F2438" />
+        <AssociationConnector Association="SindQRModel.FK__amazonPic__pictu__2E534871" />
+        <AssociationConnector Association="SindQRModel.FK__amazonPic__userI__2F476CAA" />
+        <AssociationConnector Association="SindQRModel.FK__assignmen__id_ad__312FB51C" />
+        <AssociationConnector Association="SindQRModel.FK__assignmen__statu__3223D955" />
+        <AssociationConnector Association="SindQRModel.FK__assignmen__userI__3317FD8E" />
+        <AssociationConnector Association="SindQRModel.FK__box_user__box_id__340C21C7" />
+        <AssociationConnector Association="SindQRModel.FK__box_user__user_I__35004600" />
+        <AssociationConnector Association="SindQRModel.FK__polls__tend__5384CD20" />
+        <AssociationConnector Association="SindQRModel.fk_candidate_hardvote_user" />
+        <AssociationConnector Association="SindQRModel.FK__Network_c__id_Ca__44428990" />
+        <AssociationConnector Association="SindQRModel.FK__payrollCa__id_Ca__4EC01803" />
+        <AssociationConnector Association="SindQRModel.FK__cards__userId__413112BB" />
+        <AssociationConnector Association="SindQRModel.FK__cardsPrin__cardI__4501A39F" />
+        <AssociationConnector Association="SindQRModel.FK_polls_1" />
+        <AssociationConnector Association="SindQRModel.FK_polls_2" />
+        <AssociationConnector Association="SindQRModel.FK_polls_3" />
+        <AssociationConnector Association="SindQRModel.FK_Pedidos_Clientes" />
+        <AssociationConnector Association="SindQRModel.FK__Christmas__Chris__42E45103" />
+        <AssociationConnector Association="SindQRModel.FK__Christmas__useri__3E1F9BE6" />
+        <AssociationConnector Association="SindQRModel.FK__city__stateId__35F46A39" />
+        <AssociationConnector Association="SindQRModel.fk_UserAdCity" />
+        <AssociationConnector Association="SindQRModel.FK__report__clientId__5A31CAAF" />
+        <AssociationConnector Association="SindQRModel.FK__commentsr__id_re__36E88E72" />
+        <AssociationConnector Association="SindQRModel.FK__incidents__compa__41661CE5" />
+        <AssociationConnector Association="SindQRModel.FK__operatorg__compa__48131A74" />
+        <AssociationConnector Association="SindQRModel.fk_UCCompany" />
+        <AssociationConnector Association="SindQRModel.FK_ConceptosConveniosRelacion_ConceptosConvenios" />
+        <AssociationConnector Association="SindQRModel.FK__coordinat__gps_i__37DCB2AB" />
+        <AssociationConnector Association="SindQRModel.FK_CouponPaymentDetails_Cupon" />
+        <AssociationConnector Association="SindQRModel.FK_CouponPaymentDetails_Payment" />
+        <AssociationConnector Association="SindQRModel.FK_CouponPayment_users" />
+        <AssociationConnector Association="SindQRModel.FK_Cupons_CouponPayments" />
+        <AssociationConnector Association="SindQRModel.FK_Couponrates_Cupontypes" />
+        <AssociationConnector Association="SindQRModel.FK_Couponrates_Hotels" />
+        <AssociationConnector Association="SindQRModel.FK_Cupons_Couponrates" />
+        <AssociationConnector Association="SindQRModel.FK__creditcar__userI__7BE7C435" />
+        <AssociationConnector Association="SindQRModel.FK__transacti__credi__047D0A36" />
+        <AssociationConnector Association="SindQRModel.FK_Cupons_cuponsGroupPrinted" />
+        <AssociationConnector Association="SindQRModel.FK_Cupons_User" />
+        <AssociationConnector Association="SindQRModel.FK__Position__depart__5849823D" />
+        <AssociationConnector Association="SindQRModel.FK__report__descript__5B25EEE8" />
+        <AssociationConnector Association="SindQRModel.FK__report__descript__5C1A1321" />
+        <AssociationConnector Association="SindQRModel.FK__report__descript__5D0E375A" />
+        <AssociationConnector Association="SindQRModel.FK__visits__doctor_i__349631AC" />
+        <AssociationConnector Association="SindQRModel.FK__documents__id_re__3AB91F56" />
+        <AssociationConnector Association="SindQRModel.FK__email__emailPrio__3BAD438F" />
+        <AssociationConnector Association="SindQRModel.FK__email__userId__3CA167C8" />
+        <AssociationConnector Association="SindQRModel.FK__emplaBita__id_em__6ABD3833" />
+        <AssociationConnector Association="SindQRModel.FK__family_me__holde__2C00EBAB" />
+        <AssociationConnector Association="SindQRModel.FK__medical_r__famil__3866C290" />
+        <AssociationConnector Association="SindQRModel.FK__visits__family_m__30C5A0C8" />
+        <AssociationConnector Association="SindQRModel.FK__fingerInf__userI__3D958C01" />
+        <AssociationConnector Association="SindQRModel.FK__user__gps_id__6A683278" />
+        <AssociationConnector Association="SindQRModel.FK__UserGroup__id_gr__77C22D96" />
+        <AssociationConnector Association="SindQRModel.FK__hardvotes__userI__3E89B03A" />
+        <AssociationConnector Association="SindQRModel.fk_network_hardvote" />
+        <AssociationConnector Association="SindQRModel.FK__historyre__repor__4071F8AC" />
+        <AssociationConnector Association="SindQRModel.FK__incidents__opera__425A411E" />
+        <AssociationConnector Association="SindQRModel.FK_Inventario_SistAdmCtrlOperadores21" />
+        <AssociationConnector Association="SindQRModel.FK_IronUserRoll_IronRolles" />
+        <AssociationConnector Association="SindQRModel.FK_IronUserRoll_IronUser" />
+        <AssociationConnector Association="SindQRModel.FK_SistAdmCtrlServicioHead_IronUser" />
+        <AssociationConnector Association="SindQRModel.FK_SistAdmCtrlVehiculos_IronUser" />
+        <AssociationConnector Association="SindQRModel.FK__medical_r__holde__37729E57" />
+        <AssociationConnector Association="SindQRModel.FK__membershi__holde__29247F00" />
+        <AssociationConnector Association="SindQRModel.FK__network__UserId__434E6557" />
+        <AssociationConnector Association="SindQRModel.FK__Network_c__id_Ne__4536ADC9" />
+        <AssociationConnector Association="SindQRModel.FK_profile_objectAcl" />
+        <AssociationConnector Association="SindQRModel.FK__occupatio__occup__462AD202" />
+        <AssociationConnector Association="SindQRModel.FK__occupatio__userI__471EF63B" />
+        <AssociationConnector Association="SindQRModel.FK__operatorg__userI__49073EAD" />
+        <AssociationConnector Association="SindQRModel.FK__report__originRe__5E025B93" />
+        <AssociationConnector Association="SindQRModel.FK__PanicAler__panic__4AEF871F" />
+        <AssociationConnector Association="SindQRModel.FK__PanicAler__Repor__4BE3AB58" />
+        <AssociationConnector Association="SindQRModel.FK__PanicAler__repor__4CD7CF91" />
+        <AssociationConnector Association="SindQRModel.FK__PanicAler__Scann__4DCBF3CA" />
+        <AssociationConnector Association="SindQRModel.fk_RPParam" />
+        <AssociationConnector Association="SindQRModel.FK__user__partnerTyp__6B5C56B1" />
+        <AssociationConnector Association="SindQRModel.FK__payrollCa__userI__4FB43C3C" />
+        <AssociationConnector Association="SindQRModel.FK__userPhone__phone__00577397" />
+        <AssociationConnector Association="SindQRModel.FK__polls__id_teleph__50A86075" />
+        <AssociationConnector Association="SindQRModel.FK__polls__id_teleph__519C84AE" />
+        <AssociationConnector Association="SindQRModel.FK__polls__id_userPh__5290A8E7" />
+        <AssociationConnector Association="SindQRModel.FK__polls__userId__5478F159" />
+        <AssociationConnector Association="SindQRModel.FK__userOccup__posit__7C86E2B3" />
+        <AssociationConnector Association="SindQRModel.FK__report__priority__5EF67FCC" />
+        <AssociationConnector Association="SindQRModel.FK_profile_userProfile" />
+        <AssociationConnector Association="SindQRModel.FK__rate__user_id__593DA676" />
+        <AssociationConnector Association="SindQRModel.FK__user__relationSh__6C507AEA" />
+        <AssociationConnector Association="SindQRModel.FK__userFamil__relat__75D9E524" />
+        <AssociationConnector Association="SindQRModel.FK__report__reportTy__5FEAA405" />
+        <AssociationConnector Association="SindQRModel.FK__report__statusRe__60DEC83E" />
+        <AssociationConnector Association="SindQRModel.FK__report__userId__61D2EC77" />
+        <AssociationConnector Association="SindQRModel.FK__report_Fi__repor__62C710B0" />
+        <AssociationConnector Association="SindQRModel.FK__tracking__report__69740E3F" />
+        <AssociationConnector Association="SindQRModel.FK__report_Fi__track__63BB34E9" />
+        <AssociationConnector Association="SindQRModel.FK__reportSer__user___64AF5922" />
+        <AssociationConnector Association="SindQRModel.FK__ScannerEv__Repor__6697A194" />
+        <AssociationConnector Association="SindQRModel.FK__reportUni__user___65A37D5B" />
+        <AssociationConnector Association="SindQRModel.fk_role" />
+        <AssociationConnector Association="SindQRModel.fk_RPRole" />
+        <AssociationConnector Association="SindQRModel.FK__user__sectionId__6D449F23" />
+        <AssociationConnector Association="SindQRModel.FK__sectors__id_zone__687FEA06" />
+        <AssociationConnector Association="SindQRModel.FK_SistAdmCtrlVehiculos_SisAdmPropietarios" />
+        <AssociationConnector Association="SindQRModel.FK_SistAdmCtrlServicioDetalle_SistAdmCtrlServicioHead" />
+        <AssociationConnector Association="SindQRModel.FK_SistAdmCtrlServicioHead_SistAdmCtrlVehiculos" />
+        <AssociationConnector Association="SindQRModel.FK_SistAdmCtrlServicioHead_SistAdmServiciosCatalogo" />
+        <AssociationConnector Association="SindQRModel.FK_Soc_DatFiscales_Soc_DatPersonales" />
+        <AssociationConnector Association="SindQRModel.FK_Soc_Documentacion_Soc_DatPersonales" />
+        <AssociationConnector Association="SindQRModel.FK_Soc_DomiciliosFisc_Soc_DatPersonales" />
+        <AssociationConnector Association="SindQRModel.FK_Soc_DomiciliosPart_Soc_DatPersonales" />
+        <AssociationConnector Association="SindQRModel.FK_TareasTask_Soc_DatPersonales" />
+        <AssociationConnector Association="SindQRModel.FK__userAddre__state__72095440" />
+        <AssociationConnector Association="SindQRModel.FK__user__statusId__6E38C35C" />
+        <AssociationConnector Association="SindQRModel.FK_TareasHead_TareasComis" />
+        <AssociationConnector Association="SindQRModel.FK_TareasComun_TareasTask" />
+        <AssociationConnector Association="SindQRModel.FK_TareasHead_TareasEtapas" />
+        <AssociationConnector Association="SindQRModel.FK_TareasHead_TUsuarios" />
+        <AssociationConnector Association="SindQRModel.FK_TareasTask_TareasHead" />
+        <AssociationConnector Association="SindQRModel.FK_TareasInvolu_TareasTask" />
+        <AssociationConnector Association="SindQRModel.FK_TareasTask_TGrupotipo" />
+        <AssociationConnector Association="SindQRModel.FK_TareasTask_TUsuarios" />
+        <AssociationConnector Association="SindQRModel.FK_telephone_campaign" />
+        <AssociationConnector Association="SindQRModel.FK_telephoneoperators" />
+        <AssociationConnector Association="SindQRModel.FK__transacti__userI__0388E5FD" />
+        <AssociationConnector Association="SindQRModel.FK__user__userTypeId__6F2CE795" />
+        <AssociationConnector Association="SindQRModel.FK__userAddre__userI__72FD7879" />
+        <AssociationConnector Association="SindQRModel.FK__userFamil__userI__76CE095D" />
+        <AssociationConnector Association="SindQRModel.FK__userGeolo__UserI__5F167B5D" />
+        <AssociationConnector Association="SindQRModel.FK__UserGroup__id_us__78B651CF" />
+        <AssociationConnector Association="SindQRModel.FK__userHealt__userI__7A9E9A41" />
+        <AssociationConnector Association="SindQRModel.FK__userOccup__userI__7D7B06EC" />
+        <AssociationConnector Association="SindQRModel.FK__UserOwner__owner__7E6F2B25" />
+        <AssociationConnector Association="SindQRModel.FK__UserOwner__userI__7F634F5E" />
+        <AssociationConnector Association="SindQRModel.FK__userPhone__userI__014B97D0" />
+        <AssociationConnector Association="SindQRModel.FK__userPrint__userI__051C28B4" />
+        <AssociationConnector Association="SindQRModel.FK__visits__holder_i__2FD17C8F" />
+        <AssociationConnector Association="SindQRModel.FK__userAddre__zoneI__73F19CB2" />
+        <AssociationConnector Association="SindQRModel.FK__userHealt__blood__79AA7608" />
+        <AssociationConnector Association="SindQRModel.fk_UCUser" />
+        <AssociationConnector Association="SindQRModel.fk_UUD" />
+        <AssociationConnector Association="SindQRModel.fk_user" />
+        <AssociationConnector Association="SindQRModel.FK_users_userProfile" />
+        <AssociationConnector Association="SindQRModel.FK_userphone_camp" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

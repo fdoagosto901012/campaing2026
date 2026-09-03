@@ -1,0 +1,362 @@
+﻿@model radiotaxi.Model.Emplacamiento
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Emplacamiento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.No_Economico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.No_Economico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Paterno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Paterno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Materno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Materno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Propiedad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Propiedad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Operacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Operacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_Mov)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_Mov)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_Marca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_Marca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_Modelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_Modelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AutoAno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AutoAno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Motor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Motor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.No_Serie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.No_Serie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Placas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Placas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Capacidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Capacidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EconoResp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EconoResp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Responsable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Responsable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TitularEmpla)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TitularEmpla)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TitularRentas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TitularRentas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TitularCT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TitularCT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TitularOtro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TitularOtro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Observaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Observaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bloqueado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bloqueado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Protegido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Protegido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaOp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaOp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaBaja)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaBaja)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_Usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_Usuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_UsuarioEdit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_UsuarioEdit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.resp_telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.resp_telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.resp_celular)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.resp_celular)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.poliza)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.poliza)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipopoliza)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipopoliza)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.aseguradora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.aseguradora)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.vencepoliza)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vencepoliza)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Marca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Marca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Message)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StatusAction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StatusAction)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MessageAction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MessageAction)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.db)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.db)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dbv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dbv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dbb)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dbb)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_Op }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

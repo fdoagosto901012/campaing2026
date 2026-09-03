@@ -1,0 +1,285 @@
+﻿@model IEnumerable<radiotaxi.Model.Emplacamiento>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.No_Economico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Paterno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Materno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Propiedad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Operacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Id_Mov)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Id_Marca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Id_Modelo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AutoAno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Motor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.No_Serie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Placas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Capacidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EconoResp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Responsable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TitularEmpla)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TitularRentas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TitularCT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TitularOtro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Observaciones)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bloqueado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Protegido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaOp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaBaja)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Id_Usuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Id_UsuarioEdit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.resp_telefono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.resp_celular)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.poliza)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tipopoliza)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.aseguradora)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vencepoliza)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modelo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Marca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Message)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusAction)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MessageAction)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.db)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dbv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dbb)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.No_Economico)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Paterno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Materno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Propiedad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Operacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id_Mov)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id_Marca)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id_Modelo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AutoAno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Motor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.No_Serie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Placas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Capacidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EconoResp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Responsable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TitularEmpla)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TitularRentas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TitularCT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TitularOtro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Observaciones)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bloqueado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Protegido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaOp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaBaja)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id_Usuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id_UsuarioEdit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.resp_telefono)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.resp_celular)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.poliza)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tipopoliza)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.aseguradora)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.vencepoliza)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Modelo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Marca)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Message)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusAction)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MessageAction)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.db)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dbv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dbb)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id_Op }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id_Op }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id_Op })
+        </td>
+    </tr>
+}
+
+</table>

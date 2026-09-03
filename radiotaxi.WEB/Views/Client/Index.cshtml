@@ -1,0 +1,248 @@
+﻿@model radiotaxi.Model.ClientPagination
+@{
+    ViewBag.Title = "Clientes Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <h4 class="mb-sm-0 font-size-18">Clientes</h4>
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Inicio</a></li>
+                        <li class="breadcrumb-item active">Clientes</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title  bx bx-search-alt-2"> Búsqueda</h4>
+                    <p class="card-title-desc">La búsqueda se puede realizar con cualquiera de los siguientes campos.</p>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div>
+                                <form action="/Client/" method="POST" class="form-horizontal">
+                                    <div class="row control-group">
+                                        <div class="col-md-3 mb-3 ">
+                                            <label class="form-label control-label">Número telefónico</label>
+                                            <input type="text" class="form-control span11"name="phoneNumber" id="phoneNumber" value="@(ViewBag.parameters.phoneNumber)" placeholder="Ingrese el número telefónico"/>
+                                        </div>
+                                        <div class="col-md-3 mb-3 ">
+                                            <label class="form-label control-label">Nombre</label>
+                                            <input type="text" class="form-control span11" placeholder="Ingrese el apellido nombre" name="name" id="name" value="@(ViewBag.parameters.name)"/>
+                                        </div>
+                                        <div class="col-md-3 mb-3 ">
+                                            <label class="form-label control-label">Apellido paterno</label>
+                                            <input type="text" class="form-control span11" placeholder="Ingrese el apellido paterno" name="lastName1" id="lastName1" value="@(ViewBag.parameters.lastName1)"/>
+                                        </div>
+                                        <div class="col-md-3 mb-3 ">
+                                            <label class="form-label control-label">Apellido materno</label>
+                                            <input type="text" class="form-control span11" placeholder="Ingrese el apellido materno" name="lastName2" id="lastName2" value="@(ViewBag.parameters.lastName2)"/>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 form-actions">
+                                        <button type="submit" value="Buscar" class="btn btn-primary w-md btn-success">Buscar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <h5 class="card-title">Clientes totales <span class="text-muted fw-normal ms-2">@(ViewBag.totalClients)</span></h5>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
+                                <div>
+                                    <a href="/Client/Create" class="btn btn-light"><i class="bx bx-plus me-1"></i> Agregar cliente</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class=" table-rep-plugin">
+                        <div class="table-responsive mb-0" data-pattern="priority-columns">
+                            <table id="tech-companies-1" class="table table-striped mb-lg-5 pb-lg-5 style="min-height: 600px;"">
+                                <thead>
+                                    <tr>
+                                        @*<th>
+            <div class="form-check font-size-16">
+                <input type="checkbox" class="form-check-input" id="checkAll">
+                <label class="form-check-label" for="checkAll"></label>
+            </div>
+        </th>*@
+                                        <th data-priority="3">Nombre</th>
+                                        @*<th data-priority="1" scope="col">Dirección</th>*@
+                                        <th data-priority="1" scope="col">Dirección</th>
+                                        <th data-priority="3">¿Bloqueado?</th>
+                                        <th data-priority="1">Teléfono</th>
+                                        @*<th>¿Es de casa?</th>*@
+                                        <th data-priority="3">Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Data)
+                                    {
+                                        <tr>
+
+                                            @*<th scope="row">
+            <div class="form-check font-size-16">
+                <input type="checkbox" class="form-check-input" id="contacusercheck1">
+                <label class="form-check-label" for="contacusercheck1"></label>
+            </div>
+        </th>*@
+                                            <th class="co-name">
+                                                <img src="~/Content/images/users/avatar-2.jpg" alt="" class="avatar-sm rounded-circle me-2">
+                                                <span class="co-name">@Html.DisplayFor(modelItem => item.name) @Html.DisplayFor(modelItem => item.lastname1) @Html.DisplayFor(modelItem => item.lastname2)</span>
+                                            </th>
+                                            @*<td> @Html.DisplayFor(modelItem => item.address)</td>*@
+                                            <td>
+                                                <button type="button" class="btn btn-primary position-relative p-0 avatar-sm rounded-circle"
+                                                        data-bs-toggle="popover"
+                                                        data-bs-trigger="focus"
+                                                        title="Dirección"
+                                                        data-bs-content="@(item.address)">
+                                                    <i class="mdi mdi-google-maps"></i>
+                                                </button>
+                                                @(" " + item.address.Substring(0, Math.Min(item.address.Length, 20)))...
+
+                                            </td>
+                                            <td>
+                                                <i class="mdi mdi-block-helper"> </i>
+                                                @if (item.isBlocked == true)
+                                                {
+                                                    @Html.Raw("Si");
+                                                }
+                                                else
+                                                {
+                                                    @Html.Raw("No");
+                                                }
+                                            </td>
+                                            <td>
+                                                <i class="bx bx-phone">
+                                                    @Html.DisplayFor(modelItem => item.phone)
+                                                </i>
+                                            </td>
+                                            @*
+        <td>
+            @if (item.isHome == true)
+            {
+                @Html.Raw("Si");
+            }
+            else
+            {
+                @Html.Raw("No");
+            }
+        </td>
+                                            *@
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="bx bx-dots-horizontal-rounded"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-end">
+                                                        <li>
+                                                            <a class="dropdown-item" href="/TaxiService/Create/?phone=@(item.phone)&observation=@(item.blockedReason)&address=@(item.address)"><i class="bx bx-plus"></i> Agregar Servicio</a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item" href="/TaxiService/Create/?phone=@(item.phone)&observation=@(item.blockedReason)&address=@(item.address)"><i class="bx bx-stopwatch"></i> Servicios pendientes</a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item" href="/TaxiService/Create/?phone=@(item.phone)&observation=@(item.blockedReason)&address=@(item.address)"><i class="bx bx-check"></i> Servicios Asignados</a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item" href="/Client/Edit/@(item.phone)"><i class=" bx bx-edit"></i> Editar</a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item" href="/Client/Details/@(item.phone)"><i class=" bx bx-show-alt"></i> Detalle</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-12">
+                                <nav aria-label="Page navigation example">
+                                    @if (Model.EndPage > 1)
+                                    {
+                                        <ul class="pagination justify-content-center">
+
+                                            @if (Model.CurrentPage > 1)
+                                            {
+                                                <li class="page-item">
+                                                    <a class="page-link" href="~/Client">Primero</a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="~/Client?page=@(Model.CurrentPage - 1)">Anterior</a>
+                                                </li>
+                                            }
+                                            else if (Model.CurrentPage == 1)
+                                            {
+                                                <li class="page-item ">
+                                                    <a class="page-link" href="~/Client">Primero</a>
+                                                </li>
+                                            }
+
+                                            <!--Paginación activa-->
+                                            @for (var p = Model.StartPage; p <= Model.EndPage; p++)
+                                            {
+                                                <li class="page-item @(p == Model.CurrentPage ? "active" : "")">
+                                                    <a class="page-link" href="~/Client?page=@p">@p</a>
+                                                </li>
+                                            }
+
+                                            @if (Model.CurrentPage < Model.TotalPages)
+                                            {
+                                                <li class="page-item">
+                                                    <a class="page-link" href="~/Client?page=@(Model.CurrentPage + 1)">Siguiente</a>
+                                                </li>
+                                                <li class="page-item next">
+                                                    <a class="page-link" href="~/Client?page=@(Model.TotalPages)">Último</a>
+                                                </li>
+                                            }
+                                            else if (Model.CurrentPage == Model.TotalPages)
+                                            {
+                                                <li class="page-item next">
+                                                    <a class="page-link" href="~/Client?page=@(Model.TotalPages)">Último</a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    }
+                                </nav>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end table responsive -->
+    

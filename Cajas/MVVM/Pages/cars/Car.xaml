@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cajas.MVVM.Pages.cars.Car"
+             xmlns:cars="clr-namespace:Cajas.MVVM.ViewModels.cars"
+             BackgroundColor="{ StaticResource complement }"
+             
+             Title="Vehículo">
+
+    <ContentPage.ToolbarItems>
+        
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.BindingContext>
+        <cars:CarViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".2*"></RowDefinition>
+            <RowDefinition Height=".1*"></RowDefinition>
+            <RowDefinition Height=".7*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" Grid.RowSpan="2" VerticalOptions="FillAndExpand">
+            <Frame Margin="15" BackgroundColor="{StaticResource Primary}"
+               CornerRadius="10"
+               Padding="10"
+               HasShadow="True"
+                   BorderColor="Transparent">
+                <!--
+                <Frame.Shadow>
+                    <Shadow Brush="Black"
+                        Offset="10,10"
+                        Radius="40"
+                        Opacity="0.8" />
+                </Frame.Shadow>
+                -->
+                <VerticalStackLayout>
+                    <HorizontalStackLayout 
+                        Margin="0,60,0,0"
+                        Spacing="1" HorizontalOptions="CenterAndExpand">
+                        <Label 
+                            Style="{StaticResource TitleLabel}"
+                            Text="{Binding Car.Marca}"  
+                            TextColor="white"
+                            HorizontalOptions="CenterAndExpand"/>
+                        <Label 
+                            Style="{StaticResource TitleLabel}"
+                            Text="{Binding Car.Modelo}" 
+                            TextColor="white"
+                            HorizontalOptions="CenterAndExpand"/>
+                        <Label 
+                            Style="{StaticResource TitleLabel}"
+                            Text="{Binding Car.AutoAno}"  
+                            TextColor="white"
+                            HorizontalOptions="CenterAndExpand"/>
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Spacing="0" HorizontalOptions="CenterAndExpand" Margin="0" Padding="0">
+                        <Label 
+                            Style="{StaticResource TagLabel}"
+                            Text="{Binding Car.Placas}"  
+                            HorizontalOptions="CenterAndExpand"
+                            TextColor="white"/>
+
+                    </HorizontalStackLayout>
+                    <Grid Margin="0,20,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="0"
+                            Style="{StaticResource TagLabel}"
+                            Text="N° Serie"
+                               TextColor="white"
+                            HorizontalOptions="StartAndExpand"/>
+
+                        <Label Grid.Column="1" Grid.Row="0"
+                            Style="{StaticResource TagLabelR}"
+                            Text="{Binding Car.No_Serie}" 
+                               TextColor="white"
+                            HorizontalOptions="EndAndExpand"/>
+
+                        <Label Grid.Column="0" Grid.Row="1"
+                            Style="{StaticResource TagLabel}"
+                            Text="Motor"  
+                               TextColor="white"
+                            HorizontalOptions="StartAndExpand"/>
+
+                        <Label Grid.Column="1" Grid.Row="1"
+                            Style="{StaticResource TagLabelR}"
+                            Text="{Binding Car.Motor}"
+                               TextColor="white"
+                            HorizontalOptions="EndAndExpand"/>
+
+                        <Label Grid.Column="0" Grid.Row="2"
+                            Style="{StaticResource TagLabel}"
+                            Text="Póliza"  
+                               TextColor="white"
+                            HorizontalOptions="StartAndExpand"/>
+
+                        <Label Grid.Column="1" Grid.Row="2"
+                            Style="{StaticResource TagLabelR}"
+                            Text="{Binding Car.poliza}" 
+                               TextColor="white"
+                            HorizontalOptions="EndAndExpand"/>
+
+                        <Label Grid.Column="0" Grid.Row="3"
+                            Style="{StaticResource TagLabel}"
+                            Text="Aseguradora"  
+                               TextColor="white"
+                            HorizontalOptions="StartAndExpand"/>
+
+                        <Label Grid.Column="1" Grid.Row="3"
+                            Style="{StaticResource TagLabelR}"
+                            Text="{Binding Car.aseguradora}"  
+                               TextColor="white"
+                            HorizontalOptions="EndAndExpand"/>
+
+
+                        <Label Grid.Column="0" Grid.Row="4"
+                            Style="{StaticResource TagLabel}"
+                            Text="Vence" 
+                               TextColor="white"
+                            HorizontalOptions="StartAndExpand"/>
+
+                        <Label Grid.Column="1" Grid.Row="4"
+                            Style="{StaticResource TagLabelR}"
+                            Text="{Binding Car.vencepoliza}"
+                               TextColor="white"
+                            HorizontalOptions="EndAndExpand"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+                
+        </Grid>
+        <Grid Grid.Row="0" Grid.RowSpan="2">
+            <Image
+               VerticalOptions="EndAndExpand"
+               Source="car.png"/>
+        </Grid>
+    </Grid>
+    
+    
+</ContentPage>

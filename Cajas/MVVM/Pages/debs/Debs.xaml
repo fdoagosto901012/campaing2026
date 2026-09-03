@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cajas.MVVM.Pages.debs.Debs"
+             xmlns:debs="clr-namespace:Cajas.MVVM.ViewModels.debs"
+             Title="Cargos">
+    <ContentPage.BindingContext>
+        <debs:DebsViewModel />
+    </ContentPage.BindingContext>
+    <VerticalStackLayout>
+        <Label 
+            Text="MIS DEUDAS"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>

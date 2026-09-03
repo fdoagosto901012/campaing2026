@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Taxi</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @Styles.Render("~/Content/matrix/css")
+    @Styles.Render("~/Content/font-awesome/css")
+    @Styles.Render("~/Content/dualCalendarCss")
+    <!--<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />-->
+    <style>
+        .daterangepicker .calendar {
+            display: none;
+            max-width: 335px;
+            margin: 4px;
+        }
+
+        .daterangepicker .input-mini {
+            width:85%;
+        }
+
+        .daterangepicker select.hourselect, .daterangepicker select.minuteselect, .daterangepicker select.secondselect, .daterangepicker select.ampmselect {
+            width: 62px;
+            margin-bottom: 0;
+        }
+
+        .loadinglogo {
+            width: 72px;
+            margin: -9px 0px 0px 0px;
+        }
+
+        .daterangepicker .drp-calendar {
+            display: none;
+            max-width: 300px !important;
+        }
+    </style>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+    <!--Header-part-->
+    <div id="header">
+        <h1><a href="dashboard.html">Taxi</a></h1>
+    </div>
+    <!--close-Header-part-->
+    <!--top-Header-menu-->
+    <div id="user-nav" class="navbar navbar-inverse">
+        <ul class="nav">
+            <li class="dropdown" id="profile-messages">
+                <a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><i class="icon icon-user"></i>  <span class="text">Bienvenido @Session["name"].ToString()</span><b class="caret"></b></a>
+                <!-- <ul class="dropdown-menu">
+                     <li><a href="#"><i class="icon-user"></i> My Profile</a></li>
+                     <li class="divider"></li>
+                     <li><a href="#"><i class="icon-check"></i> My Tasks</a></li>
+                     <li class="divider"></li>
+                     <li><a href="/Login/Logout"><i class="icon-key"></i> Log Out</a></li>
+                 </ul> -->
+            </li>
+            <!--
+            <li class="dropdown" id="menu-messages">
+                <a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a class="sAdd" title="" href="#"><i class="icon-plus"></i> new message</a></li>
+                    <li class="divider"></li>
+                    <li><a class="sInbox" title="" href="#"><i class="icon-envelope"></i> inbox</a></li>
+                    <li class="divider"></li>
+                    <li><a class="sOutbox" title="" href="#"><i class="icon-arrow-up"></i> outbox</a></li>
+                    <li class="divider"></li>
+                    <li><a class="sTrash" title="" href="#"><i class="icon-trash"></i> trash</a></li>
+                </ul>
+            </li>
+            <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>-->
+            <li class=""><a title="" href="/Login/Logout"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+        </ul>
+    </div>
+    <!--close-top-Header-menu-->
+    <!--start-top-serch-->
+    <div id="search">
+        <input name="phoneNumber2" id="phoneNumber2" type="text" placeholder="Search here..." /> &nbsp;
+        <button name="searchb2" id="searchb2" type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
+    </div>
+    <!--close-top-serch-->
+    <!--sidebar-menu-->
+    <div id="sidebar">
+        <a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
+        <ul>
+            <li @if (ViewBag.Title == "Seach") { @Html.Raw(" class='active' ")     ; }><a href="/Search/Clients"><i class="icon icon-search"></i> <span>Búsqueda</span></a> </li>
+            <li @if (ViewBag.Title == "Clientes Index") { @Html.Raw(" class='active' ")    ; }><a href="/Client/"><i class="icon icon-user"></i> <span>Clientes</span></a> </li>
+            <li @if (ViewBag.Title == "Reservaciones autorenovadas") { @Html.Raw(" class='active' ")   ; }><a href="/TaxiService/IndexEspeciales/"><i class="icon icon-star"></i> <span>Reservaciones autorenovadas</span></a> </li>
+            <li @if (ViewBag.Title == "IndexAsignados") { @Html.Raw(" class='active' ")   ; }><a href="/taxiService/IndexAsignados/"><i class="icon icon-thumbs-up"></i> <span>Servicios Asignados</span></a> </li>
+            <li @if (ViewBag.Title == "Servicios pendientes") { @Html.Raw(" class='active' ")    ; }><a href="/TaxiService/IndexPendientes/"><i class="icon icon-time"></i> <span>Servicios Pendientes</span></a> </li>
+            <li @if (ViewBag.Title == "Servicios Cancelados") { @Html.Raw(" class='active' ")    ; }><a href="/TaxiService/IndexCancelados/"><i class="icon icon-remove-sign"></i> <span>Servicios Cancelados</span></a> </li>
+            <li @if (ViewBag.Title == "Histórico") { @Html.Raw(" class='active' ")      ; }><a href="/Search/History/"><i class="icon icon-time"></i> <span>Historico</span></a> </li>
+            <li @if (ViewBag.Title == "Reportes") { @Html.Raw(" class='active' ")     ; }><a href="/Report/"><i class="icon icon-cogs"></i> <span>Reportes</span></a> </li>
+            @if (@Session["role"].ToString().Equals("AdminRT"))
+            {
+                <li @if (ViewBag.Title == "Incidentes") { @Html.Raw(" class='active' ")  ; }><a href="/taxiReport/"><i class="icon-thumbs-down"></i> <span>Incidentes</span></a> </li>
+            }
+            
+            <li>
+                <div id="SideBarDinamic">
+                </div>
+            </li>
+        </ul>
+
+
+    </div>
+    <!--sidebar-menu-->
+    <!--main-container-part-->
+    <div id="content">
+        @RenderBody()
+
+        <!--end-main-container-part-->
+        <!--Footer-part-->
+
+        <div class="row-fluid">
+            <div id="footer" class="span12"> 2017 &copy; Tippin'Point </div>
+        </div>
+
+        <!--end-Footer-part-->
+    </div>
+        <script type="text/javascript">
+          // This function is called from the pop-up menus to transfer to
+          // a different page. Ignore if the value returned is a null string:
+          function goPage (newURL) {
+
+              // if url is empty, skip the menu dividers and reset the menu selection to default
+              if (newURL != "") {
+
+                  // if url is "-", it is this page -- reset the menu:
+                  if (newURL == "-" ) {
+                      resetMenu();
+                  }
+                  // else, send page to designated URL
+                  else {
+                    document.location.href = newURL;
+                  }
+              }
+          }
+
+        // resets the menu selection upon entry to this page:
+        function resetMenu() {
+           document.gomenu.selector.selectedIndex = 2;
+        }
+        </script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+        
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+        
+        @RenderSection("scripts", required: false)
+</body>
+
+</html>

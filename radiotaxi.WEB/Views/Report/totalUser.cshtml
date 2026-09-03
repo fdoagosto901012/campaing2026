@@ -1,0 +1,29 @@
+﻿@model IEnumerable<radiotaxi.Model.totalReportUser>
+<div class="widget-content nopadding">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Usuario
+                </th>
+                <th>
+                    Cantidad
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Usuario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Asignados)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

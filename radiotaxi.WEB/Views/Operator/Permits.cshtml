@@ -1,0 +1,102 @@
+﻿@model List<radiotaxi.Model.permiso>
+@{
+    ViewBag.Title = "Permits";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18"><i class="mdi mdi-file-document-edit-outline"></i> Permisos e incapacidades</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Inicio</a></li>
+                    <li class="breadcrumb-item active">Permisos e incapacidades</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-rep-plugin">
+                    <div class="table-responsive mb-0" data-pattern="priority-columns">
+                        <table id="permisos" class="table table-striped display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th data-priority="gafet">Gafet</th>
+                                    <th data-priority="gafet">Tipo</th>
+                                    <th data-priority="days">Días</th>
+                                    <th data-priority="1">Fecha del permiso</th>
+                                    <th data-priority="user">Usuario</th>
+                                    <th data-priority="userName">Nombre Usuario</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <th><a target="_blank" href="/Operator/tarjeton/@(item.Gafete)">@(item.Gafete)</a> </th>
+                                        <th data-priority="gafet">
+                                            @if (item.Ticket.Contains("IN"))
+                                            {
+                                                <div class="alert alert-warning alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                    <i class="mdi mdi-hospital label-icon"></i><strong>Incapacidad</strong>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="alert alert-info alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                    <i class="mdi mdi-file-document-edit-outline label-icon"></i><strong>Permiso</strong>
+                                                </div>
+                                            }
+                                        </th>
+                                        <th>
+                                            @if (item.cantidad > 30)
+                                            {
+                                                <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                    <i class="mdi mdi-block-helper label-icon"></i><strong>Faltas eliminadas @(item.cantidad)</strong>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="alert alert-success alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                    <i class="mdi mdi-check-all label-icon"></i><strong>Faltas eliminadas @(item.cantidad)</strong>
+                                                </div>
+                                            }
+                                        </th>
+                                        <th>@(item.FechaOp)</th>
+                                        <th>@(item.Id_Usuario)</th>
+                                        <th>@(item.Nombre)</th>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th data-priority="gafet">Gafet</th>
+                                    <th data-priority="days">Días</th>
+                                    <th data-priority="1">Fecha del permiso</th>
+                                    <th data-priority="user">Usuario</th>
+                                    <th data-priority="userName">Nombre Usuario</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end card -->
+    </div> <!-- end col -->
+</div>
+
+@section Scripts {
+    <script src="~/Content/libs/DataTables/datatables.js"></script>
+    <script src="~/Content/libs/DataTables/datatables.min.js"></script>
+    <script src="~/Content/js/Views/Operator/permits.js"></script>
+}

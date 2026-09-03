@@ -1,0 +1,102 @@
+﻿@*@model radiotaxi.Model.C_permissionsDTO*@
+@{
+    ViewBag.Title = "Detalle de Permiso";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">Pregaft del @(ViewBag.operador.partnerReference) @(ViewBag.operador.firstName) @(ViewBag.operador.lastNameF) @(ViewBag.operador.lastNameM)  <!--en el taxi No. 69--></h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+<div class="row">
+    @if (ViewBag.permissions.datePrinted != null)
+    {
+        <div class="col-xl-9 col-lg-8" style="height:650px;">
+            <iframe id="iframe1"
+                    title="Preview del tarjetón"
+                    frameborder="0"
+                    style="display:block;width:100%;height:100%"
+                    src="/Operator/permiso/print/@(ViewBag.permissions.id)">
+            </iframe>
+        </div>
+    }
+    else
+    {
+        <div class="col-xl-9 col-lg-8">
+            <div class="col-xl-9 col-lg-8">
+                <div>
+                    <h5 class="font-size-14 mb-4"><i class="mdi mdi-arrow-right text-primary me-1"></i> Informacón del Permiso Express</h5>
+                    <form action="/Operator/permiso/generar" method="POST">
+                        <input type="hidden" id="id" name="id" value="@(ViewBag.permissions.id)" />
+                        <input type="hidden" id="gafet" name="gafet" value="@(ViewBag.permissions.gafet)" />
+                        <div class="row">
+                            @if (ViewBag.Message != null && ViewBag.Message != "")
+                            {
+                                <input type="hidden" id="Message" value="@(ViewBag.Message)" />
+                            }
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="col">
+                                    <label for="taxi">
+                                        Taxi
+                                    </label>
+                                    <input name="taxi"
+                                           type="text"
+                                           id="taxi"
+                                           value=""
+                                           placeholder="Taxi"
+                                           class="form-control text-uppercase"
+                                           aria-required="true"
+                                           aria-invalid="false">
+                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                    <span class="text-danger" style="display: none;"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3 align-content-end">
+                                <button type="submit" name="buscar" class="btn btn-success btn-label">
+                                    <i class="bx bx-search-alt-2 label-icon"></i> Generar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="col-xl-3 col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title mb-3 text-lg-center fw-bold display-2">Información del Permiso Express</h1>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <span class="fw-bold">Nombre:</span> @(ViewBag.operador.firstName) @(ViewBag.operador.lastNameF) @(ViewBag.operador.lastNameM)
+                    </li>
+                    <li class="list-group-item">
+                        <span class="fw-bold">Eco:</span> @(ViewBag.operador.partnerReference)
+                    </li>
+                    <li class="list-group-item"><span class="fw-bold">Activo:</span> Si</li>
+                    <li class="list-group-item"><span class="fw-bold">Entregado:</span> Si</li>
+                    <li class="list-group-item"><span class="fw-bold">Fecha de entrega:</span> 17/02/2025</li> <!--No deja validar por el tipo date @*@(Model.deliverDate != null ? Model.deliverDate : ""*@)-->
+                    <li class="list-group-item"><span class="fw-bold">Fecha de vencimiento:</span> 17/03/2025</li> <!--No deja validar por el tipo date @*@(Model.expiration_date != null ? Model.expiration_date : ""*@)-->
+                </ul>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/Content/js/Views/Operator/PermisoDetalle.js"></script>
+}

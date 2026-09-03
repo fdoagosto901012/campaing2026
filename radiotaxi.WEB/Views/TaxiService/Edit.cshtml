@@ -1,0 +1,234 @@
+﻿@model radiotaxi.Model.taxiServiceDTO
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<div id="content-header">
+    <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Editar Servicios</a>  </div>
+    <h1>Editar Servicio</h1>
+</div>
+<div class="container-fluid">
+    <hr>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"> <i class="icon-align-justify"></i> </span>
+                    <h5>Información de servicio</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    @using (Html.BeginForm(null, null, FormMethod.Post, new { name = "createService", id = "EditService", @class = "form-horizontal" }))
+                    {
+                        <div class="row-fluid">
+                            <div class="span8">
+                                @Html.AntiForgeryToken()
+                                <div class="control-group observation-custom">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div id="dvResult">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="clienteRTL">Cliente</label>                                    
+                                    <div class="controls">
+                                        @Html.EditorFor(model => model.dateRequested, new { htmlAttributes = new { @class = "form-control", @Type = "hidden" } })
+                                        @Html.HiddenFor(model => model.createdBy, new { htmlAttributes = new { @class = "span11"} })
+                                        @Html.HiddenFor(model => model.id)
+                                        
+                                        @Html.Editor("clienteRT", new { htmlAttributes = new { @class = "form-control span11", @Value = ViewBag.cliente, @Disabled = "disabled" } })
+                                    </div>
+                                </div>
+                                
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.phoneId, htmlAttributes: new { @class = "control-label" })
+                                    <div class="controls">
+                                        @Html.EditorFor(model => model.phoneId, new { htmlAttributes = new { @class = "form-control span11" } })
+                                        @Html.ValidationMessageFor(model => model.phoneId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.startPoint, htmlAttributes: new { @class = "control-label" })
+                                    <div class="controls">
+                                        @Html.TextAreaFor(model => model.startPoint, 4, 63, new { @class = "textarea_editor form-control span11" })
+                                        @Html.ValidationMessageFor(model => model.startPoint, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.baseServiceId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="controls">
+                                        @Html.DropDownListFor(model => model.baseServiceId, (IEnumerable<SelectListItem>)ViewBag.baseRT, htmlAttributes: new { @class = "form-control span11" })
+                                        @Html.ValidationMessageFor(model => model.baseServiceId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div hidden class="control-group">
+                                    @Html.LabelFor(model => model.endPoint, htmlAttributes: new { @class = "control-label" })
+                                    <div class="controls">
+                                        @Html.EditorFor(model => model.endPoint, new { htmlAttributes = new { @class = "form-control span11", @Value = " " } })
+                                        @Html.ValidationMessageFor(model => model.endPoint, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.note, htmlAttributes: new { @class = "control-label" })
+                                    <div class="controls">
+                                        @Html.TextAreaFor(model => model.note, 4, 63, new { @class = "textarea_editor form-control span11", @title = "" })
+                                        @Html.ValidationMessageFor(model => model.note, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.datePickUp, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="controls">
+                                        <div id="datetimepicker2" class="input-append">
+                                            @Html.EditorFor(model => model.datePickUp, new { htmlAttributes = new { @class = "form-control span11"} })
+                                            
+                                            <span class="add-on timepickerCalendar">
+                                                <i class="icon-calendar"></i>
+                                            </span>
+                                            <span class="add-on timepicker">
+                                                <i class="icon-time"></i>
+                                            </span>
+                                            @Html.ValidationMessageFor(model => model.datePickUp, "", new { @class = "text-danger" })
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.catalogServiceId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="controls">
+                                        @Html.DropDownListFor(model => model.catalogServiceId, (IEnumerable<SelectListItem>)ViewBag.catalog, htmlAttributes: new { @class = "form-control span11" })
+                                        @Html.ValidationMessageFor(model => model.catalogServiceId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.statusServiceId, htmlAttributes: new { @class = "control-label" })
+                                    <div class="controls">
+                                        @Html.DropDownListFor(model => model.statusServiceId, (IEnumerable<SelectListItem>)ViewBag.status, htmlAttributes: new { @class = "form-control span11" })
+                                        @Html.ValidationMessageFor(model => model.statusServiceId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <div id="rtNumberServices">
+                                            <span>Taxi</span>
+                                            @if (Model.rtNumberServices.Count > 0)
+                                            {
+
+                                            }
+                                            @for (int i = 0; i < Model.rtNumberServices.Count; i++)
+                                            {
+                                                <div class="rtNumberServicesRow">
+                                                    @Html.LabelFor(model => Model.rtNumberServices[i].rtNumber)
+                                                    @Html.TextBoxFor(model => Model.rtNumberServices[i].rtNumber, new { @class = "rtNumber" })
+                                                    @Html.LabelFor(model => Model.rtNumberServices[i].taxiNumber)
+                                                    @Html.TextBoxFor(model => Model.rtNumberServices[i].taxiNumber, new { @class = "taxiNumber" })
+                                                    @Html.HiddenFor(model => Model.rtNumberServices[i].serviceId, new { @class = "serviceId", @Value = Model.id })
+                                                    @Html.HiddenFor(model => Model.rtNumberServices[i].id, new { @class = "id" })
+                                                    <a href="javascript:void(0);" class="remRow">Eliminar</a>
+                                                </div>
+                                            }
+                                        </div>
+                                        <p>
+                                            <a href="javascript:void(0);" class="addRow">Agregar Taxi</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.autoRenew, htmlAttributes: new { @class = "control-label " })
+                                    <div class="controls">
+                                        @Html.EditorFor(model => model.autoRenew)
+                                        @Html.ValidationMessageFor(model => model.autoRenew, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <input type="submit" value="Editar" class="btn btn-success" />
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal calendar :: Agregar un evento al calendario puede ser periodo en renta -->
+<div class="modal fade" id="calendar-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Nuevo Evento</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div id="form-calendar" class="row-fluid">
+                                <!-- Información del item -->
+                                <div class="span12">
+                                    <div class="row-fluid">
+                                        <div class="span6">
+                                            <div class="form-group">
+                                                <label class="control-label">Fecha de inicio</label><br>
+                                                <input type="text" id="timepicker-24-hr" name="timepicker-24-hr" class="timepicker-24-hr hasWickedpicker form-control input-sm" onkeypress="return false;" aria-showingpicker="true" tabindex="-1">
+                                                <input type="hidden" name="date" value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row-fluid">
+                                        <div class="span12">
+                                            <p class="text-right content-botons">
+                                                <button id="sendDate" class="btn btn-primary send-event">Guardar</button>
+                                                <!--<a class="btn btn-danger delete-event" href=""><i class="fa fa-trash-o"></i></span> Borrar </a>-->
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/formBundle")
+    <script>
+        //$('.textarea_editor').wysihtml5();
+        var time = $('.timepicker').wickedpicker({ twentyFour: true });
+        $("#datePickUp").datepicker({ format: 'dd-mm-yyyy', });
+        loadLastTen();
+
+        $(document).on('click', ".wickedpicker__close", function () {
+            var split = $("#datePickUp").val().split(" ");
+            $("#datePickUp").val(split[0]);
+            $("#datePickUp").val($("#datePickUp").val() + " " + $(".wickedpicker__controls__control--hours").text());
+            $("#datePickUp").val($("#datePickUp").val() + ":" + $(".wickedpicker__controls__control--minutes").text());
+            //alert("cancel wicked");
+        });
+
+        function loadLastTen() {
+            $.ajax({
+                type: "GET",
+                url: '/TaxiService/GetLastServices/',
+                data: { phoneNumber: $("#phoneId").val() },
+                success: function (partialView) {
+                    $('#SideBarDinamic').html(partialView);
+                    $('#SideBarDinamic').show();
+                }
+            });
+        }
+    </script>
+}

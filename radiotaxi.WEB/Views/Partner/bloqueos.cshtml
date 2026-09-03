@@ -1,0 +1,334 @@
+﻿@model radiotaxi.Model.Partner
+@{
+    ViewBag.Title = "Bloqueos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- DATOS DE CONTROL JS -->
+<input id="gafet" name="gafet" type="hidden" value="@Model.partnerReference" />
+<input id="userId" name="userId" type="hidden" value="@Model.userId" />
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18"><i class="bx bx-car"></i> @Model.partnerReference</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+<div class="row">
+    <div class="col-xl-8 col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm order-2 order-sm-1">
+                        <div class="d-flex align-items-start mt-3 mt-sm-0">
+                            <div class="flex-lg-shrink-0">
+                                <div class="avatar-xl me-3">
+
+                                    @if (Model.urlImage != null)
+                                    {
+                                        <img src="@(Model.urlImage)" alt="" class="avatar-xl rounded-circle me-2 img-thumbnail">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Content/images/users/empty.png" alt="" class="avatar-xl rounded-circle me-2 img-thumbnail">
+                                    }
+                                </div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <div>
+                                    <h4 class="font-size-18 mb-1 fw-bolder">@(Model.partnerReference != null ? Model.partnerReference : "")</h4>
+                                    <h6 class="font-size-14 mb-1">@(Model.firstName != null ? Model.firstName.ToUpper() : "") @(Model.lastNameF != null ? Model.lastNameF.ToUpper() : "") @(Model.lastNameM != null ? Model.lastNameM.ToUpper() :"")</h6>
+                                    <p class="text-muted font-size-13 mb-0"> <span class="fw-bold">Fecha de ingreso:</span> @(Model.fechaingreso != null ? Model.fechaingreso.Value.ToString("dd/MM/yyyy") : "")</p>
+                                    <p class="text-muted font-size-13 "><span class="fw-bold">Número telefónico:</span> @(Model.Telefono != null ? Model.Telefono : "")</p>
+
+                                    <div class="d-flex flex-wrap align-items-start gap-2 gap-lg-3 text-muted font-size-13">
+                                        <div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i>Development</div>
+                                        <div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i>phyllisgatlin@minia.com</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- FIN PERFIL-->
+                    <div class="col-sm order-2 order-sm-1">
+                        <div class="d-flex align-items-end mt-3 mt-sm-0">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-6">
+                                        <span class="text-muted mb-3 lh-1 d-block text-truncate">
+                                            Deuda total en cuotas sindicales
+                                        </span>
+                                        <h4 class="mb-3">
+                                            <span> </span> MXN
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="text-nowrap">
+                                    <span class="badge bg-danger-subtle text-danger">@(ViewBag.total)</span>
+                                    <span class="ms-1 text-muted font-size-13">Cuotas vencidas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- FIN PORCENTAJE-->
+                </div>
+                <ul class="nav nav-tabs-custom card-header-tabs border-top mt-4" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link px-3 active" data-bs-toggle="tab" href="#bloqueos" role="tab">Bloqueos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" data-bs-toggle="tab" href="#desbloqueos" role="tab">Desbloqueos</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="bloqueos" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Bloqueos</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-rep-plugin">
+                            <div class="table-responsive mb-0" data-pattern="priority-columns">
+                                <table id="tbloqueos" class="table table-striped display" style="width:100%" data-page-length='100'>
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="tipo">Tipo</th>
+                                            <th data-priority="folio">Folio</th>
+                                            <th data-priority="secretaria">Secretaria</th>
+                                            <th data-priority="taxi">Taxi</th>
+                                            <th data-priority="chofer">Chofer</th>
+                                            <th data-priority="mensaje">Mensaje</th>
+                                            <th data-priority="fecha">Fecha</th>
+                                            <th data-priority="fecha"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (radiotaxi.Model.MENSAJE item in ViewBag.messages)
+                                        {
+                                            <tr>
+
+                                                @if (item.DETENER == "1")
+                                                {
+                                                    <th class="">
+                                                        <i class="bx bxs-lock-alt"></i>
+                                                        Bloqueo
+                                                    </th>
+                                                }
+                                                else
+                                                {
+                                                    <th>
+                                                        <i class=" bx bx-mail-send"></i>
+                                                        Mensaje
+                                                    </th>
+
+                                                }
+
+                                                <th>@(item.FOLIO)</th>
+                                                <th>@(item.SECRETARIA)</th>
+                                                <th>@(item.TAXI)</th>
+                                                <th>@(item.CHOFER)</th>
+                                                <th>@(item.MENSAJE1)</th>
+                                                <th>@(item.FECHA)</th>
+                                                <th>
+                                                    <button v-on:click="removeMessage('@(item.FOLIO)','@(Model.partnerReference)')" type="button" class="btn btn-red waves-effect waves-light">
+                                                        Eliminar
+                                                    </button>
+                                                </th>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th data-priority="tipo">Tipo</th>
+                                            <th data-priority="folio">Folio</th>
+                                            <th data-priority="secretaria">Secretaria</th>
+                                            <th data-priority="taxi">Taxi</th>
+                                            <th data-priority="taxi">Chofer</th>
+                                            <th data-priority="mensaje">Mensaje</th>
+                                            <th data-priority="fecha">Fecha</th>
+                                            <th data-priority="f"></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card body -->
+                </div>
+                <!-- end card -->
+            </div>
+
+            <div class="tab-pane" id="desbloqueos" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Desbloqueos</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-rep-plugin">
+                            <div class="table-responsive mb-0" data-pattern="priority-columns">
+                                <table id="tdesbloqueos" class="table table-striped display" style="width:100%" data-page-length='100'>
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="tipo">Tipo</th>
+                                            <th data-priority="folio">Folio</th>
+                                            <th data-priority="secretaria">Secretaria</th>
+                                            <th data-priority="taxi">Taxi</th>
+                                            <th data-priority="chofer">Chofer</th>
+                                            <th data-priority="mensaje">Mensaje</th>
+                                            <th data-priority="fecha">Fecha</th>
+                                            <th data-priority="fecha"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (radiotaxi.Model.desbloqueo item in ViewBag.Desbloqueos)
+                                        {
+                                            <tr>
+                                                @if (item.detener == "1")
+                                                {
+                                                    <th class="">
+                                                        <i class="bx bxs-lock-alt"></i>
+                                                        Bloqueo
+                                                    </th>
+                                                }
+                                                else
+                                                {
+                                                    <th>
+                                                        <i class=" bx bx-mail-send"></i>
+                                                        Mensaje
+                                                    </th>
+                                                }
+                                                <th>@(item.folio)</th>
+                                                <th>@(item.secretaria)</th>
+                                                <th>@(item.taxi)</th>
+                                                <th>@(item.chofer)</th>
+                                                <th>@(item.mensaje)</th>
+                                                <th>@(item.fecha)</th>
+                                                <th>@(item.usuariodesbloqueo)</th>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th data-priority="tipo">Tipo</th>
+                                            <th data-priority="folio">Folio</th>
+                                            <th data-priority="secretaria">Secretaria</th>
+                                            <th data-priority="taxi">Taxi</th>
+                                            <th data-priority="chofer">Chofer</th>
+                                            <th data-priority="mensaje">Mensaje</th>
+                                            <th data-priority="fecha">Fecha</th>
+                                            <th data-priority="f"></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card body -->
+                </div>
+                <!-- end card -->
+            </div>
+        </div>
+        <!-- end tab content -->
+
+
+    </div>
+
+    <div class="col-xl-4 col-lg-4">
+
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Generar Bloqueo</h4>
+            </div>
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="">
+                        <div>
+                            <form method="POST" action="../Bloqueos/soc/@(Model.partnerReference)">
+                                <div class="row">
+                                    <div class=" ">
+                                        <div class="mb-3 d-flex flex-column">
+                                            <label class="form-label w-100" for="mensaje">Bloqueo/Mensaje a :</label>
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="blockto" id="formRadios2" value="taxi" checked="">
+                                                            <label class="form-check-label" for="formRadios2">
+                                                                Taxi
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="blockto" id="formRadios1"  value="soc">
+                                                            <label class="form-check-label" for="formRadios1">
+                                                                Socio
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class=" ">
+                                        <div class="mb-3 d-flex flex-column">
+                                            <label class="form-label w-100" for="mensaje">Mensaje de bloqueo</label>
+                                            <textarea id="mensaje" name="mensaje" rows="2" class="form-control flex-grow-1"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="asistencia">Tipo</label>
+                                            <select id="detener" name="detener" class="form-select">
+                                                <option value="1" selected>Bloqueo</option>
+                                                <option value="0">Mensaje</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--
+                                <div class="mb-3">
+                                    <label class="form-label" for="secretaria">Secretaria</label>
+                                    <select disabled class="form-select" id="secretaria" name="secretaria">
+                                        <option>Sistemas</option>
+                                        <option>Actas y acuerdos</option>
+                                        <option>Emplacamiento</option>
+                                        <option>Secretaria General</option>
+                                        <option>Fiscal</option>
+                                        <option>Finanzas</option>
+                                        <option>Conflictos</option>
+                                    </select>
+                                </div>-->
+                                <div class="mt-4">
+                                    <button type="submit" class="btn btn-primary w-md">Bloquear</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end col -->
+</div>
+
+@section Scripts {
+    <script src="~/Content/libs/DataTables/datatables.js"></script>
+    <script src="~/Content/libs/DataTables/datatables.min.js"></script>
+    <script src="~/Content/js/Views/Operator/bloqueos.js"></script>
+}

@@ -1,0 +1,575 @@
+﻿@model List<radiotaxi.Model.cuponsGroupPrintedDTO>
+@{
+    ViewBag.Title = "Imprimir cupones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18"><i class="bx bxs-coupon"></i> Cupones</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Inicio</a></li>
+                    <li class="breadcrumb-item active">Modulo de Impresión</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title  bx bx-search-alt-2"> Búsqueda</h4>
+                <p class="card-title-desc">La búsqueda se puede realizar con cualquiera de los siguientes campos.</p>
+            </div>
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div>
+                            <form action="/Partner/" method="POST" class="form-horizontal">
+                                <div class="row control-group">
+                                    <div class="col-md-4 mb-3 ">
+                                        <label class="form-label control-label">Folio</label>
+                                        <input type="text" class="form-control span11" name="folio" id="folio" placeholder="Ingrese el folio del cupón" />
+                                    </div>
+                                    <div class="col-md-4 mb-3 ">
+                                        <label class="form-label control-label">Tipo de ticket (Perforación)</label>
+                                        <input type="text" class="form-control span11" placeholder="Ingrese el tipo de ticket (perforación)" name="ticket" id="ticket" />
+                                    </div>
+                                    <div class="col-md-4 mb-3 ">
+                                        <label class="form-label control-label">Hotel / Cliente</label>
+                                        <input type="text" class="form-control span11" placeholder="Ingrese el hotel / cliente" name="hc" id="hc" />
+                                    </div>
+                                </div>
+                                <div class="mt-4 form-actions">
+                                    <button type="submit" value="Buscar" class="btn btn-success waves-effect btn-label waves-light"> <i class="bx bx-search label-icon "></i>Buscar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div v-if="data != null" class="row">
+    <!--CUPONES NO IMPRESOS-->
+    <div class="col-xl-3">
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0 font-size-18">Grupos de cupones no impresos</h4>
+                </div>
+            </div>
+        </div>
+        <div class="card" v-for="item in Cuppons">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Grupo con folio {{item.Id}}</h4>
+                <div class="flex-shrink-0">
+                    <ul class="nav justify-content-end nav-tabs-custom rounded card-header-tabs"
+                        role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab"
+                               v-bind:href="'#transactions-all-tab' + item.Id" role="tab">
+                                Grupo
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab"
+                               v-bind:href="'#transactions-buy-tab' + item.Id" role="tab">
+                                Cupones
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- end nav tabs -->
+                </div>
+            </div><!-- end card header -->
+
+            <div class="card-body px-0">
+                <div class="tab-content">
+                    <div class="tab-pane active" v-bind:id="'transactions-all-tab' + item.Id" role="tabpanel">
+                        <div class="row ">
+                            <div class="col-md-12 align-self-center" style="
+                                    padding: 30px;
+                                ">
+                                <div class="mt-4 mt-sm-0">
+                                    <p class="mb-1"><i class="bx bx-user"></i> Cliente / Hotel</p>
+                                    <h4>{{item.Cupons[0].Couponrate.Hotel.Name}}</h4>
+                                    <p class="text-muted mb-4">
+                                        <i class="bx bx-calendar-event text-success"></i>
+                                        {{item.CreateDate | formatDate }}
+                                        <i class="bx bx-body text-success"></i>
+                                        Creado por <strong>{{item.CreateBy}}</strong>
+                                    </p>
+                                    <div class="row g-0">
+                                        <div class="col-6">
+                                            <div>
+                                                <p class="mb-2 text-muted text-uppercase font-size-11">
+                                                    <i class="bx bx-news text-success"></i>
+                                                    Cantidad Cupones
+                                                </p>
+                                                <h5 class="fw-medium"> {{item.Cupons.length}} Cupones</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div>
+                                                <p class="mb-2 text-muted text-uppercase font-size-11">
+                                                    <i class="bx bx-purchase-tag text-success"></i>
+                                                    TIPO DE CUPON
+                                                </p>
+                                                <h5 class="fw-medium">{{item.Cupons[0].Couponrate.Cupontype.Name}} - $ {{item.Cupons[0].Couponrate.Valor}} MXN</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-2">
+                                        <a v-on:click="preprint($event, item)" class="btn btn-primary btn-sm">Agregar a cola de impresión<i class="mdi mdi-arrow-right ms-1"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end tab pane -->
+                    <div class="tab-pane" v-bind:id="'transactions-buy-tab' + item.Id" role="tabpanel">
+                        <div class="table-responsive px-3" data-simplebar
+                             style="max-height: 352px;">
+                            <table class="table align-middle table-nowrap table-borderless">
+                                <tbody>
+                                    <tr v-for="cupon in item.Cupons">
+                                        <td style="width: 50px;">
+                                            <div class="font-size-22 ">
+                                                <i v-if="cupon.lock == false" class="bx bx-down-arrow-circle bx-lock-open-alt text-success"></i>
+                                                <i v-if="cupon.lock == true" class="bx bx-down-arrow-circle bx-lock-alt text-danger"></i>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">{{cupon.CuponsID}}</h5>
+                                                <p class="text-muted mb-0 font-size-12">
+                                                    Folio
+                                                </p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">${{cupon.Couponrate.Cupontype.Name}}</h5>
+                                                <p class="text-muted mb-0 font-size-12">
+                                                    Tipo
+                                                </p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">$ {{cupon.Couponrate.Valor}} MXN</h5>
+                                                <p class="text-muted mb-0 font-size-12">
+                                                    Monto
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end tab pane -->
+                </div>
+                <!-- end tab content -->
+            </div>
+            <!-- end card body -->
+        </div>
+    </div>
+
+    <!--CUPONES PRE IMPRESOS-->
+    <div class="col-xl-3">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0 font-size-18">Grupo de cupones a imprimir</h4>
+                    <button v-on:click="print($event)" type="button" class="btn btn-success waves-effect btn-label waves-light">
+                        <i class="bx bx-printer me-1 label-icon"></i> Imprimir
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <!--
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm">
+
+                                        </div>
+                                        <div class="col-sm-auto">
+                                            <div class="d-flex align-items-center gap-1">
+
+                                    <button v-on:click="print($event)" type="button" class="btn btn-success waves-effect waves-light"><i class="bx bx-plus me-1"></i> Imprimir</button>
+
+                                    <div class="dropdown">
+                                        <a class="btn btn-link text-muted py-1 font-size-16 shadow-none dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bx bx-dots-horizontal-rounded"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-end" style="">
+                                            <li><a class="dropdown-item" href="#">Action</a></li>
+                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        </ul>
+                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                -->
+                <!-- end card -->
+            </div>
+            <!-- end col -->
+        </div>
+
+        <div class="card" v-for="item in CupponsPrePrint ">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Grupo con folio {{item.Id}}</h4>
+                <div class="flex-shrink-0">
+                    <ul class="nav justify-content-end nav-tabs-custom rounded card-header-tabs"
+                        role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab"
+                               v-bind:href="'#transactions-all-tab' + item.Id" role="tab">
+                                Grupo
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab"
+                               v-bind:href="'#transactions-buy-tab' + item.Id" role="tab">
+                                Cupones
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- end nav tabs -->
+                </div>
+            </div><!-- end card header -->
+
+            <div class="card-body px-0">
+                <div class="tab-content">
+                    <div class="tab-pane active" v-bind:id="'transactions-all-tab' + item.Id" role="tabpanel">
+                        <div class="row ">
+                            <div class="col-md-12 align-self-center" style="padding: 30px;">
+                                <div class="mt-4 mt-sm-0">
+                                    <p class="mb-1"><i class="bx bx-user"></i> Cliente / Hotel</p>
+                                    <h4>{{item.Cupons[0].Couponrate.Hotel.Name}}</h4>
+                                    <p class="text-muted mb-4">
+                                        <i class="bx bx-calendar-event text-success"></i>
+                                        {{item.CreateDate | formatDate }}
+                                        <i class="bx bx-body text-success"></i>
+                                        Creado por <strong>{{item.CreateBy}}</strong>
+                                    </p>
+                                    <div class="row g-0">
+                                        <div class="col-6">
+                                            <div>
+                                                <p class="mb-2 text-muted text-uppercase font-size-11">
+                                                    <i class="bx bx-news text-success"></i>
+                                                    Cantidad Cupones
+                                                </p>
+                                                <h5 class="fw-medium"> {{item.Cupons.length}} Cupones</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div>
+                                                <p class="mb-2 text-muted text-uppercase font-size-11">
+                                                    <i class="bx bx-purchase-tag text-success"></i>
+                                                    TIPO DE CUPON
+                                                </p>
+                                                <h5 class="fw-medium">{{item.Cupons[0].Couponrate.Cupontype.Name}} - $ {{item.Cupons[0].Couponrate.Valor}} MXN</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <a v-on:click="cancel($event, item)" class="btn btn-danger btn-sm">Cancelar<i class="mdi mdi-arrow-left ms-1"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end tab pane -->
+                    <div class="tab-pane" v-bind:id="'transactions-buy-tab' + item.Id" role="tabpanel">
+                        <div class="table-responsive px-3" data-simplebar
+                             style="max-height: 352px;">
+                            <table class="table align-middle table-nowrap table-borderless">
+                                <tbody>
+                                    <tr v-for="cupon in item.Cupons">
+                                        <td style="width: 50px;">
+                                            <div class="font-size-22 ">
+                                                <i v-if="cupon.lock == false" class="bx bx-down-arrow-circle bx-lock-open-alt text-success"></i>
+                                                <i v-if="cupon.lock == true" class="bx bx-down-arrow-circle bx-lock-alt text-danger"></i>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">{{cupon.CuponsID}}</h5>
+                                                <p class="text-muted mb-0 font-size-12">
+                                                    Folio
+                                                </p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">${{cupon.Couponrate.Cupontype.Name}}</h5>
+                                                <p class="text-muted mb-0 font-size-12">
+                                                    Tipo
+                                                </p>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">$ {{cupon.Couponrate.Valor}} MXN</h5>
+                                                <p class="text-muted mb-0 font-size-12">
+                                                    Monto
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end tab pane -->
+                </div>
+                <!-- end tab content -->
+            </div>
+            <!-- end card body -->
+        </div>
+    </div>
+
+    <!--CUPONES PRE IMPRESOS-->
+    <div class="col-xl-3">
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0 font-size-18">Grupos de cupones en impresión</h4>
+                    <button v-on:click="print($event)" type="button" class="btn btn-success waves-effect btn-label waves-light"><i class="mdi mdi-microsoft-excel me-1 label-icon"></i> Excel</button>
+                </div>
+            </div>
+        </div>
+        <div class="card" v-for="item in CupponsPrinted ">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Grupo con folio {{item.Id}}</h4>
+                <div class="flex-shrink-0">
+                    <ul class="nav justify-content-end nav-tabs-custom rounded card-header-tabs"
+                        role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab"
+                               v-bind:href="'#transactions-all-tab' + item.Id" role="tab">
+                                Grupo
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab"
+                               v-bind:href="'#transactions-buy-tab' + item.Id" role="tab">
+                                Cupones
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- end nav tabs -->
+                </div>
+            </div><!-- end card header -->
+
+            <div class="card-body px-0">
+                <div class="tab-content">
+                    <div class="tab-pane active" v-bind:id="'transactions-all-tab' + item.Id" role="tabpanel">
+                        <div class="row ">
+                            <div class="col-md-12 align-self-center" style="padding: 30px;">
+                                <div class="mt-4 mt-sm-0">
+                                    <p class="mb-1"><i class="bx bx-user"></i> Cliente / Hotel</p>
+                                    <h4>{{item.Cupons[0].Couponrate.Hotel.Name}}</h4>
+                                    <p class="text-muted mb-4">
+                                        <i class="bx bx-calendar-event text-success"></i>
+                                        {{item.CreateDate | formatDate }}
+                                        <i class="bx bx-body text-success"></i>
+                                        Creado por <strong>{{item.CreateBy}}</strong>
+                                    </p>
+                                    <div class="row g-0">
+                                        <div class="col-6">
+                                            <div>
+                                                <p class="mb-2 text-muted text-uppercase font-size-11">
+                                                    <i class="bx bx-news text-success"></i>
+                                                    Cantidad Cupones
+                                                </p>
+                                                <h5 class="fw-medium"> {{item.Cupons.length}} Cupones</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div>
+                                                <p class="mb-2 text-muted text-uppercase font-size-11">
+                                                    <i class="bx bx-purchase-tag text-success"></i>
+                                                    TIPO DE CUPON
+                                                </p>
+                                                <h5 class="fw-medium">{{item.Cupons[0].Couponrate.Cupontype.Name}} - $ {{item.Cupons[0].Couponrate.Valor}} MXN</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <a v-on:click="deliver($event, item)" class="btn btn-info btn-sm">Entregar<i class="mdi mdi-arrow-left ms-1"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end tab pane -->
+                    <div class="tab-pane" v-bind:id="'transactions-buy-tab' + item.Id" role="tabpanel">
+                        <div class="table-responsive px-3" data-simplebar
+                             style="max-height: 352px;">
+                            <table class="table align-middle table-nowrap table-borderless">
+                                <tbody>
+                                    <tr v-for="cupon in item.Cupons">
+                                        <td style="width: 50px;">
+                                            <div class="font-size-22 ">
+                                                <i v-if="cupon.lock == false" class="bx bx-down-arrow-circle bx-lock-open-alt text-success"></i>
+                                                <i v-if="cupon.lock == true" class="bx bx-down-arrow-circle bx-lock-alt text-danger"></i>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <h5 class="font-size-14 mb-1">{{cupon.CuponsID}}</h5>
+                                                <p class="text-muted mb-0 font-size-12">
+                                                    Folio
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">${{cupon.Couponrate.Cupontype.Name}}</h5>
+                                                <p class="text-muted mb-0 font-size-12">
+                                                    Tipo
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="text-end">
+                                                <h5 class="font-size-14 mb-0">$ {{cupon.Couponrate.Valor}} MXN</h5>
+                                                <p class="text-muted mb-0 font-size-12">
+                                                    Monto
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end tab pane -->
+                </div>
+                <!-- end tab content -->
+            </div>
+            <!-- end card body -->
+        </div>
+    </div>
+
+    <!--Oredenes de impresion-->
+    <div class="col-xl-3">
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0 font-size-18">Ordenes de impresión</h4>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" v-for="[key, groups] in Object.entries(orders)" :key="clave">
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button fw-medium" type="button" data-bs-toggle="collapse" v-bind:data-bs-target="'#'+key" aria-expanded="true" aria-controls="flush-collapseOne">
+                            Codigo: {{ key | truncate(13) }}
+                        </button>
+                    </h2>
+                    <div :id="key" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample" style="">
+                        <div class="accordion-body text-muted">
+                            <div v-for="item in groups" class="row ">
+                                <div class="col-md-12 align-self-center" style="padding: 30px;">
+                                    <div class="mt-4 mt-sm-0">
+                                        <p class="mb-1"><i class="bx bx-user"></i> Cliente / Hotel</p>
+                                        <h4>{{item.Cupons[0].Couponrate.Hotel.Name}}</h4>
+                                        <p class="text-muted mb-4">
+                                            <i class="bx bx-calendar-event text-success"></i>
+                                            {{item.CreateDate | formatDate }}
+                                            <i class="bx bx-body text-success"></i>
+                                            Creado por <strong>{{item.CreateBy}}</strong>
+                                        </p>
+                                        <div class="row g-0">
+                                            <div class="col-6">
+                                                <div>
+                                                    <p class="mb-2 text-muted text-uppercase font-size-11">
+                                                        <i class="bx bx-news text-success"></i>
+                                                        Cantidad Cupones
+                                                    </p>
+                                                    <h5 class="fw-medium"> {{item.Cupons.length}} Cupones</h5>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div>
+                                                    <p class="mb-2 text-muted text-uppercase font-size-11">
+                                                        <i class="bx bx-purchase-tag text-success"></i>
+                                                        TIPO DE CUPON
+                                                    </p>
+                                                    <h5 class="fw-medium">{{item.Cupons[0].Couponrate.Cupontype.Name}} - $ {{item.Cupons[0].Couponrate.Valor}} MXN</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" d-sm-flex align-items-end justify-content-end my-3">
+                <a v-bind:href="'/cupones/exportpdf/' + key" style="margin-right: 12px;" type="button" class="btn btn-success waves-effect btn-label waves-light" target="_blank"><i class="mdi mdi-microsoft-excel me-1 label-icon" ></i> PDF</a> 
+                <a v-bind:href="'/cupones/exportexcel/' + key" style="margin-right: 12px;" type="button" class="btn btn-success waves-effect btn-label waves-light" target="_blank"><i class="mdi mdi-microsoft-excel me-1 label-icon"></i> Excel</a> 
+                <button v-on:click="disableorder($event,key)" type="button" class="btn btn-success waves-effect btn-label waves-light"><i class=" bx bx-check-double me-1 label-icon"></i> Finalizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div v-else class="row">
+    <div class="col-md-12">
+        <h2>CARGANDO LOS DATOS</h2>
+    </div>
+</div>
+
+<!-- end table responsive -->
+@section Scripts {
+    <script src="~/Content/js/Views/Coupons/impresion.js"></script>
+    <!-- Required datatable js
+        <script src="~/Content/libs/DataTablesPDF/jquery-3.7.1.js"></script>
+        <script src="~/Content/js/Views/Finance/main.js"></script>
+        <script src="~/Content/libs/DataTablesPDF/buttons.dataTables.js"></script>
+        <script src="~/Content/libs/DataTablesPDF/buttons.html5.min.js"></script>
+        <script src="~/Content/libs/DataTablesPDF/dataTables.buttons.js"></script>
+        <script src="~/Content/libs/DataTablesPDF/dataTables.js"></script>
+        <script src="~/Content/libs/DataTablesPDF/jszip.min.js"></script>
+        <script src="~/Content/libs/DataTablesPDF/pdfmake.min.js"></script>
+        <script src="~/Content/libs/DataTablesPDF/vfs_fonts.js"></script>
+        <script src="~/Content/libs/DataTables/datatables.js"></script>
+        <script src="~/Content/libs/DataTables/datatables.min.js"></script>
+
+
+    -->
+}

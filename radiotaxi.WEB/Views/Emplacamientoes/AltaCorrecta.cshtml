@@ -1,0 +1,103 @@
+﻿@model radiotaxi.Model.Emplacamiento
+@{
+    ViewBag.Title = "Tarjeton";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="card-title mb-0 font-size-22"><i class="bx bxs-upvote"></i> @(Model.No_Economico.ToString().Replace(".0000", "")) | @(ViewBag.emplaMovimiento.Movimiento) </h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+<div class="row">
+    <div class="col-xl-9 col-lg-8" style="height:650px;">
+        <iframe id="iframe1"
+                title="Preview de Alta"
+                frameborder="0"
+                style="display:block;width:100%;height:100%"
+                src="/emplacamiento/renderpdf/@((int)Model.Id_Op)">
+        </iframe>
+        <!-- end card -->
+    </div>
+    <div class="col-xl-3 col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title mb-3 font-size-24 text-center">Resumen de movimiento</h3>
+
+                <div class="flex-wrap gap-2 font-size-16">
+                    <h3 class="card-title mb-3 font-size-18 text-center"> @(ViewBag.emplaMovimiento.Movimiento)</h3>
+
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <p class="mb-1"><span class="fw-bold">Marca:</span> @(ViewBag.emplaMarca.Marca)</p>
+                        </li>
+                        <li>
+                            <p class="mb-1"><span class="fw-bold">Modelo:</span> @(ViewBag.emplaModelo.Modelo)</p>
+                        </li>
+                        <li>
+                            <p class="mb-1"><span class="fw-bold">Año del vehiculo:</span> @(Model.AutoAno)</p>
+                        </li>
+                        <li>
+                            <p class="mb-1"><span class="fw-bold">Responsable:</span> @(Model.Responsable)</p>
+                        </li>
+                        <li>
+                            <p class="mb-1"><span class="fw-bold">Eco/Gafet del responsable:</span> @(Model.EconoResp)</p>
+                        </li>
+                        <li>
+                            <p class="mb-1"><span class="fw-bold">Teléfono del responsable:</span> @(Model.resp_telefono)</p>
+                        </li>
+                        <li>
+                            <p class="mb-1"><span class="fw-bold">Celular del Responsable:</span> @(Model.resp_celular)</p>
+                        </li>
+                        <li>
+                            <p class="mb-1"><span class="fw-bold">Placas:</span> @(Model.Placas.ToUpper())</p>
+                        </li>
+                        <li>
+                            <p class="mb-1"><span class="fw-bold">Motor:</span> @(Model.Motor.ToUpper())</p>
+                        </li>
+                        <li>
+                            <p class="mb-1"><span class="fw-bold">N° de serie:</span> @(Model.No_Serie.ToUpper())</p>
+                        </li>
+                        <li>
+                            <p class="mb-1"><span class="fw-bold">Capacidad:</span> @(Model.Capacidad) PASAJEROS MÁS CONDUCTOR</p>
+                        </li>
+                        <li>
+                            <p class="mb-1"><span class="fw-bold">Poliza:</span> @(Model.poliza.ToUpper())</p>
+                        </li>
+                        <li>
+                            <p class="mb-1"><span class="fw-bold">Tipo de poliza:</span> @(Model.tipopoliza.ToUpper())</p>
+                        </li>
+                        <li>
+                            <p class="mb-1"><span class="fw-bold">Aseguradora:</span> @(Model.aseguradora)</p>
+                        </li>
+                        <li>
+                            <p class="mb-1"><span class="fw-bold">Vencimiento de poliza:</span> @(((DateTime)Model.vencepoliza).ToString("dd/MM/yyyy"))</p>
+                        </li>
+                        <hr />
+                        <li>
+                            <p class="mb-1"><span class="fw-bold">Observaciones:</span> @(Model.Observaciones.ToUpper())</p>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="mt-4 form-actions d-flex justify-content-around">
+                    <a href="/emplacamiento/detalle/@(Model.No_Economico.ToString().Replace(".0000", ""))" class="btn btn-success waves-effect btn-label waves-light"><i class=" bx bx-arrow-back label-icon"></i> Regresar</a>
+                </div>
+
+            </div>
+            <!-- end card body -->
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+
+}

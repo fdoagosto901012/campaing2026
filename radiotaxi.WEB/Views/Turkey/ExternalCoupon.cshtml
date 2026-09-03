@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "External Coupon";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18"> <i class="mdi mdi-food-turkey"></i> Pavos</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Inicio</a></li>
+                    <li class="breadcrumb-item active">Generar cupones externos</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-12 col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <h5 class="card-title mb-0">Generar cupón externo.</h5>
+                    <div class="card-body">
+                        <div class="p-0">
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <div class="mt-1">
+                                        <form class="row my-3">
+                                            <div class="col-md-3">
+                                                <div class="col">
+                                                    <label for="name">Nombre</label>
+                                                    <input name="name" type="text" class="form-control" id="name" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="col">
+                                                    <label for="name">Apellidos</label>
+                                                    <input name="lastname" type="text" class="form-control" id="lastname" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="col">
+                                                    <label for="name">Comentarios</label>
+                                                    <input  name="coments" type="text" class="form-control" id="coments" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 d-flex">
+                                                <div class="col align-content-center pt-4">
+                                                    <a v-on:click="generateTicket('G','0')" class="btn btn-success waves-effect btn-label waves-light mb-3"><i class="bx bxs-paper-plane label-icon"></i> Generar Cupón</a>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                    <!-- end post -->
+                                </div>
+                                <!-- end row -->
+                            </div>
+                        </div>
+                        <!-- end card body -->
+                    </div>
+                    <!-- end card -->
+                </div>
+                <!-- end card body -->
+            </div>
+            <!-- end card -->
+        </div>
+        <!-- end col -->
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script src="~/Content/js/Views/Turkeys/ExternalCoupon.js"></script>
+}

@@ -1,0 +1,180 @@
+﻿@model radiotaxi.Model.OperatorPagination
+@{
+    ViewBag.Title = "Operadores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">Operadores</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Inicio</a></li>
+                    <li class="breadcrumb-item active">Operadores</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title  bx bx-search-alt-2"> Búsqueda</h4>
+                <p class="card-title-desc">La búsqueda se puede realizar con cualquiera de los siguientes campos.</p>
+            </div>
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div>
+                            <form action="/Operator/" method="POST" class="form-horizontal">
+                                <div class="row control-group">
+                                    <div class="col-md-3 mb-3 ">
+                                        <label class="form-label control-label">Gafet</label>
+                                        <input type="text" class="form-control span11" name="gafet" id="phoneNumber" value="@(ViewBag.parameters.gafet)" placeholder="Ingrese el número de gafet" />
+                                    </div>
+                                    <div class="col-md-3 mb-3 ">
+                                        <label class="form-label control-label">Nombre</label>
+                                        <input type="text" class="form-control span11" placeholder="Ingrese el nombre" name="name" id="name" value="@(ViewBag.parameters.name)" />
+                                    </div>
+                                    <div class="col-md-3 mb-3 ">
+                                        <label class="form-label control-label">Apellido paterno</label>
+                                        <input type="text" class="form-control span11" placeholder="Ingrese el apellido paterno" name="lastName1" id="lastName1" value="@(ViewBag.parameters.lastName1)" />
+                                    </div>
+                                    <div class="col-md-3 mb-3 ">
+                                        <label class="form-label control-label">Apellido materno</label>
+                                        <input type="text" class="form-control span11" placeholder="Ingrese el apellido materno" name="lastName2" id="lastName2" value="@(ViewBag.parameters.lastName2)" />
+                                    </div>
+                                </div>
+                                <div class="mt-4 form-actions">
+                                    <button type="submit" value="Buscar" class="btn btn-primary w-md btn-success">Buscar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <h5 class="card-title">Clientes totales <span class="text-muted fw-normal ms-2">@(ViewBag.totalClients)</span></h5>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
+                            <div>
+                                <a href="/Operator/Create" class="btn btn-light"><i class="bx bx-plus me-1"></i> Agregar Operador</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class=" table-rep-plugin">
+                    <div class="table-responsive mb-0" data-pattern="priority-columns">
+                        <table id="tech-companies-1" class="table table-striped mb-lg-5 pb-lg-5 style=" min-height: 600px;"">
+                            <thead>
+                                <tr>
+
+                                    <th data-priority="1">Gafet</th>
+                                    <th data-priority="3">Nombre</th>
+                                    <th data-priority="3">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Data)
+                                {
+                                    <tr>
+                                        <td>
+                                            @if (item.bucket != null)
+                                            {
+                                                <img src="@(item.urlImage)" alt="" class="avatar-md rounded-circle me-2">
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Content/images/users/empty.png" alt="" class="avatar-md rounded-circle me-2">
+                                            }
+                                            <span class="ntext">@Html.DisplayFor(modelItem => item.CHOFER)</span>
+                                        </td>
+                                        <td class="co-name">
+                                            <span class="co-name ntext">@Html.DisplayFor(modelItem => item.NOMBRE) @Html.DisplayFor(modelItem => item.APELLIDOS) </span>
+                                        </td>
+                                        <td>
+                                            <a href="~/Operator/tarjeton?gafet=@(item.CHOFER)" class="btn btn-success waves-effect btn-label waves-light">
+                                                <i class="bx bxs-id-card label-icon"></i> Tarjeton
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-12">
+                            <nav aria-label="Page navigation example">
+                                @if (Model.EndPage > 1)
+                                {
+                                    <ul class="pagination justify-content-center">
+
+                                        @if (Model.CurrentPage > 1)
+                                        {
+                                            <li class="page-item">
+                                                <a class="page-link" href="~/Operator">Primero</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="~/Operator?page=@(Model.CurrentPage - 1)">Anterior</a>
+                                            </li>
+                                        }
+                                        else if (Model.CurrentPage == 1)
+                                        {
+                                            <li class="page-item ">
+                                                <a class="page-link" href="~/Operator">Primero</a>
+                                            </li>
+                                        }
+
+                                        <!--Paginación activa-->
+                                        @for (var p = Model.StartPage; p <= Model.EndPage; p++)
+                                        {
+                                            <li class="page-item @(p == Model.CurrentPage ? "active" : "")">
+                                                <a class="page-link" href="~/Operator?page=@p">@p</a>
+                                            </li>
+                                        }
+
+                                        @if (Model.CurrentPage < Model.TotalPages)
+                                        {
+                                            <li class="page-item">
+                                                <a class="page-link" href="~/Operator?page=@(Model.CurrentPage + 1)">Siguiente</a>
+                                            </li>
+                                            <li class="page-item next">
+                                                <a class="page-link" href="~/Operator?page=@(Model.TotalPages)">Último</a>
+                                            </li>
+                                        }
+                                        else if (Model.CurrentPage == Model.TotalPages)
+                                        {
+                                            <li class="page-item next">
+                                                <a class="page-link" href="~/Operator?page=@(Model.TotalPages)">Último</a>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end table responsive -->

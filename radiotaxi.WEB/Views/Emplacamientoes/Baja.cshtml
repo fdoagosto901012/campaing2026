@@ -1,0 +1,126 @@
+﻿@model radiotaxi.Model.Emplacamiento
+
+@{
+    ViewBag.Title = "Editar";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0"><i class="bx bxs-downvote"></i> @(Model.No_Economico.ToString().Replace(".0000", "")) | Proceso de baja de emplacamiento </h4>
+            </div>
+            <div class="card-body">
+                <form id="" class="formjs" v-on:submit="onSubmit" action="/emplacamiento/baja" method="POST" enctype="multipart/form-data">
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        <div class="form-group row">
+                            <div class="d-flex justify-content-between">
+                                <div class="col-md-3">
+                                    <label for="No_Economico">Eco:</label>
+                                    <input v-validate="'required'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('No_Economico')}" id="No_Economico" name="No_Economico" value="@(ViewBag.Partner.partnerReference != null ? ViewBag.Partner.partnerReference : "")" @(Permissions.allow("Admin") ? " " : " readonly " )>
+                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                    <span class="text-danger" v-show="this.errors.has('No_Economico')">{{ this.errors.first('No_Economico') }}</span>
+                                </div>
+
+                                <!--
+            <div class="col-md-2">
+                <label for="Status" class="control-label col-md-6">Estatus</label>
+                <select id="Status" name="Status" class="form-control" v-validate="'required'" v-bind:class="{ 'border-danger' : this.errors.has('Status')}">
+                    <option value="ALTA" selected>Alta</option>
+                    <option value="BAJA">Baja</option>
+                </select>
+                <small id="emailHelp" class="form-text text-muted"></small>
+                <span class="text-danger" v-show="this.errors.has('Status')">{{ this.errors.first('Status') }}</span>
+            </div>
+
+            -->
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label for="Nombre">Nombres</label>
+                                <input v-validate="'required'" type="text" class="form-control text-uppercase" id="Nombre"
+                                       name="Nombre" placeholder="Ingrese el nombre del operador" v-bind:class="{ 'border-danger' : this.errors.has('Status')}"
+                                       value="@(ViewBag.Partner.firstName != null ? ViewBag.Partner.firstName : "")" @(Permissions.allow("Admin") ? " " : " readonly " )>
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Nombre')">{{ this.errors.first('Nombre') }}</span>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="Paterno">Apellido Paterno</label>
+                                <input v-validate="'required'" type="text" class="form-control text-uppercase" id="Paterno"
+                                       name="Paterno" placeholder=""
+                                       value="@(ViewBag.Partner.lastNameF != null ? ViewBag.Partner.lastNameF : "")" @(Permissions.allow("Admin") ? " " : " readonly " ) v-bind:class="{ 'border-danger' : this.errors.has('Paterno')}">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Paterno')">{{ this.errors.first('Paterno') }}</span>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="Materno">Apellido Materno</label>
+                                <input v-validate="'required'" type="text" class="form-control text-uppercase" id="Materno"
+                                       name="Materno" placeholder=""
+                                       value="@(ViewBag.Partner.lastNameM != null ? ViewBag.Partner.lastNameM : "")" @(Permissions.allow("Admin") ? " " : " readonly " ) v-bind:class="{ 'border-danger' : this.errors.has('Materno')}">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Materno')">{{ this.errors.first('Materno') }}</span>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label for="Id_Op" class="control-label col-md-6">Movimiento</label>
+                                <select id="Id_Mov" name="Id_Mov" class="form-control" v-validate="'required'" v-bind:class="{ 'border-danger' : this.errors.has('Id_Mov')}">
+                                    <option value="0">N/A</option>
+                                    @foreach (radiotaxi.Model.EmplaMovimiento movimiento in ((List<radiotaxi.Model.EmplaMovimiento>)ViewBag.movimientos).Where(x => x.Tipo_Mov == "B"))
+                                    {
+                                        <option @(Model.Id_Mov == movimiento.Id_Mov ? " Selected " : "" ) value="@( movimiento.Id_Mov != null ?  movimiento.Id_Mov : "")">@( movimiento.Movimiento != null ? movimiento.Movimiento: "")</option>
+                                    }
+                                </select>
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Id_Op')">{{ this.errors.first('Id_Op') }}</span>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="form-group row">
+                            <div class="col-md-9">
+                                <label for="Observaciones">Observaciones</label>
+                                <input v-validate="'required'" type="text" class="form-control text-uppercase" v-bind:class="{ 'border-danger' : this.errors.has('Observaciones')}" id="Observaciones" name="Observaciones" value="@(Model.Observaciones)">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                                <span class="text-danger" v-show="this.errors.has('Observaciones')">{{ this.errors.first('Observaciones') }}</span>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="form-group row d-flex justify-content-between">
+                            <div class="col-md-2 align-content-start">
+                                <a href="/emplacamiento/detalle/@(ViewBag.Partner.partnerReference)" class="btn btn-danger">
+                                    <i class=""></i> Cancelar
+                                </a>
+                            </div>
+
+                            <div class="col-md-2 d-flex  justify-content-end">
+                                <input type="hidden" value="@Model.Id_Op" name="Id_Op" id="Id_Op" />
+                                <input type="submit" value="Guardar" class="btn btn-success" id="SendForm" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+
+@section Scripts {
+    <script src="~/Content/js/Views/Emplacamiento/edit.js"></script>
+}

@@ -1,0 +1,145 @@
+﻿@{
+    ViewBag.Title = "LoginErrors";
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Dashboard | Practicontrol Web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/Content/images/favicon.ico">
+    <!-- Cropper.js -->
+    <link href="~/Content/libs/cropperjs/cropper.min.css" rel="stylesheet" type="text/css" />
+    <!-- Responsive Table css -->
+    <link href="~/Content/libs/admin-resources/rwd-table/rwd-table.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- plugin css -->
+    <link href="~/Content/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+    <!-- Calendar -->
+    <link href="@Url.Content("~/Content/libs/@fullcalendar/core/main.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/libs/@fullcalendar/daygrid/main.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/libs/@fullcalendar/bootstrap/main.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/libs/@fullcalendar/timegrid/main.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/libs/sweetalert2/sweetalert2.min.css")" rel="stylesheet" type="text/css" />
+
+    <!-- DATATABLES PDF-->
+    <link href="@Url.Content("~/Content/libs/DataTablesPDF/buttons.dataTables.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/libs/DataTablesPDF/dataTables.dataTables.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/libs/DataTables/datatables.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/libs/DataTables/datatables.min.css")" rel="stylesheet" type="text/css" />
+
+
+    <!-- preloader css -->
+    <link rel="stylesheet" href="~/Content/css/preloader.min.css" type="text/css" />
+    <!-- Bootstrap Css -->
+    <link href="~/Content/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="~/Content/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="~/Content/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+    <div class="my-5 pt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-center mb-5">
+                        <h1 class="display-1 fw-semibold">4<span class="text-primary mx-2">0</span>3</h1>
+                        <h4 class="text-uppercase">Usted no cuenta con los permisos requeridos para hacer esta operación.</h4>
+                        <div class="mt-5 text-center">
+                            <a class="btn btn-primary waves-effect waves-light" href="/Operator/">Regresar al panel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-10 col-xl-8">
+                    <div>
+                        <img src="~/Content/images/error-img.png" alt="" class="img-fluid">
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+        </div>
+        <!-- end container -->
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script src="~/Content/libs/jquery/jquery.min.js"></script>
+    <script src="~/Content/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/libs/metismenu/metisMenu.min.js"></script>
+    <script src="~/Content/libs/simplebar/simplebar.min.js"></script>
+    <script src="~/Content/libs/node-waves/waves.min.js"></script>
+    <script src="~/Content/libs/feather-icons/feather.min.js"></script>
+    <!-- pace js -->
+    <script src="~/Content/libs/pace-js/pace.min.js"></script>
+    <!-- apex chart js -->
+    <script src="~/Content/libs/apexcharts/apexcharts.min.js"></script>
+    <!-- Responsive Table js -->
+    <script src="~/Content/libs/admin-resources/rwd-table/rwd-table.min.js"></script>
+    <!-- materialdesign icon js-->
+    <script src="~/Content/js/pages/materialdesign.init.js"></script>
+    <!-- Init js -->
+    <script src="~/Content/js/pages/table-responsive.init.js"></script>
+    <!-- VUE 3 -->
+    <script src="~/Content/libs/Vue/vee-validate.js"></script>
+    <script src="~/Content/libs/Vue/vue.js"></script>
+    <!-- FullCalendar-->
+    <script src="~/Content/libs/FullCalendar/fullcalendar.min.js"></script>
+
+    <!-- Sweetalert-->
+    <script src="~/Content/libs/sweetalert2/sweetalert2.min.js"></script>
+
+    <!-- Copperjs-->
+    <script src="~/Content/libs/cropperjs/cropper.js"></script>
+
+    <script src="~/Content/js/app.js"></script>
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const optionsTime = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
+            const dateString = now.toLocaleDateString('es-ES', optionsDate);
+            const timeString = now.toLocaleTimeString('es-ES', optionsTime);
+            document.getElementById('current-date').innerText = dateString;
+            document.getElementById('current-time').innerText = timeString;
+        }
+
+        // Inicializa la fecha y hora y actualiza cada segundo
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+
+    </script>
+    <script>
+        @functions{
+            public string TokenHeaderValue()
+            {
+                string cookieToken, formToken;
+                AntiForgery.GetTokens(null, out cookieToken, out formToken);
+                return cookieToken + ":" + formToken;
+            }
+
+            public bool permissions(string roles){
+                roles = roles.Replace(" ", "");
+                string[] _roles = roles.Split(',');
+                foreach (var role in _roles)
+                {
+                    if (Session["role"].ToString() == role)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+        var csrfToken = '@TokenHeaderValue()';
+    </script>
+</body>
+
+</html>

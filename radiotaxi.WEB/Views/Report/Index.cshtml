@@ -1,0 +1,630 @@
+﻿@model IEnumerable<radiotaxi.Model.totalReportUser>
+
+@{
+    ViewBag.Title = "Reportes";
+    Layout = "~/Views/Shared/_LayOut_Report.cshtml";
+}
+
+<script>
+        @functions{
+            public string TokenHeaderValue()
+            {
+                string cookieToken, formToken;
+                AntiForgery.GetTokens(null, out cookieToken, out formToken);
+                return cookieToken + ":" + formToken;
+            }
+        }
+    var csrfToken = '@TokenHeaderValue()';
+    ////console.log(csrfToken);
+</script>
+
+
+
+<!--breadcrumbs-->
+<div id="content-header">
+    <div id="breadcrumb"> <a href="/" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom" data-original-title="">Reportes</a> </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <h3>Reportes generales y gráficas</h3>
+            <hr />
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span5">
+            <strong>Intervalo de fechas</strong><br />
+            <input type="text" class="interval-date" name="daterange" value="" /><img class="loadinglogo hidden" src="~/img/loading.gif" />
+        </div>
+        <div class="span4">
+            
+        </div>
+    </div>
+    
+
+    <div class="row-fluid">
+        <div class="span4">
+            <div class="row-fluid">
+                <div class="span12 text-center">
+                    <hr />
+                    <h5>Servicios asignados por día (<span id="assignedbyday">0 Servicios</span>) <span class="dateStart"></span> - <span class="dateEnd"></span></h5>
+                    <hr />
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span12">
+                    <canvas id="myChart" width="400" height="400"></canvas>
+
+                </div>
+            </div>
+        </div>
+        <div class="span4">
+            <div class="row-fluid">
+                <div class="span12  text-center">
+                    <hr />
+                    <h5>Servicios cancelados por día (<span id="cancelbyday">0 Servicios</span>) <span class="dateStart"></span> - <span class="dateEnd"></span></h5>
+                    <hr />
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <canvas id="myChart1" width="400" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="span4">
+            <div class="row-fluid">
+                <div class="span12  text-center">
+                    <hr />
+                    <h5>Servicios pendientes por día (<span id="pedingbyday">0 Servicios</span>) <span class="dateStart"></span> - <span class="dateEnd"></span></h5>
+                    <hr />
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <canvas id="myChart2" width="400" height="400"></canvas>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span4">
+            <div class="row-fluid">
+                <div class="span12 text-center">
+                    <hr />
+                    <h5>Asignados por centralista (<span class="dateStart"></span> - <span class="dateEnd"></span>)</h5>
+                    <hr />
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span12">
+                    <canvas id="myChart5" width="400" height="400"></canvas>
+
+                </div>
+            </div>
+        </div>
+        <div class="span4">
+            <div class="row-fluid">
+                <div class="span12  text-center">
+                    <hr />
+                    <h5>Recepcionados por centralista (<span class="dateStart"></span> - <span class="dateEnd"></span>)</h5>
+                    <hr />
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <canvas id="myChart6" width="400" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="span4">
+            <div class="row-fluid">
+                <div class="span12  text-center">
+                    <hr />
+                    <h5>Recepcionados por turno (<span class="dateStart"></span> - <span class="dateEnd"></span>)</h5>
+                    <hr />
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <canvas id="myChart8" width="400" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="row-fluid">
+                <div class="span12 text-center">
+                    <hr />
+                    <h5>Asignados por unidad (<span class="dateStart"></span> - <span class="dateEnd"></span>)</h5>
+                    <hr />
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span12">
+                    <canvas id="myChart7" width="400" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js">
+</script>
+
+<script>
+
+
+
+    window.onload = function () {
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        window.myChart = new Chart(ctx, {
+            type: 'line',
+            options: {
+                legends: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        var ctx1 = document.getElementById('myChart1').getContext('2d');
+        window.myChart1 = new Chart(ctx1, {
+            type: 'line',
+            options: {
+                legends: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        var ctx2 = document.getElementById('myChart2').getContext('2d');
+        window.myChart2 = new Chart(ctx2, {
+            type: 'line',
+            options: {
+                legends: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        var ctx5 = document.getElementById('myChart5').getContext('2d');
+        window.myChart5 = new Chart(ctx5, {
+            type: 'bar',
+            options: {
+                legends: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        var ctx6 = document.getElementById('myChart6').getContext('2d');
+        window.myChart6 = new Chart(ctx6, {
+            type: 'bar',
+            options: {
+                legends: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        var ctx7 = document.getElementById('myChart7').getContext('2d');
+        window.myChart7 = new Chart(ctx7, {
+            type: 'bar',
+            options: {
+                legends: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        var ctx8 = document.getElementById('myChart8').getContext('2d');
+        window.myChart8 = new Chart(ctx8, {
+            type: 'bar',
+            options: {
+                legends: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+
+    };
+
+    /*
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: Object.keys(data.days_report.dictionary_assigend),
+            datasets: [{
+                label: 'Servicios asignados por unidad ',
+                data: Object.values(data.days_report.dictionary_assigend),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legends: {
+                display: false
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });*/
+
+    
+    var _Dates = null;
+    // Grafica servicios asignados...
+    //$('input[name="daterange"]').daterangepicker();
+   
+    $(function () {
+        $('input[name="daterange"]').daterangepicker({
+            opens: 'left'
+        }, function (start, end, label) {
+            console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' a ' + end.format('DD-MM-YYYY'));
+        });
+    });
+
+    
+    function successFunc(data, status) {
+
+
+        if (data != null) {
+            //console.log(data);
+            // Crear primera tabla.
+            
+
+            window.myChart.data = {
+                labels: Object.keys(data.days_report.dictionary_assigend),
+                datasets: [{
+                    label: 'Servicios asignados por unidad ',
+                    data: Object.values(data.days_report.dictionary_assigend),
+                    borderWidth: 1
+                }]
+            };
+            window.myChart.update();
+
+
+            window.myChart1.data = {
+                labels: Object.keys(data.days_report.dictionary_canceled),
+                datasets: [{
+                    label: 'Servicios cancelados por día',
+                    data: Object.values(data.days_report.dictionary_canceled),
+                    borderWidth: 1
+                }]
+            };
+            window.myChart1.update();
+
+
+            window.myChart2.data = {
+                labels: Object.keys(data.days_report.dictionary_pending),
+                datasets: [{
+                    label: 'Servicios pendientes por día',
+                    data: Object.values(data.days_report.dictionary_pending),
+                    borderWidth: 1
+                }]
+            };
+            window.myChart2.update();
+
+
+
+            $('.loadinglogo').addClass("hidden");
+            var dictionary_assigend_counter = 0;
+            $.each(data.days_report.dictionary_assigend, function (key, value) {
+                dictionary_assigend_counter = parseInt(dictionary_assigend_counter) + parseInt(value);
+            });
+            //console.log("Asignados : " + dictionary_assigend_counter);
+            $("#assignedbyday").html("<strong>" + dictionary_assigend_counter + "</strong> Servicios");
+
+            var dictionary_canceled_counter = 0;
+            $.each(data.days_report.dictionary_canceled, function (key, value) {
+                dictionary_canceled_counter = parseInt(dictionary_canceled_counter) + parseInt(value);
+            });
+            //console.log("Cancelados : " + dictionary_canceled_counter);
+            $("#cancelbyday").html("<strong>" + dictionary_canceled_counter + "</strong> Servicios");
+
+            var dictionary_pending_counter = 0;
+            $.each(data.days_report.dictionary_pending, function (key, value) {
+                dictionary_pending_counter = parseInt(dictionary_pending_counter) + parseInt(value);
+
+            });
+            //console.log("Pendientes : " + dictionary_pending_counter);
+            $("#pedingbyday").html("<strong>" + dictionary_pending_counter + "</strong> Servicios");
+
+            //console.log(data);
+
+
+            GenerateThrowned(data.days_report.throwned);
+            GenerateReceived(data.days_report.received);
+
+            GenerateServicesByRtUnid(data.days_report.numberServicesRTbyUnid_rtNumber);
+            GenerateServicesByTurn(data.days_report.ServicesByTurns);
+
+
+            //console.log(window._Dates);
+            if (window._Dates != null) {
+                $(".dateStart").html(window._Dates[0]);
+                $(".dateEnd").html(window._Dates[1]);
+            } else {
+                var s = new Date();
+                var e = new Date();
+                s.setDate(s.getDate() - 9);
+                e.setDate(e.getDate() - 1);
+
+                var dd_s = s.getDate();
+                var mm_s = s.getMonth() + 1;
+                var yyyy_s = s.getFullYear();
+                if (dd_s < 10) {
+                    dd_s = '0' + dd_s;
+                }
+
+                var dd_e = e.getDate();
+                var mm_e = e.getMonth() + 1;
+                var yyyy_e = e.getFullYear();
+                if (dd_e < 10) {
+                    dd_e = '0' + dd_e;
+                }
+
+                $(".dateStart").html(dd_s + '/' + mm_s + '/' + yyyy_s);
+                $(".dateEnd").html(dd_e + '/' + mm_e + '/' + yyyy_e);
+            }
+        } else {
+            alert("No se pudo cargar los datos");
+        }
+    }
+
+    function errorFunc() {
+        $('.loadinglogo').addClass("hidden");
+        alert('error');
+    }
+
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [day, month, year].join('-');
+    }
+
+    function GenerateServicesByTurn(data) {
+
+        var values = new Array();
+        var manana = new Array();
+        var tarde = new Array();
+        var noche = new Array();
+        var labels = new Array();
+
+        $.each(data, function (index, item) {
+            //console.log(new Date(item.dateOfDay.replace("/Date(", "").replace(")/", "")));
+            var date = formatDate((new Date(parseInt(item.dateOfDay.substr(6)))).toDateString());
+            if (values[date] == undefined) {
+                values[date] = [];
+                values[date][item.turn] = item.NumberServices;
+            } else {
+                values[date][item.turn] = item.NumberServices;
+            }
+        });
+
+
+
+
+        for (let key in values) {
+            
+            labels.push(key);
+            //console.log(new Date(item.dateOfDay.replace("/Date(", "").replace(")/", "")));
+            if (values[key]['manana'] != undefined) {
+                manana.push(values[key]['manana']);
+            } else {
+                manana.push(0);
+            }
+            if (values[key]['noche'] != undefined) {
+                noche.push(values[key]['noche']);
+            } else {
+                noche.push(0);
+            }
+            if (values[key]['tarde'] != undefined) {
+                tarde.push(values[key]['tarde']);
+            } else {
+                tarde.push(0);
+            }
+        }
+
+
+        //console.log(values);
+        window.myChart8.data = {
+            labels: labels,
+            datasets:
+            [{
+                label: 'Mañana',
+                backgroundColor: '#4dc9f6',
+                borderColor: '#4dc9f6',
+                borderWidth: 1,
+                data: manana
+            }, {
+                label: 'Tarde',
+                backgroundColor: '#f67019',
+                borderColor: '#f67019',
+                borderWidth: 1,
+                data: tarde
+            },{
+                label: 'Noche',
+                backgroundColor: '#acc236',
+                borderColor: '#acc236',
+                borderWidth: 1,
+                data: noche
+            }]
+        };
+        window.myChart8.update();
+    }
+
+    function GenerateServicesByRtUnid(data) {
+        var values = {};
+        $.each(data, function (index, item) {
+            values[item.rtNumber] = item.servicesCount;
+        });
+
+        //console.log(values);
+        window.myChart7.data = {
+            labels: Object.keys(values),
+            datasets: [{
+                label: 'Servicios asignados por unidad',
+                data: Object.values(values),
+                borderWidth: 1
+            }]
+        };
+        window.myChart7.update();
+    }
+
+
+    function GenerateThrowned(data){
+        var values = {};
+        $.each(data, function (index, item) {
+            values[item.Usuario] = item.Asignados;
+        });
+
+        //console.log(values);
+        window.myChart5.data ={
+            labels: Object.keys(values),
+            datasets: [{
+                label: 'Servicios lanzados por usuario',
+                data: Object.values(values),
+                borderWidth: 1
+            }]
+        };
+        window.myChart5.update();
+
+    }
+
+    function GenerateReceived(data) {
+        var values = {};
+        $.each(data, function (index, item) {
+            values[item.Usuario] = item.Asignados;
+        });
+
+        //console.log(values);
+        window.myChart6.data = {
+            labels: Object.keys(values),
+            datasets: [{
+                label: 'Servicios recepcionados por usuario',
+                data: Object.values(values),
+                borderWidth: 1
+            }]
+        };
+        window.myChart6.update();
+    }
+
+    $(document).ready(function () {
+
+
+        var serviceURL = '/Report/getStadistics';
+        $.ajaxSetup({
+            headers: { 'RequestVerificationToken': csrfToken }
+        });
+        $.ajax({
+            type: "POST",
+            url: serviceURL,
+            data: {},
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: successFunc,
+            error: errorFunc
+        });
+
+        $(document).on('change', 'input[name="daterange"]', function () {
+            var dates = $(this).val().split(" - ");
+            window._Dates = dates;
+            var start = dates[0].split("/");
+            var end = dates[1].split("/");
+            
+            start = start[1] + "/" + start[0] + "/" + start[2];
+            end = end[1] + "/" + end[0] + "/" + end[2];
+            _Dates = dates;
+            $('.loadinglogo').removeClass("hidden");
+
+            var serviceURL = '/Report/getStadistics';
+            $.ajaxSetup({
+                headers: { 'RequestVerificationToken': csrfToken }
+            });
+            $.ajax({
+                type: 'POST',
+                url: serviceURL,
+                data: {
+                    start: start,
+                    end: end
+                },
+                success: successFunc,
+                error: errorFunc
+            });
+        });
+    });
+
+</script>
+}

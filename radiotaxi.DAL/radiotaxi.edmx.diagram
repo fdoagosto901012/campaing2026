@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6c1058eaf2f94e5f9674a90b1b07d1f6" Name="Diagram1" ZoomLevel="60">
+        <EntityTypeShape EntityType="radiotaxiModel.C_Group" Width="1.5" PointX="10.75" PointY="4.25" />
+        <EntityTypeShape EntityType="radiotaxiModel.C_Group_user" Width="1.5" PointX="13" PointY="2.25" />
+        <EntityTypeShape EntityType="radiotaxiModel.AppService" Width="1.5" PointX="0.75" PointY="13.25" />
+        <EntityTypeShape EntityType="radiotaxiModel.baseService" Width="1.5" PointX="0.75" PointY="3.375" />
+        <EntityTypeShape EntityType="radiotaxiModel.catalogService" Width="1.5" PointX="0.75" PointY="18.375" />
+        <EntityTypeShape EntityType="radiotaxiModel.ChatMessage" Width="1.5" PointX="13" PointY="4.875" />
+        <EntityTypeShape EntityType="radiotaxiModel.client" Width="1.5" PointX="0.75" PointY="6.5" />
+        <EntityTypeShape EntityType="radiotaxiModel.GPSphone" Width="1.5" PointX="3" PointY="17.5" />
+        <EntityTypeShape EntityType="radiotaxiModel.package" Width="1.5" PointX="3.75" PointY="2.875" />
+        <EntityTypeShape EntityType="radiotaxiModel.paymentPackage" Width="1.5" PointX="6" PointY="7.75" />
+        <EntityTypeShape EntityType="radiotaxiModel.report" Width="1.5" PointX="5.75" PointY="12.125" />
+        <EntityTypeShape EntityType="radiotaxiModel.rtNumberService" Width="1.5" PointX="8.25" PointY="8.125" />
+        <EntityTypeShape EntityType="radiotaxiModel.statusService" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="radiotaxiModel.taxiApp" Width="1.5" PointX="3" PointY="22.25" />
+        <EntityTypeShape EntityType="radiotaxiModel.taxiReport" Width="1.5" PointX="8" PointY="12.75" />
+        <EntityTypeShape EntityType="radiotaxiModel.taxiService" Width="1.5" PointX="3" PointY="6.5" />
+        <EntityTypeShape EntityType="radiotaxiModel.unit_taxi" Width="1.5" PointX="6" PointY="4.375" />
+        <AssociationConnector Association="radiotaxiModel.FK___Group_us__id_Gr__37A5467C" />
+        <AssociationConnector Association="radiotaxiModel.FK__ChatMessa___NAME__38996AB5" />
+        <AssociationConnector Association="radiotaxiModel.FK__taxiServi__AppSe__403A8C7D" />
+        <AssociationConnector Association="radiotaxiModel.FK__taxiServi__baseS__3F466844" />
+        <AssociationConnector Association="radiotaxiModel.fk_TSCS" />
+        <AssociationConnector Association="radiotaxiModel.FK__GPSphones__phone__398D8EEE" />
+        <AssociationConnector Association="radiotaxiModel.FK__paymentPa__phone__3B75D760" />
+        <AssociationConnector Association="radiotaxiModel.FK__taxiServi__opera__412EB0B6" />
+        <AssociationConnector Association="radiotaxiModel.fk_TSC" />
+        <AssociationConnector Association="radiotaxiModel.FK__paymentPa__packa__3A81B327" />
+        <AssociationConnector Association="radiotaxiModel.FK_TRR" />
+        <AssociationConnector Association="radiotaxiModel.fk_RNSTS" />
+        <AssociationConnector Association="radiotaxiModel.FK_Unit_taxi_rtNumberService" />
+        <AssociationConnector Association="radiotaxiModel.FK__taxiApp__statusS__3D5E1FD2" />
+        <AssociationConnector Association="radiotaxiModel.fk_TSSS" />
+        <AssociationConnector Association="radiotaxiModel.FK_Unit_taxi_Client" />
+        <EntityTypeShape EntityType="radiotaxiModel.audience" Width="1.5" PointX="6.375" PointY="0.75" />
+        <EntityTypeShape EntityType="radiotaxiModel.company" Width="1.5" PointX="10.375" PointY="22.125" />
+        <EntityTypeShape EntityType="radiotaxiModel.department" Width="1.5" PointX="10.375" PointY="14.25" />
+        <EntityTypeShape EntityType="radiotaxiModel.firebase" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="radiotaxiModel.parameter" Width="1.5" PointX="13.375" PointY="9.125" />
+        <EntityTypeShape EntityType="radiotaxiModel.profile" Width="1.5" PointX="10.375" PointY="25" />
+        <EntityTypeShape EntityType="radiotaxiModel.role" Width="1.5" PointX="13.375" PointY="12.125" />
+        <EntityTypeShape EntityType="radiotaxiModel.roleparam" Width="1.5" PointX="15.625" PointY="12.125" />
+        <EntityTypeShape EntityType="radiotaxiModel.token" Width="1.5" PointX="12.625" PointY="30.625" />
+        <EntityTypeShape EntityType="radiotaxiModel.user" Width="1.5" PointX="10.375" PointY="16.875" />
+        <EntityTypeShape EntityType="radiotaxiModel.userBiometricData" Width="1.5" PointX="10.375" PointY="9.75" />
+        <EntityTypeShape EntityType="radiotaxiModel.userCompany" Width="1.5" PointX="12.625" PointY="18.125" />
+        <EntityTypeShape EntityType="radiotaxiModel.userDepartment" Width="1.5" PointX="12.625" PointY="15.125" />
+        <EntityTypeShape EntityType="radiotaxiModel.userProfile" Width="1.5" PointX="12.625" PointY="21" />
+        <EntityTypeShape EntityType="radiotaxiModel.userRole" Width="1.5" PointX="15.625" PointY="18.125" />
+        <EntityTypeShape EntityType="radiotaxiModel.userSession" Width="1.5" PointX="12.625" PointY="27.375" />
+        <AssociationConnector Association="radiotaxiModel.fk_UCCompany" />
+        <AssociationConnector Association="radiotaxiModel.fk_UD" />
+        <AssociationConnector Association="radiotaxiModel.fk_RPParam" />
+        <AssociationConnector Association="radiotaxiModel.FK_profile_userProfile" />
+        <AssociationConnector Association="radiotaxiModel.fk_role" />
+        <AssociationConnector Association="radiotaxiModel.fk_RPRole" />
+        <AssociationConnector Association="radiotaxiModel.FK_users_token" />
+        <AssociationConnector Association="radiotaxiModel.fk_UCUser" />
+        <AssociationConnector Association="radiotaxiModel.fk_user" />
+        <AssociationConnector Association="radiotaxiModel.FK_users_userProfile" />
+        <AssociationConnector Association="radiotaxiModel.FK_users_userSession" />
+        <AssociationConnector Association="radiotaxiModel.fk_UUD" />
+        <EntityTypeShape EntityType="radiotaxiModel.C_Group1" Width="1.5" PointX="23.375" PointY="17.875" />
+        <EntityTypeShape EntityType="radiotaxiModel.C_Group_user1" Width="1.5" PointX="25.625" PointY="15.75" />
+        <EntityTypeShape EntityType="radiotaxiModel.AppService1" Width="1.5" PointX="21.375" PointY="3.375" />
+        <EntityTypeShape EntityType="radiotaxiModel.baseService1" Width="1.5" PointX="21.375" PointY="24.25" />
+        <EntityTypeShape EntityType="radiotaxiModel.catalogService1" Width="1.5" PointX="21.375" PointY="12.375" />
+        <EntityTypeShape EntityType="radiotaxiModel.ChatMessage1" Width="1.5" PointX="25.625" PointY="18.25" />
+        <EntityTypeShape EntityType="radiotaxiModel.client1" Width="1.5" PointX="18.375" PointY="7.375" />
+        <EntityTypeShape EntityType="radiotaxiModel.GPSphone1" Width="1.5" PointX="20.625" PointY="19.75" />
+        <EntityTypeShape EntityType="radiotaxiModel.package1" Width="1.5" PointX="18.375" PointY="3.875" />
+        <EntityTypeShape EntityType="radiotaxiModel.paymentPackage1" Width="1.5" PointX="20.625" PointY="8.625" />
+        <EntityTypeShape EntityType="radiotaxiModel.report1" Width="1.5" PointX="23.375" PointY="1.625" />
+        <EntityTypeShape EntityType="radiotaxiModel.rtNumberService1" Width="1.5" PointX="25.875" PointY="12.125" />
+        <EntityTypeShape EntityType="radiotaxiModel.statusService1" Width="1.5" PointX="21.375" PointY="0.75" />
+        <EntityTypeShape EntityType="radiotaxiModel.taxiApp1" Width="1.5" PointX="23.625" PointY="23.25" />
+        <EntityTypeShape EntityType="radiotaxiModel.taxiReport1" Width="1.5" PointX="25.625" PointY="2.25" />
+        <EntityTypeShape EntityType="radiotaxiModel.taxiService1" Width="1.5" PointX="23.625" PointY="7.375" />
+        <EntityTypeShape EntityType="radiotaxiModel.unit_taxi1" Width="1.5" PointX="20.625" PointY="17.125" />
+        <EntityTypeShape EntityType="radiotaxiModel.InterestPoint" Width="1.5" PointX="15.375" PointY="1.375" />
+        <EntityTypeShape EntityType="radiotaxiModel.PointType" Width="1.5" PointX="15.375" PointY="5.375" />
+        <EntityTypeShape EntityType="radiotaxiModel.Rate" Width="1.5" PointX="15.375" PointY="8.375" />
+        <EntityTypeShape EntityType="radiotaxiModel.SuperBlock" Width="1.5" PointX="5.375" PointY="17.375" />
+        <EntityTypeShape EntityType="radiotaxiModel.Tariff" Width="1.5" PointX="7.375" PointY="17.375" />
+        <EntityTypeShape EntityType="radiotaxiModel.Zone" Width="1.5" PointX="5.375" PointY="22.375" />
+        <AssociationConnector Association="radiotaxiModel.FK___Group_us__id_Gr__778AC167" />
+        <AssociationConnector Association="radiotaxiModel.FK__ChatMessa___NAME__787EE5A0" />
+        <AssociationConnector Association="radiotaxiModel.FK__taxiServi__AppSe__01142BA1" />
+        <AssociationConnector Association="radiotaxiModel.FK__taxiServi__baseS__00200768" />
+        <AssociationConnector Association="radiotaxiModel.fk_TSCS1" />
+        <AssociationConnector Association="radiotaxiModel.FK__GPSphones__phone__797309D9" />
+        <AssociationConnector Association="radiotaxiModel.FK__paymentPa__phone__7B5B524B" />
+        <AssociationConnector Association="radiotaxiModel.FK__taxiServi__opera__02084FDA" />
+        <AssociationConnector Association="radiotaxiModel.fk_TSC1" />
+        <AssociationConnector Association="radiotaxiModel.FK_Unit_taxi_Client1" />
+        <AssociationConnector Association="radiotaxiModel.FK__paymentPa__packa__7A672E12" />
+        <AssociationConnector Association="radiotaxiModel.FK_TRR1" />
+        <AssociationConnector Association="radiotaxiModel.fk_RNSTS1" />
+        <AssociationConnector Association="radiotaxiModel.FK_Unit_taxi_rtNumberService1" />
+        <AssociationConnector Association="radiotaxiModel.FK__taxiApp__statusS__7E37BEF6" />
+        <AssociationConnector Association="radiotaxiModel.fk_TSSS1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

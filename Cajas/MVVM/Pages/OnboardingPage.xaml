@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cajas.MVVM.Pages.OnboardingPage"
+             xmlns:viewmodel="clr-namespace:Cajas.MVVM.ViewModels"
+             Title="OnboardingPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="white">
+    <ContentPage.BindingContext>
+        <viewmodel:OnboardingPageViewModel />
+    </ContentPage.BindingContext>
+    <Grid Padding="20,20,20,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout Grid.Row="0">
+            <Image 
+                HeightRequest="100"
+                Margin="0,0,0,30"
+                Source="logotc.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Image.Aspect>
+                    <OnIdiom x:TypeArguments="Aspect">
+                        <OnIdiom.Phone>AspectFit</OnIdiom.Phone>
+                        <OnIdiom.Tablet>AspectFill</OnIdiom.Tablet>
+                    </OnIdiom>
+                </Image.Aspect>
+            </Image>
+        </VerticalStackLayout>
+
+        <CarouselView 
+            x:Name="OnboardingCarousel"
+            Grid.Row="1" 
+            ItemsSource="{Binding OnboardingList}"
+            IndicatorView="indicatorView"
+            HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand"
+            >
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label Text="{Binding .}" TextColor="Black" FontSize="28" FontAttributes="Bold" FontFamily="LatoRegular" VerticalOptions="Center" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" Margin="0,0,0,10"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+        <IndicatorView
+            Grid.Row="2" 
+            x:Name="indicatorView" 
+            IndicatorColor="DimGray"
+            IndicatorsShape="Circle" IndicatorSize="8" 
+            Margin="0,10,5,40"
+            SelectedIndicatorColor="LightGray" 
+            HorizontalOptions="CenterAndExpand" 
+            VerticalOptions="End"/>
+
+        <VerticalStackLayout Grid.Row="3">
+            <Image Source="untitled4.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Image.Aspect>
+                    <OnIdiom x:TypeArguments="Aspect">
+                        <OnIdiom.Phone>AspectFit</OnIdiom.Phone>
+                        <OnIdiom.Tablet>AspectFill</OnIdiom.Tablet>
+                    </OnIdiom>
+                </Image.Aspect>
+            </Image>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="4" VerticalOptions="EndAndExpand">
+            <Button
+                BackgroundColor="{StaticResource btnBackgroundcolor}"
+                TextColor="{StaticResource btntexgcolor}"
+                HorizontalOptions="CenterAndExpand"
+                Margin="10,40,10,10"
+                Text="Continuar"
+                Command="{Binding ICommandNavToLoginPage}">
+            </Button>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "TicketDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Descripción del ticket N°: @(ViewBag.ticket)</h2>
+<div class="tab-pane" id="reportes" role="tabpanel">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-rep-plugin">
+                        <div class="table-responsive mb-0" data-pattern="priority-columns">
+                            <table id="treportes" class="table table-striped display" style="width:100%" data-page-length='100'>
+                                <thead>
+                                    <tr>
+                                        <th data-priority="2">N° Ticket</th>
+                                        <th data-priority="2">Eco</th>
+                                        <th data-priority="1">Operador</th>
+                                        <th data-priority="2">Fecha de pago</th>
+                                        <th data-priority="2">Descripción</th>
+                                        <th data-priority="2">Precio</th>
+                                        <th data-priority="2">Cantidad</th>
+                                        <th data-priority="2">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="t-contet">
+
+                                    @foreach (radiotaxi.Model.Ticket_DTO ticket in ViewBag.tickets)
+                                    {
+                                        <tr>
+                                            <td>@(ViewBag.ticket)</td>
+                                            <td>@(ticket.Id_Cliente)</td>
+                                            <td>@(ticket.Id_Proveedor)</td>
+                                            <td>
+                                                @(ticket.FechaOP.ToString("dd/MM/yyyy "))
+                                                @(ticket.HoraOp.ToString("hh:mm tt"))
+                                            </td>
+                                            <td>@(ticket.Descripcion)</td>
+                                            <td>$@(ticket.PrecioConiva.ToString("0.00"))</td>
+                                            <td>@(ticket.Cant)</td>
+                                            <td> <h5><strong>@Html.Raw("$" + ticket.Total.ToString("0.00"))</strong></h5></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th data-priority="2">N° Ticket</th>
+                                        <th data-priority="2">Eco</th>
+                                        <th data-priority="1">Operador</th>
+                                        <th data-priority="2">Fecha de pago</th>
+                                        <th data-priority="2">Descripción</th>
+                                        <th data-priority="2">Precio</th>
+                                        <th data-priority="2">Cantidad</th>
+                                        <th data-priority="2">Total</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end card -->
+        </div> <!-- end col -->
+    </div>
+</div>

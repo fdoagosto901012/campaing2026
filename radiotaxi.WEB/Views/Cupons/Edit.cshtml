@@ -1,0 +1,232 @@
+﻿@model radiotaxi.Model.Cupon
+
+@{
+    ViewBag.Title = "Cupones | Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+
+            <div>
+                <h4 class="mb-sm-0 font-size-18">
+                    <i class="bx bxs-coupon text-primary me-1"></i>
+                    Editar cupón
+                </h4>
+
+                <p class="text-muted mb-0 mt-1">
+                    Modifica el cliente, la tarifa o el estado del cupón.
+                </p>
+            </div>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item">
+                        <a href="/cupones">Cupones</a>
+                    </li>
+
+                    <li class="breadcrumb-item active">
+                        Editar
+                    </li>
+                </ol>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+
+        <div class="card">
+
+            <div class="card-header bg-transparent border-bottom py-3">
+
+                <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="avatar-sm me-3">
+                            <div class="avatar-title bg-primary-subtle text-primary rounded-circle font-size-22">
+                                <i class="bx bxs-coupon"></i>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h5 class="card-title mb-1">
+                                Cupón con folio @Model.CuponsID
+                            </h5>
+
+                            <p class="text-muted mb-0">
+                                Configuración general del cupón
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <span class="badge bg-primary-subtle text-primary font-size-13 px-3 py-2">
+                        Folio @Model.CuponsID
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="card-body p-4">
+
+                <form method="post"
+                      action="/cupones/editar/@Model.CuponsID">
+
+                    <input type="hidden"
+                           name="CuponsID"
+                           id="CuponsID"
+                           value="@Model.CuponsID" />
+
+                    <div class="row g-3 align-items-end">
+
+                        <div class="col-12 col-lg-5">
+
+                            <label for="cliente"
+                                   class="form-label fw-medium">
+                                Cliente
+                            </label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+                                    <i class="bx bx-building-house"></i>
+                                </span>
+
+                                <select v-on:change="getRates($event)"
+                                        class="form-select"
+                                        name="cliente"
+                                        id="cliente"
+                                        required>
+
+                                    @foreach (radiotaxi.Model.Hotel item in ViewBag.hotels)
+                                    {
+                                        <option value="@item.HotelID"
+                                                @(Model.Couponrate.HotelID == item.HotelID ? "selected" : "")>
+                                            @item.Name
+                                        </option>
+                                    }
+
+                                </select>
+
+                            </div>
+
+                            <div class="form-text">
+                                Hotel o cliente relacionado con el cupón.
+                            </div>
+
+                        </div>
+
+                        <div class="col-12 col-lg-5">
+
+                            <label for="tarifa"
+                                   class="form-label fw-medium">
+                                Tarifa / Perforación
+                            </label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+                                    <i class="bx bx-purchase-tag"></i>
+                                </span>
+
+                                <select class="form-select"
+                                        name="tarifa"
+                                        id="tarifa"
+                                        required>
+
+                                    @foreach (radiotaxi.Model.Couponrate item in ViewBag.couponrates)
+                                    {
+                                        <option value="@item.CouponrateID"
+                                                @(Model.Couponrate.CouponrateID == item.CouponrateID ? "selected" : "")>
+                                            @item.Cupontype.Name -
+                                            @item.Valor.ToString("$#,##0.00") MXN
+                                        </option>
+                                    }
+
+                                </select>
+
+                            </div>
+
+                            <div class="form-text">
+                                Tarifa correspondiente al cliente.
+                            </div>
+
+                        </div>
+
+                        <div class="col-12 col-lg-2">
+
+                            <label for="active"
+                                   class="form-label fw-medium">
+                                Estado
+                            </label>
+
+                            <div class="d-flex align-items-center justify-content-between border rounded px-3"
+                                 style="height: 38px;">
+
+                                <span id="activeText" class="fw-medium">
+                                    @(Model.active ? "Activo" : "Inactivo")
+                                </span>
+
+                                <div class="form-check form-switch mb-0">
+
+                                    <input type="checkbox"
+                                           class="form-check-input"
+                                           name="active"
+                                           id="active"
+                                           value="true"
+                                           @(Model.active ? "checked" : "") />
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-text">
+                                Disponibilidad del cupón.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <hr class="my-4" />
+
+                    <div class="d-flex flex-wrap justify-content-end gap-2">
+
+                        <a href="/cupones"
+                           class="btn btn-light waves-effect">
+
+                            <i class="bx bx-arrow-back me-1"></i>
+                            Cancelar
+
+                        </a>
+
+                        <button type="submit"
+                                class="btn btn-success waves-effect btn-label waves-light">
+
+                            <i class="bx bx-save label-icon"></i>
+                            Guardar cambios
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Content/js/Views/Coupons/edit.js"></script>
+}

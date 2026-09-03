@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cajas.MVVM.Pages.cars.CarNotFound"
+             xmlns:cars="clr-namespace:Cajas.MVVM.ViewModels.cars"
+             BackgroundColor="{ StaticResource complement }"
+             Title="Vehículo">
+    <ContentPage.BindingContext>
+        <cars:CarNotFoundViewModel/>
+    </ContentPage.BindingContext>
+    <Grid VerticalOptions="CenterAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".2*"></RowDefinition>
+            <RowDefinition Height=".1*"></RowDefinition>
+            <RowDefinition Height=".7*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" Grid.RowSpan="2" VerticalOptions="Start">
+            <Frame Margin="15" BackgroundColor="{StaticResource alert}"
+               CornerRadius="10"
+               Padding="10"
+               HasShadow="True"
+               BorderColor="Transparent">
+                <HorizontalStackLayout HorizontalOptions="CenterAndExpand"
+                    Margin="0,60,0,0">
+                    <Label Style="{StaticResource TitleLabel}" TextColor="{StaticResource btntexgcolor}" HorizontalOptions="CenterAndExpand" Text="Eco. "></Label>
+                    <Label Style="{StaticResource TitleLabel}" TextColor="{StaticResource btntexgcolor}" HorizontalOptions="CenterAndExpand" Text="{Binding Eco}"></Label>
+                    <Label Style="{StaticResource TitleLabel}" TextColor="{StaticResource btntexgcolor}" HorizontalOptions="CenterAndExpand" Text="DADO DE BAJA"></Label>
+                </HorizontalStackLayout>
+            </Frame>
+        </Grid>
+        <Grid Grid.Row="0" Grid.RowSpan="2">
+            <Image
+           VerticalOptions="EndAndExpand"
+           Source="taxiblancoalert.png"/>
+        </Grid>
+    </Grid>
+</ContentPage>

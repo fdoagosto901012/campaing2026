@@ -1,0 +1,212 @@
+﻿@model radiotaxi.Model.PartnerPagination
+@{
+    ViewBag.Title = "Emplacamiento";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18"><i class="bx bx-group"></i> Emplacamiento</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Inicio</a></li>
+                    <li class="breadcrumb-item active">Emplacamiento</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title  bx bx-search-alt-2"> Búsqueda</h4>
+                <p class="card-title-desc">La búsqueda se puede realizar con cualquiera de los siguientes campos.</p>
+            </div>
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div>
+                            <form action="/emplacamiento/" method="POST" class="form-horizontal">
+                                <div class="row control-group">
+                                    <div class="col-md-3 mb-3 ">
+                                        <label class="form-label control-label">Económico</label>
+                                        <input type="number" class="form-control span11" name="gafet" id="phoneNumber" placeholder="Ingrese el número económico" @*value="@(ViewBag.parameters.gafet)"*@ />
+                                    </div>
+                                    <div class="col-md-3 mb-3 ">
+                                        <label class="form-label control-label">Nombre</label>
+                                        <input type="text" class="form-control span11" placeholder="Ingrese el nombre" name="name" id="name" @*value="@(ViewBag.parameters.name)"*@ />
+                                    </div>
+                                    <div class="col-md-3 mb-3 ">
+                                        <label class="form-label control-label">Apellido paterno</label>
+                                        <input type="text" class="form-control span11" placeholder="Ingrese el apellido paterno" name="lastName1" id="lastName1" @*value="@(ViewBag.parameters.lastName1)"*@ />
+                                    </div>
+                                    <div class="col-md-3 mb-3 ">
+                                        <label class="form-label control-label">Apellido materno</label>
+                                        <input type="text" class="form-control span11" placeholder="Ingrese el apellido materno" name="lastName2" id="lastName2" @*value="@(ViewBag.parameters.lastName2)"*@ />
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-3 mb-3 ">
+                                        <label class="form-label control-label">N° Serie</label>
+                                        <input type="text" class="form-control span11" placeholder="Ingrese el apellido materno" name="serie" id="serie" @*value="@(ViewBag.parameters.lastName2)"*@ />
+                                    </div>
+                                    <div class="col-md-3 mb-3 ">
+                                        <label class="form-label control-label">Placas</label>
+                                        <input type="text" class="form-control span11" placeholder="Ingrese el apellido materno" name="placa" id="placa" @*value="@(ViewBag.parameters.lastName2)"*@ />
+                                    </div>
+
+                                    <div class="col-md-3 mb-3 ">
+                                        <label class="form-label control-label">Eco/Gafet Responsable</label>
+                                        <input type="text" class="form-control span11" placeholder="Ingrese el apellido materno" name="EconoResp" id="EconoResp" @*value="@(ViewBag.parameters.lastName2)"*@ />
+                                    </div>
+                                    <div class="col-md-3 mb-3 ">
+                                        <label class="form-label control-label">Nombre Responsable</label>
+                                        <input type="text" class="form-control span11" placeholder="Ingrese el apellido materno" name="Responsable" id="Responsable" @*value="@(ViewBag.parameters.lastName2)"*@ />
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-9">
+
+                                    </div>
+                                    <div class="col-md-3 mb-3  text-end">
+                                        <label class="form-label control-label">&nbsp;</label>
+                                        <button type="submit" value="Buscar" class="form-control span11 btn btn-success waves-effect btn-label waves-light"> <i class="bx bx-search label-icon "></i>Buscar</button>
+                                    </div>
+                                </div>
+
+
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <h5 class="card-title">Clientes totales <span class="text-muted fw-normal ms-2">@(ViewBag.totalPartners != null ? ViewBag.totalPartners : "")</span></h5>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="row" data-pattern="priority-columns">
+                            <div class="col-md-12">
+                                @foreach (var item in Model.Data)
+                                {
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            @if (item.urlImage != null)
+                                            {
+                                                <img src="@(item.urlImage)" alt="" class="avatar-md rounded-circle me-2 img-thumbnail">
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Content/images/users/empty.png" alt="" class="avatar-md rounded-circle me-2 img-thumbnail">
+                                            }
+                                            <span class="ntext">@(item.Numero.ToString())</span>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <span class="co-name ntext">@item.Nombre @Html.DisplayFor(modelItem => item.Paterno) @Html.DisplayFor(modelItem => item.Materno) </span>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+  
+                                                @if (Permissions.allow("Admin, Practi-Emplacamiento, Practi-BasicView"))
+                                                {
+                                                    <a href="/emplacamiento/detalle/@(item.Numero.ToString())" class="btn btn-success waves-effect btn-label waves-light">
+                                                        <i class="bx bx-show label-icon"></i> Emplacamiento
+                                                    </a>
+                                                }
+                                            </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <hr />
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-12">
+                                <nav aria-label="Page navigation example">
+                                    @if (Model.EndPage > 1)
+                                    {
+                                        <ul class="pagination justify-content-center">
+
+                                            @if (Model.CurrentPage > 1)
+                                            {
+                                                <li class="page-item">
+                                                    <a class="page-link" href="~/emplacamiento">Primero</a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="~/emplacamiento?page=@(Model.CurrentPage - 1)">Anterior</a>
+                                                </li>
+                                            }
+                                            else if (Model.CurrentPage == 1)
+                                            {
+                                                <li class="page-item ">
+                                                    <a class="page-link" href="~/emplacamiento">Primero</a>
+                                                </li>
+                                            }
+
+                                            <!--Paginación activa-->
+                                            @for (var p = Model.StartPage; p <= Model.EndPage; p++)
+                                            {
+                                                <li class="page-item @(p == Model.CurrentPage ? "active" : "")">
+                                                    <a class="page-link" href="~/emplacamiento?page=@p">@p</a>
+                                                </li>
+                                            }
+
+                                            @if (Model.CurrentPage < Model.TotalPages)
+                                            {
+                                                <li class="page-item">
+                                                    <a class="page-link" href="~/emplacamiento?page=@(Model.CurrentPage + 1)">Siguiente</a>
+                                                </li>
+                                                <li class="page-item next">
+                                                    <a class="page-link" href="~/emplacamiento?page=@(Model.TotalPages)">Último</a>
+                                                </li>
+                                            }
+                                            else if (Model.CurrentPage == Model.TotalPages)
+                                            {
+                                                <li class="page-item next">
+                                                    <a class="page-link" href="~/emplacamiento?page=@(Model.TotalPages)">Último</a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    }
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end table responsive -->

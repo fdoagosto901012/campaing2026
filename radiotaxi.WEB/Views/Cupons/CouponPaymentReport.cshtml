@@ -1,0 +1,182 @@
+﻿@{
+    ViewBag.Title = "Coupon Payment Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-sm-0 font-size-18"><i class=" bx bxs-coupon"></i> Reporte de pagos de cupones</h4>
+            </div>
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div>
+                            <form action="" method="POST" class="form-horizontal">
+                                <!-- DIVISION FORM -->
+                                <div class="row control-group">
+                                    <div class="col-md-2 mb-2 ">
+                                        <label class="form-label control-label">Fecha inicial</label>
+                                        <input type="date" class="form-control span11" name="startDate" id="startDate" value="" />
+                                    </div>
+                                    <div class="col-md-2 mb-2 ">
+                                        <label class="form-label control-label">Fecha final</label>
+                                        <input type="date" class="form-control span11" name="endDate" id="endDate" value="" />
+                                    </div>
+                                    <div class="col-md-2 mb-2 ">
+                                        <label class="form-label control-label">Cajera</label>
+                                        <input type="text" class="form-control span11" placeholder="ID DE LA CAJERA" name="cajera" id="cajera" value="" />
+                                    </div>
+                                    <div class="col-md-4 mb-4 ">
+                                        <label class="form-label control-label">Nombre</label>
+                                        <input type="text" class="form-control span11" placeholder="NOMBRE DE LA CAJERA" name="name" id="name" value="" />
+                                    </div>
+                                </div>
+                                <hr class="divider">
+
+                                <div class="row control-group">
+                                    <div class="col-md-2 mb-2 ">
+                                        <label class="form-label control-label">Sector</label>
+                                        <input type="text" class="form-control span11" placeholder="SECTOR" name="sector" id="sector" value="" />
+                                    </div>
+                                    <div class="col-md-2 mb-2 ">
+                                        <label class="form-label control-label">Número</label>
+                                        <input type="text" class="form-control span11" placeholder="Número inicial" name="startcouponnumber" id="startcouponnumber" value="" />
+                                    </div>
+                                    <div class="col-md-2 mb-42">
+                                        <label class="form-label control-label">al</label>
+                                        <input type="text" class="form-control span11" placeholder="Número final" name="endcouponnumber" id="endcouponnumber" value="" />
+                                    </div>
+                                    <div class="col-md-2 mb-2 ">
+                                        <label class="form-label control-label">Perforación</label>
+                                        <input type="text" class="form-control span11" placeholder="Perforación" name="perforation" id="perforation" value="" />
+                                    </div>
+                                    <div class="col-md-4 mb-4 ">
+                                        <label class="form-label control-label">Empresa</label>
+                                        <input type="text" class="form-control span11" placeholder="Empresa" name="company" id="company" value="" />
+                                    </div>
+
+                                </div>
+                                <div class="row control-group">
+                                    <div class="col-md-1 mb-1">
+                                        <input class="form-check-input" type="radio" name="check-op" id="check-op" checked="">
+                                        <label class="form-check-label" for="check-op">
+                                            OP
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1 mb-1">
+                                        <input class="form-check-input" type="radio" name="check-eco" id="check-eco" checked="">
+                                        <label class="form-check-label" for="check-eco">
+                                            SOC
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2 mb-2 ">
+                                        <label class="form-label control-label">Eco/Gafet</label>
+                                        <input type="text" class="form-control span11" name="ecogafet" id="ecogafet" value="" placeholder="Ingrese el número eco o gafet" />
+                                    </div>
+                                    <div class="col-md-4 mb-4 ">
+                                        <label class="form-label control-label">Nombre</label>
+                                        <input type="text" class="form-control span11" placeholder="NOMBRE DEL SOCIO U OP" name="name" id="name" value="" />
+                                    </div>
+                                </div>
+                                <!-- DIVISION FORM -->
+                                <div class="mt-4 form-actions">
+                                    <button type="submit" value="Buscar" class="btn btn-success waves-effect btn-label waves-light"> <i class=" bx bx-printer label-icon "></i>Generar</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row g-1 align-items-center">
+                    <div class="col-12 col-md-3 d-flex text-center text-md-start justify-content-center">
+                        <p class="fw-bold font-size-13">Eco/Gafet</p>
+                    </div>
+                    <div class="col-12 col-md-2 d-flex justify-content-center">
+                        <p class="fw-bold font-size-13">Sector</p>
+                    </div>
+                    <div class="col-12 col-md-3 d-flex justify-content-center">
+                        <p class="fw-bold font-size-13">Número</p>
+                    </div>
+                    <div class="col-12 col-md-1 d-flex justify-content-center">
+                        <p class="fw-bold font-size-13">Perforacion</p>
+                    </div>
+                    <div class="col-12 col-md-1 d-flex justify-content-center">
+                        <p class="fw-bold font-size-13">Pago</p>
+                    </div>
+                    <div class="col-12 col-md-1 d-flex justify-content-center">
+                        <p class="fw-bold font-size-13">Cajera</p>
+                    </div>
+                </div>
+                <hr class="divider">
+                <form action=""
+                      method="post"
+                      class="row g-3 align-items-center">
+                    <div class="row g-1 align-items-center">
+                        <div class="col-12 col-md-3 text-aling-center text-md-center ">
+                            <p>ECO/GAFET</p>
+                        </div>
+                        <div class="col-12 col-md-2 text-center text-md-center ">
+                            <p>SECTOR</p>
+                        </div>
+                        <div class="col-12 col-md-3 text-center text-md-center ">
+                            <p>NÚMERO</p>
+                        </div>
+                        <div class="col-12 col-md-1 text-center text-md-center ">
+                            <p>PERFORACIÓN</p>
+                        </div>
+                        <div class="col-12 col-md-1 text-center text-md-center ">
+                            <p>PAGO</p>
+                        </div>
+                        <div class="col-12 col-md-1 text-center text-md-center ">
+                            <p>CAJERA</p>
+                        </div>
+                    </div>
+
+                    <hr class="divider">
+
+                    <div class="row g-1 align-items-center">
+
+                        <div class="col-8 col-md-8">
+
+                        </div>
+                        <div class="col-2 col-md-2 text-end text-md-end align-content-end">
+                            <p class="mb-0 p-0 fw-bolder h5">Total:</p>
+                        </div>
+                        <div class="col-2 col-md-2 text-end text-md-end align-content-end">
+                            <p class="mb-0 fw-bolder h5 p-0">PRECIO TOTAL DE LOS CUPONES</p>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-end m-3 ">
+                        <div class="col-3 col-md-12 text-end text-md-end align-items-end ">
+
+                            <div v-if="loading" role="status" class="spinner-border text-success" style="width: 30px;height: 30px;margin: 0px 14px -10px 1px;"><span class="sr-only">Loading...</span></div>
+                            <button type="submit" class="btn btn-success waves-effect btn-label waves-light">
+                                <i class="bx bx-wallet label-icon"></i>
+                                Pagar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+-->
+<script>
+    alert('Reutilizar ticket para la impresión del reporte de pagos de la cajera seleccionada')
+</script>

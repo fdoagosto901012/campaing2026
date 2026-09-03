@@ -1,0 +1,129 @@
+﻿@{
+    ViewBag.Title = "Print Invoice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-sm-0 font-size-18"><i class=" bx bxs-coupon"></i> Reimpresión de relación de facturación de cupones</h4>
+            </div>
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div>
+                            <form action="" method="POST" class="form-horizontal">
+                                <!-- DIVISION FORM -->
+                                <div class="row control-group">
+                                    <div class="col-md-3 mb-3 ">
+                                        <label class="form-label control-label">Cliente</label>
+                                        <input type="text" class="form-control span11" placeholder="Código de cliente" name="idClient" id="idClient" value="" />
+                                    </div>
+                                    <div class="col-md-4 mb-4 ">
+                                        <label class="form-label control-label">Nombre</label>
+                                        <input type="text" class="form-control span11" placeholder="NOMBRE DE LA CAJERA" name="clientName" id="clientName" value="" />
+                                    </div>
+                                </div>
+                                <div class="row control-group">
+                                    <div class="col-md-3 mb-3 ">
+                                        <label class="form-label control-label">N°. Factura:</label>
+                                        <input type="text" class="form-control span11" placeholder="Código de cliente" name="invoiceNumber" id="invoiceNumber" value="" />
+                                    </div>
+                                </div>
+                                <!-- DIVISION FORM -->
+                                <div class="mt-4 form-actions">
+                                    <button type="submit" value="Buscar" class="btn btn-success waves-effect btn-label waves-light"> <i class=" bx bx-printer label-icon "></i>Imprimir</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row g-1 align-items-center">
+                    <div class="col-12 col-md-3 d-flex text-center text-md-start justify-content-center">
+                        <p class="fw-bold font-size-13">Eco/Gafet</p>
+                    </div>
+                    <div class="col-12 col-md-2 d-flex justify-content-center">
+                        <p class="fw-bold font-size-13">Sector</p>
+                    </div>
+                    <div class="col-12 col-md-3 d-flex justify-content-center">
+                        <p class="fw-bold font-size-13">Número</p>
+                    </div>
+                    <div class="col-12 col-md-1 d-flex justify-content-center">
+                        <p class="fw-bold font-size-13">Perforacion</p>
+                    </div>
+                    <div class="col-12 col-md-1 d-flex justify-content-center">
+                        <p class="fw-bold font-size-13">Pago</p>
+                    </div>
+                    <div class="col-12 col-md-1 d-flex justify-content-center">
+                        <p class="fw-bold font-size-13">Cajera</p>
+                    </div>
+                </div>
+                <hr class="divider">
+                <form action=""
+                      method="post"
+                      class="row g-3 align-items-center">
+                    <div class="row g-1 align-items-center">
+                        <div class="col-12 col-md-3 text-aling-center text-md-center ">
+                            <p>ECO/GAFET</p>
+                        </div>
+                        <div class="col-12 col-md-2 text-center text-md-center ">
+                            <p>SECTOR</p>
+                        </div>
+                        <div class="col-12 col-md-3 text-center text-md-center ">
+                            <p>NÚMERO</p>
+                        </div>
+                        <div class="col-12 col-md-1 text-center text-md-center ">
+                            <p>PERFORACIÓN</p>
+                        </div>
+                        <div class="col-12 col-md-1 text-center text-md-center ">
+                            <p>PAGO</p>
+                        </div>
+                        <div class="col-12 col-md-1 text-center text-md-center ">
+                            <p>CAJERA</p>
+                        </div>
+                    </div>
+
+                    <hr class="divider">
+
+                    <div class="row g-1 align-items-center">
+
+                        <div class="col-8 col-md-8">
+
+                        </div>
+                        <div class="col-2 col-md-2 text-end text-md-end align-content-end">
+                            <p class="mb-0 p-0 fw-bolder h5">Total:</p>
+                        </div>
+                        <div class="col-2 col-md-2 text-end text-md-end align-content-end">
+                            <p class="mb-0 fw-bolder h5 p-0">PRECIO TOTAL DE LOS CUPONES</p>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-end m-3 ">
+                        <div class="col-3 col-md-12 text-end text-md-end align-items-end ">
+
+                            <div v-if="loading" role="status" class="spinner-border text-success" style="width: 30px;height: 30px;margin: 0px 14px -10px 1px;"><span class="sr-only">Loading...</span></div>
+                            <button type="submit" class="btn btn-success waves-effect btn-label waves-light">
+                                <i class="bx bx-wallet label-icon"></i>
+                                Pagar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+-->

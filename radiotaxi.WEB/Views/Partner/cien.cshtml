@@ -1,0 +1,320 @@
+﻿@model radiotaxi.Model.Partner
+@{
+    ViewBag.Title = @Model.partnerReference;
+}
+
+<!-- DATOS DE CONTROL JS -->
+<input id="gafet" name="gafet" type="hidden" value="@Model.partnerReference" />
+<input id="userId" name="userId" type="hidden" value="@Model.userId" />
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18 "><i class="bx bx-user"></i> @Model.partnerReference</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- end page title -->
+<div class="row">
+    <div class="col-xl-9 col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm order-2 order-sm-1">
+                        <div class="d-flex align-items-start mt-3 mt-sm-0">
+                            <div class="flex-lg-shrink-0">
+                                <div class="avatar-xl me-3">
+
+                                    @if (Model.urlImage != null)
+                                    {
+                                        <img src="@(Model.urlImage)" alt="" class="avatar-xl rounded-circle me-2 img-thumbnail">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Content/images/users/empty.png" alt="" class="avatar-xl rounded-circle me-2 img-thumbnail">
+                                    }
+                                </div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <div>
+                                    <h4 class="font-size-18 mb-1 fw-bolder">@(Model.partnerReference != null ? Model.partnerReference : "")</h4>
+                                    <h6 class="font-size-14 mb-1">@(Model.firstName != null ? Model.firstName.ToUpper() : "") @(Model.lastNameF != null ? Model.lastNameF.ToUpper() : "") @(Model.lastNameM != null ? Model.lastNameM.ToUpper() : "")</h6>
+                                    <p class="text-muted font-size-13 mb-0"> <span class="fw-bold">Fecha de ingreso:</span> @(Model.fechaingreso != null ? Model.fechaingreso.Value.ToString("dd/MM/yyyy") : "")</p>
+                                    @if (Permissions.allow("Admin, Practi-Trabajo, Practi-Cred"))
+                                    {
+                                        <p class="text-muted font-size-13 "><span class="fw-bold">Número telefónico:</span> @(Model.Telefono != null ? Model.Telefono : "")</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- FIN PERFIL-->
+                </div>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="general" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Poner al 100%</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <form method="POST" action="/partner/cien/@(Model.partnerReference)" class="hstack gap-3" v-on:submit="onSubmit">
+                            
+                                <div class="mb-3 col-4">
+                                    <label for="autoriza" class="form-label">Autoriza</label>
+                                    <select id="autoriza" name="autoriza" class="form-select" v-validate="'required'" v-bind:class="{ 'border-danger' : this.errors.has('autoriza')}">
+                                        <option selected value="">Selecciona quien autoriza</option>
+                                        <option value="RCB">Ruben Carrillo Buenfil</option>
+                                        <option value="SAM">Salomon Alfonso Muñoz</option>
+                                        <option value="RZA">Rosy Zapata</option>
+                                        <option value="NCG">Neidi Contreras</option>
+                                        <option value="LER">Leticia Esteban Reyes</option>
+                                        <option value="MDV">Michel Alexis Díaz Valdez</option>
+                                    </select>
+                                    <span class="text-danger" v-show="this.errors.has('autoriza')">{{ this.errors.first('autoriza') }}</span>
+
+                                </div>
+                                <div class=" col-2 d-flex align-items-center justify-content-start">
+                                    <button type="submit" class="btn btn-primary mt-2">Poner al 100%</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- end card body -->
+                </div>
+                <!-- end card -->
+
+                <div class="row">
+                    <div class="col-6">
+
+                    </div>
+                </div>
+
+
+                <!-- end card -->
+            </div>
+        </div>
+        <!-- end tab content -->
+    </div>
+    <!-- end col -->
+
+    <div class="col-xl-3 col-lg-4">
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title mb-3"><i class="bx bx-car"></i> Emplacamiento</h5>
+                <div class="flex-wrap gap-2 font-size-14">
+                    @if (ViewBag.emplaactual != null)
+                    {
+
+                        if (((radiotaxi.Model.Emplacamiento)ViewBag.emplaactual).Operacion != "EMPLACADO")
+                        {
+                            <h5 class="card-title mb-3">
+                                <i class="bx bxs-downvote text-danger"></i>
+                                <span class="badge bg-danger-subtle text-danger">Vehículo : <strong>BAJA </strong> - @(((DateTime)ViewBag.emplaactual.FechaOp).ToShortDateString())</span>
+                            </h5>
+                        }
+                        else
+                        {
+                            <h5 class="card-title mb-3">
+                                <i class="bx bxs-upvote text-success"></i>
+                                <span class="badge bg-success-subtle text-success">
+                                    Vehículo : <strong>ALTA</strong>
+                                </span>
+                            </h5>
+
+                        }
+
+                        if (ViewBag.emplaactual.Bloqueado == true)
+                        {
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="alert alert-danger" role="alert">
+                                        <i class=" bx bx-block"></i> <i class=" bx bx-car"></i> El VIN del vehiculo esta Bloqueado, favor de comunicarse con sistemas.
+                                    </div>
+                                </div><!-- end col -->
+                            </div>
+
+                        }
+
+                        if (ViewBag.emplaactual.Protegido == true)
+                        {
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="alert alert-danger" role="alert">
+                                        <i class=" bx bx-block"></i> <i class=" bx bx-car"></i> El número económico esta protegido, favor de comunicarse con sistemas.
+                                    </div>
+                                </div><!-- end col -->
+                            </div>
+                        }
+
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Marca:</span> @(ViewBag.emplaactual.Marca)</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Modelo:</span> @(ViewBag.emplaactual.Modelo)</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Año del vehiculo:</span> @(ViewBag.emplaactual.AutoAno)</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Responsable:</span> @(ViewBag.emplaactual.Responsable)</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Eco/Gafet del responsable:</span> @(ViewBag.emplaactual.EconoResp)</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Teléfono del responsable:</span> @(ViewBag.emplaactual.resp_telefono)</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Celular del Responsable:</span> @(ViewBag.emplaactual.resp_celular)</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Placas:</span> @(ViewBag.emplaactual.Placas.ToUpper())</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Motor:</span> @(ViewBag.emplaactual.Motor.ToUpper())</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">N° de serie:</span> @(ViewBag.emplaactual.No_Serie.ToUpper())</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Capacidad:</span> @(ViewBag.emplaactual.Capacidad) PASAJEROS MÁS CONDUCTOR</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Poliza:</span> @(ViewBag.emplaactual.poliza != null ? ViewBag.emplaactual.poliza.ToUpper() : "")</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Tipo de poliza:</span> @(ViewBag.emplaactual.tipopoliza != null ? ViewBag.emplaactual.tipopoliza.ToUpper() : "")</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Aseguradora:</span> @(ViewBag.emplaactual.aseguradora)</p>
+                            </li>
+                            <li>
+                                <p class="mb-1">
+                                    <span class="fw-bold">Vencimiento de poliza:</span> @(ViewBag.emplaactual.vencepoliza != null ? Convert.ToDateTime(ViewBag.emplaactual.vencepoliza).ToString("dd/MM/yyyy"): "")
+                                </p>
+                            </li>
+                        </ul>
+                        <hr />
+                        <p class="mb-1"><span class="fw-bold">Observaciones:</span> @(ViewBag.emplaactual.Observaciones.ToUpper())</p>
+                        <p>
+                            <span class="fw-bold">Fecha de operación :</span>
+                            @(((DateTime)ViewBag.emplaactual.FechaOp).ToShortDateString())
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                            Sin Emplacar
+                        </p>
+                    }
+                </div>
+            </div>
+            <!-- end card body -->
+        </div>
+
+        @if (Permissions.allow("Admin, Practi-Cred"))
+        {
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-3"><i class="bx bx-folder"></i>  Documentación importante</h5>
+
+                    <div class="flex-wrap gap-2 font-size-14">
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                @if (Model.ine != null)
+                                {
+                                    <p class="my-0"><span class="fw-bold">INE:</span> @Model.ine</p>
+                                }
+                                else
+                                {
+                                    <p class="my-0"><span class="fw-bold">INE:</span> NO REGISTRADO</p>
+                                }
+                            </li>
+                            <li>
+                                @if (Model.urfc != null)
+                                {
+                                    <p class="my-0"><span class="fw-bold">RFC:</span> @Model.urfc</p>
+                                }
+                                else
+                                {
+                                    <p class="my-0"><span class="fw-bold">RFC:</span> NO REGISTRADO</p>
+                                }
+                            </li>
+                            <li>
+                                @if (Model.curp != null)
+                                {
+                                    <p class="my-0"><span class="fw-bold">CURP:</span> @Model.curp</p>
+                                }
+                                else
+                                {
+                                    <p class="my-0"><span class="fw-bold">CURP:</span> NO REGISTRADO</p>
+                                }
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- end card body -->
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-3"><i class="mdi mdi-hospital"></i>Información médica</h5>
+                    <div>
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                @if (Model.bloodType != null)
+                                {
+                                    <p class="my-0"><span class="fw-bold">Tipo de sangre:</span> @Model.bloodType</p>
+                                }
+                                else
+                                {
+                                    <p class="my-0"><span class="fw-bold">Tipo de sangre:</span> NO REGISTRADO</p>
+                                }
+                            </li>
+                            <li>
+                                @if (Model.organDonor != false)
+                                {
+                                    <p class="my-0"><span class="fw-bold">Donador:</span> Si</p>
+                                }
+                                else
+                                {
+                                    <p class="my-0"><span class="fw-bold">Donador:</span> No</p>
+                                }
+                            </li>
+
+                            <li>
+                                @if (Model.allergies != null)
+                                {
+                                    <p class="my-0"><span class="fw-bold">Alergias:</span> @Model.allergies</p>
+                                }
+                                else
+                                {
+                                    <p class="my-0"><span class="fw-bold">Alergias:</span> NO REGISTRADO</p>
+                                }
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- end card body -->
+            </div>
+            <!-- end card -->
+        }
+    </div>
+    <!-- end col -->
+</div>
+
+@section Scripts {
+    <script src="~/Content/js/Views/Partner/100.js"></script>
+}

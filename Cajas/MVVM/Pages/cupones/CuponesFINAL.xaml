@@ -1,0 +1,1053 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    x:Class="Cajas.MVVM.Pages.cupones.CuponesView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Cajas"
+    Style="{StaticResource ApplicationPageStyle}">
+    <Grid
+        ColumnDefinitions="370,*"
+        RowDefinitions="*,58">
+
+        <!-- ===================================================== -->
+        <!-- PANEL IZQUIERDO -->
+        <!-- ===================================================== -->
+
+        <Border
+            Grid.Row="0"
+            Grid.Column="0"
+            BackgroundColor="{StaticResource PanelGreen}"
+            Stroke="{StaticResource BorderColor}"
+            StrokeThickness="1">
+
+            <Grid
+                Padding="26,25,26,20"
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,*">
+
+                <!-- LOGOS -->
+
+                <HorizontalStackLayout
+                    Grid.Row="0"
+                    Margin="0,0,0,22"
+                    HorizontalOptions="Center"
+                    Spacing="20">
+
+                    <Image
+                        Source="logotc.png"
+                        HeightRequest="80"
+                        WidthRequest="100"
+                        Aspect="AspectFit" />
+
+                    <BoxView
+                        WidthRequest="1"
+                        HeightRequest="75"
+                        BackgroundColor="#D6DDD6"
+                        VerticalOptions="Center" />
+
+                    <Image
+                        Source="adm.png"
+                        HeightRequest="80"
+                        WidthRequest="100"
+                        Aspect="AspectFit" />
+
+                </HorizontalStackLayout>
+
+                <!-- SEPARADOR -->
+
+                <BoxView
+                    Grid.Row="1"
+                    Margin="0,0,0,25"
+                    HeightRequest="1"
+                    BackgroundColor="#DCE3DC" />
+
+                <!-- OPERADOR / SOCIO -->
+
+                <HorizontalStackLayout
+                    Grid.Row="2"
+                    Margin="0,0,0,14"
+                    Spacing="9">
+
+                    <Label
+                        Text="&#xf007;"
+                        FontFamily="FASolid"
+                        FontSize="18"
+                        TextColor="{StaticResource PrimaryGreen}"
+                        VerticalTextAlignment="Center" />
+
+                    <Label
+                        Style="{StaticResource SectionTitle}"
+                        Text="OPERADOR / SOCIO" />
+
+                </HorizontalStackLayout>
+
+                <!-- BUSCADOR DE OPERADOR -->
+
+                <VerticalStackLayout
+                    Grid.Row="3"
+                    Spacing="8">
+
+                    <Label
+                        Text="ID o Número de identificación"
+                        FontSize="14"
+                        TextColor="{StaticResource TextPrimary}" />
+
+                    <Grid ColumnDefinitions="*,52">
+
+                        <Border
+                            Grid.Column="0"
+                            Margin="0,0,10,0"
+                            Style="{StaticResource InputBorder}">
+
+                            <Entry
+                                x:Name="OperatorEntry"
+                                Style="{StaticResource InputEntry}"
+                                Placeholder="Ingrese ID o número"
+                                ReturnType="Search" />
+
+                        </Border>
+
+                        <ImageButton
+                            Grid.Column="1"
+                            Style="{StaticResource SquarePrimaryImageButton}"
+                            Command="{Binding SearchOperatorCommand}">
+
+                            <ImageButton.Source>
+
+                                <FontImageSource
+                                    FontFamily="FASolid"
+                                    Glyph="&#xf002;"
+                                    Size="19"
+                                    Color="White" />
+
+                            </ImageButton.Source>
+
+                        </ImageButton>
+
+                    </Grid>
+
+                </VerticalStackLayout>
+
+                <!-- TARJETA DEL OPERADOR -->
+
+                <Border
+                    Grid.Row="4"
+                    Margin="0,18,0,24"
+                    Style="{StaticResource CardBorder}">
+
+                    <Grid
+                        ColumnDefinitions="82,*"
+                        RowDefinitions="Auto,Auto,Auto">
+
+                        <!-- AVATAR -->
+
+                        <Border
+                            Grid.RowSpan="3"
+                            WidthRequest="72"
+                            HeightRequest="72"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"
+                            BackgroundColor="#E8F5E4"
+                            StrokeThickness="0">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="36" />
+                            </Border.StrokeShape>
+
+                            <Label
+                                Text="&#xf2bd;"
+                                FontFamily="FASolid"
+                                FontSize="56"
+                                TextColor="#B6DCA8"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center" />
+
+                        </Border>
+
+                        <Label
+                            Grid.Column="1"
+                            Text="{Binding OperatorName}"
+                            FontSize="17"
+                            FontAttributes="Bold"
+                            TextColor="{StaticResource TextPrimary}" />
+
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="0,5,0,0"
+                            Text="{Binding OperatorCredential, StringFormat='Gafete: {0}'}"
+                            FontSize="14"
+                            TextColor="{StaticResource TextSecondary}" />
+
+                        <HorizontalStackLayout
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Margin="0,5,0,0"
+                            Spacing="4">
+
+                            <Label
+                                Text="Estado:"
+                                FontSize="14"
+                                TextColor="{StaticResource TextSecondary}" />
+
+                            <Label
+                                Text="{Binding OperatorStatus}"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                TextColor="#24803D" />
+
+                        </HorizontalStackLayout>
+
+                    </Grid>
+
+                </Border>
+
+                <!-- SEPARADOR -->
+
+                <BoxView
+                    Grid.Row="5"
+                    Margin="0,0,0,22"
+                    HeightRequest="1"
+                    BackgroundColor="#DCE3DC" />
+
+                <!-- TÍTULO RESUMEN -->
+
+                <HorizontalStackLayout
+                    Grid.Row="6"
+                    Margin="0,0,0,14"
+                    Spacing="9">
+
+                    <Label
+                        Text="&#xf080;"
+                        FontFamily="FASolid"
+                        FontSize="18"
+                        TextColor="{StaticResource PrimaryGreen}"
+                        VerticalTextAlignment="Center" />
+
+                    <Label
+                        Style="{StaticResource SectionTitle}"
+                        Text="RESUMEN" />
+
+                </HorizontalStackLayout>
+
+                <!-- TARJETAS Y BOTONES -->
+
+                <VerticalStackLayout
+                    Grid.Row="7"
+                    Spacing="12">
+
+                    <!-- CUPONES ESCANEADOS -->
+
+                    <Border
+                        Style="{StaticResource CardBorder}"
+                        Padding="18,14">
+
+                        <Grid
+                            ColumnDefinitions="62,*"
+                            RowDefinitions="Auto,Auto">
+
+                            <Label
+                                Grid.RowSpan="2"
+                                Text="&#xf145;"
+                                FontFamily="FASolid"
+                                FontSize="28"
+                                TextColor="{StaticResource PrimaryGreen}"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center" />
+
+                            <Label
+                                Grid.Column="1"
+                                Text="Cupones escaneados"
+                                FontSize="14"
+                                TextColor="{StaticResource TextSecondary}" />
+
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Text="{Binding CouponsCount}"
+                                FontSize="28"
+                                FontAttributes="Bold"
+                                TextColor="{StaticResource TextPrimary}" />
+
+                        </Grid>
+
+                    </Border>
+
+                    <!-- TOTAL ACUMULADO -->
+
+                    <Border
+                        Style="{StaticResource CardBorder}"
+                        Padding="18,14">
+
+                        <Grid
+                            ColumnDefinitions="62,*"
+                            RowDefinitions="Auto,Auto">
+
+                            <Label
+                                Grid.RowSpan="2"
+                                Text="&#xf0d6;"
+                                FontFamily="FASolid"
+                                FontSize="28"
+                                TextColor="{StaticResource PrimaryGreen}"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center" />
+
+                            <Label
+                                Grid.Column="1"
+                                Text="Total acumulado"
+                                FontSize="14"
+                                TextColor="{StaticResource TextSecondary}" />
+
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Text="{Binding TotalAmount, StringFormat='${0:N2}'}"
+                                FontSize="28"
+                                FontAttributes="Bold"
+                                TextColor="{StaticResource PrimaryGreen}" />
+
+                        </Grid>
+
+                    </Border>
+
+                    <!-- COBRAR CUPONES -->
+
+                    <Button
+                        Margin="0,10,0,0"
+                        HeightRequest="64"
+                        Text="COBRAR CUPONES"
+                        FontSize="16"
+                        Style="{StaticResource PrimaryButton}"
+                        ContentLayout="Left,12"
+                        Command="{Binding ChargeCouponsCommand}">
+
+                        <Button.ImageSource>
+
+                            <FontImageSource
+                                FontFamily="FASolid"
+                                Glyph="&#xf0d6;"
+                                Size="20"
+                                Color="White" />
+
+                        </Button.ImageSource>
+
+                    </Button>
+
+                    <!-- LIMPIAR TODO -->
+
+                    <Button
+                        HeightRequest="58"
+                        Text="LIMPIAR TODO"
+                        Style="{StaticResource SecondaryButton}"
+                        ContentLayout="Left,12"
+                        Command="{Binding ClearCouponsCommand}">
+
+                        <Button.ImageSource>
+
+                            <FontImageSource
+                                FontFamily="FASolid"
+                                Glyph="&#xf0e2;"
+                                Size="18"
+                                Color="{StaticResource TextPrimary}" />
+
+                        </Button.ImageSource>
+
+                    </Button>
+
+                </VerticalStackLayout>
+
+            </Grid>
+
+        </Border>
+
+        <!-- ===================================================== -->
+        <!-- PANEL DERECHO -->
+        <!-- ===================================================== -->
+
+        <Grid
+            Grid.Row="0"
+            Grid.Column="1"
+            Padding="40,38,40,30"
+            RowDefinitions="Auto,Auto,Auto,*"
+            BackgroundColor="#FFFFFF">
+
+            <!-- TÍTULO -->
+
+            <Label
+                Grid.Row="0"
+                Text="ESCANEAR CUPÓN"
+                Style="{StaticResource SectionTitle}"
+                FontSize="17" />
+
+            <!-- ENTRADA DEL CUPÓN -->
+
+            <Border
+                Grid.Row="1"
+                Margin="0,18,0,0"
+                HeightRequest="61"
+                Style="{StaticResource InputBorder}">
+
+                <Grid ColumnDefinitions="*,65">
+
+                    <Entry
+                        x:Name="CouponCodeEntry"
+                        Grid.Column="0"
+                        Style="{StaticResource InputEntry}"
+                        Margin="15,0"
+                        HeightRequest="61"
+                        FontSize="16"
+                        Placeholder="Escanee o ingrese el código del cupón..."
+                        ReturnType="Done" />
+
+                    <BoxView
+                        Grid.Column="1"
+                        WidthRequest="1"
+                        BackgroundColor="#E3E3E3"
+                        HorizontalOptions="Start" />
+
+                    <ImageButton
+                        Grid.Column="1"
+                        WidthRequest="58"
+                        HeightRequest="58"
+                        Padding="17"
+                        BackgroundColor="Transparent"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Command="{Binding AddCouponCommand}">
+
+                        <ImageButton.Source>
+
+                            <FontImageSource
+                                FontFamily="FASolid"
+                                Glyph="&#xf029;"
+                                Size="21"
+                                Color="{StaticResource PrimaryGreen}" />
+
+                        </ImageButton.Source>
+
+                    </ImageButton>
+
+                </Grid>
+
+            </Border>
+
+            <!-- TEXTO DE AYUDA -->
+
+            <HorizontalStackLayout
+                Grid.Row="2"
+                Margin="0,14,0,35"
+                Spacing="8">
+
+                <Label
+                    Text="El lector de código QR agregará el cupón automáticamente."
+                    FontSize="13"
+                    TextColor="{StaticResource TextSecondary}"
+                    VerticalTextAlignment="Center" />
+
+                <Label
+                    Text="&#xf05a;"
+                    FontFamily="FASolid"
+                    FontSize="14"
+                    TextColor="{StaticResource PrimaryGreen}"
+                    VerticalTextAlignment="Center" />
+
+            </HorizontalStackLayout>
+
+            <!-- TABLA -->
+
+            <Grid
+                Grid.Row="3"
+                RowDefinitions="Auto,*">
+
+                <Label
+                    Grid.Row="0"
+                    Margin="0,0,0,17"
+                    Text="CUPONES ESCANEADOS"
+                    Style="{StaticResource SectionTitle}"
+                    FontSize="17" />
+
+                <Border
+                    Grid.Row="1"
+                    Style="{StaticResource CardBorder}"
+                    Padding="0">
+
+                    <Grid RowDefinitions="57,*">
+
+                        <!-- ENCABEZADO -->
+
+                        <Grid
+                            Grid.Row="0"
+                            Padding="20,0"
+                            ColumnDefinitions="55,1.5*,1*,1.5*,1*,75"
+                            BackgroundColor="{StaticResource TableHeaderBackground}">
+
+                            <Label
+                                Grid.Column="0"
+                                Style="{StaticResource TableHeader}"
+                                Text="#"
+                                HorizontalTextAlignment="Center" />
+
+                            <Label
+                                Grid.Column="1"
+                                Style="{StaticResource TableHeader}"
+                                Text="Código del cupón" />
+
+                            <Label
+                                Grid.Column="2"
+                                Style="{StaticResource TableHeader}"
+                                Text="Valor"
+                                HorizontalTextAlignment="Center" />
+
+                            <Label
+                                Grid.Column="3"
+                                Style="{StaticResource TableHeader}"
+                                Text="Fecha y hora"
+                                HorizontalTextAlignment="Center" />
+
+                            <Label
+                                Grid.Column="4"
+                                Style="{StaticResource TableHeader}"
+                                Text="Estado"
+                                HorizontalTextAlignment="Center" />
+
+                            <Label
+                                Grid.Column="5"
+                                Style="{StaticResource TableHeader}"
+                                Text="Acciones"
+                                HorizontalTextAlignment="Center" />
+
+                        </Grid>
+
+                        <!-- LISTADO -->
+
+                        <CollectionView
+                            Grid.Row="1"
+                            ItemsSource="{Binding Coupons}"
+                            SelectionMode="None"
+                            VerticalScrollBarVisibility="Always">
+
+                            <CollectionView.EmptyView>
+
+                                <VerticalStackLayout
+                                    Margin="0,80,0,0"
+                                    HorizontalOptions="Center"
+                                    Spacing="8">
+
+                                    <Label
+                                        Text="&#xf029;"
+                                        FontFamily="FASolid"
+                                        FontSize="42"
+                                        TextColor="#D5D5D5"
+                                        HorizontalTextAlignment="Center" />
+
+                                    <Label
+                                        Text="No hay cupones escaneados"
+                                        FontSize="16"
+                                        TextColor="{StaticResource TextMuted}"
+                                        HorizontalTextAlignment="Center" />
+
+                                    <Label
+                                        Text="Escanea un código QR para comenzar"
+                                        FontSize="13"
+                                        TextColor="{StaticResource TextLight}"
+                                        HorizontalTextAlignment="Center" />
+
+                                </VerticalStackLayout>
+
+                            </CollectionView.EmptyView>
+
+                            <CollectionView.ItemTemplate>
+
+                                <DataTemplate>
+
+                                    <Grid RowDefinitions="61,1">
+
+                                        <Grid
+                                            Grid.Row="0"
+                                            Padding="20,0"
+                                            ColumnDefinitions="55,1.5*,1*,1.5*,1*,75">
+
+                                            <Label
+                                                Grid.Column="0"
+                                                Style="{StaticResource TableCell}"
+                                                Text="{Binding Number}"
+                                                HorizontalTextAlignment="Center" />
+
+                                            <Label
+                                                Grid.Column="1"
+                                                Style="{StaticResource TableCell}"
+                                                Text="{Binding Code}"
+                                                FontAttributes="Bold" />
+
+                                            <Label
+                                                Grid.Column="2"
+                                                Style="{StaticResource TableCell}"
+                                                Text="{Binding Amount, StringFormat='${0:N2}'}"
+                                                FontAttributes="Bold"
+                                                HorizontalTextAlignment="Center" />
+
+                                            <Label
+                                                Grid.Column="3"
+                                                Style="{StaticResource TableCell}"
+                                                Text="{Binding ScannedDate, StringFormat='{0:dd/MM/yyyy HH:mm:ss}'}"
+                                                TextColor="{StaticResource TextSecondary}"
+                                                HorizontalTextAlignment="Center" />
+
+                                            <!-- ESTADO -->
+
+                                            <Border
+                                                Grid.Column="4"
+                                                Style="{StaticResource SuccessBadge}">
+
+                                                <Label
+                                                    Text="{Binding Status}"
+                                                    Style="{StaticResource SuccessBadgeLabel}" />
+
+                                            </Border>
+
+                                            <!-- ELIMINAR -->
+
+                                            <ImageButton
+                                                Grid.Column="5"
+                                                Style="{StaticResource DangerImageButton}"
+                                                Clicked="RemoveCoupon_Clicked"
+                                                CommandParameter="{Binding .}">
+
+                                                <ImageButton.Source>
+
+                                                    <FontImageSource
+                                                        FontFamily="FASolid"
+                                                        Glyph="&#xf2ed;"
+                                                        Size="19"
+                                                        Color="{StaticResource Danger}" />
+
+                                                </ImageButton.Source>
+
+                                            </ImageButton>
+
+                                        </Grid>
+
+                                        <BoxView
+                                            Grid.Row="1"
+                                            HeightRequest="1"
+                                            BackgroundColor="{StaticResource SeparatorColor}" />
+
+                                    </Grid>
+
+                                </DataTemplate>
+
+                            </CollectionView.ItemTemplate>
+
+                        </CollectionView>
+
+                    </Grid>
+
+                </Border>
+
+            </Grid>
+
+        </Grid>
+
+        <!-- ===================================================== -->
+        <!-- BARRA INFERIOR IZQUIERDA -->
+        <!-- ===================================================== -->
+
+        <Border
+            Grid.Row="1"
+            Grid.Column="0"
+            Padding="25,0"
+            BackgroundColor="{StaticResource PanelGreen}"
+            Stroke="{StaticResource BorderColor}"
+            StrokeThickness="1">
+
+            <Grid ColumnDefinitions="*,Auto">
+
+                <HorizontalStackLayout
+                    VerticalOptions="Center"
+                    Spacing="8">
+
+                    <Border
+                        WidthRequest="30"
+                        HeightRequest="30"
+                        BackgroundColor="#E6F2E6"
+                        StrokeThickness="0">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="15" />
+                        </Border.StrokeShape>
+
+                        <Label
+                            Text="&#xf007;"
+                            FontFamily="FASolid"
+                            FontSize="14"
+                            TextColor="{StaticResource PrimaryGreen}"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center" />
+
+                    </Border>
+
+                    <Label
+                        Text="Usuario:"
+                        FontSize="13"
+                        TextColor="{StaticResource TextSecondary}"
+                        VerticalTextAlignment="Center" />
+
+                    <Label
+                        Text="{Binding CurrentUser}"
+                        FontSize="13"
+                        FontAttributes="Bold"
+                        TextColor="{StaticResource TextPrimary}"
+                        VerticalTextAlignment="Center" />
+
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout
+                    Grid.Column="1"
+                    VerticalOptions="Center"
+                    Spacing="5">
+
+                    <Label
+                        Text="Caja:"
+                        FontSize="13"
+                        TextColor="{StaticResource TextSecondary}"
+                        VerticalTextAlignment="Center" />
+
+                    <Label
+                        Text="{Binding RegisterNumber}"
+                        FontSize="13"
+                        FontAttributes="Bold"
+                        TextColor="{StaticResource TextPrimary}"
+                        VerticalTextAlignment="Center" />
+
+                </HorizontalStackLayout>
+
+            </Grid>
+
+        </Border>
+
+        <!-- ===================================================== -->
+        <!-- BARRA INFERIOR DERECHA -->
+        <!-- ===================================================== -->
+
+        <Border
+            Grid.Row="1"
+            Grid.Column="1"
+            Padding="40,0"
+            BackgroundColor="{StaticResource PanelGreen}"
+            Stroke="{StaticResource BorderColor}"
+            StrokeThickness="1">
+
+            <Grid ColumnDefinitions="*,Auto">
+
+                <HorizontalStackLayout
+                    VerticalOptions="Center"
+                    Spacing="10">
+
+                    <Label
+                        Text="&#xf058;"
+                        FontFamily="FASolid"
+                        FontSize="22"
+                        TextColor="{StaticResource PrimaryGreen}"
+                        VerticalTextAlignment="Center" />
+
+                    <Label
+                        Text="{Binding StatusMessage}"
+                        FontSize="13"
+                        TextColor="#55725D"
+                        VerticalTextAlignment="Center" />
+
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout
+                    Grid.Column="1"
+                    VerticalOptions="Center"
+                    Spacing="5">
+
+                    <Label
+                        Text="Último cupón:"
+                        FontSize="13"
+                        TextColor="#55725D"
+                        VerticalTextAlignment="Center" />
+
+                    <Label
+                        Text="{Binding LastCouponCode}"
+                        FontSize="13"
+                        FontAttributes="Bold"
+                        TextColor="#36523D"
+                        VerticalTextAlignment="Center" />
+
+                </HorizontalStackLayout>
+
+
+
+            </Grid>
+
+        </Border>
+
+        <!-- ===================================================== -->
+        <!-- MODAL CONFIRMAR COBRO -->
+        <!-- ===================================================== -->
+
+        <Grid
+            x:Name="ChargeModalOverlay"
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.RowSpan="2"
+            Grid.ColumnSpan="2"
+            ZIndex="100"
+            IsVisible="False"
+            Opacity="0"
+            BackgroundColor="{StaticResource ModalOverlayColor}">
+
+            <Border
+                x:Name="ChargeModalCard"
+                WidthRequest="520"
+                Style="{StaticResource ModalCard}"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Scale="0.92">
+
+                <Grid
+                    RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+                    RowSpacing="14">
+
+                    <!-- CERRAR -->
+
+                    <ImageButton
+                        Grid.Row="0"
+                        WidthRequest="35"
+                        HeightRequest="35"
+                        Padding="10"
+                        Margin="0,-8,-10,0"
+                        BackgroundColor="Transparent"
+                        HorizontalOptions="End"
+                        VerticalOptions="Start"
+                        Clicked="CancelChargeModal_Clicked">
+
+                        <ImageButton.Source>
+                            <FontImageSource
+                                FontFamily="FASolid"
+                                Glyph="&#xf00d;"
+                                Size="17"
+                                Color="#333333" />
+                        </ImageButton.Source>
+
+                    </ImageButton>
+
+                    <!-- ENCABEZADO -->
+
+                    <VerticalStackLayout
+                        Grid.Row="1"
+                        Margin="0,-15,0,0"
+                        Spacing="9"
+                        HorizontalOptions="Center">
+
+                        <Border
+                            WidthRequest="66"
+                            HeightRequest="66"
+                            BackgroundColor="#E4F5E6"
+                            StrokeThickness="0"
+                            HorizontalOptions="Center">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="33" />
+                            </Border.StrokeShape>
+
+                            <Label
+                                Text="&#xf00c;"
+                                FontFamily="FASolid"
+                                FontSize="30"
+                                TextColor="{StaticResource PrimaryGreen}"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center" />
+
+                        </Border>
+
+                        <Label
+                            Text="¿Confirmar cobro de cupones?"
+                            FontSize="21"
+                            FontAttributes="Bold"
+                            TextColor="{StaticResource PrimaryGreen}"
+                            HorizontalTextAlignment="Center" />
+
+                        <Label
+                            Text="Se cobrarán los cupones por un total de:"
+                            FontSize="13"
+                            TextColor="{StaticResource TextSecondary}"
+                            HorizontalTextAlignment="Center" />
+
+                        <Label
+                            Text="{Binding TotalAmount, StringFormat='${0:N2}'}"
+                            FontSize="31"
+                            FontAttributes="Bold"
+                            TextColor="{StaticResource PrimaryGreen}"
+                            HorizontalTextAlignment="Center" />
+
+                    </VerticalStackLayout>
+
+                    <!-- RESUMEN -->
+
+                    <Border
+                        Grid.Row="2"
+                        Margin="5,4,5,0"
+                        Padding="18,13"
+                        BackgroundColor="#F3FAF3"
+                        StrokeThickness="0">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="7" />
+                        </Border.StrokeShape>
+
+                        <Grid
+                            ColumnDefinitions="32,*,Auto"
+                            RowDefinitions="Auto,Auto,Auto"
+                            RowSpacing="12">
+
+                            <!-- CANTIDAD -->
+
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Text="&#xf145;"
+                                FontFamily="FASolid"
+                                FontSize="17"
+                                TextColor="{StaticResource PrimaryGreen}"
+                                VerticalTextAlignment="Center" />
+
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Text="Cantidad de cupones:"
+                                FontSize="13"
+                                TextColor="{StaticResource TextPrimary}"
+                                VerticalTextAlignment="Center" />
+
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="2"
+                                Text="{Binding CouponsCount}"
+                                FontSize="13"
+                                FontAttributes="Bold"
+                                TextColor="{StaticResource TextPrimary}"
+                                VerticalTextAlignment="Center"
+                                HorizontalOptions="Fill"
+                                HorizontalTextAlignment="End" />
+
+                            <!-- TOTAL -->
+
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Text="&#xf0d6;"
+                                FontFamily="FASolid"
+                                FontSize="17"
+                                TextColor="{StaticResource PrimaryGreen}"
+                                VerticalTextAlignment="Center" />
+
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Text="Total a cobrar:"
+                                FontSize="13"
+                                TextColor="{StaticResource TextPrimary}"
+                                VerticalTextAlignment="Center" />
+
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                Text="{Binding TotalAmount, StringFormat='${0:N2}'}"
+                                FontSize="13"
+                                FontAttributes="Bold"
+                                TextColor="{StaticResource PrimaryGreen}"
+                                VerticalTextAlignment="Center"
+                                HorizontalOptions="Fill"
+                                HorizontalTextAlignment="End" />
+
+                            <!-- OPERADOR -->
+
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                Text="&#xf007;"
+                                FontFamily="FASolid"
+                                FontSize="17"
+                                TextColor="{StaticResource PrimaryGreen}"
+                                VerticalTextAlignment="Center" />
+
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Text="Operador / Socio:"
+                                FontSize="13"
+                                TextColor="{StaticResource TextPrimary}"
+                                VerticalTextAlignment="Center" />
+
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="2"
+                                Text="{Binding OperatorName}"
+                                HorizontalOptions="Fill"
+                                HorizontalTextAlignment="End"
+                                VerticalTextAlignment="Center"
+                                FontSize="13"
+                                FontAttributes="Bold"
+                                TextColor="{StaticResource TextPrimary}" />
+
+                        </Grid>
+
+                    </Border>
+
+                    <!-- SEPARADOR -->
+
+                    <BoxView
+                        Grid.Row="3"
+                        Margin="-28,4,-28,0"
+                        HeightRequest="1"
+                        BackgroundColor="#E7E7E7" />
+
+                    <!-- BOTONES -->
+
+                    <Grid
+                        Grid.Row="4"
+                        Margin="0,4,0,0"
+                        ColumnDefinitions="*,*"
+                        ColumnSpacing="12">
+
+                        <Button
+                            Grid.Column="0"
+                            HeightRequest="51"
+                            Text="CANCELAR"
+                            FontSize="13"
+                            Style="{StaticResource SecondaryButton}"
+                            Clicked="CancelChargeModal_Clicked" />
+
+                        <Button
+                            Grid.Column="1"
+                            HeightRequest="51"
+                            Text="CONFIRMAR COBRO"
+                            FontSize="13"
+                            Style="{StaticResource PrimaryButton}"
+                            ContentLayout="Left,10"
+                            Clicked="ConfirmCharge_Clicked">
+
+                            <Button.ImageSource>
+                                <FontImageSource
+                                    FontFamily="FASolid"
+                                    Glyph="&#xf058;"
+                                    Size="17"
+                                    Color="White" />
+                            </Button.ImageSource>
+
+                        </Button>
+
+                    </Grid>
+
+                </Grid>
+
+            </Border>
+
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

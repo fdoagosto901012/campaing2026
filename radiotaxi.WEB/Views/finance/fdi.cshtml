@@ -1,0 +1,212 @@
+﻿@{
+    ViewBag.Title = "Fondo de Defunción e Invalidez";
+}
+
+<!-- start page title -->
+
+<div>
+    <ul class="nav nav-tabs-custom card-header-tabs border-top mt-4 border-bottom" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link px-3 active" data-bs-toggle="tab" href="#socios" role="tab">FDI SOCIOS</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link px-3" data-bs-toggle="tab" href="#operadores" role="tab">FDI OPERADORES</a>
+        </li>
+    </ul>
+</div>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="socios" role="tabpanel">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title  bx bx-search-alt-2"> Búsqueda socios</h4>
+                        <p class="card-title-desc">La búsqueda se puede realizar con cualquiera de los siguientes campos.</p>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div>
+                                    <form v-on:submit="onSubmitSOC($event)" id="formsoc" class="form-horizontal">
+                                        <div class="row control-group">
+                                            <div class="col-md-3 mb-3 ">
+                                                <label class="form-label control-label">Fecha inicial</label>
+                                                <input type="date" class="form-control span11" name="initDateSoc" id="initDateSoc" placeholder="" />
+                                            </div>
+                                            <div class="col-md-3 mb-3 ">
+                                                <label class="form-label control-label">Fecha final</label>
+                                                <input type="date" class="form-control span11" placeholder="" id="endDateSoc" name="endDateSoc" />
+                                            </div>
+                                        </div>
+                                        <div class="mt-4 form-actions d-flex justify-content-star align-items-center" style="gap: 10px; min-height: 50px;">
+                                            <button type="submit" value="Buscar" class="btn btn-success waves-effect btn-label waves-light">
+                                                <i class="bx bx-search label-icon"></i>Buscar
+                                            </button>
+
+                                            <div v-if="loading" class="spinner-border text-success" role="status" style="width: 1.5rem; height: 1.5rem;">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-4">
+                                            <span class="fs-3">
+                                                Recuadación total del periodo: <strong class="badge bg-success-subtle text-success fs-2">{{socMesTotal.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' })}} MXN</strong>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-rep-plugin">
+                            <div class="table-responsive mb-0" data-pattern="priority-columns">
+                                <table id="tsocios" class="table table-striped display" style="width:100%" data-page-length='100'>
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="producto">Producto</th>
+                                            <th data-priority="socio">Socio</th>
+                                            <th data-priority="nombre">Nombre</th>
+                                            <th data-priority="impPeriodo">IMPORTE PERIODO</th>
+                                            <th data-priority="impAcumulado">IMPORTE ACUMULADO</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--
+                                        <tr v-for="soc in socs">
+                                            <th>{{soc.socio}}</th>
+                                            <th>{{soc.nombre}}</th>
+                                            <th>{{soc.IMPORTE_MES.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' })}} MXN</th>
+                                            <th>{{soc.IMPORTE.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' })}} MXN</th>
+                                        </tr>
+                                        -->
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Producto</th>
+                                            <th>Socio</th>
+                                            <th>Nombre</th>
+                                            <th>IMPORTE PERIODO</th>
+                                            <th>IMPORTE ACUMULADO</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- end card -->
+            </div> <!-- end col -->
+        </div>
+    </div>
+</div>
+
+<div class="tab-content">
+    <div class="tab-pane" id="operadores" role="tabpanel">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title  bx bx-search-alt-2"> Búsqueda operadores</h4>
+                        <p class="card-title-desc">La búsqueda se puede realizar con cualquiera de los siguientes campos.</p>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div>
+                                    <form v-on:submit="onSubmitOP($event)" class="form-horizontal">
+                                        <div class="row control-group">
+                                            <div class="col-md-3 mb-3 ">
+                                                <label class="form-label control-label">Fecha inicial</label>
+                                                <input type="date" class="form-control span11" name="initDateOp" id="initDateOp" placeholder="" />
+                                            </div>
+                                            <div class="col-md-3 mb-3 ">
+                                                <label class="form-label control-label">Fecha final</label>
+                                                <input type="date" class="form-control span11" placeholder="" name="endDateOp" id="endDateOp" />
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-4 form-actions d-flex justify-content-star align-items-center" style="gap: 10px; min-height: 50px;">
+                                            <button type="submit" value="Buscar" class="btn btn-success waves-effect btn-label waves-light">
+                                                <i class="bx bx-search label-icon"></i>Buscar
+                                            </button>
+
+                                            <div v-if="loading" class="spinner-border text-success" role="status" style="width: 1.5rem; height: 1.5rem;">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-4">
+                                            <span class="fs-3">
+                                                Recuadación total del periodo: <strong class="badge bg-success-subtle text-success fs-2">{{opMesTotal.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' })}} MXN</strong>
+                                            </span>
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-rep-plugin">
+                            <div class="table-responsive mb-0" data-pattern="priority-columns">
+                                <table id="toperadores" class="table table-striped display" style="width:100%" data-page-length='100'>
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="producto">Producto</th>
+                                            <th data-priority="operador">Operador</th>
+                                            <th data-priority="nombre">Nombre</th>
+                                            <th data-priority="impPeriodo">IMPORTE PERIODO</th>
+                                            <th data-priority="impAcumulado">IMPORTE ACUMULADO</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--
+                                        <tr v-for="op in ops">
+                                            <th>{{op.socio}}</th>
+                                            <th>{{op.nombre}}</th>
+                                            <th>{{op.IMPORTE_MES.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' })}} MXN</th>
+                                            <th>{{op.IMPORTE.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' })}} MXN</th>
+                                        </tr>
+                                        -->
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Producto</th>
+                                            <th>Operador</th>
+                                            <th>Nombre</th>
+                                            <th>IMPORTE PERIODO</th>
+                                            <th>IMPORTE ACUMULADO</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end card -->
+            </div> <!-- end col -->
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Content/libs/DataTables/datatables.js"></script>
+    <script src="~/Content/libs/DataTables/datatables.min.js"></script>
+    <script src="~/Content/js/Views/Finance/fdi.js"></script>
+}
