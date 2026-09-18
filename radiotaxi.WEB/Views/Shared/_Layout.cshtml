@@ -47,6 +47,24 @@
 </head>
 
 <body>
+
+    <script>
+        (function() {
+            var theme = localStorage.getItem("practicontrol-campaign-theme");
+
+            if (theme === "dark") {
+                document.body.setAttribute("data-bs-theme", "dark");
+                document.body.setAttribute("data-topbar", "dark");
+                document.body.setAttribute("data-sidebar", "dark");
+            }
+            else {
+                document.body.setAttribute("data-bs-theme", "light");
+                document.body.setAttribute("data-topbar", "light");
+                document.body.setAttribute("data-sidebar", "light");
+            }
+        })();
+    </script>
+
     <!-- <body data-layout="horizontal"> -->
     <!-- Begin page -->
     <div id="layout-wrapper">
@@ -812,6 +830,29 @@
     <script src="~/Content/libs/sweetalert2/sweetalert2.min.js"></script>
     <!-- MAIN APP -->
     <script src="~/Content/js/app.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#mode-setting-btn").on("click", function () {
+
+                setTimeout(function () {
+
+                    var theme = document.body.getAttribute("data-bs-theme");
+
+                    if (theme === "dark") {
+                        localStorage.setItem("practicontrol-campaign-theme", "dark");
+                    }
+                    else {
+                        localStorage.setItem("practicontrol-campaign-theme", "light");
+                    }
+
+                }, 50);
+
+            });
+
+        });
+    </script>
 
     <script>
         function updateDateTime() {
