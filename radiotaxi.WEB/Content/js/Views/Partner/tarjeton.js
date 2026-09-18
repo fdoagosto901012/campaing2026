@@ -53,6 +53,9 @@
             gafet: '',
             data: null,
             selected: 3,
+
+            // MAPA
+            map: null,
         },
         methods: {
             searchCar: function () {
@@ -196,16 +199,85 @@
                         console.log(response);
                     }
                 });
-            }
+            },
+
+            initMap: function () {
+
+                var that = this;
+
+                console.log("=== INIT MAP ===");
+                console.log("google:", typeof google);
+                console.log(
+                    "google.maps:",
+                    typeof google !== "undefined" ? typeof google.maps : "NO EXISTE"
+                );
+
+                var container = document.getElementById("partnerMap");
+
+                console.log("partnerMap:", container);
+
+                if (!container) {
+                    console.error("No se encontró #partnerMap");
+                    return;
+                }
+
+                if (typeof google === "undefined" || !google.maps) {
+                    console.error("Google Maps API NO está cargada.");
+                    return;
+                }
+
+                // Si ya existe, solamente refrescarlo.
+                if (that.map !== null) {
+
+                    console.log("El mapa ya estaba creado.");
+
+                    google.maps.event.trigger(that.map, "resize");
+
+                    return;
+                }
+
+                const ubicacion = {
+                    lat: 21.17429,
+                    lng: -86.84656
+                };
+
+                console.log("Creando Google Maps...");
+
+                that.map = new google.maps.Map(
+                    container,
+                    {
+                        center: ubicacion,
+                        zoom: 12
+                    }
+                );
+
+                console.log("MAPA CREADO:", that.map);
+            },
         },
         filters: {
 
         },
         mounted: function () {
+
             var that = this;
+
+            var mapTab = document.querySelector(
+                'a[data-bs-toggle="tab"][href="#mapa"]'
+            );
+
+            console.log("TAB MAPA:", mapTab);
+
+            if (mapTab) {
+
+                mapTab.addEventListener('shown.bs.tab', function () {
+
+                    console.log("TAB MAPA ABIERTO");
+
+                    that.initMap();
+
+                });
+            }
         },
-
-
 
     })
 });

@@ -119,6 +119,9 @@
                         <li class="nav-item">
                             <a class="nav-link px-3" data-bs-toggle="tab" href="#convenios" role="tab">Convenios</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-3" data-bs-toggle="tab" href="#mapa" role="tab">Mapa</a>
+                        </li>
                     }
 
 
@@ -636,10 +639,10 @@
                                         <a v-on:click="generateTicket('D','@(Model.partnerReference)')" href="#" class="btn btn-success waves-effect btn-label waves-light mb-3"><i class="bx bxs-paper-plane label-icon"></i> Entregar Pavo</a>
                                         @*
 
-                                    @if (Permissions.allow("Admin,Practi-AdminTurkey"))
-                                     {
-                                         <a v-on:click="generateTicket('D','@(Model.partnerReference)')" href="#" class="btn btn-success waves-effect btn-label waves-light mb-3"><i class="mdi mdi-food-turkey label-icon"></i> Entregar Pavo</a>
-                                     }
+                                            @if (Permissions.allow("Admin,Practi-AdminTurkey"))
+                                             {
+                                                 <a v-on:click="generateTicket('D','@(Model.partnerReference)')" href="#" class="btn btn-success waves-effect btn-label waves-light mb-3"><i class="mdi mdi-food-turkey label-icon"></i> Entregar Pavo</a>
+                                             }
                                         *@
                                     </div>
                                 }
@@ -1296,6 +1299,29 @@
                 <!-- end card -->
             </div>
             <!-- end tab pane -->
+
+            <div class="tab-pane" id="mapa" role="tabpanel">
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="bx bx-map"></i> Mapa
+                        </h5>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div id="partnerMap"
+                             style="width: 100%; height: 600px;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
         <!-- end tab content -->
     </div>
@@ -1351,63 +1377,63 @@
                             </div>
                         }
 
-                <ul class="list-unstyled mb-0">
-                    <li>
-                        <p class="mb-1"><span class="fw-bold">Marca:</span> @(ViewBag.emplaactual.Marca)</p>
-                    </li>
-                    <li>
-                        <p class="mb-1"><span class="fw-bold">Modelo:</span> @(ViewBag.emplaactual.Modelo)</p>
-                    </li>
-                    <li>
-                        <p class="mb-1"><span class="fw-bold">Año del vehiculo:</span> @(ViewBag.emplaactual.AutoAno)</p>
-                    </li>
-                    <li>
-                        <p class="mb-1"><span class="fw-bold">Responsable:</span> @(ViewBag.emplaactual.Responsable)</p>
-                    </li>
-                    <li>
-                        <p class="mb-1"><span class="fw-bold">Eco/Gafet del responsable:</span> @(ViewBag.emplaactual.EconoResp)</p>
-                    </li>
-                    @if (Permissions.deny("Practi-BasicView"))
-                    {
-                        <li>
-                            <p class="mb-1"><span class="fw-bold">Teléfono del responsable:</span> @(ViewBag.emplaactual.resp_telefono)</p>
-                        </li>
-                        <li>
-                            <p class="mb-1"><span class="fw-bold">Celular del Responsable:</span> @(ViewBag.emplaactual.resp_celular)</p>
-                        </li>
-                    }
-                    <li>
-                        <p class="mb-1"><span class="fw-bold">Placas:</span> @(ViewBag.emplaactual.Placas.ToUpper())</p>
-                    </li>
-                    <li>
-                        <p class="mb-1"><span class="fw-bold">Motor:</span> @(ViewBag.emplaactual.Motor.ToUpper())</p>
-                    </li>
-                    <li>
-                        <p class="mb-1"><span class="fw-bold">N° de serie:</span> @(ViewBag.emplaactual.No_Serie.ToUpper())</p>
-                    </li>
-                    <li>
-                        <p class="mb-1"><span class="fw-bold">Capacidad:</span> @(ViewBag.emplaactual.Capacidad) PASAJEROS MÁS CONDUCTOR</p>
-                    </li>
-                    <li>
-                        <p class="mb-1"><span class="fw-bold">Poliza:</span> @(ViewBag.emplaactual.poliza != null ? ViewBag.emplaactual.poliza.ToUpper() : "")</p>
-                    </li>
-                    <li>
-                        <p class="mb-1"><span class="fw-bold">Tipo de poliza:</span> @(ViewBag.emplaactual.tipopoliza != null ? ViewBag.emplaactual.tipopoliza.ToUpper() : "")</p>
-                    </li>
-                    <li>
-                        <p class="mb-1"><span class="fw-bold">Aseguradora:</span> @(ViewBag.emplaactual.aseguradora)</p>
-                    </li>
-                    <li>
-                        <p class="mb-1">
-                            <span class="fw-bold">Vencimiento de poliza:</span> @(ViewBag.emplaactual.vencepoliza != null ? Convert.ToDateTime(ViewBag.emplaactual.vencepoliza).ToString("dd/MM/yyyy"): "")
-                        </p>
-                    </li>
-                </ul>
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Marca:</span> @(ViewBag.emplaactual.Marca)</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Modelo:</span> @(ViewBag.emplaactual.Modelo)</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Año del vehiculo:</span> @(ViewBag.emplaactual.AutoAno)</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Responsable:</span> @(ViewBag.emplaactual.Responsable)</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Eco/Gafet del responsable:</span> @(ViewBag.emplaactual.EconoResp)</p>
+                            </li>
+                            @if (Permissions.deny("Practi-BasicView"))
+                            {
+                                <li>
+                                    <p class="mb-1"><span class="fw-bold">Teléfono del responsable:</span> @(ViewBag.emplaactual.resp_telefono)</p>
+                                </li>
+                                <li>
+                                    <p class="mb-1"><span class="fw-bold">Celular del Responsable:</span> @(ViewBag.emplaactual.resp_celular)</p>
+                                </li>
+                            }
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Placas:</span> @(ViewBag.emplaactual.Placas.ToUpper())</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Motor:</span> @(ViewBag.emplaactual.Motor.ToUpper())</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">N° de serie:</span> @(ViewBag.emplaactual.No_Serie.ToUpper())</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Capacidad:</span> @(ViewBag.emplaactual.Capacidad) PASAJEROS MÁS CONDUCTOR</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Poliza:</span> @(ViewBag.emplaactual.poliza != null ? ViewBag.emplaactual.poliza.ToUpper() : "")</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Tipo de poliza:</span> @(ViewBag.emplaactual.tipopoliza != null ? ViewBag.emplaactual.tipopoliza.ToUpper() : "")</p>
+                            </li>
+                            <li>
+                                <p class="mb-1"><span class="fw-bold">Aseguradora:</span> @(ViewBag.emplaactual.aseguradora)</p>
+                            </li>
+                            <li>
+                                <p class="mb-1">
+                                    <span class="fw-bold">Vencimiento de poliza:</span> @(ViewBag.emplaactual.vencepoliza != null ? Convert.ToDateTime(ViewBag.emplaactual.vencepoliza).ToString("dd/MM/yyyy"): "")
+                                </p>
+                            </li>
+                        </ul>
                         <hr />
                         <p class="mb-1"><span class="fw-bold">Observaciones:</span> @(ViewBag.emplaactual.Observaciones.ToUpper())</p>
                         <p>
                             <span class="fw-bold">Fecha de operación :</span>
-                             @(((DateTime)ViewBag.emplaactual.FechaOp).ToShortDateString())
+                            @(((DateTime)ViewBag.emplaactual.FechaOp).ToShortDateString())
                         </p>
                     }
                     else
@@ -1513,5 +1539,8 @@
 </div>
 
 @section Scripts {
-   <script src="~/Content/js/Views/Partner/tarjeton.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHMfXpMtrVbgMBpFq8oURjEnJ4QtbNhG0&callback=initMap"></script>
+
+    <script src="~/Content/js/Views/Partner/tarjeton.js"></script>
 }
