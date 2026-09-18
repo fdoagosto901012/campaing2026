@@ -241,6 +241,11 @@ namespace radiotaxi.WEB.Controllers
                     ViewBag.christmasgiftPrinted = christmasgift.ChristmasgiftPrinteds;
                 }
                 ViewBag.maxdeb = maxdeb;
+
+                
+
+
+
                 return View(_Partner);
             }
             catch (Exception ex)
