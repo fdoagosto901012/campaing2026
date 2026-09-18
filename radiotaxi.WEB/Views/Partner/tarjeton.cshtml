@@ -639,10 +639,10 @@
                                         <a v-on:click="generateTicket('D','@(Model.partnerReference)')" href="#" class="btn btn-success waves-effect btn-label waves-light mb-3"><i class="bx bxs-paper-plane label-icon"></i> Entregar Pavo</a>
                                         @*
 
-                                            @if (Permissions.allow("Admin,Practi-AdminTurkey"))
-                                             {
-                                                 <a v-on:click="generateTicket('D','@(Model.partnerReference)')" href="#" class="btn btn-success waves-effect btn-label waves-light mb-3"><i class="mdi mdi-food-turkey label-icon"></i> Entregar Pavo</a>
-                                             }
+                                    @if (Permissions.allow("Admin,Practi-AdminTurkey"))
+                                     {
+                                         <a v-on:click="generateTicket('D','@(Model.partnerReference)')" href="#" class="btn btn-success waves-effect btn-label waves-light mb-3"><i class="mdi mdi-food-turkey label-icon"></i> Entregar Pavo</a>
+                                     }
                                         *@
                                     </div>
                                 }
@@ -1299,21 +1299,340 @@
                 <!-- end card -->
             </div>
             <!-- end tab pane -->
-
+            <!-- MAPA -->
             <div class="tab-pane" id="mapa" role="tabpanel">
 
                 <div class="card">
 
                     <div class="card-header">
-                        <h5 class="card-title mb-0">
-                            <i class="bx bx-map"></i> Mapa
-                        </h5>
+                        <div class="d-flex align-items-center justify-content-between">
+
+                            <div>
+                                <h5 class="card-title mb-1">
+                                    <i class="bx bx-map"></i>
+                                    Ubicación del socio
+                                </h5>
+
+                                <p class="text-muted mb-0 font-size-13">
+                                    Consulta o selecciona la ubicación geográfica del socio.
+                                </p>
+                            </div>
+
+                            <div>
+                                <span class="badge bg-primary-subtle text-primary">
+                                    <i class="bx bx-user me-1"></i>
+                                    @Model.partnerReference
+                                </span>
+                            </div>
+
+                        </div>
                     </div>
+
 
                     <div class="card-body">
 
-                        <div id="partnerMap"
-                             style="width: 100%; height: 600px;">
+                        <div class="row g-3">
+
+                            <!-- ================================================= -->
+                            <!-- MAPA -->
+                            <!-- ================================================= -->
+                            <div class="col-12 col-xl-8">
+
+                                <div class="border rounded overflow-hidden">
+
+                                    <div id="partnerMap"
+                                         style="width: 100%; height: 650px;">
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- ================================================= -->
+                            <!-- PANEL DERECHO -->
+                            <!-- ================================================= -->
+                            <div class="col-12 col-xl-4">
+
+                                <div class="card border h-100 mb-0">
+
+                                    <div class="card-body">
+
+
+                                        <!-- ===================================== -->
+                                        <!-- DIRECCIÓN REGISTRADA -->
+                                        <!-- ===================================== -->
+
+                                        <h5 class="card-title mb-3">
+
+                                            <i class="bx bx-home me-1"></i>
+
+                                            Dirección registrada
+
+                                        </h5>
+
+
+                                        <div class="alert alert-light border">
+
+                                            @if (Model.userAddresses != null &&
+                                                 Model.userAddresses.Count() > 0)
+                                            {
+                                                try
+                                                {
+                                                    var direccion = Model.userAddresses.FirstOrDefault();
+
+                                                    <div class="d-flex">
+
+                                                        <div class="me-2">
+
+                                                            <i class="bx bx-map-pin text-primary font-size-20"></i>
+
+                                                        </div>
+
+                                                        <div>
+
+                                                            <p class="mb-0 text-break">
+
+                                                                @(direccion.address)
+
+                                                                @if (!String.IsNullOrWhiteSpace(direccion.address2))
+                                                                {
+                                                                    @(", " + direccion.address2)
+                                                                }
+
+                                                                @if (!String.IsNullOrWhiteSpace(direccion.colony))
+                                                                {
+                                                                    @(", " + direccion.colony)
+                                                                }
+
+                                                                @if (!String.IsNullOrWhiteSpace(direccion.supermanzana))
+                                                                {
+                                                                    @(", SM " + direccion.supermanzana)
+                                                                }
+
+                                                                @if (!String.IsNullOrWhiteSpace(direccion.manzana))
+                                                                {
+                                                                    @(", MZ " + direccion.manzana)
+                                                                }
+
+                                                                @if (!String.IsNullOrWhiteSpace(direccion.lote))
+                                                                {
+                                                                    @(", LT " + direccion.lote)
+                                                                }
+
+                                                                @if (!String.IsNullOrWhiteSpace(direccion.street))
+                                                                {
+                                                                    @(", Calle " + direccion.street)
+                                                                }
+
+                                                                @if (!String.IsNullOrWhiteSpace(direccion.postalCode))
+                                                                {
+                                                                    @(", CP " + direccion.postalCode)
+                                                                }
+
+                                                            </p>
+
+                                                        </div>
+
+                                                    </div>
+                                                }
+                                                catch (Exception)
+                                                {
+                                                    <span class="text-muted">
+                                                        Error al cargar la dirección registrada.
+                                                    </span>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <div class="text-muted">
+
+                                                    <i class="bx bx-info-circle me-1"></i>
+
+                                                    No existe una dirección registrada.
+
+                                                </div>
+                                            }
+
+                                        </div>
+
+
+                                        <hr class="my-4" />
+
+
+                                        <!-- ===================================== -->
+                                        <!-- BUSCAR DIRECCIÓN -->
+                                        <!-- ===================================== -->
+
+                                        <h5 class="card-title mb-3">
+
+                                            <i class="bx bx-search-alt-2 me-1"></i>
+
+                                            Buscar ubicación
+
+                                        </h5>
+
+
+                                        <div class="mb-3">
+
+                                            <label class="form-label">
+
+                                                Dirección
+
+                                            </label>
+
+                                            <textarea v-model="mapAddress"
+                                                      class="form-control"
+                                                      rows="3"
+                                                      placeholder="Ej. Av. Tulum 260, Cancún, Quintana Roo">
+                                </textarea>
+
+                                        </div>
+
+
+                                        <div class="d-grid mb-4">
+
+                                            <button type="button"
+                                                    class="btn btn-primary"
+                                                    v-on:click="searchAddress">
+
+                                                <i class="bx bx-search-alt-2 me-1"></i>
+
+                                                Buscar en mapa
+
+                                            </button>
+
+                                        </div>
+
+
+                                        <!-- ===================================== -->
+                                        <!-- COORDENADAS -->
+                                        <!-- ===================================== -->
+
+                                        <hr class="my-4" />
+
+
+                                        <h5 class="card-title mb-3">
+
+                                            <i class="bx bx-current-location me-1"></i>
+
+                                            Coordenadas
+
+                                        </h5>
+
+
+                                        <div class="row g-2">
+
+                                            <div class="col-md-6 col-xl-12 col-xxl-6">
+
+                                                <label class="form-label">
+
+                                                    Latitud
+
+                                                </label>
+
+                                                <div class="input-group">
+
+                                                    <span class="input-group-text">
+
+                                                        <i class="bx bx-map-pin"></i>
+
+                                                    </span>
+
+                                                    <input type="text"
+                                                           v-model="mapLatitude"
+                                                           class="form-control"
+                                                           placeholder="--"
+                                                           readonly />
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="col-md-6 col-xl-12 col-xxl-6">
+
+                                                <label class="form-label">
+
+                                                    Longitud
+
+                                                </label>
+
+                                                <div class="input-group">
+
+                                                    <span class="input-group-text">
+
+                                                        <i class="bx bx-map-pin"></i>
+
+                                                    </span>
+
+                                                    <input type="text"
+                                                           v-model="mapLongitude"
+                                                           class="form-control"
+                                                           placeholder="--"
+                                                           readonly />
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <!-- ===================================== -->
+                                        <!-- AYUDA -->
+                                        <!-- ===================================== -->
+
+                                        <div class="alert alert-info mt-4 mb-4">
+
+                                            <div class="d-flex">
+
+                                                <div class="me-2">
+
+                                                    <i class="bx bx-info-circle font-size-20"></i>
+
+                                                </div>
+
+                                                <div class="font-size-13">
+
+                                                    Puedes escribir una dirección,
+                                                    hacer clic directamente sobre el mapa
+                                                    o arrastrar el marcador para seleccionar
+                                                    la ubicación exacta.
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <!-- ===================================== -->
+                                        <!-- GUARDAR -->
+                                        <!-- ===================================== -->
+
+                                        <div class="d-grid">
+
+                                            <button type="button"
+                                                    class="btn btn-success"
+                                                    v-on:click="saveLocation"
+                                                    v-bind:disabled="!mapLatitude || !mapLongitude">
+
+                                                <i class="bx bx-save me-1"></i>
+
+                                                Guardar ubicación
+
+                                            </button>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
                         </div>
 
                     </div>
@@ -1321,6 +1640,7 @@
                 </div>
 
             </div>
+            <!-- FIN MAPA -->
 
         </div>
         <!-- end tab content -->

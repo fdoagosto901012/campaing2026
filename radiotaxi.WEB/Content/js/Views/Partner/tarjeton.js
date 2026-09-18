@@ -56,6 +56,11 @@
 
             // MAPA
             map: null,
+            mapMarker: null,
+
+            mapAddress: '',
+            mapLatitude: '',
+            mapLongitude: '',
         },
         methods: {
             searchCar: function () {
@@ -233,6 +238,10 @@
 
                     google.maps.event.trigger(that.map, "resize");
 
+                    if (that.mapMarker !== null) {
+                        that.map.setCenter(that.mapMarker.getPosition());
+                    }
+
                     return;
                 }
 
@@ -251,7 +260,175 @@
                     }
                 );
 
+                that.map.addListener("click", function (event) {
+
+                    var lat = event.latLng.lat();
+                    var lng = event.latLng.lng();
+
+                    that.setMapLocation(lat, lng);
+
+                });
+
                 console.log("MAPA CREADO:", that.map);
+            },
+
+            setMapLocation: function (lat, lng) {
+
+                var that = this;
+
+                var position = {
+                    lat: lat,
+                    lng: lng
+                };
+
+                // Si todavía no existe el marcador, lo creamos.
+                if (that.mapMarker === null) {
+
+                    that.mapMarker = new google.maps.Marker({
+                        position: position,
+                        map: that.map,
+                        draggable: true
+                    });
+
+                    // Si el usuario arrastra el marcador,
+                    // actualizamos nuevamente las coordenadas.
+                    that.mapMarker.addListener("dragend", function (event) {
+
+                        var newLat = event.latLng.lat();
+                        var newLng = event.latLng.lng();
+
+                        that.mapLatitude = newLat.toFixed(6);
+                        that.mapLongitude = newLng.toFixed(6);
+
+                        that.reverseGeocode(newLat, newLng);
+
+                    });
+
+                }
+                else {
+
+                    // Ya existe: solamente moverlo.
+                    that.mapMarker.setPosition(position);
+
+                }
+
+                that.mapLatitude = lat.toFixed(6);
+                that.mapLongitude = lng.toFixed(6);
+
+                that.reverseGeocode(lat, lng);
+            },
+
+            reverseGeocode: function (lat, lng) {
+
+                var that = this;
+
+                var geocoder = new google.maps.Geocoder();
+
+                var position = {
+                    lat: lat,
+                    lng: lng
+                };
+
+                geocoder.geocode(
+                    { location: position },
+                    function (results, status) {
+
+                        if (status === "OK") {
+
+                            if (results[0]) {
+
+                                that.mapAddress =
+                                    results[0].formatted_address;
+
+                                console.log(
+                                    "Dirección encontrada:",
+                                    that.mapAddress
+                                );
+
+                            }
+
+                        }
+                        else {
+
+                            console.error(
+                                "Error en geocodificación inversa:",
+                                status
+                            );
+
+                        }
+
+                    }
+                );
+            },
+
+            searchAddress: function () {
+
+                var that = this;
+
+                if (!that.mapAddress ||
+                    that.mapAddress.trim() === "") {
+
+                    Swal.fire({
+                        title: "Dirección requerida",
+                        text: "Escribe una dirección para buscarla.",
+                        icon: "info"
+                    });
+
+                    return;
+                }
+
+                var geocoder = new google.maps.Geocoder();
+
+                geocoder.geocode(
+                    {
+                        address: that.mapAddress
+                    },
+                    function (results, status) {
+
+                        if (status === "OK" && results[0]) {
+
+                            var location =
+                                results[0].geometry.location;
+
+                            var lat = location.lat();
+                            var lng = location.lng();
+
+                            // Centramos el mapa.
+                            that.map.setCenter(location);
+
+                            // Acercamos el mapa.
+                            that.map.setZoom(17);
+
+                            // Colocamos/movemos el pin.
+                            that.setMapLocation(lat, lng);
+
+                        }
+                        else {
+
+                            Swal.fire({
+                                title: "Dirección no encontrada",
+                                text: "No fue posible localizar la dirección.",
+                                icon: "warning"
+                            });
+
+                            console.error(
+                                "Geocoder:",
+                                status
+                            );
+
+                        }
+
+                    }
+                );
+            },
+
+            saveLocation: function () {
+
+                console.log("Guardar ubicación");
+                console.log("Dirección:", this.mapAddress);
+                console.log("Latitud:", this.mapLatitude);
+                console.log("Longitud:", this.mapLongitude);
+
             },
         },
         filters: {
